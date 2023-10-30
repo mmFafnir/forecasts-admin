@@ -3,22 +3,22 @@ import { Content } from "antd/es/layout/layout";
 import { FC } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import TableMatch from "../components/Tables/TableMatch";
+import { Outlet } from "react-router-dom";
 
 const LayoutMain: FC = () => {
   return (
-    <div className="w-full">
-      <Layout className="min-h-screen">
-        <Sidebar />
-        <Layout>
-          <Header />
-          <Content style={contentStyle}>
-            <div className="p-5">
-              <TableMatch />
-            </div>
-          </Content>
+    <div className="app">
+      <div className="w-full">
+        <Layout className="min-h-screen">
+          <Sidebar />
+          <Layout>
+            <Header />
+            <Content style={contentStyle}>
+              <Outlet />
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
+      </div>
     </div>
   );
 };

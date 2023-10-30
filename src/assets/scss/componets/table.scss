@@ -1,0 +1,33 @@
+.table {
+  color: red;
+
+  thead td:last-child {
+    display: none;
+  }
+
+  tbody {
+    tr {
+      position: relative;
+
+      @media (min-width: 901px) {
+        &:hover {
+          td:last-child {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    td:last-child {
+      right: -53px;
+      position: absolute;
+      background-color: #fff;
+      transition-duration: 0.3s;
+      opacity: 0;
+      cursor: pointer;
+      svg {
+        width: 21px;
+        height: 21px;
+      }
+    }
+  }
+}

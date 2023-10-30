@@ -3,6 +3,7 @@ import Sider from "antd/es/layout/Sider";
 import Logo from "../UI/Logo";
 import { Menu, MenuProps } from "antd";
 import { SidebarMenu } from "./SidebarMenu";
+import { Link } from "react-router-dom";
 
 const links: MenuProps["items"] = SidebarMenu.map((item, index) => {
   const key = String(index + 1);
@@ -12,10 +13,14 @@ const links: MenuProps["items"] = SidebarMenu.map((item, index) => {
     icon: createElement(item.icon),
     label: item.name,
 
-    children: item.children.map((submneu) => {
+    children: item.children?.map((submenu) => {
       return {
-        key: submneu + key,
-        label: <button className="w-full text-right">{submneu}</button>,
+        key: submenu.link + key,
+        label: (
+          <Link to={submenu.link} className="w-full text-right">
+            {submenu.text}
+          </Link>
+        ),
       };
     }),
   };

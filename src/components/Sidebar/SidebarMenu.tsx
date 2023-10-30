@@ -3,14 +3,20 @@ import {
   NotificationOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
-const forecast = ["СТРАНЫ", "ЛИГИ", "КОМАНДЫ", "МАТЧИ"];
+const forecast = [
+  { link: "/country", text: "СТРАНЫ" },
+  { link: "/leagues", text: "ЛИГИ" },
+  { link: "/teams", text: "КОМАНДЫ" },
+  { link: "/matches", text: "МАТЧИ" },
+];
 
 export const SidebarMenu = [
   {
     icon: LaptopOutlined,
-    name: "ГЛАВНАЯ",
-    children: forecast,
+    name: <Link to={"/"}>ГЛАВНАЯ</Link>,
+    // children: forecast,
   },
   {
     icon: NotificationOutlined,
@@ -19,7 +25,7 @@ export const SidebarMenu = [
   },
   {
     icon: UserOutlined,
-    name: "СТАВИМ",
+    name: "СТАВИМ C ИИ",
     children: forecast,
   },
 ];
