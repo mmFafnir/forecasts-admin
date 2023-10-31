@@ -1,0 +1,26 @@
+.form-item {
+  p {
+    text-align: left;
+  }
+}
+
+.form-date {
+  button {
+    background-color: #1677ff !important;
+  }
+}
+
+.form-team {
+  > p {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+}
+
+.ant-form-item {
+  .ant-col {
+    max-width: none !important;
+  }
+}

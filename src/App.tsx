@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import "./assets/scss/App.css";
 import LayoutMain from "./layouts/LayoutMain";
 import MatchPage from "./Pages/MatchPage";
+
+import MatchElementPage from "./Pages/MatchElementPage";
+import "./assets/scss/App.scss";
 
 function App() {
   const getString = () => {
@@ -18,7 +20,10 @@ function App() {
     <Routes>
       <Route path="/" element={<LayoutMain />}>
         <Route path="" element={<MatchPage />} />
+
         <Route path="/matches" element={<MatchPage />} />
+        <Route path="/matches/:id" element={<MatchElementPage />} />
+
         <Route
           path="*"
           element={

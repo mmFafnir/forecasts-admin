@@ -1,0 +1,17 @@
+h1 {
+  font-size: 24px !important;
+  text-align: left;
+  font-weight: 500 !important;
+}
+
+.line-after {
+  display: flex;
+  align-items: center;
+  &::after {
+    content: "";
+    height: 29px;
+    flex: 0 0 1px;
+    margin: 0px 15px;
+    background-color: #d9d9d9;
+  }
+}
