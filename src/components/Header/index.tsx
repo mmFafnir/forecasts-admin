@@ -3,6 +3,7 @@ import { Header as HeaderAnt } from "antd/es/layout/layout";
 import { Menu } from "antd";
 
 import "./header.scss";
+import { sports } from "../../assets/data/sports";
 
 const Header: FC = () => {
   return (
@@ -12,11 +13,11 @@ const Header: FC = () => {
           style={{ backgroundColor: "transparent" }}
           mode="horizontal"
           defaultSelectedKeys={["2"]}
-          items={new Array(8).fill(null).map((_, index) => {
+          items={sports.map((sport, index) => {
             const key = index + 1;
             return {
               key,
-              label: <button className="font-bold">Футбол</button>,
+              label: <button className="font-bold">{sport.label}</button>,
             };
           })}
         />

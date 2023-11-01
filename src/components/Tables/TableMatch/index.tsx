@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import data from "./data";
 import { columns } from "./colums";
 import Table from "..";
@@ -15,6 +15,7 @@ export interface DataType {
   team_away: string;
   update: string;
   user: string;
+  status: ReactElement<HTMLElement>;
 }
 
 const TableMatch: FC = () => {

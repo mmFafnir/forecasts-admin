@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 
 const LayoutMain: FC = () => {
   return (
-    <div className="app">
+    <div className="app null">
       <div className="w-full">
         <Layout className="min-h-screen">
           <Sidebar />

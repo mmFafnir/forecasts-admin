@@ -29,7 +29,10 @@ const links: MenuProps["items"] = SidebarMenu.map((item, index) => {
 const Sidebar: FC = () => {
   return (
     <Sider style={siderStyle}>
-      <div className="w-full px-5 py-3 h-16 flex justify-center items-center bg-blue-400">
+      <div
+        style={{ height: "64px" }}
+        className="w-full px-5 flex justify-center items-center bg-blue-400"
+      >
         <Logo />
       </div>
       <div className="mt-7">

@@ -15,6 +15,12 @@ for (let i = 0; i < 46; i++) {
     team_away: "Real Madrid",
     update: "2023-10-23 16:00:46",
     user: "Amidamaru",
+    status:
+      i % 2 ? (
+        <p style={{ color: "green" }}>опубликовано</p>
+      ) : (
+        <p style={{ color: "red" }}>на модерации</p>
+      ),
   });
 }
 

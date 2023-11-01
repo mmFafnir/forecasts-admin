@@ -1,8 +1,9 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 const Logo: FC = () => {
   return (
-    <a href="#">
+    <Link to="/">
       <svg
         width="101"
         height="16"
@@ -15,7 +16,7 @@ const Logo: FC = () => {
           fill="white"
         />
       </svg>
-    </a>
+    </Link>
   );
 };
 

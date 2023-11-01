@@ -13,7 +13,12 @@ interface IProps {
   defaultValue?: string;
 }
 
-const SelectForm: FC<IProps> = ({ setValue, label, defaultValue = "lucy" }) => {
+const SelectForm: FC<IProps> = ({
+  data,
+  setValue,
+  label,
+  defaultValue = data[0].value,
+}) => {
   return (
     <div>
       {label && <p className="mb-2 text-left">{label}</p>}
@@ -22,12 +27,7 @@ const SelectForm: FC<IProps> = ({ setValue, label, defaultValue = "lucy" }) => {
         className="text-left"
         style={{ width: "150px" }}
         onChange={(value: string) => setValue(value)}
-        options={[
-          { value: "jack", label: "Jack" },
-          { value: "lucy", label: "Lucy" },
-          { value: "Yiminghe", label: "yiminsad naskjdnkjsadnghe" },
-          { value: "disabled", label: "Disabled", disabled: true },
-        ]}
+        options={data}
       />
     </div>
   );

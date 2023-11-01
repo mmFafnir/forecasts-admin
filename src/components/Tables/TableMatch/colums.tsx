@@ -40,6 +40,10 @@ export const columns: ColumnsType<DataType> = [
     dataIndex: "user",
   },
   {
+    title: "Статус",
+    dataIndex: "status",
+  },
+  {
     title: "",
     key: "action",
     render: (_, record) => (

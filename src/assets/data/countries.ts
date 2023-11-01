@@ -1,0 +1,609 @@
+export const countries = [
+  {
+    value: "AU",
+    label: "\u0410\u0432\u0441\u0442\u0440\u0430\u043b\u0438\u044f",
+  },
+  { value: "AT", label: "\u0410\u0432\u0441\u0442\u0440\u0438\u044f" },
+  {
+    value: "AZ",
+    label: "\u0410\u0437\u0435\u0440\u0431\u0430\u0439\u0434\u0436\u0430\u043d",
+  },
+  {
+    value: "AX",
+    label:
+      "\u0410\u043b\u0430\u043d\u0434\u0441\u043a\u0438\u0435 \u043e-\u0432\u0430",
+  },
+  { value: "AL", label: "\u0410\u043b\u0431\u0430\u043d\u0438\u044f" },
+  { value: "DZ", label: "\u0410\u043b\u0436\u0438\u0440" },
+  {
+    value: "AS",
+    label:
+      "\u0410\u043c\u0435\u0440\u0438\u043a\u0430\u043d\u0441\u043a\u043e\u0435 \u0421\u0430\u043c\u043e\u0430",
+  },
+  { value: "AI", label: "\u0410\u043d\u0433\u0438\u043b\u044c\u044f" },
+  { value: "AO", label: "\u0410\u043d\u0433\u043e\u043b\u0430" },
+  { value: "AD", label: "\u0410\u043d\u0434\u043e\u0440\u0440\u0430" },
+  {
+    value: "AQ",
+    label: "\u0410\u043d\u0442\u0430\u0440\u043a\u0442\u0438\u0434\u0430",
+  },
+  {
+    value: "AG",
+    label:
+      "\u0410\u043d\u0442\u0438\u0433\u0443\u0430 \u0438 \u0411\u0430\u0440\u0431\u0443\u0434\u0430",
+  },
+  {
+    value: "AR",
+    label: "\u0410\u0440\u0433\u0435\u043d\u0442\u0438\u043d\u0430",
+  },
+  { value: "AM", label: "\u0410\u0440\u043c\u0435\u043d\u0438\u044f" },
+  { value: "AW", label: "\u0410\u0440\u0443\u0431\u0430" },
+  {
+    value: "AF",
+    label: "\u0410\u0444\u0433\u0430\u043d\u0438\u0441\u0442\u0430\u043d",
+  },
+  { value: "BS", label: "\u0411\u0430\u0433\u0430\u043c\u044b" },
+  {
+    value: "BD",
+    label: "\u0411\u0430\u043d\u0433\u043b\u0430\u0434\u0435\u0448",
+  },
+  { value: "BB", label: "\u0411\u0430\u0440\u0431\u0430\u0434\u043e\u0441" },
+  { value: "BH", label: "\u0411\u0430\u0445\u0440\u0435\u0439\u043d" },
+  { value: "BY", label: "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c" },
+  { value: "BZ", label: "\u0411\u0435\u043b\u0438\u0437" },
+  { value: "BE", label: "\u0411\u0435\u043b\u044c\u0433\u0438\u044f" },
+  { value: "BJ", label: "\u0411\u0435\u043d\u0438\u043d" },
+  {
+    value: "BM",
+    label:
+      "\u0411\u0435\u0440\u043c\u0443\u0434\u0441\u043a\u0438\u0435 \u043e-\u0432\u0430",
+  },
+  { value: "BG", label: "\u0411\u043e\u043b\u0433\u0430\u0440\u0438\u044f" },
+  { value: "BO", label: "\u0411\u043e\u043b\u0438\u0432\u0438\u044f" },
+  {
+    value: "BQ",
+    label:
+      "\u0411\u043e\u043d\u044d\u0439\u0440, \u0421\u0438\u043d\u0442-\u042d\u0441\u0442\u0430\u0442\u0438\u0443\u0441 \u0438 \u0421\u0430\u0431\u0430",
+  },
+  {
+    value: "BA",
+    label:
+      "\u0411\u043e\u0441\u043d\u0438\u044f \u0438 \u0413\u0435\u0440\u0446\u0435\u0433\u043e\u0432\u0438\u043d\u0430",
+  },
+  { value: "BW", label: "\u0411\u043e\u0442\u0441\u0432\u0430\u043d\u0430" },
+  { value: "BR", label: "\u0411\u0440\u0430\u0437\u0438\u043b\u0438\u044f" },
+  {
+    value: "IO",
+    label:
+      "\u0411\u0440\u0438\u0442\u0430\u043d\u0441\u043a\u0430\u044f \u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u044f \u0432 \u0418\u043d\u0434\u0438\u0439\u0441\u043a\u043e\u043c \u043e\u043a\u0435\u0430\u043d\u0435",
+  },
+  {
+    value: "BN",
+    label:
+      "\u0411\u0440\u0443\u043d\u0435\u0439-\u0414\u0430\u0440\u0443\u0441\u0441\u0430\u043b\u0430\u043c",
+  },
+  {
+    value: "BF",
+    label:
+      "\u0411\u0443\u0440\u043a\u0438\u043d\u0430-\u0424\u0430\u0441\u043e",
+  },
+  { value: "BI", label: "\u0411\u0443\u0440\u0443\u043d\u0434\u0438" },
+  { value: "BT", label: "\u0411\u0443\u0442\u0430\u043d" },
+  { value: "VU", label: "\u0412\u0430\u043d\u0443\u0430\u0442\u0443" },
+  { value: "VA", label: "\u0412\u0430\u0442\u0438\u043a\u0430\u043d" },
+  {
+    value: "GB",
+    label:
+      "\u0412\u0435\u043b\u0438\u043a\u043e\u0431\u0440\u0438\u0442\u0430\u043d\u0438\u044f",
+  },
+  { value: "HU", label: "\u0412\u0435\u043d\u0433\u0440\u0438\u044f" },
+  {
+    value: "VE",
+    label: "\u0412\u0435\u043d\u0435\u0441\u0443\u044d\u043b\u0430",
+  },
+  {
+    value: "VG",
+    label:
+      "\u0412\u0438\u0440\u0433\u0438\u043d\u0441\u043a\u0438\u0435 \u043e-\u0432\u0430 (\u0412\u0435\u043b\u0438\u043a\u043e\u0431\u0440\u0438\u0442\u0430\u043d\u0438\u044f)",
+  },
+  {
+    value: "VI",
+    label:
+      "\u0412\u0438\u0440\u0433\u0438\u043d\u0441\u043a\u0438\u0435 \u043e-\u0432\u0430 (\u0421\u0428\u0410)",
+  },
+  {
+    value: "UM",
+    label:
+      "\u0412\u043d\u0435\u0448\u043d\u0438\u0435 \u043c\u0430\u043b\u044b\u0435 \u043e-\u0432\u0430 (\u0421\u0428\u0410)",
+  },
+  {
+    value: "TL",
+    label:
+      "\u0412\u043e\u0441\u0442\u043e\u0447\u043d\u044b\u0439 \u0422\u0438\u043c\u043e\u0440",
+  },
+  { value: "VN", label: "\u0412\u044c\u0435\u0442\u043d\u0430\u043c" },
+  { value: "GA", label: "\u0413\u0430\u0431\u043e\u043d" },
+  { value: "HT", label: "\u0413\u0430\u0438\u0442\u0438" },
+  { value: "GY", label: "\u0413\u0430\u0439\u0430\u043d\u0430" },
+  { value: "GM", label: "\u0413\u0430\u043c\u0431\u0438\u044f" },
+  { value: "GH", label: "\u0413\u0430\u043d\u0430" },
+  {
+    value: "GP",
+    label: "\u0413\u0432\u0430\u0434\u0435\u043b\u0443\u043f\u0430",
+  },
+  {
+    value: "GT",
+    label: "\u0413\u0432\u0430\u0442\u0435\u043c\u0430\u043b\u0430",
+  },
+  { value: "GN", label: "\u0413\u0432\u0438\u043d\u0435\u044f" },
+  {
+    value: "GW",
+    label:
+      "\u0413\u0432\u0438\u043d\u0435\u044f-\u0411\u0438\u0441\u0430\u0443",
+  },
+  { value: "DE", label: "\u0413\u0435\u0440\u043c\u0430\u043d\u0438\u044f" },
+  { value: "GG", label: "\u0413\u0435\u0440\u043d\u0441\u0438" },
+  {
+    value: "GI",
+    label: "\u0413\u0438\u0431\u0440\u0430\u043b\u0442\u0430\u0440",
+  },
+  { value: "HN", label: "\u0413\u043e\u043d\u0434\u0443\u0440\u0430\u0441" },
+  {
+    value: "HK",
+    label: "\u0413\u043e\u043d\u043a\u043e\u043d\u0433 (\u0421\u0410\u0420)",
+  },
+  { value: "GD", label: "\u0413\u0440\u0435\u043d\u0430\u0434\u0430" },
+  {
+    value: "GL",
+    label: "\u0413\u0440\u0435\u043d\u043b\u0430\u043d\u0434\u0438\u044f",
+  },
+  { value: "GR", label: "\u0413\u0440\u0435\u0446\u0438\u044f" },
+  { value: "GE", label: "\u0413\u0440\u0443\u0437\u0438\u044f" },
+  { value: "GU", label: "\u0413\u0443\u0430\u043c" },
+  { value: "DK", label: "\u0414\u0430\u043d\u0438\u044f" },
+  { value: "JE", label: "\u0414\u0436\u0435\u0440\u0441\u0438" },
+  { value: "DJ", label: "\u0414\u0436\u0438\u0431\u0443\u0442\u0438" },
+  { value: "DM", label: "\u0414\u043e\u043c\u0438\u043d\u0438\u043a\u0430" },
+  {
+    value: "DO",
+    label:
+      "\u0414\u043e\u043c\u0438\u043d\u0438\u043a\u0430\u043d\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
+  },
+  { value: "EG", label: "\u0415\u0433\u0438\u043f\u0435\u0442" },
+  { value: "ZM", label: "\u0417\u0430\u043c\u0431\u0438\u044f" },
+  {
+    value: "EH",
+    label:
+      "\u0417\u0430\u043f\u0430\u0434\u043d\u0430\u044f \u0421\u0430\u0445\u0430\u0440\u0430",
+  },
+  { value: "ZW", label: "\u0417\u0438\u043c\u0431\u0430\u0431\u0432\u0435" },
+  { value: "IL", label: "\u0418\u0437\u0440\u0430\u0438\u043b\u044c" },
+  { value: "IN", label: "\u0418\u043d\u0434\u0438\u044f" },
+  {
+    value: "ID",
+    label: "\u0418\u043d\u0434\u043e\u043d\u0435\u0437\u0438\u044f",
+  },
+  { value: "JO", label: "\u0418\u043e\u0440\u0434\u0430\u043d\u0438\u044f" },
+  { value: "IQ", label: "\u0418\u0440\u0430\u043a" },
+  { value: "IR", label: "\u0418\u0440\u0430\u043d" },
+  { value: "IE", label: "\u0418\u0440\u043b\u0430\u043d\u0434\u0438\u044f" },
+  { value: "IS", label: "\u0418\u0441\u043b\u0430\u043d\u0434\u0438\u044f" },
+  { value: "ES", label: "\u0418\u0441\u043f\u0430\u043d\u0438\u044f" },
+  { value: "IT", label: "\u0418\u0442\u0430\u043b\u0438\u044f" },
+  { value: "YE", label: "\u0419\u0435\u043c\u0435\u043d" },
+  {
+    value: "CV",
+    label: "\u041a\u0430\u0431\u043e-\u0412\u0435\u0440\u0434\u0435",
+  },
+  {
+    value: "KZ",
+    label: "\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d",
+  },
+  { value: "KH", label: "\u041a\u0430\u043c\u0431\u043e\u0434\u0436\u0430" },
+  { value: "CM", label: "\u041a\u0430\u043c\u0435\u0440\u0443\u043d" },
+  { value: "CA", label: "\u041a\u0430\u043d\u0430\u0434\u0430" },
+  { value: "QA", label: "\u041a\u0430\u0442\u0430\u0440" },
+  { value: "KE", label: "\u041a\u0435\u043d\u0438\u044f" },
+  { value: "CY", label: "\u041a\u0438\u043f\u0440" },
+  { value: "KG", label: "\u041a\u0438\u0440\u0433\u0438\u0437\u0438\u044f" },
+  { value: "KI", label: "\u041a\u0438\u0440\u0438\u0431\u0430\u0442\u0438" },
+  { value: "CN", label: "\u041a\u0438\u0442\u0430\u0439" },
+  { value: "KP", label: "\u041a\u041d\u0414\u0420" },
+  {
+    value: "CC",
+    label:
+      "\u041a\u043e\u043a\u043e\u0441\u043e\u0432\u044b\u0435 \u043e-\u0432\u0430",
+  },
+  { value: "CO", label: "\u041a\u043e\u043b\u0443\u043c\u0431\u0438\u044f" },
+  { value: "KM", label: "\u041a\u043e\u043c\u043e\u0440\u044b" },
+  {
+    value: "CG",
+    label:
+      "\u041a\u043e\u043d\u0433\u043e - \u0411\u0440\u0430\u0437\u0437\u0430\u0432\u0438\u043b\u044c",
+  },
+  {
+    value: "CD",
+    label:
+      "\u041a\u043e\u043d\u0433\u043e - \u041a\u0438\u043d\u0448\u0430\u0441\u0430",
+  },
+  {
+    value: "CR",
+    label: "\u041a\u043e\u0441\u0442\u0430-\u0420\u0438\u043a\u0430",
+  },
+  {
+    value: "CI",
+    label: "\u041a\u043e\u0442-\u0434\u2019\u0418\u0432\u0443\u0430\u0440",
+  },
+  { value: "CU", label: "\u041a\u0443\u0431\u0430" },
+  { value: "KW", label: "\u041a\u0443\u0432\u0435\u0439\u0442" },
+  { value: "CW", label: "\u041a\u044e\u0440\u0430\u0441\u0430\u043e" },
+  { value: "LA", label: "\u041b\u0430\u043e\u0441" },
+  { value: "LV", label: "\u041b\u0430\u0442\u0432\u0438\u044f" },
+  { value: "LS", label: "\u041b\u0435\u0441\u043e\u0442\u043e" },
+  { value: "LR", label: "\u041b\u0438\u0431\u0435\u0440\u0438\u044f" },
+  { value: "LB", label: "\u041b\u0438\u0432\u0430\u043d" },
+  { value: "LY", label: "\u041b\u0438\u0432\u0438\u044f" },
+  { value: "LT", label: "\u041b\u0438\u0442\u0432\u0430" },
+  {
+    value: "LI",
+    label: "\u041b\u0438\u0445\u0442\u0435\u043d\u0448\u0442\u0435\u0439\u043d",
+  },
+  {
+    value: "LU",
+    label: "\u041b\u044e\u043a\u0441\u0435\u043c\u0431\u0443\u0440\u0433",
+  },
+  { value: "MU", label: "\u041c\u0430\u0432\u0440\u0438\u043a\u0438\u0439" },
+  {
+    value: "MR",
+    label: "\u041c\u0430\u0432\u0440\u0438\u0442\u0430\u043d\u0438\u044f",
+  },
+  {
+    value: "MG",
+    label: "\u041c\u0430\u0434\u0430\u0433\u0430\u0441\u043a\u0430\u0440",
+  },
+  { value: "YT", label: "\u041c\u0430\u0439\u043e\u0442\u0442\u0430" },
+  { value: "MO", label: "\u041c\u0430\u043a\u0430\u043e (\u0421\u0410\u0420)" },
+  { value: "MW", label: "\u041c\u0430\u043b\u0430\u0432\u0438" },
+  { value: "MY", label: "\u041c\u0430\u043b\u0430\u0439\u0437\u0438\u044f" },
+  { value: "ML", label: "\u041c\u0430\u043b\u0438" },
+  { value: "MV", label: "\u041c\u0430\u043b\u044c\u0434\u0438\u0432\u044b" },
+  { value: "MT", label: "\u041c\u0430\u043b\u044c\u0442\u0430" },
+  { value: "MA", label: "\u041c\u0430\u0440\u043e\u043a\u043a\u043e" },
+  {
+    value: "MQ",
+    label: "\u041c\u0430\u0440\u0442\u0438\u043d\u0438\u043a\u0430",
+  },
+  {
+    value: "MH",
+    label:
+      "\u041c\u0430\u0440\u0448\u0430\u043b\u043b\u043e\u0432\u044b \u041e\u0441\u0442\u0440\u043e\u0432\u0430",
+  },
+  { value: "MX", label: "\u041c\u0435\u043a\u0441\u0438\u043a\u0430" },
+  { value: "MZ", label: "\u041c\u043e\u0437\u0430\u043c\u0431\u0438\u043a" },
+  { value: "MD", label: "\u041c\u043e\u043b\u0434\u043e\u0432\u0430" },
+  { value: "MC", label: "\u041c\u043e\u043d\u0430\u043a\u043e" },
+  { value: "MN", label: "\u041c\u043e\u043d\u0433\u043e\u043b\u0438\u044f" },
+  {
+    value: "MS",
+    label: "\u041c\u043e\u043d\u0442\u0441\u0435\u0440\u0440\u0430\u0442",
+  },
+  {
+    value: "MM",
+    label:
+      "\u041c\u044c\u044f\u043d\u043c\u0430 (\u0411\u0438\u0440\u043c\u0430)",
+  },
+  { value: "NA", label: "\u041d\u0430\u043c\u0438\u0431\u0438\u044f" },
+  { value: "NR", label: "\u041d\u0430\u0443\u0440\u0443" },
+  { value: "NP", label: "\u041d\u0435\u043f\u0430\u043b" },
+  { value: "NE", label: "\u041d\u0438\u0433\u0435\u0440" },
+  { value: "NG", label: "\u041d\u0438\u0433\u0435\u0440\u0438\u044f" },
+  {
+    value: "NL",
+    label: "\u041d\u0438\u0434\u0435\u0440\u043b\u0430\u043d\u0434\u044b",
+  },
+  {
+    value: "NI",
+    label: "\u041d\u0438\u043a\u0430\u0440\u0430\u0433\u0443\u0430",
+  },
+  { value: "NU", label: "\u041d\u0438\u0443\u044d" },
+  {
+    value: "NZ",
+    label:
+      "\u041d\u043e\u0432\u0430\u044f \u0417\u0435\u043b\u0430\u043d\u0434\u0438\u044f",
+  },
+  {
+    value: "NC",
+    label:
+      "\u041d\u043e\u0432\u0430\u044f \u041a\u0430\u043b\u0435\u0434\u043e\u043d\u0438\u044f",
+  },
+  { value: "NO", label: "\u041d\u043e\u0440\u0432\u0435\u0433\u0438\u044f" },
+  { value: "BV", label: "\u043e-\u0432 \u0411\u0443\u0432\u0435" },
+  { value: "IM", label: "\u043e-\u0432 \u041c\u044d\u043d" },
+  {
+    value: "NF",
+    label: "\u043e-\u0432 \u041d\u043e\u0440\u0444\u043e\u043b\u043a",
+  },
+  {
+    value: "CX",
+    label:
+      "\u043e-\u0432 \u0420\u043e\u0436\u0434\u0435\u0441\u0442\u0432\u0430",
+  },
+  {
+    value: "SH",
+    label: "\u043e-\u0432 \u0421\u0432. \u0415\u043b\u0435\u043d\u044b",
+  },
+  {
+    value: "PN",
+    label: "\u043e-\u0432\u0430 \u041f\u0438\u0442\u043a\u044d\u0440\u043d",
+  },
+  {
+    value: "TC",
+    label:
+      "\u043e-\u0432\u0430 \u0422\u0451\u0440\u043a\u0441 \u0438 \u041a\u0430\u0439\u043a\u043e\u0441",
+  },
+  {
+    value: "HM",
+    label:
+      "\u043e-\u0432\u0430 \u0425\u0435\u0440\u0434 \u0438 \u041c\u0430\u043a\u0434\u043e\u043d\u0430\u043b\u044c\u0434",
+  },
+  { value: "AE", label: "\u041e\u0410\u042d" },
+  { value: "OM", label: "\u041e\u043c\u0430\u043d" },
+  {
+    value: "KY",
+    label:
+      "\u041e\u0441\u0442\u0440\u043e\u0432\u0430 \u041a\u0430\u0439\u043c\u0430\u043d",
+  },
+  {
+    value: "CK",
+    label:
+      "\u041e\u0441\u0442\u0440\u043e\u0432\u0430 \u041a\u0443\u043a\u0430",
+  },
+  { value: "PK", label: "\u041f\u0430\u043a\u0438\u0441\u0442\u0430\u043d" },
+  { value: "PW", label: "\u041f\u0430\u043b\u0430\u0443" },
+  {
+    value: "PS",
+    label:
+      "\u041f\u0430\u043b\u0435\u0441\u0442\u0438\u043d\u0441\u043a\u0438\u0435 \u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u0438",
+  },
+  { value: "PA", label: "\u041f\u0430\u043d\u0430\u043c\u0430" },
+  {
+    value: "PG",
+    label:
+      "\u041f\u0430\u043f\u0443\u0430 \u2014 \u041d\u043e\u0432\u0430\u044f \u0413\u0432\u0438\u043d\u0435\u044f",
+  },
+  { value: "PY", label: "\u041f\u0430\u0440\u0430\u0433\u0432\u0430\u0439" },
+  { value: "PE", label: "\u041f\u0435\u0440\u0443" },
+  { value: "PL", label: "\u041f\u043e\u043b\u044c\u0448\u0430" },
+  {
+    value: "PT",
+    label: "\u041f\u043e\u0440\u0442\u0443\u0433\u0430\u043b\u0438\u044f",
+  },
+  {
+    value: "PR",
+    label: "\u041f\u0443\u044d\u0440\u0442\u043e-\u0420\u0438\u043a\u043e",
+  },
+  {
+    value: "KR",
+    label:
+      "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u041a\u043e\u0440\u0435\u044f",
+  },
+  { value: "RE", label: "\u0420\u0435\u044e\u043d\u044c\u043e\u043d" },
+  { value: "RU", label: "\u0420\u043e\u0441\u0441\u0438\u044f" },
+  { value: "RW", label: "\u0420\u0443\u0430\u043d\u0434\u0430" },
+  { value: "RO", label: "\u0420\u0443\u043c\u044b\u043d\u0438\u044f" },
+  {
+    value: "SV",
+    label: "\u0421\u0430\u043b\u044c\u0432\u0430\u0434\u043e\u0440",
+  },
+  { value: "WS", label: "\u0421\u0430\u043c\u043e\u0430" },
+  {
+    value: "SM",
+    label: "\u0421\u0430\u043d-\u041c\u0430\u0440\u0438\u043d\u043e",
+  },
+  {
+    value: "ST",
+    label:
+      "\u0421\u0430\u043d-\u0422\u043e\u043c\u0435 \u0438 \u041f\u0440\u0438\u043d\u0441\u0438\u043f\u0438",
+  },
+  {
+    value: "SA",
+    label:
+      "\u0421\u0430\u0443\u0434\u043e\u0432\u0441\u043a\u0430\u044f \u0410\u0440\u0430\u0432\u0438\u044f",
+  },
+  {
+    value: "MK",
+    label:
+      "\u0421\u0435\u0432\u0435\u0440\u043d\u0430\u044f \u041c\u0430\u043a\u0435\u0434\u043e\u043d\u0438\u044f",
+  },
+  {
+    value: "MP",
+    label:
+      "\u0421\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u041c\u0430\u0440\u0438\u0430\u043d\u0441\u043a\u0438\u0435 \u043e-\u0432\u0430",
+  },
+  {
+    value: "SC",
+    label:
+      "\u0421\u0435\u0439\u0448\u0435\u043b\u044c\u0441\u043a\u0438\u0435 \u041e\u0441\u0442\u0440\u043e\u0432\u0430",
+  },
+  {
+    value: "BL",
+    label:
+      "\u0421\u0435\u043d-\u0411\u0430\u0440\u0442\u0435\u043b\u0435\u043c\u0438",
+  },
+  {
+    value: "MF",
+    label: "\u0421\u0435\u043d-\u041c\u0430\u0440\u0442\u0435\u043d",
+  },
+  {
+    value: "PM",
+    label:
+      "\u0421\u0435\u043d-\u041f\u044c\u0435\u0440 \u0438 \u041c\u0438\u043a\u0435\u043b\u043e\u043d",
+  },
+  { value: "SN", label: "\u0421\u0435\u043d\u0435\u0433\u0430\u043b" },
+  {
+    value: "VC",
+    label:
+      "\u0421\u0435\u043d\u0442-\u0412\u0438\u043d\u0441\u0435\u043d\u0442 \u0438 \u0413\u0440\u0435\u043d\u0430\u0434\u0438\u043d\u044b",
+  },
+  {
+    value: "KN",
+    label:
+      "\u0421\u0435\u043d\u0442-\u041a\u0438\u0442\u0441 \u0438 \u041d\u0435\u0432\u0438\u0441",
+  },
+  {
+    value: "LC",
+    label: "\u0421\u0435\u043d\u0442-\u041b\u044e\u0441\u0438\u044f",
+  },
+  { value: "RS", label: "\u0421\u0435\u0440\u0431\u0438\u044f" },
+  { value: "SG", label: "\u0421\u0438\u043d\u0433\u0430\u043f\u0443\u0440" },
+  {
+    value: "SX",
+    label: "\u0421\u0438\u043d\u0442-\u041c\u0430\u0440\u0442\u0435\u043d",
+  },
+  { value: "SY", label: "\u0421\u0438\u0440\u0438\u044f" },
+  { value: "SK", label: "\u0421\u043b\u043e\u0432\u0430\u043a\u0438\u044f" },
+  { value: "SI", label: "\u0421\u043b\u043e\u0432\u0435\u043d\u0438\u044f" },
+  {
+    value: "US",
+    label:
+      "\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u043d\u044b\u0435 \u0428\u0442\u0430\u0442\u044b",
+  },
+  {
+    value: "SB",
+    label:
+      "\u0421\u043e\u043b\u043e\u043c\u043e\u043d\u043e\u0432\u044b \u041e\u0441\u0442\u0440\u043e\u0432\u0430",
+  },
+  { value: "SO", label: "\u0421\u043e\u043c\u0430\u043b\u0438" },
+  { value: "SD", label: "\u0421\u0443\u0434\u0430\u043d" },
+  { value: "SR", label: "\u0421\u0443\u0440\u0438\u043d\u0430\u043c" },
+  {
+    value: "SL",
+    label:
+      "\u0421\u044c\u0435\u0440\u0440\u0430-\u041b\u0435\u043e\u043d\u0435",
+  },
+  {
+    value: "TJ",
+    label: "\u0422\u0430\u0434\u0436\u0438\u043a\u0438\u0441\u0442\u0430\u043d",
+  },
+  { value: "TH", label: "\u0422\u0430\u0438\u043b\u0430\u043d\u0434" },
+  { value: "TW", label: "\u0422\u0430\u0439\u0432\u0430\u043d\u044c" },
+  { value: "TZ", label: "\u0422\u0430\u043d\u0437\u0430\u043d\u0438\u044f" },
+  { value: "TG", label: "\u0422\u043e\u0433\u043e" },
+  { value: "TK", label: "\u0422\u043e\u043a\u0435\u043b\u0430\u0443" },
+  { value: "TO", label: "\u0422\u043e\u043d\u0433\u0430" },
+  {
+    value: "TT",
+    label:
+      "\u0422\u0440\u0438\u043d\u0438\u0434\u0430\u0434 \u0438 \u0422\u043e\u0431\u0430\u0433\u043e",
+  },
+  { value: "TV", label: "\u0422\u0443\u0432\u0430\u043b\u0443" },
+  { value: "TN", label: "\u0422\u0443\u043d\u0438\u0441" },
+  {
+    value: "TM",
+    label:
+      "\u0422\u0443\u0440\u043a\u043c\u0435\u043d\u0438\u0441\u0442\u0430\u043d",
+  },
+  { value: "TR", label: "\u0422\u0443\u0440\u0446\u0438\u044f" },
+  { value: "UG", label: "\u0423\u0433\u0430\u043d\u0434\u0430" },
+  {
+    value: "UZ",
+    label: "\u0423\u0437\u0431\u0435\u043a\u0438\u0441\u0442\u0430\u043d",
+  },
+  { value: "UA", label: "\u0423\u043a\u0440\u0430\u0438\u043d\u0430" },
+  {
+    value: "WF",
+    label:
+      "\u0423\u043e\u043b\u043b\u0438\u0441 \u0438 \u0424\u0443\u0442\u0443\u043d\u0430",
+  },
+  { value: "UY", label: "\u0423\u0440\u0443\u0433\u0432\u0430\u0439" },
+  {
+    value: "FO",
+    label:
+      "\u0424\u0430\u0440\u0435\u0440\u0441\u043a\u0438\u0435 \u043e-\u0432\u0430",
+  },
+  {
+    value: "FM",
+    label:
+      "\u0424\u0435\u0434\u0435\u0440\u0430\u0442\u0438\u0432\u043d\u044b\u0435 \u0428\u0442\u0430\u0442\u044b \u041c\u0438\u043a\u0440\u043e\u043d\u0435\u0437\u0438\u0438",
+  },
+  { value: "FJ", label: "\u0424\u0438\u0434\u0436\u0438" },
+  {
+    value: "PH",
+    label: "\u0424\u0438\u043b\u0438\u043f\u043f\u0438\u043d\u044b",
+  },
+  {
+    value: "FI",
+    label: "\u0424\u0438\u043d\u043b\u044f\u043d\u0434\u0438\u044f",
+  },
+  {
+    value: "FK",
+    label:
+      "\u0424\u043e\u043b\u043a\u043b\u0435\u043d\u0434\u0441\u043a\u0438\u0435 \u043e-\u0432\u0430",
+  },
+  { value: "FR", label: "\u0424\u0440\u0430\u043d\u0446\u0438\u044f" },
+  {
+    value: "GF",
+    label:
+      "\u0424\u0440\u0430\u043d\u0446\u0443\u0437\u0441\u043a\u0430\u044f \u0413\u0432\u0438\u0430\u043d\u0430",
+  },
+  {
+    value: "PF",
+    label:
+      "\u0424\u0440\u0430\u043d\u0446\u0443\u0437\u0441\u043a\u0430\u044f \u041f\u043e\u043b\u0438\u043d\u0435\u0437\u0438\u044f",
+  },
+  {
+    value: "TF",
+    label:
+      "\u0424\u0440\u0430\u043d\u0446\u0443\u0437\u0441\u043a\u0438\u0435 \u042e\u0436\u043d\u044b\u0435 \u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u0438",
+  },
+  { value: "HR", label: "\u0425\u043e\u0440\u0432\u0430\u0442\u0438\u044f" },
+  {
+    value: "CF",
+    label:
+      "\u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e-\u0410\u0444\u0440\u0438\u043a\u0430\u043d\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
+  },
+  { value: "TD", label: "\u0427\u0430\u0434" },
+  {
+    value: "ME",
+    label: "\u0427\u0435\u0440\u043d\u043e\u0433\u043e\u0440\u0438\u044f",
+  },
+  { value: "CZ", label: "\u0427\u0435\u0445\u0438\u044f" },
+  { value: "CL", label: "\u0427\u0438\u043b\u0438" },
+  {
+    value: "CH",
+    label: "\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0438\u044f",
+  },
+  { value: "SE", label: "\u0428\u0432\u0435\u0446\u0438\u044f" },
+  {
+    value: "SJ",
+    label:
+      "\u0428\u043f\u0438\u0446\u0431\u0435\u0440\u0433\u0435\u043d \u0438 \u042f\u043d-\u041c\u0430\u0439\u0435\u043d",
+  },
+  { value: "LK", label: "\u0428\u0440\u0438-\u041b\u0430\u043d\u043a\u0430" },
+  { value: "EC", label: "\u042d\u043a\u0432\u0430\u0434\u043e\u0440" },
+  {
+    value: "GQ",
+    label:
+      "\u042d\u043a\u0432\u0430\u0442\u043e\u0440\u0438\u0430\u043b\u044c\u043d\u0430\u044f \u0413\u0432\u0438\u043d\u0435\u044f",
+  },
+  { value: "ER", label: "\u042d\u0440\u0438\u0442\u0440\u0435\u044f" },
+  { value: "SZ", label: "\u042d\u0441\u0432\u0430\u0442\u0438\u043d\u0438" },
+  { value: "EE", label: "\u042d\u0441\u0442\u043e\u043d\u0438\u044f" },
+  { value: "ET", label: "\u042d\u0444\u0438\u043e\u043f\u0438\u044f" },
+  {
+    value: "GS",
+    label:
+      "\u042e\u0436\u043d\u0430\u044f \u0413\u0435\u043e\u0440\u0433\u0438\u044f \u0438 \u042e\u0436\u043d\u044b\u0435 \u0421\u0430\u043d\u0434\u0432\u0438\u0447\u0435\u0432\u044b \u043e-\u0432\u0430",
+  },
+  {
+    value: "ZA",
+    label:
+      "\u042e\u0436\u043d\u043e-\u0410\u0444\u0440\u0438\u043a\u0430\u043d\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
+  },
+  {
+    value: "SS",
+    label: "\u042e\u0436\u043d\u044b\u0439 \u0421\u0443\u0434\u0430\u043d",
+  },
+  { value: "JM", label: "\u042f\u043c\u0430\u0439\u043a\u0430" },
+  { value: "JP", label: "\u042f\u043f\u043e\u043d\u0438\u044f" },
+];
