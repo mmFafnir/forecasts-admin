@@ -22,7 +22,7 @@ function App() {
         <Route path="" element={<MatchPage />} />
 
         <Route path="/matches" element={<MatchPage />} />
-        <Route path="/matches/:id" element={<MatchElementPage />} />
+        <Route path="/:id" element={<MatchElementPage />} />
 
         <Route
           path="*"
