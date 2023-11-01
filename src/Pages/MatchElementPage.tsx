@@ -5,7 +5,7 @@ import { NotifyEnum } from "../types/notifyEnum";
 import DateForm from "../components/UI/Form/DateForm";
 import TimeForm from "../components/UI/Form/TimeForm";
 import FileImage from "../components/UI/Form/FileImage";
-import TextArea from "antd/es/input/TextArea";
+import TextEditor from "../components/TextEditor";
 
 const MatchElementPage: FC = () => {
   const [form] = Form.useForm();
@@ -126,7 +126,7 @@ const MatchElementPage: FC = () => {
         </Row>
 
         <Form.Item name={"analysis"}>
-          <TextArea />
+          <TextEditor />
         </Form.Item>
 
         <Button type="default" htmlType="submit">

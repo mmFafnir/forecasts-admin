@@ -14,9 +14,9 @@ const TimeForm: FC<IProps> = ({ label, defaultValue, setTime }) => {
   const [value, setValue] = useState<Dayjs | null>(
     defaultValue ? dayjs(defaultValue, timeFormat) : null
   );
-
+  //
   const onChangeTime: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(dateString);
+    console.log(date);
     setTime(dateString);
     if (dateString.length === 0) return setValue(null);
     setValue(dayjs(dateString, timeFormat));

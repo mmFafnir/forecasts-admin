@@ -15,7 +15,9 @@ const DateForm: FC<IProps> = ({ defaultDate, setDate, label }) => {
     defaultDate ? dayjs(defaultDate) : null
   );
 
+  //  (date, dateString)
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+    console.log(date);
     setDate(dateString);
     if (dateString.length === 0) return setValue(null);
     setValue(dayjs(dateString));
