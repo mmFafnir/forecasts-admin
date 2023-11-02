@@ -24,6 +24,10 @@ export const columns: ColumnsType<DataType> = [
     dataIndex: "time",
   },
   {
+    title: "Статус матчка",
+    dataIndex: "status",
+  },
+  {
     title: "Команда дома",
     dataIndex: "team_home",
   },
@@ -41,7 +45,7 @@ export const columns: ColumnsType<DataType> = [
   },
   {
     title: "Статус",
-    dataIndex: "status",
+    dataIndex: "moderation",
   },
   {
     title: "",

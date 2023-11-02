@@ -11,11 +11,12 @@ export interface DataType {
   season: string;
   date: string;
   time: string;
+  status: ReactElement<HTMLElement>;
   team_home: string;
   team_away: string;
   update: string;
   user: string;
-  status: ReactElement<HTMLElement>;
+  moderation: ReactElement<HTMLElement>;
 }
 
 const TableMatch: FC = () => {

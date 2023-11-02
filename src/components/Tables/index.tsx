@@ -26,7 +26,7 @@ const Table: FC<IProps> = ({ data, columns }) => {
   const hasSelected = selectedRowKeys.length > 0;
 
   return (
-    <div className="flex flex-col pr-11" style={{ maxWidth: "1400px" }}>
+    <div className="flex flex-col pr-11" style={{ maxWidth: "1500px" }}>
       <div className="mb-5">
         <span className="mr-2">
           {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
