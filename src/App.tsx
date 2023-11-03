@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import LayoutMain from "./layouts/LayoutMain";
-import MatchPage from "./pages/MatchPage";
-import MatchElementPage from "./pages/MatchElementPage";
-import AuthPage from "./pages/AuthPage";
+import MatchPage from "./Pages/MatchPage";
+import MatchElementPage from "./Pages/MatchElementPage";
+import AuthPage from "./Pages/AuthPage";
 
-import TeamsPage from "./pages/TeamsPage";
+import TeamsPage from "./Pages/TeamsPage";
 import SecurityProvider from "./modules/SecurityProvider";
-import PromptsPage from "./pages/PromptsPage";
-import LeaguesPages from "./pages/LeaguesPages";
-import CountriesPage from "./pages/CountriesPage";
+import PromptsPage from "./Pages/PromptsPage";
+import LeaguesPages from "./Pages/LeaguesPages";
+import CountriesPage from "./Pages/CountriesPage";
 import "./assets/scss/App.scss";
 
 function App() {
@@ -27,9 +27,9 @@ function App() {
       <Route
         path="/"
         element={
-          // <SecurityProvider>
-          <LayoutMain />
-          // </SecurityProvider>
+          <SecurityProvider>
+            <LayoutMain />
+          </SecurityProvider>
         }
       >
         <Route path="" element={<TeamsPage />} />
