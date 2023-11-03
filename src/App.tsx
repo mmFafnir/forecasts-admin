@@ -27,9 +27,9 @@ function App() {
       <Route
         path="/"
         element={
-          <SecurityProvider>
-            <LayoutMain />
-          </SecurityProvider>
+          // <SecurityProvider>
+          <LayoutMain />
+          // </SecurityProvider>
         }
       >
         <Route path="" element={<TeamsPage />} />
