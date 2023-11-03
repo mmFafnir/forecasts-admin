@@ -6,12 +6,12 @@ import MatchPage from "./pages/MatchPage";
 import MatchElementPage from "./pages/MatchElementPage";
 import AuthPage from "./pages/AuthPage";
 
-import "./assets/scss/App.scss";
 import TeamsPage from "./pages/TeamsPage";
 import SecurityProvider from "./modules/SecurityProvider";
 import PromptsPage from "./pages/PromptsPage";
 import LeaguesPages from "./pages/LeaguesPages";
 import CountriesPage from "./pages/CountriesPage";
+import "./assets/scss/App.scss";
 
 function App() {
   const getString = () => {
