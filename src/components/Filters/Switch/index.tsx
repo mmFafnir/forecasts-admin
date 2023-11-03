@@ -19,7 +19,7 @@ const Switch: FC<IProps> = ({ items, setItem }) => {
   return (
     <div className="flex items-center">
       <p>{items[0].title}</p>
-      <SwitchAnt className="m-3 bg-slate-300" onChange={onChange} />
+      <SwitchAnt className="mx-3 bg-slate-300" onChange={onChange} />
       <p>{items[1].title}</p>
     </div>
   );

@@ -1,26 +1,64 @@
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
+import { ITeam } from "../../../store/Slices/teamsSlice/interface";
 import { Image, Spin } from "antd";
-import { TypeCountry } from "../../../store/Slices/countriesSlice/interface";
+import dayjs from "dayjs";
 
-export const columns: ColumnsType<TypeCountry> = [
+export const columns: ColumnsType<ITeam> = [
   {
-    title: "Страна",
-    dataIndex: "name",
-    render: (_, record) => (
-      <>
-        <p>{record.translation}</p>
-        <p>({record.name})</p>
-      </>
-    ),
+    title: "Название",
+    dataIndex: "team_name",
   },
   {
     title: "Лого",
-    dataIndex: "code",
+    dataIndex: "get_photo",
     render: (_, record) => (
       <Image
         width={20}
-        src={`https://admin.aibetguru.com/uploads/${record.code}.svg`}
+        src={`https://admin.aibetguru.com/uploads/${record.team_id}.png`}
+        placeholder={<Spin />}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src =
+            "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
+        }}
+      />
+    ),
+  },
+  {
+    title: "Вид спорта",
+    dataIndex: "sport_id",
+    render: (_, record) => (record.sport_id == 1 ? "Футбол" : ""),
+  },
+  {
+    title: "Дата",
+    dataIndex: "created_at",
+    render: (_, record) => (
+      <p className="text-left">
+        {record.created_at
+          ? `${dayjs(record.created_at).format("DD.MM.YYYY")}`
+          : "null"}
+      </p>
+    ),
+  },
+  {
+    title: "Дата обновления",
+    dataIndex: "updated_at",
+    render: (_, record) => (
+      <p className="text-left">
+        {record.updated_at
+          ? `${dayjs(record.updated_at).format("DD.MM.YYYY")}`
+          : "null"}
+      </p>
+    ),
+  },
+  {
+    title: "Страна",
+    dataIndex: "team_cc",
+    render: (_, record) => (
+      <Image
+        width={20}
+        src={`https://admin.aibetguru.com/uploads/${record.team_cc}.svg`}
         placeholder={<Spin />}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
@@ -29,12 +67,11 @@ export const columns: ColumnsType<TypeCountry> = [
       />
     ),
   },
-
   {
     title: "",
     key: "action",
     render: (_, record) => (
-      <Link to={`/countries/${record.code}`}>
+      <Link to={`/teams/${record.id}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"

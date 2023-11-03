@@ -1,57 +1,54 @@
 import { ColumnsType } from "antd/es/table";
-import { DataType } from ".";
 import { Link } from "react-router-dom";
+import { Image, Spin } from "antd";
+import { TypeLeague } from "../../../store/Slices/leaguesSlice/interface";
 
-export const columns: ColumnsType<DataType> = [
+export const columns: ColumnsType<TypeLeague> = [
+  {
+    title: "Название",
+    dataIndex: "league_name",
+  },
+  {
+    title: "Лого",
+    dataIndex: "league_id",
+    render: (_, record) => (
+      <Image
+        width={20}
+        src={`https://admin.aibetguru.com/uploads/${record.league_id}.png`}
+        placeholder={<Spin />}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src =
+            "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
+        }}
+      />
+    ),
+  },
+
   {
     title: "Страна",
     dataIndex: "country",
   },
   {
-    title: "Лига",
-    dataIndex: "league",
-  },
-  {
-    title: "Сезон",
-    dataIndex: "season",
-  },
-  {
-    title: "Дата",
-    dataIndex: "date",
-  },
-  {
-    title: "Время",
-    dataIndex: "time",
-  },
-  {
-    title: "Статус матчка",
-    dataIndex: "status",
-  },
-  {
-    title: "Команда дома",
-    dataIndex: "team_home",
-  },
-  {
-    title: "Команда в гостях",
-    dataIndex: "team_away",
-  },
-  {
-    title: "Дата обновления",
-    dataIndex: "update",
-  },
-  {
-    title: "Пользователь",
-    dataIndex: "user",
-  },
-  {
-    title: "Статус",
-    dataIndex: "moderation",
+    title: "",
+    dataIndex: "league_cc",
+    render: (_, record) => (
+      <Image
+        width={20}
+        src={`https://admin.aibetguru.com/uploads/${record.league_cc}.svg`}
+        placeholder={<Spin />}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = "https://cdn-icons-png.flaticon.com/512/921/921490.png";
+        }}
+      />
+    ),
   },
   {
     title: "",
     key: "action",
     render: (_, record) => (
-      <Link to={`/matches/${record.id}`}>
+      <Link to={`/leagues/${record.id}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"

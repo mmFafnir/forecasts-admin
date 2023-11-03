@@ -1,25 +1,23 @@
-import { Spin } from "antd";
 import { FC, useEffect, useState } from "react";
-import Table from "..";
-import Pagination from "../../UI/Pagination";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
-import { fetchCountries } from "../../../store/Slices/countriesSlice/asyncActions";
-import { TFilter } from "../../../types/TypeFilter";
+import { Spin } from "antd";
 import { EnumStatus } from "../../../types/Status";
-import { columns } from "./colums";
+import { fetchLeagues } from "../../../store/Slices/leaguesSlice/asyncActions";
+import { TFilter } from "../../../types/TypeFilter";
+import { columns } from "./columnt";
+import Table from "..";
+import Pagination from "../../UI/Pagination";
 
-const TableCountries: FC = () => {
-  const { countries, status, total } = useTypeSelector(
-    (state) => state.countries
-  );
+const TableLeagues: FC = () => {
+  const { leagues, status, total } = useTypeSelector((state) => state.leagues);
   const { limit, search } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
 
   const [page, setPage] = useState<number>(1);
 
   const onGetAllLeagues = (params: TFilter) => {
-    dispatch(fetchCountries(params));
+    dispatch(fetchLeagues(params));
   };
 
   useEffect(() => {
@@ -41,11 +39,11 @@ const TableCountries: FC = () => {
         spinning={status == EnumStatus.LOADING}
         tip="Loading..."
       >
-        <Table data={countries} columns={columns} />
+        <Table data={leagues} columns={columns} />
       </Spin>
       <Pagination setPage={setPage} defaultPage={page} total={total} />
     </div>
   );
 };
 
-export default TableCountries;
+export default TableLeagues;

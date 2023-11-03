@@ -1,4 +1,5 @@
 import {
+  EditOutlined,
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
@@ -6,7 +7,7 @@ import {
 import { Link } from "react-router-dom";
 
 const forecast = [
-  { link: "/country", text: "СТРАНЫ" },
+  { link: "/countries", text: "СТРАНЫ" },
   { link: "/leagues", text: "ЛИГИ" },
   { link: "/teams", text: "КОМАНДЫ" },
   { link: "/matches", text: "МАТЧИ" },
@@ -27,5 +28,10 @@ export const SidebarMenu = [
     icon: UserOutlined,
     name: "СТАВИМ C ИИ",
     children: forecast,
+  },
+  {
+    icon: EditOutlined,
+    name: <Link to={"/prompts"}>ПРОМТЫ</Link>,
+    // children: forecast,
   },
 ];

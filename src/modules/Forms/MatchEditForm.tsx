@@ -166,7 +166,6 @@ const MatchEditForm: FC = () => {
       <Button
         type="primary"
         size="large"
-        htmlType="submit"
         className="mr-auto mt-8 flex w-44 justify-center"
         onClick={onFinish}
       >

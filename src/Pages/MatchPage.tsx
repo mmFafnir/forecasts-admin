@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import TableMatch from "../components/Tables/TableMatch";
 import Switch, { TSwitchItem } from "../components/Filters/Switch";
-import FilterBtns from "../components/Filters/FilterBtns";
+import FilterHeader from "../components/Filters/FilterHeader";
+import axios from "../core/axios";
 
 const switchItems: [TSwitchItem, TSwitchItem] = [
   {
@@ -34,21 +35,33 @@ const filterBtnItems = [
 ];
 
 const MatchPage: FC = () => {
-  const [statuMatch, setStatusMatch] = useState<string>(switchItems[0].name);
+  const [statusMatch, setStatusMatch] = useState<string>(switchItems[0].name);
+  console.log(statusMatch);
+  const fetchMatches = async () => {
+    try {
+      const data = await axios.get("/get_all_promts");
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  console.log(statuMatch);
+  useEffect(() => {
+    fetchMatches();
+  }, []);
+
   return (
-    <div className="p-5">
+    <>
       <div className="flex items-center ">
         <h1 className="line-after">МАТЧИ</h1>
         <Switch items={switchItems} setItem={setStatusMatch} />
       </div>
       <div className="mt-6">
-        <FilterBtns items={filterBtnItems} />
+        <FilterHeader items={filterBtnItems} />
       </div>
       <div></div>
       <TableMatch />
-    </div>
+    </>
   );
 };
 

@@ -7,13 +7,13 @@ import { Outlet } from "react-router-dom";
 
 const LayoutMain: FC = () => {
   return (
-    <div className="app null">
+    <div className="app">
       <div className="w-full">
-        <Layout className="min-h-screen">
+        <Layout className="min-h-screen pb-24">
           <Sidebar />
           <Layout>
             <Header />
-            <Content style={contentStyle}>
+            <Content style={contentStyle} className="p-8">
               <Outlet />
             </Content>
           </Layout>

@@ -40,6 +40,7 @@ const Sidebar: FC = () => {
           mode="inline"
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
+          className="text-left"
           style={{ height: "100%", backgroundColor: "transparent" }}
           items={links}
         />

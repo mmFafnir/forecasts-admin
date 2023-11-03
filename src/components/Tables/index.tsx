@@ -1,7 +1,8 @@
-import { Table as TableAnt } from "antd";
+import { Empty, Table as TableAnt } from "antd";
 import { AnyObject } from "antd/es/_util/type";
 // import { ColumnsType } from "antd/es/table";
 import { FC, useState, Key } from "react";
+import Search from "../UI/Search";
 
 type TData = AnyObject;
 
@@ -26,19 +27,28 @@ const Table: FC<IProps> = ({ data, columns }) => {
   const hasSelected = selectedRowKeys.length > 0;
 
   return (
-    <div className="flex flex-col pr-11" style={{ maxWidth: "1500px" }}>
+    <div className="flex flex-col pr-11 ">
       <div className="mb-5">
         <span className="mr-2">
           {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
         </span>
       </div>
+      <Search />
       <TableAnt
         className="table"
+        rowKey="id"
         rowSelection={rowSelection}
         columns={columns}
         dataSource={data}
-        pagination={{ position: ["bottomCenter"] }}
+        pagination={false}
       />
+      {data.length === 0 && (
+        <Empty
+          style={{ minHeight: "500px", paddingTop: "10%" }}
+          description={"Пусто :("}
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+        />
+      )}
     </div>
   );
 };

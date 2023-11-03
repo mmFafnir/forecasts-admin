@@ -2,10 +2,16 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import LayoutMain from "./layouts/LayoutMain";
-import MatchPage from "./Pages/MatchPage";
+import MatchPage from "./pages/MatchPage";
+import MatchElementPage from "./pages/MatchElementPage";
+import AuthPage from "./pages/AuthPage";
 
-import MatchElementPage from "./Pages/MatchElementPage";
 import "./assets/scss/App.scss";
+import TeamsPage from "./pages/TeamsPage";
+import SecurityProvider from "./modules/SecurityProvider";
+import PromptsPage from "./pages/PromptsPage";
+import LeaguesPages from "./pages/LeaguesPages";
+import CountriesPage from "./pages/CountriesPage";
 
 function App() {
   const getString = () => {
@@ -18,11 +24,26 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<LayoutMain />}>
-        <Route path="" element={<MatchPage />} />
+      <Route
+        path="/"
+        element={
+          <SecurityProvider>
+            <LayoutMain />
+          </SecurityProvider>
+        }
+      >
+        <Route path="" element={<TeamsPage />} />
 
         <Route path="/matches" element={<MatchPage />} />
-        <Route path="/:id" element={<MatchElementPage />} />
+        <Route path="/matches/:id" element={<MatchElementPage />} />
+
+        <Route path="/teams" element={<TeamsPage />} />
+
+        <Route path="/leagues" element={<LeaguesPages />} />
+
+        <Route path="/countries" element={<CountriesPage />} />
+
+        <Route path="/prompts" element={<PromptsPage />} />
 
         <Route
           path="*"
@@ -31,6 +52,7 @@ function App() {
           }
         />
       </Route>
+      <Route path="/auth" element={<AuthPage />} />
     </Routes>
   );
 }
