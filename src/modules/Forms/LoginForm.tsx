@@ -5,7 +5,7 @@ import { required, validEmail } from "../../core/form-rools";
 import axios from "../../core/axios";
 import { AxiosError } from "axios";
 
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 
 interface ILoginForm {
@@ -14,7 +14,7 @@ interface ILoginForm {
 }
 
 const LoginForm: FC = () => {
-  const cookies = new Cookies(null, { path: "/" });
+  // const cookies = new Cookies(null, { path: "/" });
   const navigate = useNavigate();
   const [form] = Form.useForm<ILoginForm>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,7 +29,8 @@ const LoginForm: FC = () => {
       const params = form.getFieldsValue();
       const { data } = await axios.post("/login", params);
 
-      cookies.set("_token", data.token);
+      window.localStorage.setItem("_token", data.token);
+      // cookies.set("_token", data.token);
 
       notification.success({
         message: `Вы успешно вошли`,
@@ -44,7 +45,7 @@ const LoginForm: FC = () => {
       }, 1000);
     } catch (error) {
       const err = error as AxiosError;
-
+      console.log(err);
       notification.error({
         message: `Ошибка ${err.response ? err.response.status : ""}`,
         description: "Неверный логин или пароль",

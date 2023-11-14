@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getUserInfo } from "./asyncAction";
 import { EnumStatus } from "../../../types/Status";
 import { TypeUser } from "./interface";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 
-const cookies = new Cookies(null, { path: "/" });
+// const cookies = new Cookies(null, { path: "/" });
 
 interface IState {
   user: TypeUser | null;
@@ -22,7 +22,8 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      cookies.remove("_token");
+      window.localStorage.removeItem("_token");
+      // cookies.remove("_token");
     },
   },
 

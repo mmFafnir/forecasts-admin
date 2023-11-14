@@ -1,4 +1,5 @@
 export type TypeCountry = {
+  id: string;
   code: string;
   name: string;
   translation: string;

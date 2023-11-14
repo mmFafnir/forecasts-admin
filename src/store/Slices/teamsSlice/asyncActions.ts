@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { TFilter } from "../../../types/TypeFilter";
 import axios from "../../../core/axios";
-import { IDataTeamsFetch } from "./interface";
+import { IDataTeamsFetch, ITeam, IUpdateTeamParams } from "./interface";
 
 export const fetchTeams = createAsyncThunk<IDataTeamsFetch, TFilter>(
   "teams/fetchTeams",
@@ -11,5 +11,13 @@ export const fetchTeams = createAsyncThunk<IDataTeamsFetch, TFilter>(
     url = url + `?limit=${limit}&page=${page}&search=${search}`;
     const { data } = await axios.get(url);
     return data.data;
+  }
+);
+
+export const updateTeam = createAsyncThunk<ITeam, IUpdateTeamParams>(
+  "teams/updateTeam",
+  async (team) => {
+    const { data } = await axios.post("/update_command", team);
+    return data;
   }
 );

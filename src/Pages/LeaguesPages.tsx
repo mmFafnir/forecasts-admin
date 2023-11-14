@@ -1,23 +1,12 @@
 import { FC } from "react";
 import TableLeagues from "../components/Tables/TableLeagues";
 import FilterHeader from "../components/Filters/FilterHeader";
+import { EnumModalFilters } from "../types/Enums";
 
 const filterBtnItems = [
   {
     name: "Страна",
-    value: "countries",
-  },
-  {
-    name: "Лига",
-    value: "league",
-  },
-  {
-    name: "Дата начала",
-    value: "date",
-  },
-  {
-    name: "Сезон",
-    value: "season",
+    value: EnumModalFilters.COUNTRIES,
   },
 ];
 
@@ -25,7 +14,7 @@ const LeaguesPages: FC = () => {
   return (
     <>
       <div className="flex items-center">
-        <h1>КОМАНДЫ</h1>
+        <h1>ЛИГИ</h1>
       </div>
       <div className="mt-6">
         <FilterHeader items={filterBtnItems} />

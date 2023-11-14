@@ -1,14 +1,16 @@
 import { FilterOutlined } from "@ant-design/icons";
 import { Radio, Select } from "antd";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { setLimit } from "../../../store/Slices/filterSlice";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 import "./filterBtn.scss";
+import ModalFilter from "../ModalFilter";
+import { EnumModalFilters } from "../../../types/Enums";
 
 type TBtnFilter = {
-  value: string;
+  value: EnumModalFilters;
   name: string;
 };
 
@@ -19,20 +21,29 @@ interface IProps {
 const FilterHeader: FC<IProps> = ({ items }) => {
   const { limit } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
+
+  const [filterName, setFilterName] = useState<EnumModalFilters>(
+    items.length > 0 ? items[0].value : EnumModalFilters.COUNTRIES
+  );
   const onChangeLimit = (value: string) => dispatch(setLimit(Number(value)));
 
   return (
     <>
       {items.length > 0 && (
-        <div className="flex items-center flex-wrap max">
+        <div className="flex items-center flex-wrap max relative">
           <FilterOutlined className="filter-btns-svg" />
           <Radio.Group defaultValue={items[0].value} buttonStyle="solid">
             {items.map((item) => (
-              <Radio.Button key={item.value} value={item.value}>
+              <Radio.Button
+                key={item.value}
+                value={item.value}
+                onClick={() => setFilterName(item.value)}
+              >
                 {item.name}
               </Radio.Button>
             ))}
           </Radio.Group>
+          <ModalFilter name={filterName} />
         </div>
       )}
       <div className="flex mt-6 items-center ">

@@ -15,3 +15,8 @@ export interface IDataTeamsFetch {
   data: ITeam[];
   last_page: number;
 }
+
+export interface IUpdateTeamParams {
+  team_id: string | number;
+  name: string;
+}

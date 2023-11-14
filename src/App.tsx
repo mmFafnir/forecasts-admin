@@ -7,29 +7,25 @@ import MatchElementPage from "./Pages/MatchElementPage";
 import AuthPage from "./Pages/AuthPage";
 
 import TeamsPage from "./Pages/TeamsPage";
-import SecurityProvider from "./modules/SecurityProvider";
+// import SecurityProvider from "./modules/SecurityProvider";
 import PromptsPage from "./Pages/PromptsPage";
 import LeaguesPages from "./Pages/LeaguesPages";
 import CountriesPage from "./Pages/CountriesPage";
+import TeamsElementPage from "./Pages/TeamsElementPage";
+import LeaguesElementPage from "./Pages/LeaguesElementPage";
 import "./assets/scss/App.scss";
 
 function App() {
-  const getString = () => {
-    return "sad";
-  };
-
-  useEffect(() => {
-    getString();
-  });
+  useEffect(() => {});
 
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <SecurityProvider>
-            <LayoutMain />
-          </SecurityProvider>
+          // <SecurityProvider>
+          <LayoutMain />
+          // </SecurityProvider>
         }
       >
         <Route path="" element={<TeamsPage />} />
@@ -38,8 +34,10 @@ function App() {
         <Route path="/matches/:id" element={<MatchElementPage />} />
 
         <Route path="/teams" element={<TeamsPage />} />
+        <Route path="/teams/:id" element={<TeamsElementPage />} />
 
         <Route path="/leagues" element={<LeaguesPages />} />
+        <Route path="/leagues/:id" element={<LeaguesElementPage />} />
 
         <Route path="/countries" element={<CountriesPage />} />
 

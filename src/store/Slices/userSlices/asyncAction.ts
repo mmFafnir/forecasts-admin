@@ -6,6 +6,7 @@ export const getUserInfo = createAsyncThunk<TypeUser>(
   "user/getUserInfo",
   async () => {
     const { data } = await axios.post("/auth_user_info");
+    console.log(data);
     return data.user;
   }
 );

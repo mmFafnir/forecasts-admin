@@ -3,6 +3,7 @@ import TableMatch from "../components/Tables/TableMatch";
 import Switch, { TSwitchItem } from "../components/Filters/Switch";
 import FilterHeader from "../components/Filters/FilterHeader";
 import axios from "../core/axios";
+import { EnumModalFilters } from "../types/Enums";
 
 const switchItems: [TSwitchItem, TSwitchItem] = [
   {
@@ -18,19 +19,19 @@ const switchItems: [TSwitchItem, TSwitchItem] = [
 const filterBtnItems = [
   {
     name: "Страна",
-    value: "countries",
+    value: EnumModalFilters.COUNTRIES,
   },
   {
     name: "Лига",
-    value: "league",
+    value: EnumModalFilters.LEAGUES,
   },
   {
     name: "Дата начала",
-    value: "date",
+    value: EnumModalFilters.DATE,
   },
   {
     name: "Сезон",
-    value: "season",
+    value: EnumModalFilters.SEASON,
   },
 ];
 

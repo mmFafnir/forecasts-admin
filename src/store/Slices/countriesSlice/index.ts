@@ -27,7 +27,12 @@ const countriesSlice = createSlice({
       state.status = EnumStatus.LOADING;
     });
     builder.addCase(fetchCountries.fulfilled, (state, action) => {
-      state.countries = action.payload.data;
+      state.countries = [
+        ...action.payload.data.map((country) => {
+          country["id"] = country.code;
+          return country;
+        }),
+      ];
       state.total = action.payload.last_page;
       state.page = action.payload.current_page;
       state.status = EnumStatus.SUCCESS;

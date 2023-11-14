@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { EnumStatus } from "../../../types/Status";
 import { TypeLeague } from "./interface";
-import { fetchLeagues } from "./asyncActions";
+import { fetchLeagues, updateLeague } from "./asyncActions";
 
 interface IState {
   leagues: TypeLeague[];
@@ -23,6 +23,7 @@ const leaguesSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
+    //fetch
     builder.addCase(fetchLeagues.pending, (state) => {
       state.status = EnumStatus.LOADING;
     });
@@ -34,6 +35,14 @@ const leaguesSlice = createSlice({
     });
     builder.addCase(fetchLeagues.rejected, (state) => {
       state.status = EnumStatus.ERROR;
+    });
+
+    //update
+    builder.addCase(updateLeague.rejected, (_, action) => {
+      throw {
+        code: action.error.code,
+        message: action.error.message,
+      };
     });
   },
 });

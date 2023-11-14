@@ -1,23 +1,16 @@
 import { FC } from "react";
 import FilterHeader from "../components/Filters/FilterHeader";
 import TableTeams from "../components/Tables/TableTeams";
+import { EnumModalFilters } from "../types/Enums";
 
 const filterBtnItems = [
   {
     name: "Страна",
-    value: "countries",
+    value: EnumModalFilters.COUNTRIES,
   },
   {
     name: "Лига",
-    value: "league",
-  },
-  {
-    name: "Дата начала",
-    value: "date",
-  },
-  {
-    name: "Сезон",
-    value: "season",
+    value: EnumModalFilters.LEAGUES,
   },
 ];
 
