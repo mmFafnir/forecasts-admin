@@ -10,7 +10,6 @@ export const fetchCountries = createAsyncThunk<IDataTypeCountryFetch, TFilter>(
     let url = "/get_country";
     url = url + `?limit=${limit}&page=${page}&search=${search}`;
     const { data } = await axios.get(url);
-    console.log(data);
     return data.data;
   }
 );

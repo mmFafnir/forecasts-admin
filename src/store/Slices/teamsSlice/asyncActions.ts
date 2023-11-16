@@ -18,6 +18,7 @@ export const updateTeam = createAsyncThunk<ITeam, IUpdateTeamParams>(
   "teams/updateTeam",
   async (team) => {
     const { data } = await axios.post("/update_command", team);
+    console.log(data)
     return data;
   }
 );

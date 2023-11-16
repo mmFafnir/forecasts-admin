@@ -28,6 +28,9 @@ export const columns: ColumnsType<TypeLeague> = [
   {
     title: "Страна",
     dataIndex: "country",
+    render: (_, record) => (
+      <p>{record.country ? record.country.translation : "null"}</p>
+    ),
   },
   {
     title: "",

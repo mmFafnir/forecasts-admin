@@ -33,7 +33,7 @@ const countriesSlice = createSlice({
           return country;
         }),
       ];
-      state.total = action.payload.last_page;
+      state.total = action.payload.total;
       state.page = action.payload.current_page;
       state.status = EnumStatus.SUCCESS;
     });

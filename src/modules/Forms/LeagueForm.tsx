@@ -26,7 +26,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
     setLoading(true);
     dispatch(
       updateLeague({
-        league_id: league.league_id,
+        league_id: league.id,
         name: form.getFieldsValue().league_name,
       })
     )

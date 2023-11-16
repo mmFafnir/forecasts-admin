@@ -28,7 +28,7 @@ const teamsSlice = createSlice({
     });
     builder.addCase(fetchTeams.fulfilled, (state, action) => {
       state.teams = action.payload.data;
-      state.total = action.payload.last_page;
+      state.total = action.payload.total;
       state.page = action.payload.current_page;
       state.status = EnumStatus.SUCCESS;
     });

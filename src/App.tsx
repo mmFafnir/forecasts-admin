@@ -7,7 +7,7 @@ import MatchElementPage from "./Pages/MatchElementPage";
 import AuthPage from "./Pages/AuthPage";
 
 import TeamsPage from "./Pages/TeamsPage";
-// import SecurityProvider from "./modules/SecurityProvider";
+import SecurityProvider from "./modules/SecurityProvider";
 import PromptsPage from "./Pages/PromptsPage";
 import LeaguesPages from "./Pages/LeaguesPages";
 import CountriesPage from "./Pages/CountriesPage";
@@ -23,9 +23,9 @@ function App() {
       <Route
         path="/"
         element={
-          // <SecurityProvider>
+          <SecurityProvider>
           <LayoutMain />
-          // </SecurityProvider>
+          </SecurityProvider>
         }
       >
         <Route path="" element={<TeamsPage />} />

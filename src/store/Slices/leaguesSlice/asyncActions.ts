@@ -14,6 +14,7 @@ export const fetchLeagues = createAsyncThunk<IDataLeaguesFetch, TFilter>(
     let url = "/get_all_league";
     url = url + `?limit=${limit}&page=${page}&search=${search}`;
     const { data } = await axios.get(url);
+    console.log(data);
     return data.data;
   }
 );

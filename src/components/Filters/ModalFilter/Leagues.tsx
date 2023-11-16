@@ -1,58 +1,56 @@
 import { FC, useEffect, useState } from "react";
-import { Select } from "antd";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
+import CustomAutoComplete, {
+  ISelectDataAutoComplete,
+} from "../../UI/Search/CustomAutoComplete";
 import { fetchLeagues } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { IDataLeaguesFetch } from "../../../store/Slices/leaguesSlice/interface";
 
-interface ISelectLegues {
-  value: string;
-  label: string;
-}
-
 const Leagues: FC = () => {
-  const [data, setData] = useState<ISelectLegues[]>([]);
-  const [limit, setLimit] = useState<number>(20);
-
   const dispatch = useTypeDispatch();
+  const [data, setData] = useState<ISelectDataAutoComplete[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [limit, setLimit] = useState<number>(20);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [empty, setEmpty] = useState<boolean>(false);
 
-  const filterOption = (
-    input: string,
-    option?: { label: string; value: string }
-  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+  const addLimit = () => setLimit((prev) => prev + 20);
 
   useEffect(() => {
-    setLimit(20);
+    setLoading(true);
     dispatch(
       fetchLeagues({
         limit: limit,
         page: 1,
-        search: "",
+        search: search,
       })
-    ).then((res) => {
-      const payload = res.payload as IDataLeaguesFetch;
-      const data: ISelectLegues[] = [];
-      payload.data.forEach((item) => {
-        data.push({
-          value: String(item.id),
-          label: item.league_name,
+    )
+      .then((res) => {
+        const payload = res.payload as IDataLeaguesFetch;
+        const data: ISelectDataAutoComplete[] = [];
+        payload.data.forEach((item) => {
+          data.push({
+            key: String(item.id),
+            value: `${item.league_name}`,
+          });
         });
+        setEmpty(payload.total === data.length);
+        setData(data);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      setData(data);
-    });
-  }, []);
+  }, [search, limit]);
 
   return (
     <>
       <p className="mr-2 font-semibold absolute -top-4">Посик по лигам:</p>
-
-      <Select
-        className="w-40 text-left"
-        showSearch
-        style={{ width: 200 }}
-        placeholder="Search to Select"
-        optionFilterProp="children"
-        filterOption={filterOption}
-        options={data}
+      <CustomAutoComplete
+        loading={loading}
+        setLimit={addLimit}
+        data={data}
+        setSearch={setSearch}
+        empty={empty}
       />
     </>
   );

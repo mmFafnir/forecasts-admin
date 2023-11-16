@@ -1,8 +1,7 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import TableMatch from "../components/Tables/TableMatch";
 import Switch, { TSwitchItem } from "../components/Filters/Switch";
 import FilterHeader from "../components/Filters/FilterHeader";
-import axios from "../core/axios";
 import { EnumModalFilters } from "../types/Enums";
 
 const switchItems: [TSwitchItem, TSwitchItem] = [
@@ -38,18 +37,6 @@ const filterBtnItems = [
 const MatchPage: FC = () => {
   const [statusMatch, setStatusMatch] = useState<string>(switchItems[0].name);
   console.log(statusMatch);
-  const fetchMatches = async () => {
-    try {
-      const data = await axios.get("/get_all_promts");
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchMatches();
-  }, []);
 
   return (
     <>

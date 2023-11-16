@@ -14,6 +14,7 @@ export interface IDataTeamsFetch {
   current_page: number;
   data: ITeam[];
   last_page: number;
+  total: number;
 }
 
 export interface IUpdateTeamParams {

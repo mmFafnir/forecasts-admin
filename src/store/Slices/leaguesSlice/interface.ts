@@ -1,5 +1,7 @@
+import { TypeCountry } from "../countriesSlice/interface";
+
 export type TypeLeague = {
-  country: string;
+  country: TypeCountry | null;
   id: number;
   league_cc: string;
   league_id: number;
@@ -12,6 +14,7 @@ export interface IDataLeaguesFetch {
   current_page: number;
   data: TypeLeague[];
   last_page: number;
+  total: number;
 }
 
 export interface IUpdateLeagueParams {

@@ -1,52 +1,123 @@
 import { ColumnsType } from "antd/es/table";
-import { DataType } from ".";
 import { Link } from "react-router-dom";
+import { TypeMatch } from "../../../store/Slices/matchesSlice/interface";
+import dayjs from "dayjs";
+import { Image, Spin } from "antd";
+// import { TypeMatch } from "../../../store/Slices/matchesSlice/interface";
 
-export const columns: ColumnsType<DataType> = [
+export const columns: ColumnsType<TypeMatch> = [
   {
     title: "Страна",
     dataIndex: "country",
+    render: (_, record) =>
+      record.leagues.country ? (
+        <div className="flex items-center">
+          <Image
+            width={20}
+            src={`https://admin.aibetguru.com/uploads/${record.leagues.country.code}.svg`}
+            placeholder={<Spin />}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src =
+                "https://cdn-icons-png.flaticon.com/512/921/921490.png";
+            }}
+          />
+          <p className="ml-1">{record.leagues.country.translation}</p>
+        </div>
+      ) : (
+        "null"
+      ),
   },
   {
     title: "Лига",
-    dataIndex: "league",
+    dataIndex: "leagues",
+    render: (_, record) => (
+      <div className="flex items-center">
+        <Image
+          width={20}
+          src={`https://admin.aibetguru.com/uploads/${record.leagues.league_id}.png`}
+          placeholder={<Spin />}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src =
+              "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
+          }}
+        />
+        <p className="ml-1">{record.leagues.league_name}</p>
+      </div>
+    ),
   },
-  {
-    title: "Сезон",
-    dataIndex: "season",
-  },
+  // {
+  //   title: "Сезон",
+  //   dataIndex: "season",
+  // },
   {
     title: "Дата",
-    dataIndex: "date",
+    dataIndex: "real_date",
+    render: (_, record) => <p>{record.real_date}</p>,
   },
   {
     title: "Время",
-    dataIndex: "time",
+    dataIndex: "real_time",
+    render: (_, record) => <p>{record.real_time}</p>,
   },
   {
     title: "Статус матчка",
-    dataIndex: "status",
+    dataIndex: "time_status",
   },
   {
     title: "Команда дома",
-    dataIndex: "team_home",
+    dataIndex: "home_team",
+    render: (_, record) => (
+      <div className="flex items-center">
+        <Image
+          width={20}
+          src={`https://admin.aibetguru.com/uploads/${record.home_team.team_id}.png`}
+          placeholder={<Spin />}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src =
+              "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
+          }}
+        />
+        <p className="ml-1">{record.home_team.team_name}</p>
+      </div>
+    ),
   },
   {
     title: "Команда в гостях",
-    dataIndex: "team_away",
+    dataIndex: "away_team",
+    render: (_, record) => (
+      <div className="flex items-center">
+        <Image
+          width={20}
+          src={`https://admin.aibetguru.com/uploads/${record.away_team.team_id}.png`}
+          placeholder={<Spin />}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src =
+              "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
+          }}
+        />
+        <p className="ml-1">{record.away_team.team_name}</p>
+      </div>
+    ),
   },
   {
     title: "Дата обновления",
-    dataIndex: "update",
+    dataIndex: "updated_at",
+    render: (_, record) => (
+      <p>{dayjs(record.updated_at).format("DD.MM.YYYY")}</p>
+    ),
   },
-  {
-    title: "Пользователь",
-    dataIndex: "user",
-  },
-  {
-    title: "Статус",
-    dataIndex: "moderation",
-  },
+  // {
+  //   title: "Пользователь",
+  //   dataIndex: "user",
+  // },
+  // {
+  //   title: "Статус",
+  //   dataIndex: "moderation",
+  // },
   {
     title: "",
     key: "action",

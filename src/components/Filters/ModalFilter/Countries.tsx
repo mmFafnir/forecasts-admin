@@ -1,61 +1,56 @@
-import { AutoComplete } from "antd";
 import { FC, useEffect, useState } from "react";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { fetchCountries } from "../../../store/Slices/countriesSlice/asyncActions";
 import { IDataTypeCountryFetch } from "../../../store/Slices/countriesSlice/interface";
-import { setSearch } from "../../../store/Slices/filterSlice";
-import { useTypeSelector } from "../../../hooks/useTypeSelector";
-
-interface ISelectCountries {
-  key: string;
-  value: string;
-}
+import CustomAutoComplete, {
+  ISelectDataAutoComplete,
+} from "../../UI/Search/CustomAutoComplete";
 
 const Countries: FC = () => {
-  const { search } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
+  const [data, setData] = useState<ISelectDataAutoComplete[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [limit, setLimit] = useState<number>(20);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [empty, setEmpty] = useState<boolean>(false);
 
-  const [data, setData] = useState<ISelectCountries[]>([]);
-  // const [limit, setLimit] = useState<number>(20);
-
-  const testFn = (value: string) => {
-    setTimeout(() => {
-      dispatch(setSearch(value));
-    }, 500);
-  };
-
-  const handleOnChange = (value: string) => {
-    testFn(value);
-  };
+  const addLimit = () => setLimit((prev) => prev + 20);
 
   useEffect(() => {
+    setLoading(true);
     dispatch(
       fetchCountries({
-        limit: 20,
+        limit: limit,
         page: 1,
         search: search,
       })
-    ).then((res) => {
-      const payload = res.payload as IDataTypeCountryFetch;
-      const data: ISelectCountries[] = [];
-      payload.data.forEach((item) => {
-        data.push({
-          key: item.id,
-          value: item.translation,
+    )
+      .then((res) => {
+        const payload = res.payload as IDataTypeCountryFetch;
+        const data: ISelectDataAutoComplete[] = [];
+        payload.data.forEach((item) => {
+          data.push({
+            key: item.id,
+            value: `${item.translation} (${item.name})`,
+          });
         });
+        setEmpty(payload.total === data.length);
+        setData(data);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      setData(data);
-    });
-  }, [search]);
+  }, [search, limit]);
 
   return (
     <>
       <p className="mr-2 font-semibold absolute -top-4">Посик по странам:</p>
-      <AutoComplete
-        style={{ minWidth: 200 }}
-        options={data}
-        placeholder="try to type `b`"
-        onChange={(value) => handleOnChange(value)}
+      <CustomAutoComplete
+        loading={loading}
+        setLimit={addLimit}
+        data={data}
+        setSearch={setSearch}
+        empty={empty}
       />
     </>
   );
