@@ -187,19 +187,21 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           </div>
         </Row>
 
-        <div className="relative mt-8">
-          <div className="sticky top-2 text-right z-10 inline-block ml-auto">
-            <Button
-              onClick={() => confirmGptMessage(match.id)}
-              type="primary"
-              className="mr-2"
-            >
-              Подтвердить
-            </Button>
-            <Button onClick={() => resendGptMessage(match.id)} type="primary">
-              Повторный запрос
-            </Button>
-          </div>
+        <div className="relative mt-8 text-end">
+          {match.chat_gpt_text_status == 2 && (
+            <div className="sticky top-2 text-right z-10 inline-block ml-auto">
+              <Button
+                onClick={() => confirmGptMessage(match.id)}
+                type="primary"
+                className="mr-2"
+              >
+                Подтвердить
+              </Button>
+              <Button onClick={() => resendGptMessage(match.id)} type="primary">
+                Повторный запрос
+              </Button>
+            </div>
+          )}
 
           {/* Текст для чата GPT */}
           <Form.Item
