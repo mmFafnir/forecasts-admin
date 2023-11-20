@@ -1,17 +1,54 @@
-import { Button, Form, Input, Row, Switch } from "antd";
+import { Button, Form, Row, Switch } from "antd";
 import { FC } from "react";
-import SelectForm from "../../components/UI/Form/SelectForm";
 import { sports } from "../../assets/data/sports";
-import { countries } from "../../assets/data/countries";
-import { leagues } from "../../assets/data/leagues";
-import { required } from "../../core/form-rools";
-import DateForm from "../../components/UI/Form/DateForm";
-import TimeForm from "../../components/UI/Form/TimeForm";
-import FileImage from "../../components/UI/Form/FileImage";
 import TextEditor from "../../components/TextEditor";
 import EventForm from "../../components/Events/EventForm";
+import { TypeMatch } from "../../store/Slices/matchesSlice/interface";
+import CustomImage from "../../components/UI/CustomImage";
+import axios from "../../core/axios";
+import TextArea from "antd/es/input/TextArea";
 
-const MatchEditForm: FC = () => {
+interface IProps {
+  match: TypeMatch;
+}
+
+const getMatchTextGpt = async (id: number | string) => {
+  try {
+    const { data } = await axios.get(
+      `/send_message_in_chat_gpt_for_match/match_id=${id}`
+    );
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const confirmGptMessage = async (id: number | string) => {
+  try {
+    const { data } = await axios.get(
+      `/confirm_chat_gpt_message/match_id=${id}`
+    );
+
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const resendGptMessage = async (id: number | string) => {
+  try {
+    const { data } = await axios.get(
+      `/resend_message_to_chat_gpt/match_id=${id}`
+    );
+
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const MatchEditForm: FC<IProps> = ({ match }) => {
+  console.log(match);
   const [form] = Form.useForm();
 
   const onFinish = () => {
@@ -44,122 +81,183 @@ const MatchEditForm: FC = () => {
         >
           <div className="flex form-item">
             <p className="mr-3">Кубок любимый</p>
-            <Switch className="bg-slate-400" />
+            <Switch
+              defaultChecked={match.favorite_game == "0" ? false : true}
+              className="bg-slate-400"
+            />
           </div>
         </Form.Item>
 
         {/* Select'ы */}
         <Row>
           {/* Вид спорта */}
-          <Form.Item className="mr-4 form-item" name={"sport"}>
-            <SelectForm
-              label={"Вид спорта"}
-              data={sports}
-              defaultValue={sports[0].value}
-              setValue={(value) => form.setFieldsValue({ sport: value })}
-            />
-          </Form.Item>
-          {/* Страна */}
-          <Form.Item className="mr-4 form-item" name={"countries"}>
-            <SelectForm
-              label={"Страна"}
-              data={countries}
-              defaultValue={countries[0].value}
-              setValue={(value) => form.setFieldsValue({ countries: value })}
-            />
-          </Form.Item>
-          {/* Лини */}
-          <Form.Item className="form-item" name={"league"}>
-            <SelectForm
-              label="Лига"
-              data={leagues}
-              defaultValue={leagues[0].value}
-              setValue={(value) => form.setFieldsValue({ league: value })}
-            />
-          </Form.Item>
-        </Row>
+          <div className="mr-4 form-item">
+            <p>
+              Вид спорта:{" "}
+              <span>
+                {
+                  sports.find(
+                    (sport) => sport.id === Number(match.leagues.sport_id)
+                  )?.label
+                }
+              </span>
+            </p>
+          </div>
 
-        {/* Тур */}
-        <Form.Item
-          name={"tur"}
-          className="form-item"
-          label={"Тур"}
-          rules={[required]}
-          initialValue={"Групповой этап"}
-        >
-          <Input defaultValue={"Групповой этап"} />
-        </Form.Item>
+          {/* Лига */}
+          <div className="form-item">
+            <p>
+              Лига: <span>{match.leagues.league_name}</span>
+            </p>
+          </div>
+        </Row>
 
         {/* Даты */}
         <Row>
           {/* Дата */}
-          <Form.Item
-            className="mr-4 form-item"
-            name={"date"}
-            rules={[required]}
-          >
-            <DateForm
-              setDate={(value) => form.setFieldsValue({ date: value })}
-              defaultDate="06-06-2023"
-              label="Дата"
-            />
-          </Form.Item>
+          <div className="mr-4 form-item">
+            <p>
+              Дата:<span>{match.real_date}</span>
+            </p>
+          </div>
           {/* Время */}
-          <Form.Item className="form-item" name={"time"} rules={[required]}>
-            <TimeForm
-              defaultValue="8:02 PM"
-              label="Время"
-              setTime={(value) => form.setFieldsValue({ time: value })}
-            />
-          </Form.Item>
+          <div className="form-item">
+            <p>
+              Время:<span>{match.real_time}</span>
+            </p>
+          </div>
         </Row>
 
         {/* Команды */}
         <Row className="mt-8" justify={"space-between"}>
           {/* Первая команда */}
-          <div className="w-5/12 form-team">
-            <p>Первая команда</p>
-            <Form.Item
-              className="mb-2"
-              name={"team_first_name"}
-              rules={[required]}
-            >
-              <Input defaultValue={"Янг Бойз"} />
-            </Form.Item>
-            <Form.Item name={"team_first_name_en"} rules={[required]}>
-              <Input defaultValue={"Young Boys"} />
-            </Form.Item>
-            <FileImage defaultImg="/1.png" />
+          <div className="w-5/12 form-item form-team">
+            <p>
+              Первая команда:<span>{match.home_team.team_name}</span>
+            </p>
+            <div className="mb-2">
+              <p className="flex items-center">
+                Страна:
+                <CustomImage
+                  classes="!object-contain"
+                  errorSrc="https://cdn-icons-png.flaticon.com/512/921/921490.png"
+                  src={`https://admin.aibetguru.com/uploads/${match.home_team.team_cc}.svg`}
+                  width={35}
+                  height={23}
+                />
+              </p>
+            </div>
+            <div className="flex">
+              <CustomImage
+                classes=""
+                width={150}
+                height={150}
+                src={`https://admin.aibetguru.com/uploads/${match.home_team.team_id}.png`}
+                errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
+              />
+            </div>
           </div>
 
           {/* Вторая команда */}
-          <div className="w-5/12 form-team">
-            <p>Первая команда</p>
-            <Form.Item
-              className="mb-2"
-              name={"team_second_name"}
-              rules={[required]}
-            >
-              <Input defaultValue={"РБ Лейпциг"} />
-            </Form.Item>
-            <Form.Item name={"team_second_name_en"} rules={[required]}>
-              <Input defaultValue={"RB Leipzig"} />
-            </Form.Item>
-
-            <FileImage defaultImg="/2.png" />
+          <div className="w-5/12 form-item form-team">
+            <p>
+              Вторая команда:<span>{match.away_team.team_name}</span>
+            </p>
+            <div className="mb-2">
+              <p className="flex items-center">
+                Страна:
+                <CustomImage
+                  classes="!object-contain"
+                  errorSrc="https://cdn-icons-png.flaticon.com/512/921/921490.png"
+                  src={`https://admin.aibetguru.com/uploads/${match.away_team.team_cc}.svg`}
+                  width={35}
+                  height={23}
+                />
+              </p>
+            </div>
+            <div className="flex">
+              <CustomImage
+                classes="!object-fill"
+                width={150}
+                height={150}
+                src={`https://admin.aibetguru.com/uploads/${match.away_team.team_id}.png`}
+                errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
+              />
+            </div>
           </div>
         </Row>
 
-        {/* Анализ */}
-        <Form.Item className="mt-5" name={"analysis"}>
-          <div className="form-item">
-            <p className="mb-2"> Анализ</p>
-            <TextEditor
-              onChange={(value) => form.setFieldsValue({ analysis: value })}
-            />
+        <div className="relative mt-8">
+          <div className="sticky top-2 text-right z-10 inline-block ml-auto">
+            <Button
+              onClick={() => confirmGptMessage(match.id)}
+              type="primary"
+              className="mr-2"
+            >
+              Подтвердить
+            </Button>
+            <Button onClick={() => resendGptMessage(match.id)} type="primary">
+              Повторный запрос
+            </Button>
           </div>
-        </Form.Item>
+
+          {/* Текст для чата GPT */}
+          <Form.Item
+            name={"chat_gpt_text"}
+            initialValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
+          >
+            <div className="form-item">
+              <div className="flex items-center mb-2">
+                <p className="!mb-0 mr-2">Текст для чата GPT</p>
+                <Button
+                  onClick={() => getMatchTextGpt(match.id)}
+                  type="primary"
+                >
+                  Получить ответ
+                </Button>
+              </div>
+              <TextArea
+                className="!resize-none !h-80"
+                size="large"
+                defaultValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
+              />
+            </div>
+          </Form.Item>
+
+          {/* Кф */}
+          <Form.Item
+            className="mt-8"
+            name={"chat_gpt_text"}
+            initialValue={match.game_cf ? match.game_cf : ""}
+          >
+            <div className="form-item">
+              <p>Коэффициент:</p>
+              <TextArea
+                className="!resize-none !h-80"
+                size="large"
+                defaultValue={match.game_cf ? match.game_cf : ""}
+              />
+            </div>
+          </Form.Item>
+
+          {/* Анализ */}
+          <Form.Item
+            className="mt-8 pb-9"
+            name={"analysis"}
+            initialValue={match.game_analize ? match.game_analize : ""}
+          >
+            <div className="form-item">
+              <p>Анализ:</p>
+
+              <TextEditor
+                defaultValue={match.game_analize ? match.game_analize : ""}
+                onChange={(value) => form.setFieldsValue({ analysis: value })}
+              />
+            </div>
+          </Form.Item>
+        </div>
       </Form>
+
       {/* События */}
       <EventForm />
 

@@ -27,11 +27,11 @@ export interface DataType {
 
 const TableMatch: FC = () => {
   const { matches, status, total } = useTypeSelector((state) => state.matches);
-  const { limit, search } = useTypeSelector((state) => state.filters);
+  const { limit, search, date } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
   const [page, setPage] = useState<number>(1);
 
-  const onGetAllMatches = (params: TFilter) => {
+  const onGetAllMatches = (params: Required<TFilter>) => {
     dispatch(fetchMatches(params));
   };
 
@@ -40,8 +40,9 @@ const TableMatch: FC = () => {
       page,
       limit,
       search,
+      date,
     });
-  }, [page, limit, search]);
+  }, [page, limit, search, date]);
 
   useEffect(() => {
     setPage(1);
