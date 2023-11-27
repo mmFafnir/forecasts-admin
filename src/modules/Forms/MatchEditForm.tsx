@@ -11,19 +11,41 @@ import {
   getMatchTextGpt,
   resendGptMessage,
 } from "../../api/ChatGPT";
+import { useTypeDispatch } from "../../hooks/useTypeDispatch";
+import { switchFavoriteCups } from "../../store/Slices/matchesSlice/asyncAction";
+import { notify } from "../../assets/scripts/notify";
 
 interface IProps {
   match: TypeMatch;
 }
 
 const MatchEditForm: FC<IProps> = ({ match }) => {
+  const dispatch = useTypeDispatch();
   const [form] = Form.useForm();
+  const [favoriteCup, setFavoriteCup] = useState<boolean>(
+    match.favorite_game == "0" ? false : true
+  );
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingSwitch, setSwitchLoading] = useState<boolean>(false);
+
   const onClickGetMatch = () => {
     setLoading(true);
     getMatchTextGpt(match.id).catch(() => {
       setLoading(false);
     });
+  };
+
+  const switchCup = () => {
+    setSwitchLoading(true);
+    setFavoriteCup((prev) => !prev);
+    dispatch(switchFavoriteCups(match.id))
+      .catch(() => {
+        notify({ type: "error", message: "Ошибка :(" });
+        setFavoriteCup((prev) => !prev);
+      })
+      .finally(() => {
+        setSwitchLoading(false);
+      });
   };
 
   const onFinish = () => {
@@ -50,20 +72,22 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
         autoComplete="off"
       >
         {/* Switch любимый кубок */}
-        <Form.Item
+        {/* <Form.Item
           className="items-start"
           name={"favorite_cup"}
           // label="Кубок любимый"
           initialValue={match.favorite_game == "0" ? false : true}
-        >
-          <div className="flex form-item">
-            <p className="mr-3">Кубок любимый</p>
-            <Switch
-              defaultChecked={match.favorite_game == "0" ? false : true}
-              className="bg-slate-400"
-            />
-          </div>
-        </Form.Item>
+        > */}
+        <div className="flex form-item">
+          <p className="mr-3">Кубок любимый</p>
+          <Switch
+            loading={loadingSwitch}
+            onChange={switchCup}
+            checked={favoriteCup}
+            className="bg-slate-400"
+          />
+        </div>
+        {/* </Form.Item> */}
 
         {/* Select'ы */}
         <Row>

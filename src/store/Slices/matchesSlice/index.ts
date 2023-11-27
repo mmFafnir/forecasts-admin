@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TypeMatch } from "./interface";
 import { EnumStatus } from "../../../types/Status";
-import { fetchMatches, updateEventMatch } from "./asyncAction";
+import {
+  fetchMatches,
+  switchFavoriteCups,
+  updateEventMatch,
+} from "./asyncAction";
 
 interface IState {
   matches: TypeMatch[];
@@ -40,6 +44,14 @@ const matchesSlice = createSlice({
 
     // update
     builder.addCase(updateEventMatch.rejected, (_, action) => {
+      throw {
+        code: action.error.code,
+        message: action.error.message,
+      };
+    });
+
+    // update
+    builder.addCase(switchFavoriteCups.rejected, (_, action) => {
       throw {
         code: action.error.code,
         message: action.error.message,

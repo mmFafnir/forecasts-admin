@@ -31,3 +31,13 @@ export const updateEventMatch = createAsyncThunk<
   console.log(data);
   return data;
 });
+
+export const switchFavoriteCups = createAsyncThunk(
+  "matches/switchFavoriteCups",
+  async (id: number) => {
+    const { data } = await axios.get(
+      `/add_or_delete_in_favorite_match/match_id=${id}`
+    );
+    return data;
+  }
+);
