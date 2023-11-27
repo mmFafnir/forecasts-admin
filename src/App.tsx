@@ -14,6 +14,7 @@ import CountriesPage from "./Pages/CountriesPage";
 import TeamsElementPage from "./Pages/TeamsElementPage";
 import LeaguesElementPage from "./Pages/LeaguesElementPage";
 import "./assets/scss/App.scss";
+import EventsPage from "./Pages/EventsPage";
 
 function App() {
   useEffect(() => {});
@@ -38,6 +39,8 @@ function App() {
 
         <Route path="/leagues" element={<LeaguesPages />} />
         <Route path="/leagues/:id" element={<LeaguesElementPage />} />
+
+        <Route path="/events" element={<EventsPage />} />
 
         <Route path="/countries" element={<CountriesPage />} />
 

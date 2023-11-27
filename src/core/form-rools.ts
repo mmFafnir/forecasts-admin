@@ -11,3 +11,9 @@ export const validEmail: Rule = {
   type: "email",
   message: "Неверное значение полей e-mail!",
 };
+
+export const validNumber: Rule = {
+  required: true,
+  type: "number",
+  message: "В поле должно быть число!",
+};

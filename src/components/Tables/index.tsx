@@ -1,4 +1,4 @@
-import { Empty, Table as TableAnt } from "antd";
+import { Button, Empty, Table as TableAnt } from "antd";
 import { AnyObject } from "antd/es/_util/type";
 // import { ColumnsType } from "antd/es/table";
 import { FC, useState, Key } from "react";
@@ -6,11 +6,17 @@ import Search from "../UI/Search";
 
 type TData = AnyObject;
 
+type TCallback = {
+  fn: (ids: Key[]) => void;
+  title: string;
+};
+
 interface IProps {
   data: TData[];
   columns: TData[];
+  callback?: TCallback;
 }
-const Table: FC<IProps> = ({ data, columns }) => {
+const Table: FC<IProps> = ({ data, columns, callback }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   //   const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,12 +34,21 @@ const Table: FC<IProps> = ({ data, columns }) => {
 
   return (
     <div className="flex flex-col pr-11 ">
-      <div className="mb-5">
+      <div className="flex justify-end items-center mt-3 mb-3">
         <span className="mr-2">
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
+          {/* {hasSelected && `Selected ${selectedRowKeys.length} items`} */}
+          {callback && (
+            <Button
+              disabled={!hasSelected}
+              type="primary"
+              onClick={() => callback.fn(selectedRowKeys)}
+            >
+              {`${callback.title} ${hasSelected ? selectedRowKeys.length : ""}`}
+            </Button>
+          )}
         </span>
+        <Search classes="!mb-0 max-w-sm flex-1" />
       </div>
-      <Search />
       <TableAnt
         className="table"
         rowKey="id"

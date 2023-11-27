@@ -11,6 +11,7 @@ const forecast = [
   { link: "/leagues", text: "ЛИГИ" },
   { link: "/teams", text: "КОМАНДЫ" },
   { link: "/matches", text: "МАТЧИ" },
+  { link: "/events", text: "СОБЫТИЯ" },
 ];
 
 export const SidebarMenu = [
@@ -27,7 +28,7 @@ export const SidebarMenu = [
   {
     icon: UserOutlined,
     name: "СТАВИМ C ИИ",
-    children: forecast,
+    // children: forecast,
   },
   {
     icon: EditOutlined,

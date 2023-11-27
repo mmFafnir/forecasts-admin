@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, Key, ReactElement, useEffect, useState } from "react";
 import { columns } from "./colums";
 import Table from "..";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
@@ -35,6 +35,10 @@ const TableMatch: FC = () => {
     dispatch(fetchMatches(params));
   };
 
+  const getAllMatch = (ids: Key[]) => {
+    console.log(ids);
+  };
+
   useEffect(() => {
     onGetAllMatches({
       page,
@@ -56,7 +60,11 @@ const TableMatch: FC = () => {
         spinning={status == EnumStatus.LOADING}
         tip="Loading..."
       >
-        <Table data={matches} columns={columns} />
+        <Table
+          data={matches}
+          columns={columns}
+          callback={{ fn: getAllMatch, title: "Получит текст чат GPT" }}
+        />
       </Spin>
       <Pagination setPage={setPage} defaultPage={page} total={total} />
     </div>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TypeMatch } from "./interface";
 import { EnumStatus } from "../../../types/Status";
-import { fetchMatches } from "./asyncAction";
+import { fetchMatches, updateEventMatch } from "./asyncAction";
 
 interface IState {
   matches: TypeMatch[];
@@ -36,6 +36,14 @@ const matchesSlice = createSlice({
     });
     builder.addCase(fetchMatches.rejected, (state) => {
       state.status = EnumStatus.ERROR;
+    });
+
+    // update
+    builder.addCase(updateEventMatch.rejected, (_, action) => {
+      throw {
+        code: action.error.code,
+        message: action.error.message,
+      };
     });
   },
 });

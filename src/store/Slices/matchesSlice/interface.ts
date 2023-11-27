@@ -1,5 +1,18 @@
+import { TypeEvent } from "../eventsSlice/interface";
 import { TypeLeague } from "../leaguesSlice/interface";
+import { TypeRisk } from "../risksSlice/interface";
 import { ITeam } from "../teamsSlice/interface";
+
+export type TypeMatchEventCard = {
+  bet: string;
+  created_at: string;
+  event: TypeEvent;
+  id: number | string;
+  odds: string | number;
+  risk: TypeRisk;
+  updated_at: string;
+  why: string;
+};
 
 export type TypeMatch = {
   away_id: number;
@@ -8,6 +21,7 @@ export type TypeMatch = {
   chat_gpt_text_status: number;
   created_at: Date;
   event_data_json: string;
+  cards: TypeMatchEventCard[];
   favorite_game: string | number;
   foreign_away_id: number;
   foreign_home_id: number;
@@ -35,4 +49,13 @@ export interface IDataMatchesFetch {
   data: TypeMatch[];
   last_page: number;
   data_count: number;
+}
+
+export interface IUpdateEventMatch {
+  card_id: number | string;
+  event_id: number | string;
+  risk_id: number | string;
+  bet: number | string;
+  odds: number;
+  why: string;
 }

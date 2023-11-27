@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IDataMatchesFetch } from "./interface";
+import {
+  IDataMatchesFetch,
+  IUpdateEventMatch,
+  TypeMatchEventCard,
+} from "./interface";
 import { TFilter } from "../../../types/TypeFilter";
 import axios from "../../../core/axios";
 
@@ -15,6 +19,15 @@ export const fetchMatches = createAsyncThunk<
 
   console.log(url);
   const { data } = await axios.get(url);
+  console.log(data);
+  return data;
+});
+
+export const updateEventMatch = createAsyncThunk<
+  TypeMatchEventCard,
+  IUpdateEventMatch
+>("matches/updateEventMatch", async (params) => {
+  const { data } = await axios.post("/update_card", params);
   console.log(data);
   return data;
 });

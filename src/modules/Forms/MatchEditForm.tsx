@@ -1,55 +1,30 @@
 import { Button, Form, Row, Switch } from "antd";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { sports } from "../../assets/data/sports";
 import TextEditor from "../../components/TextEditor";
 import EventForm from "../../components/Events/EventForm";
 import { TypeMatch } from "../../store/Slices/matchesSlice/interface";
 import CustomImage from "../../components/UI/CustomImage";
-import axios from "../../core/axios";
 import TextArea from "antd/es/input/TextArea";
+import {
+  confirmGptMessage,
+  getMatchTextGpt,
+  resendGptMessage,
+} from "../../api/ChatGPT";
 
 interface IProps {
   match: TypeMatch;
 }
 
-const getMatchTextGpt = async (id: number | string) => {
-  try {
-    const { data } = await axios.get(
-      `/send_message_in_chat_gpt_for_match/match_id=${id}`
-    );
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const confirmGptMessage = async (id: number | string) => {
-  try {
-    const { data } = await axios.get(
-      `/confirm_chat_gpt_message/match_id=${id}`
-    );
-
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const resendGptMessage = async (id: number | string) => {
-  try {
-    const { data } = await axios.get(
-      `/resend_message_to_chat_gpt/match_id=${id}`
-    );
-
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const MatchEditForm: FC<IProps> = ({ match }) => {
-  console.log(match);
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState<boolean>(false);
+  const onClickGetMatch = () => {
+    setLoading(true);
+    getMatchTextGpt(match.id).catch(() => {
+      setLoading(false);
+    });
+  };
 
   const onFinish = () => {
     console.log("Success:", form.getFieldsValue());
@@ -59,6 +34,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
     console.log("Failed:", errorInfo);
   };
 
+  console.log(match);
   return (
     <>
       <Form
@@ -78,6 +54,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           className="items-start"
           name={"favorite_cup"}
           // label="Кубок любимый"
+          initialValue={match.favorite_game == "0" ? false : true}
         >
           <div className="flex form-item">
             <p className="mr-3">Кубок любимый</p>
@@ -187,6 +164,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           </div>
         </Row>
 
+        {/* gpt тексты */}
         <div className="relative mt-8 text-end">
           {match.chat_gpt_text_status == 2 && (
             <div className="sticky top-2 text-right z-10 inline-block ml-auto">
@@ -211,12 +189,16 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
             <div className="form-item">
               <div className="flex items-center mb-2">
                 <p className="!mb-0 mr-2">Текст для чата GPT</p>
-                <Button
-                  onClick={() => getMatchTextGpt(match.id)}
-                  type="primary"
-                >
-                  Получить ответ
-                </Button>
+                {(match.chat_gpt_text_status == 0 ||
+                  match.chat_gpt_text_status == 1) && (
+                  <Button
+                    onClick={onClickGetMatch}
+                    type="primary"
+                    loading={match.chat_gpt_text_status == 1 || loading}
+                  >
+                    Получить ответ
+                  </Button>
+                )}
               </div>
               <TextArea
                 className="!resize-none !h-80"
@@ -229,7 +211,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           {/* Кф */}
           <Form.Item
             className="mt-8"
-            name={"chat_gpt_text"}
+            name={"game_cf"}
             initialValue={match.game_cf ? match.game_cf : ""}
           >
             <div className="form-item">
@@ -261,16 +243,18 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       </Form>
 
       {/* События */}
-      <EventForm />
+      {match.cards && match.cards.length > 0 && (
+        <EventForm cards={match.cards} />
+      )}
 
-      <Button
+      {/* <Button
         type="primary"
         size="large"
         className="mr-auto mt-8 flex w-44 justify-center"
         onClick={onFinish}
       >
         Сохранить
-      </Button>
+      </Button> */}
     </>
   );
 };

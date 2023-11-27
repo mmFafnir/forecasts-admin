@@ -27,7 +27,8 @@
       transition-duration: 0.3s;
       opacity: 0;
       cursor: pointer;
-      a {
+      a,
+      button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -39,5 +40,15 @@
         height: 21px;
       }
     }
+  }
+}
+
+.no-action {
+  table tbody td:last-child {
+    position: static;
+    opacity: 1;
+    height: auto;
+    width: auto;
+    cursor: auto;
   }
 }
