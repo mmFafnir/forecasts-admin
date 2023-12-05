@@ -32,7 +32,6 @@ const matchesSlice = createSlice({
       state.status = EnumStatus.LOADING;
     });
     builder.addCase(fetchMatches.fulfilled, (state, action) => {
-      console.log(action);
       state.matches = action.payload.data;
       state.total = action.payload.data_count;
       state.page = action.payload.current_page;

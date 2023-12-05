@@ -8,6 +8,7 @@ import { TFilter } from "../../../types/TypeFilter";
 import { EnumStatus } from "../../../types/Status";
 import { Spin } from "antd";
 import Pagination from "../../UI/Pagination";
+import { getMatchTextGptArray } from "../../../api/ChatGPT";
 
 export interface DataType {
   key: React.Key;
@@ -35,9 +36,8 @@ const TableMatch: FC = () => {
     dispatch(fetchMatches(params));
   };
 
-  const getAllMatch = (ids: Key[]) => {
-    console.log(ids);
-  };
+  const getAllMatch = async (ids: Key[]) =>
+    await getMatchTextGptArray(ids as number[]);
 
   useEffect(() => {
     onGetAllMatches({

@@ -24,6 +24,31 @@ export const getMatchTextGpt = async (id: number | string) => {
   }
 };
 
+export const getMatchTextGptArray = async (ids: number[] | string[]) => {
+  try {
+    const { data } = await axios.post(
+      `/send_message_in_chat_gpt_for_match_with_array`,
+      {
+        ids: ids,
+      }
+    );
+
+    notify({
+      type: "success",
+      message: "Запросы отправлены, ждем)",
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    const err = error as AxiosError;
+    notify({
+      type: "success",
+      message: `Ошибка ${err.response?.status} :(`,
+      description: "Попробуйте чуть позже",
+    });
+  }
+};
+
 export const confirmGptMessage = async (id: number | string) => {
   try {
     const { data } = await axios.get(

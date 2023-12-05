@@ -1,6 +1,5 @@
 import { Button, Empty, Table as TableAnt } from "antd";
 import { AnyObject } from "antd/es/_util/type";
-// import { ColumnsType } from "antd/es/table";
 import { FC, useState, Key } from "react";
 import Search from "../UI/Search";
 
@@ -18,11 +17,17 @@ interface IProps {
 }
 const Table: FC<IProps> = ({ data, columns, callback }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-  //   const [loading, setLoading] = useState<boolean>(false);
-
+  const [loading, setLoading] = useState<boolean>(false);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  const onCallback = async () => {
+    if (!callback) return;
+    setLoading(true);
+    await callback.fn(selectedRowKeys);
+    setLoading(false);
+    setSelectedRowKeys([]);
   };
 
   const rowSelection = {
@@ -39,9 +44,10 @@ const Table: FC<IProps> = ({ data, columns, callback }) => {
           {/* {hasSelected && `Selected ${selectedRowKeys.length} items`} */}
           {callback && (
             <Button
+              loading={loading}
               disabled={!hasSelected}
               type="primary"
-              onClick={() => callback.fn(selectedRowKeys)}
+              onClick={onCallback}
             >
               {`${callback.title} ${hasSelected ? selectedRowKeys.length : ""}`}
             </Button>

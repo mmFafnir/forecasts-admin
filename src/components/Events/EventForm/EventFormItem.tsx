@@ -20,7 +20,6 @@ interface IProps {
 
 const EventFormItem: FC<IProps> = ({ data }) => {
   const dispatch = useTypeDispatch();
-
   const eventsData = useEventDataHook();
   const risksData = useRiskDataHook();
   const [form] = Form.useForm<IUpdateEventMatch>();
@@ -71,15 +70,15 @@ const EventFormItem: FC<IProps> = ({ data }) => {
       <Form.Item
         className="items-start"
         name={"best_bet"}
-        initialValue={false}
+        initialValue={data.event.id === 3}
         // label="Кубок любимый"
       >
         <div className="flex form-item items-center ">
           <p className="mr-3 !mb-0">Лучшая ставка</p>
           <Switch
-            defaultChecked={false}
+            defaultChecked={data.event.id === 3}
             // onChange={(value) => form.setFieldsValue({ best_bet: value })}
-            className="bg-slate-400"
+            className="bg-slate-400 pointer-events-none"
           />
 
           <Button
