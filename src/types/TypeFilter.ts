@@ -6,6 +6,6 @@ export interface TFilter {
   limit: string | number;
   page: string | number;
   search: string;
-  date: IDateFilter;
-  chat_gpt_text_status: TypeChatGptTextStatus;
+  date?: IDateFilter;
+  chat_gpt_text_status?: TypeChatGptTextStatus;
 }

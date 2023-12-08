@@ -46,8 +46,8 @@ const TableMatch: FC = () => {
       page,
       limit,
       search,
-      date,
-      chat_gpt_text_status,
+      date: date ? date : { start: "", finish: "" },
+      chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
     });
   }, [page, limit, search, date, chat_gpt_text_status]);
 
