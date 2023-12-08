@@ -11,12 +11,18 @@ export const fetchMatches = createAsyncThunk<
   IDataMatchesFetch,
   Required<TFilter>
 >("matches/fetchMatches", async (params) => {
-  const { limit = 10, page = 1, search = "", date } = params;
+  const {
+    limit = 10,
+    page = 1,
+    search = "",
+    date,
+    chat_gpt_text_status,
+  } = params;
   const offset = Number(page) * Number(limit);
   let url = "/get_match";
   url =
     url +
-    `?limit=${limit}&offset=${offset}&team_name=${search}&date_start=${date.start}`;
+    `?limit=${limit}&offset=${offset}&team_name=${search}&date_start=${date.start}&date_end=${date.finish}&chat_gpt_text_status=${chat_gpt_text_status}`;
 
   const { data } = await axios.get(url);
   console.log(data);

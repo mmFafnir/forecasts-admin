@@ -2,5 +2,5 @@ export enum EnumModalFilters {
   COUNTRIES = "countries",
   LEAGUES = "leagues",
   DATE = "date",
-  SEASON = "season",
+  STATUS_CHAT_GPT_TEXT = "status_chat_gbt_text",
 }

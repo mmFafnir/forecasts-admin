@@ -29,8 +29,8 @@ const filterBtnItems = [
     value: EnumModalFilters.DATE,
   },
   {
-    name: "Сезон",
-    value: EnumModalFilters.SEASON,
+    name: "Текст чат-GPT",
+    value: EnumModalFilters.STATUS_CHAT_GPT_TEXT,
   },
 ];
 

@@ -28,7 +28,9 @@ export interface DataType {
 
 const TableMatch: FC = () => {
   const { matches, status, total } = useTypeSelector((state) => state.matches);
-  const { limit, search, date } = useTypeSelector((state) => state.filters);
+  const { limit, search, date, chat_gpt_text_status } = useTypeSelector(
+    (state) => state.filters
+  );
   const dispatch = useTypeDispatch();
   const [page, setPage] = useState<number>(1);
 
@@ -45,8 +47,9 @@ const TableMatch: FC = () => {
       limit,
       search,
       date,
+      chat_gpt_text_status,
     });
-  }, [page, limit, search, date]);
+  }, [page, limit, search, date, chat_gpt_text_status]);
 
   useEffect(() => {
     setPage(1);

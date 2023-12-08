@@ -1,8 +1,11 @@
 import { IDateFilter } from "../store/Slices/filterSlice";
 
+export type TypeChatGptTextStatus = "0" | "1" | "2" | "3" | "4" | "";
+
 export interface TFilter {
   limit: string | number;
   page: string | number;
   search: string;
-  date?: IDateFilter;
+  date: IDateFilter;
+  chat_gpt_text_status: TypeChatGptTextStatus;
 }

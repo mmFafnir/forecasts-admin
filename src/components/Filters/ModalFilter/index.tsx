@@ -3,6 +3,7 @@ import Countries from "./Countries";
 import { EnumModalFilters } from "../../../types/Enums";
 import Leagues from "./Leagues";
 import Date from "./Date";
+import ChatGptText from "./ChatGptStatus";
 
 interface IProps {
   name: EnumModalFilters;
@@ -16,7 +17,8 @@ const getCurrentFilter = (name: string) => {
       return <Leagues />;
     case EnumModalFilters.DATE:
       return <Date />;
-
+    case EnumModalFilters.STATUS_CHAT_GPT_TEXT:
+      return <ChatGptText />;
     default:
       return <p>Фильтр в разработке</p>;
   }
