@@ -16,7 +16,7 @@ const TableLeagues: FC = () => {
 
   const [page, setPage] = useState<number>(1);
 
-  const onGetAllLeagues = (params: TFilter) => {
+  const onGetAllLeagues = (params: Omit<TFilter, "league" | "country">) => {
     dispatch(fetchLeagues(params));
   };
 
@@ -31,7 +31,6 @@ const TableLeagues: FC = () => {
   useEffect(() => {
     setPage(1);
   }, [search]);
-  console.log("total", total);
   return (
     <div>
       <Spin

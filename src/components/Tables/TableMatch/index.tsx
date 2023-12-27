@@ -28,9 +28,8 @@ export interface DataType {
 
 const TableMatch: FC = () => {
   const { matches, status, total } = useTypeSelector((state) => state.matches);
-  const { limit, search, date, chat_gpt_text_status } = useTypeSelector(
-    (state) => state.filters
-  );
+  const { limit, search, date, chat_gpt_text_status, league, country } =
+    useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
   const [page, setPage] = useState<number>(1);
 
@@ -45,17 +44,19 @@ const TableMatch: FC = () => {
     onGetAllMatches({
       page,
       limit,
+      country,
+      league,
       search,
       date: date ? date : { start: "", finish: "" },
       chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
     });
-  }, [page, limit, search, date, chat_gpt_text_status]);
+  }, [page, limit, search, date, chat_gpt_text_status, league, country]);
 
   useEffect(() => {
     setPage(1);
   }, [search]);
 
-  console.log(matches);
+  console.log(country);
   return (
     <div>
       <Spin

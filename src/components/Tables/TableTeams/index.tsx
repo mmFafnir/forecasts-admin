@@ -15,7 +15,9 @@ const TableTeams: FC = () => {
   const dispatch = useTypeDispatch();
   const [page, setPage] = useState<number>(1);
 
-  const onGetAllTeams = (params: TFilter) => {
+  const onGetAllTeams = (
+    params: Pick<TFilter, "page" | "limit" | "search">
+  ) => {
     dispatch(fetchTeams(params));
   };
 

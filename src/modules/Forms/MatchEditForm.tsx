@@ -1,4 +1,4 @@
-import { Button, Form, Row, Switch } from "antd";
+import { Button, Form, Row, Spin, Switch } from "antd";
 import { FC, useState } from "react";
 import { sports } from "../../assets/data/sports";
 import TextEditor from "../../components/TextEditor";
@@ -14,6 +14,7 @@ import {
 import { useTypeDispatch } from "../../hooks/useTypeDispatch";
 import { switchFavoriteCups } from "../../store/Slices/matchesSlice/asyncAction";
 import { notify } from "../../assets/scripts/notify";
+import LoaderCover from "../../components/UI/LoaderCover";
 
 interface IProps {
   match: TypeMatch;
@@ -27,12 +28,20 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingSwitch, setSwitchLoading] = useState<boolean>(false);
+  const [chatGbtStatus, setChatGbtStatus] = useState<number>(
+    match.chat_gpt_text_status
+  );
 
   const onClickGetMatch = () => {
     setLoading(true);
-    getMatchTextGpt(match.id).catch(() => {
-      setLoading(false);
-    });
+    getMatchTextGpt(match.id)
+      .then((res) => {
+        if (res === "error") return;
+        setChatGbtStatus(res.chat_gpt_text_status);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   const switchCup = () => {
@@ -45,6 +54,24 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       })
       .finally(() => {
         setSwitchLoading(false);
+      });
+  };
+
+  const confirmGptText = (id: number) => {
+    console.log("asd");
+    console.log("return avec nua");
+    confirmGptMessage(id).then((res) => {
+      if (res === "error") return;
+      setChatGbtStatus(res.chat_gpt_text_status);
+    });
+  };
+  const resendGptText = (id: number) => {
+    resendGptMessage(id)
+      .then((res) => {
+        setChatGbtStatus(res.chat_gpt_text_status);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -73,7 +100,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       >
         {/* Switch любимый кубок */}
         {/* <Form.Item
-          className="items-start"
+          className="items-starconfirmGptMessaget"
           name={"favorite_cup"}
           // label="Кубок любимый"
           initialValue={match.favorite_game == "0" ? false : true}
@@ -190,63 +217,91 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
 
         {/* gpt тексты */}
         <div className="relative mt-8 text-end">
-          {match.chat_gpt_text_status == 2 && (
+          {chatGbtStatus == 2 && (
             <div className="sticky top-2 text-right z-10 inline-block ml-auto">
               <Button
-                onClick={() => confirmGptMessage(match.id)}
+                onClick={() => confirmGptText(match.id)}
                 type="primary"
                 className="mr-2"
               >
                 Подтвердить
               </Button>
-              <Button onClick={() => resendGptMessage(match.id)} type="primary">
+              <Button onClick={() => resendGptText(match.id)} type="primary">
                 Повторный запрос
               </Button>
             </div>
           )}
 
           {/* Текст для чата GPT */}
-          <Form.Item
-            name={"chat_gpt_text"}
-            initialValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
-          >
-            <div className="form-item">
-              <div className="flex items-center mb-2">
-                <p className="!mb-0 mr-2">Текст для чата GPT</p>
-                {(match.chat_gpt_text_status == 0 ||
-                  match.chat_gpt_text_status == 1) && (
-                  <Button
-                    onClick={onClickGetMatch}
-                    type="primary"
-                    loading={match.chat_gpt_text_status == 1 || loading}
-                  >
-                    Получить ответ
-                  </Button>
-                )}
+          {chatGbtStatus !== 4 && (
+            <Form.Item
+              name={"chat_gpt_text"}
+              initialValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
+            >
+              <div className="form-item">
+                <div className="flex items-center mb-2">
+                  <p className="!mb-0 mr-2">Текст для чата GPT</p>
+                  {(chatGbtStatus == 0 || chatGbtStatus == 1) && (
+                    <Button
+                      className="ml-auto"
+                      onClick={onClickGetMatch}
+                      type="primary"
+                      loading={chatGbtStatus == 1 || loading}
+                    >
+                      Получить ответ
+                    </Button>
+                  )}
+                  {chatGbtStatus === 3 && (
+                    <p className="ml-auto">
+                      <span className="!font-medium">
+                        Ждем ответа от чата GPT:{" "}
+                      </span>
+                      <Spin size="large" />
+                    </p>
+                  )}
+                </div>
+                <TextArea
+                  className="!resize-none !h-80"
+                  disabled={chatGbtStatus === 3}
+                  size="large"
+                  defaultValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
+                />
               </div>
-              <TextArea
-                className="!resize-none !h-80"
-                size="large"
-                defaultValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
-              />
-            </div>
-          </Form.Item>
+            </Form.Item>
+          )}
 
           {/* Кф */}
-          <Form.Item
-            className="mt-8"
-            name={"game_cf"}
-            initialValue={match.game_cf ? match.game_cf : ""}
-          >
-            <div className="form-item">
-              <p>Коэффициент:</p>
-              <TextArea
-                className="!resize-none !h-80"
-                size="large"
-                defaultValue={match.game_cf ? match.game_cf : ""}
-              />
-            </div>
-          </Form.Item>
+          {chatGbtStatus !== 4 && (
+            <Form.Item
+              className="mt-8"
+              name={"game_cf"}
+              initialValue={match.game_cf ? match.game_cf : ""}
+            >
+              {/* <div className="cover-loader">
+              </div> */}
+              <div className="form-item">
+                <div className="flex items-center mb-2">
+                  <p className="!mb-0">Коэффициент:</p>
+                  {chatGbtStatus === 3 && (
+                    <p className="ml-auto">
+                      <span className="!font-medium">
+                        Ждем ответа от чата GPT:{" "}
+                      </span>
+                      <Spin size="large" />
+                    </p>
+                  )}
+                </div>
+                <LoaderCover loading={chatGbtStatus === 1}>
+                  <TextArea
+                    disabled={chatGbtStatus === 3}
+                    className="!resize-none !h-80"
+                    size="large"
+                    defaultValue={match.game_cf ? match.game_cf : ""}
+                  />
+                </LoaderCover>
+              </div>
+            </Form.Item>
+          )}
 
           {/* Анализ */}
           <Form.Item
@@ -256,11 +311,12 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           >
             <div className="form-item">
               <p>Анализ:</p>
-
-              <TextEditor
-                defaultValue={match.game_analize ? match.game_analize : ""}
-                onChange={(value) => form.setFieldsValue({ analysis: value })}
-              />
+              <LoaderCover loading={chatGbtStatus === 1}>
+                <TextEditor
+                  defaultValue={match.game_analize ? match.game_analize : ""}
+                  onChange={(value) => form.setFieldsValue({ analysis: value })}
+                />
+              </LoaderCover>
             </div>
           </Form.Item>
         </div>

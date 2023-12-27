@@ -5,6 +5,7 @@ import CustomAutoComplete, {
 } from "../../UI/Search/CustomAutoComplete";
 import { fetchLeagues } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { IDataLeaguesFetch } from "../../../store/Slices/leaguesSlice/interface";
+import { setLeague } from "../../../store/Slices/filterSlice";
 
 const Leagues: FC = () => {
   const dispatch = useTypeDispatch();
@@ -16,8 +17,15 @@ const Leagues: FC = () => {
 
   const addLimit = () => setLimit((prev) => prev + 20);
 
+  const onChange = (value: string, key?: number | string) => {
+    console.log(value);
+    setSearch(value);
+    dispatch(setLeague(key ? String(key) : ""));
+  };
+
   useEffect(() => {
     setLoading(true);
+    console.log(search);
     dispatch(
       fetchLeagues({
         limit: limit,
@@ -30,7 +38,7 @@ const Leagues: FC = () => {
         const data: ISelectDataAutoComplete[] = [];
         payload.data.forEach((item) => {
           data.push({
-            key: String(item.id),
+            key: String(item.league_id),
             value: `${item.league_name}`,
           });
         });
@@ -49,7 +57,7 @@ const Leagues: FC = () => {
         loading={loading}
         setLimit={addLimit}
         data={data}
-        setSearch={setSearch}
+        setSearch={onChange}
         empty={empty}
       />
     </>

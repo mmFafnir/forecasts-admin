@@ -1,14 +1,13 @@
 import { notification } from "antd";
-interface IParams {
+import { ArgsProps } from "antd/es/notification";
+
+interface IParams extends ArgsProps {
   type: "success" | "error" | "info";
-  description?: string;
-  message: string;
 }
 
 export const notify = (params: IParams) => {
-  const { type, message, description = "" } = params;
+  const { type } = params;
   notification[type]({
-    message: message,
-    description: description,
+    ...params,
   });
 };

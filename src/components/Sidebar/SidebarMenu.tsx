@@ -11,6 +11,7 @@ const forecast = [
   { link: "/leagues", text: "ЛИГИ" },
   { link: "/teams", text: "КОМАНДЫ" },
   { link: "/matches", text: "МАТЧИ" },
+  { link: "/bookmakers", text: "ТОП БУКМЕКЕРОВ" },
   { link: "/events", text: "СОБЫТИЯ" },
 ];
 

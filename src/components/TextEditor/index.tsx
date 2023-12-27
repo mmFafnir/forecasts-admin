@@ -21,7 +21,7 @@ const TextEditor: FC<IProps> = ({ height = 500, defaultValue, onChange }) => {
   };
 
   return (
-    <div className="no-null">
+    <div className="no-null w-full">
       <Editor
         apiKey="z0ljugkdjg4mg4441owx0ic0eyzypwr10owtr0bbdlopl6zv"
         ref={editorRef}

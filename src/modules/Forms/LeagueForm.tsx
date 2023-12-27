@@ -1,4 +1,4 @@
-import { Button, Form, Input, Row, notification } from "antd";
+import { Button, Form, Input, Row } from "antd";
 import { FC, useState } from "react";
 import { TypeLeague } from "../../store/Slices/leaguesSlice/interface";
 import { useTypeDispatch } from "../../hooks/useTypeDispatch";
@@ -7,6 +7,7 @@ import { required } from "../../core/form-rools";
 import CustomImage from "../../components/UI/CustomImage";
 import { updateLeague } from "../../store/Slices/leaguesSlice/asyncActions";
 import { AxiosError } from "axios";
+import { notify } from "../../assets/scripts/notify";
 
 interface IInputs {
   league_name: string;
@@ -31,18 +32,18 @@ const LeagueForm: FC<IProps> = ({ league }) => {
       })
     )
       .then(() => {
-        notification.success({
+        notify({
+          type: "success",
           message: "Успешно",
           description: `Лига ${league.league_name} успешно обнавлена`,
-          duration: 2,
         });
       })
       .catch((error) => {
         const err = error as AxiosError;
-        notification.error({
+        notify({
+          type: "error",
           message: `Ошибка ${err.code}`,
           description: err.message,
-          duration: 3,
         });
       })
       .finally(() => {

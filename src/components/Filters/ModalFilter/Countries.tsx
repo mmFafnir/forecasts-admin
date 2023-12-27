@@ -5,6 +5,7 @@ import { IDataTypeCountryFetch } from "../../../store/Slices/countriesSlice/inte
 import CustomAutoComplete, {
   ISelectDataAutoComplete,
 } from "../../UI/Search/CustomAutoComplete";
+import { setCountry } from "../../../store/Slices/filterSlice";
 
 const Countries: FC = () => {
   const dispatch = useTypeDispatch();
@@ -15,22 +16,27 @@ const Countries: FC = () => {
   const [empty, setEmpty] = useState<boolean>(false);
 
   const addLimit = () => setLimit((prev) => prev + 20);
+  const onChange = (value: string, key?: number | string) => {
+    setSearch(value);
+    dispatch(setCountry(key ? String(key) : ""));
+  };
 
-  useEffect(() => {
+  const getCountries = (value: string) => {
     setLoading(true);
     dispatch(
       fetchCountries({
         limit: limit,
         page: 1,
-        search: search,
+        search: value,
       })
     )
       .then((res) => {
         const payload = res.payload as IDataTypeCountryFetch;
         const data: ISelectDataAutoComplete[] = [];
+        console.log(payload.data);
         payload.data.forEach((item) => {
           data.push({
-            key: item.id,
+            key: item.code,
             value: `${item.translation} (${item.name})`,
           });
         });
@@ -40,6 +46,10 @@ const Countries: FC = () => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    getCountries(search);
   }, [search, limit]);
 
   return (
@@ -49,7 +59,7 @@ const Countries: FC = () => {
         loading={loading}
         setLimit={addLimit}
         data={data}
-        setSearch={setSearch}
+        setSearch={onChange}
         empty={empty}
       />
     </>

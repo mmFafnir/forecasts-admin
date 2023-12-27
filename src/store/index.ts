@@ -8,6 +8,7 @@ import leaguesSlice from "./Slices/leaguesSlice";
 import countriesSlice from "./Slices/countriesSlice";
 import eventsSlice from "./Slices/eventsSlice";
 import risksSlice from "./Slices/risksSlice";
+import bookmakersSlice from "./Slices/bookmakersSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     prompts: promptsSlice,
     events: eventsSlice,
     risks: risksSlice,
+    bookmakers: bookmakersSlice,
   },
 });
 

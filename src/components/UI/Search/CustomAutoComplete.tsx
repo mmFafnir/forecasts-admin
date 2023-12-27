@@ -10,11 +10,16 @@ export interface ISelectDataAutoComplete {
 interface IProps {
   data: ISelectDataAutoComplete[];
   setLimit: () => void;
-  setSearch: (value: string) => void;
+  setSearch: (value: string, id?: number | string) => void;
   placeholder?: string;
   loading?: boolean;
   empty?: boolean;
 }
+
+type TypeOptions = {
+  value: string;
+  key: number | string;
+};
 
 let timerId: number | undefined = undefined;
 
@@ -37,11 +42,10 @@ const CustomAutoComplete: FC<IProps> = ({
       setLimit();
     }
   };
-
-  const onSearch = (value: string) => {
+  const onSearch = (value: string, options?: TypeOptions) => {
     clearTimeout(timerId);
     timerId = setTimeout(function () {
-      setSearch(value);
+      setSearch(value, options?.key);
     }, 400);
   };
 
@@ -52,7 +56,7 @@ const CustomAutoComplete: FC<IProps> = ({
         style={{ minWidth: 200 }}
         options={data}
         placeholder={placeholder}
-        onChange={onSearch}
+        onChange={(value, options) => onSearch(value, options as TypeOptions)}
         onPopupScroll={(e) => onScroll(e)}
         notFoundContent={<Empty description="Пусто" />}
       />

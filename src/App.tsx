@@ -15,6 +15,8 @@ import TeamsElementPage from "./Pages/TeamsElementPage";
 import LeaguesElementPage from "./Pages/LeaguesElementPage";
 import "./assets/scss/App.scss";
 import EventsPage from "./Pages/EventsPage";
+import BookmakerPage from "./Pages/BookmakersPage";
+import BookmakerElementPage from "./Pages/BookmakersElementPage";
 
 function App() {
   useEffect(() => {});
@@ -25,7 +27,7 @@ function App() {
         path="/"
         element={
           <SecurityProvider>
-          <LayoutMain />
+            <LayoutMain />
           </SecurityProvider>
         }
       >
@@ -39,6 +41,9 @@ function App() {
 
         <Route path="/leagues" element={<LeaguesPages />} />
         <Route path="/leagues/:id" element={<LeaguesElementPage />} />
+
+        <Route path="/bookmakers" element={<BookmakerPage />} />
+        <Route path="/bookmakers/:id" element={<BookmakerElementPage />} />
 
         <Route path="/events" element={<EventsPage />} />
 

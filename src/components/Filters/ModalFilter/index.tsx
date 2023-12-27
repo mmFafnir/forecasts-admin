@@ -9,26 +9,37 @@ interface IProps {
   name: EnumModalFilters;
 }
 
-const getCurrentFilter = (name: string) => {
-  switch (name) {
-    case EnumModalFilters.COUNTRIES:
-      return <Countries />;
-    case EnumModalFilters.LEAGUES:
-      return <Leagues />;
-    case EnumModalFilters.DATE:
-      return <Date />;
-    case EnumModalFilters.STATUS_CHAT_GPT_TEXT:
-      return <ChatGptText />;
-    default:
-      return <p>Фильтр в разработке</p>;
-  }
-};
-
+const components = [
+  {
+    name: EnumModalFilters.COUNTRIES,
+    component: <Countries />,
+  },
+  {
+    name: EnumModalFilters.LEAGUES,
+    component: <Leagues />,
+  },
+  {
+    name: EnumModalFilters.DATE,
+    component: <Date />,
+  },
+  {
+    name: EnumModalFilters.STATUS_CHAT_GPT_TEXT,
+    component: <ChatGptText />,
+  },
+];
 const ModalFilter: FC<IProps> = ({ name }) => {
-  console.log(name);
   return (
     <div className="ml-2">
-      <div className="relative">{getCurrentFilter(name)}</div>
+      <div className="relative">
+        {components.map((item) => (
+          <div
+            key={item.name}
+            className={`${name === item.name ? "block" : "hidden"}`}
+          >
+            {item.component}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

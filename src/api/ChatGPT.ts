@@ -2,7 +2,12 @@ import axios from "../core/axios";
 import { AxiosError } from "axios";
 import { notify } from "../assets/scripts/notify";
 
-export const getMatchTextGpt = async (id: number | string) => {
+interface IReturnGpt {
+  chat_gpt_text_status: 1;
+}
+export const getMatchTextGpt = async (
+  id: number | string
+): Promise<IReturnGpt | "error"> => {
   try {
     const { data } = await axios.get(
       `/send_message_in_chat_gpt_for_match/match_id=${id}`
@@ -21,6 +26,7 @@ export const getMatchTextGpt = async (id: number | string) => {
       message: `Ошибка ${err.response?.status} :(`,
       description: "Попробуйте чуть позже",
     });
+    return "error";
   }
 };
 
@@ -49,26 +55,28 @@ export const getMatchTextGptArray = async (ids: number[] | string[]) => {
   }
 };
 
-export const confirmGptMessage = async (id: number | string) => {
+export const confirmGptMessage = async (
+  id: number | string
+): Promise<IReturnGpt | "error"> => {
   try {
     const { data } = await axios.get(
       `/confirm_chat_gpt_message/match_id=${id}`
     );
 
     console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
+    return "error";
   }
 };
 
-export const resendGptMessage = async (id: number | string) => {
-  try {
-    const { data } = await axios.get(
-      `/resend_message_to_chat_gpt/match_id=${id}`
-    );
-
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
+export const resendGptMessage = async (
+  id: number | string
+): Promise<IReturnGpt> => {
+  const { data } = await axios.get(
+    `/resend_message_to_chat_gpt/match_id=${id}`
+  );
+  console.log(data);
+  return data;
 };

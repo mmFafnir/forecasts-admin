@@ -25,7 +25,6 @@ const FileImage: FC<IProps> = ({ defaultImg }) => {
   const onChangeFile: UploadProps["onChange"] = async (info) => {
     setFileList([info.file]);
     if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
       setFileList([info.file]);
     }
     if (info.file.status === "done") {
