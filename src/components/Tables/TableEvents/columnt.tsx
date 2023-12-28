@@ -10,7 +10,7 @@ export const columns: ColumnsType<TypeEvent> = [
     dataIndex: "original_name",
   },
   {
-    title: "Кастомное еазвание ",
+    title: "Кастомное название ",
     dataIndex: "show_name",
     render: (_, record) => (
       <Form.Item
@@ -24,9 +24,9 @@ export const columns: ColumnsType<TypeEvent> = [
   },
 
   {
-    title: "Статуч",
+    title: "Статус",
     dataIndex: "status",
-    render: (_, record) => <p>{record.status}</p>,
+    render: (_, record) => <p>statusMatchRender{record.status}</p>,
   },
   {
     title: "Создано",

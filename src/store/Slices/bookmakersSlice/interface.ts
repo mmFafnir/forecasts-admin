@@ -12,10 +12,12 @@ export type TypeBookmaker = {
 export interface IDataCreateBookmaker {
   name: string;
   price: number;
+  logo?: string;
   code: string;
   url: string;
 }
 
-export interface IDataUpdateBookmaker extends IDataCreateBookmaker {
+export interface IDataUpdateBookmaker {
   bookmaker_id: number;
+  data: FormData;
 }

@@ -3,29 +3,29 @@ import { Link } from "react-router-dom";
 // import { Image, Spin } from "antd";
 import { TypeBookmaker } from "../../../store/Slices/bookmakersSlice/interface";
 import dayjs from "dayjs";
+import { Image, Spin } from "antd";
 
 export const columns: ColumnsType<TypeBookmaker> = [
+  {
+    title: "Логотип",
+    dataIndex: "logo",
+    render: (_, record) => (
+      <Image
+        width={50}
+        src={`https://admin.aibetguru.com/uploads/${record.logo}`}
+        placeholder={<Spin />}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src =
+            "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
+        }}
+      />
+    ),
+  },
   {
     title: "Название",
     dataIndex: "name",
   },
-
-  // {
-  //   title: "Лого",
-  //   dataIndex: "logo",
-  //   render: (_, record) => (
-  //     <Image
-  //       width={20}
-  //       src={`https://admin.aibetguru.com/uploads/${record.code}.svg`}
-  //       placeholder={<Spin />}
-  //       onError={(e) => {
-  //         const target = e.target as HTMLImageElement;
-  //         target.src = "https://cdn-icons-png.flaticon.com/512/921/921490.png";
-  //       }}
-  //     />
-  //   ),
-  // },
-
   {
     title: "Промогод",
     dataIndex: "code",
@@ -55,7 +55,13 @@ export const columns: ColumnsType<TypeBookmaker> = [
     title: "Ссылка",
     dataIndex: "url",
     render: (_, record) => (
-      <a target="_blanc" href={record.url}>
+      <a
+        className="overflow-hidden block whitespace-nowrap text-ellipsis"
+        target="_blanc"
+        style={{ maxWidth: "260px" }}
+        href={record.url}
+        title={record.url}
+      >
         {record.url}
       </a>
     ),

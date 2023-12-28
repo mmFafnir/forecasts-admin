@@ -11,6 +11,7 @@ interface IState extends Omit<TFilter, "page"> {}
 const initialState: IState = {
   limit: 10,
   search: "",
+  statusMatch: "",
   country: "",
   league: "",
   date: {
@@ -45,6 +46,9 @@ const filterSlice = createSlice({
     ) => {
       state.chat_gpt_text_status = action.payload;
     },
+    setStatusMatch: (state, action: PayloadAction<string>) => {
+      state.statusMatch = action.payload;
+    },
   },
 });
 
@@ -55,6 +59,7 @@ export const {
   setChatGptTextStatus,
   setLeague,
   setCountry,
+  setStatusMatch,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

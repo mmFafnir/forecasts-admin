@@ -30,6 +30,7 @@ const DateForm: FC<IProps> = ({ defaultDate, setDate, label }) => {
       {label && <p className="text-left mb-2">{label}</p>}
       <DatePicker
         className="block"
+        style={{ height: 32 }}
         value={value}
         format={dateFormat}
         onChange={onChange}

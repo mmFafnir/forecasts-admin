@@ -13,10 +13,27 @@ const CreateBookmaker: FC = () => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IDataCreateBookmaker>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [imgFile, setImgFile] = useState<File | null>(null);
 
-  const onFinish = (values: IDataCreateBookmaker) => {
+  const onFinish = async (values: IDataCreateBookmaker) => {
     setLoading(true);
-    dispatch(createBookmaker(values))
+    const formData = new FormData();
+
+    if (imgFile) {
+      formData.append("logo", imgFile);
+    }
+    for (const [key, value] of Object.entries(values)) {
+      formData.append(key, value);
+    }
+
+    dispatch(createBookmaker(formData))
+      .then(() => {
+        notify({
+          type: "success",
+          message: "Успех",
+          description: `Букмекер ${values.name} был успешно добавлен`,
+        });
+      })
       .catch(() => {
         notify({
           type: "error",
@@ -25,6 +42,8 @@ const CreateBookmaker: FC = () => {
         });
       })
       .finally(() => {
+        setImgFile(null);
+        form.resetFields();
         setLoading(false);
       });
   };
@@ -66,7 +85,7 @@ const CreateBookmaker: FC = () => {
 
       <div className="mb-7">
         <p className={`${titleClasses} mb-3`}>Загрузить логотип</p>
-        <UploadInput />
+        <UploadInput file={imgFile} setFile={setImgFile} />
       </div>
 
       <Form.Item className="mb-7" name="code" rules={[required]}>

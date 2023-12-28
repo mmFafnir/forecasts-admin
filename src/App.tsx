@@ -1,11 +1,8 @@
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
 import LayoutMain from "./layouts/LayoutMain";
 import MatchPage from "./Pages/MatchPage";
 import MatchElementPage from "./Pages/MatchElementPage";
 import AuthPage from "./Pages/AuthPage";
-
 import TeamsPage from "./Pages/TeamsPage";
 import SecurityProvider from "./modules/SecurityProvider";
 import PromptsPage from "./Pages/PromptsPage";
@@ -13,14 +10,12 @@ import LeaguesPages from "./Pages/LeaguesPages";
 import CountriesPage from "./Pages/CountriesPage";
 import TeamsElementPage from "./Pages/TeamsElementPage";
 import LeaguesElementPage from "./Pages/LeaguesElementPage";
-import "./assets/scss/App.scss";
 import EventsPage from "./Pages/EventsPage";
 import BookmakerPage from "./Pages/BookmakersPage";
+import "./assets/scss/App.scss";
 import BookmakerElementPage from "./Pages/BookmakersElementPage";
 
 function App() {
-  useEffect(() => {});
-
   return (
     <Routes>
       <Route
@@ -31,7 +26,7 @@ function App() {
           </SecurityProvider>
         }
       >
-        <Route path="" element={<TeamsPage />} />
+        <Route path="" element={<MatchPage />} />
 
         <Route path="/matches" element={<MatchPage />} />
         <Route path="/matches/:id" element={<MatchElementPage />} />

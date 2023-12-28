@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { TypeMatch } from "../../../store/Slices/matchesSlice/interface";
 import dayjs from "dayjs";
 import { Image, Spin } from "antd";
-// import { TypeMatch } from "../../../store/Slices/matchesSlice/interface";
+import { statusMatchRender } from "../../../assets/scripts/statusRender";
 
 export const columns: ColumnsType<TypeMatch> = [
   {
@@ -47,10 +47,6 @@ export const columns: ColumnsType<TypeMatch> = [
       </div>
     ),
   },
-  // {
-  //   title: "Сезон",
-  //   dataIndex: "season",
-  // },
   {
     title: "Дата",
     dataIndex: "real_date",
@@ -64,6 +60,7 @@ export const columns: ColumnsType<TypeMatch> = [
   {
     title: "Статус матчка",
     dataIndex: "time_status",
+    render: (_, record) => <p>Матч {statusMatchRender(record.time_status)}</p>,
   },
   {
     title: "Команда дома",

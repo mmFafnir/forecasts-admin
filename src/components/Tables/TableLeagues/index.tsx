@@ -16,7 +16,9 @@ const TableLeagues: FC = () => {
 
   const [page, setPage] = useState<number>(1);
 
-  const onGetAllLeagues = (params: Omit<TFilter, "league" | "country">) => {
+  const onGetAllLeagues = (
+    params: Pick<TFilter, "page" | "limit" | "search">
+  ) => {
     dispatch(fetchLeagues(params));
   };
 

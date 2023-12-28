@@ -14,6 +14,7 @@ import {
 import { notify } from "../../assets/scripts/notify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import CustomImage from "../../components/UI/CustomImage";
 
 interface IProps {
   bookmaker: TypeBookmaker;
@@ -29,6 +30,9 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
   const [loadingError, setLoadingError] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
+  const [imgFile, setImgFile] = useState<File | null>(null);
+  const [previewImage, serPreviewImage] = useState<string | null>(null);
+
   const showNotifyError = () => {
     notify({
       type: "error",
@@ -36,9 +40,10 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
       description: "Произошла ошибка, букмекер хочет жить, попробуйте позже",
     });
   };
+
   const onDelete = () => {
     setLoadingError(true);
-    dispatch(deleteBookmaker(bookmaker.id))
+    dispatch(deleteBookmaker([bookmaker.id]))
       .then(() => {
         navigate("/bookmakers");
         notify({
@@ -57,13 +62,18 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
   };
 
   const onFinish = (values: IDataCreateBookmaker) => {
+    console.log(values);
     setLoading(true);
-    dispatch(
-      updateBookmaker({
-        ...values,
-        bookmaker_id: bookmaker.id,
-      })
-    )
+    const formData = new FormData();
+
+    if (imgFile) {
+      formData.append("logo", imgFile);
+    }
+    for (const [key, value] of Object.entries(values)) {
+      formData.append(key, value);
+    }
+    formData.append("bookmaker_id", String(bookmaker.id));
+    dispatch(updateBookmaker(formData))
       .then(() => {
         notify({
           type: "success",
@@ -73,6 +83,7 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
       })
       .catch((error) => {
         const err = error as AxiosError;
+        serPreviewImage(null);
         notify({
           type: "error",
           message: `Ошибка ${err.code}`,
@@ -125,9 +136,28 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
         </div>
       </Form.Item>
 
-      <div className="mb-7 flex flex-col items-start">
+      <div className="mb-7 flex flex-col items-start text-left">
         <p className={`${titleClasses} mb-3`}>Загрузить новый логотип</p>
-        <UploadInput />
+        {bookmaker.logo && (
+          <div className="h-40 mb-3" style={{ minWidth: "300px" }}>
+            <CustomImage
+              rootClasses="!overflow-hidden rounded-2xl"
+              src={
+                previewImage
+                  ? previewImage
+                  : `https://admin.aibetguru.com/uploads/${bookmaker.logo}`
+              }
+              errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
+              width={"100%"}
+              height={"100%"}
+            />
+          </div>
+        )}
+        <UploadInput
+          setPreviewImage={serPreviewImage}
+          setFile={setImgFile}
+          file={imgFile}
+        />
       </div>
 
       <Form.Item

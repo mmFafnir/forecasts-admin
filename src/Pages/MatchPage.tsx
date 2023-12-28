@@ -1,18 +1,17 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import TableMatch from "../components/Tables/TableMatch";
-import Switch, { TSwitchItem } from "../components/Filters/Switch";
 import FilterHeader from "../components/Filters/FilterHeader";
 import { EnumModalFilters } from "../types/Enums";
+import { Radio, RadioChangeEvent } from "antd";
+import { useTypeDispatch } from "../hooks/useTypeDispatch";
+import { setStatusMatch } from "../store/Slices/filterSlice";
+import { useTypeSelector } from "../hooks/useTypeSelector";
 
-const switchItems: [TSwitchItem, TSwitchItem] = [
-  {
-    name: "upcoming",
-    title: "Предстоящие",
-  },
-  {
-    name: "completed",
-    title: "Завершенные",
-  },
+const StatusMatch = [
+  { label: "Все", value: "" },
+  { label: "Не начался", value: "0" },
+  { label: "В игре(Live)", value: "1" },
+  { label: "Завершен", value: "3" },
 ];
 
 const filterBtnItems = [
@@ -35,14 +34,27 @@ const filterBtnItems = [
 ];
 
 const MatchPage: FC = () => {
-  const [statusMatch, setStatusMatch] = useState<string>(switchItems[0].name);
-  console.log(statusMatch);
+  const { statusMatch } = useTypeSelector((state) => state.filters);
+  const dispatch = useTypeDispatch();
+  const onChange = ({ target: { value } }: RadioChangeEvent) => {
+    dispatch(setStatusMatch(value));
+    console.log("radio3 checked", value);
+  };
 
   return (
     <>
       <div className="flex items-center ">
         <h1 className="line-after">МАТЧИ</h1>
-        <Switch items={switchItems} setItem={setStatusMatch} />
+
+        <div>
+          <Radio.Group
+            options={StatusMatch}
+            onChange={onChange}
+            value={statusMatch}
+            optionType="button"
+          />
+        </div>
+        {/* <Switch items={switchItems} setItem={setStatusMatch} /> */}
       </div>
       <div className="mt-6">
         <FilterHeader items={filterBtnItems} />

@@ -10,4 +10,5 @@ export interface TFilter {
   search: string;
   date?: IDateFilter;
   chat_gpt_text_status?: TypeChatGptTextStatus;
+  statusMatch: string;
 }

@@ -34,7 +34,7 @@ const TableEvents: FC = () => {
       })
     );
   }, [search]);
-
+  console.log(events);
   return (
     <div>
       <Form

@@ -1,13 +1,16 @@
 import { Button, Empty, Table as TableAnt } from "antd";
 import { AnyObject } from "antd/es/_util/type";
-import { FC, useState, Key } from "react";
+import { FC, useState, Key, useEffect } from "react";
 import Search from "../UI/Search";
+import { ButtonType } from "antd/es/button";
 
 type TData = AnyObject;
 
 type TCallback = {
   fn: (ids: Key[]) => void;
   title: string;
+  type?: ButtonType;
+  danger?: boolean;
 };
 
 interface IProps {
@@ -37,6 +40,10 @@ const Table: FC<IProps> = ({ data, columns, callback }) => {
 
   const hasSelected = selectedRowKeys.length > 0;
 
+  useEffect(() => {
+    setSelectedRowKeys([]);
+  }, [data]);
+
   return (
     <div className="flex flex-col pr-11 ">
       <div className="flex justify-end items-center mt-3 mb-3">
@@ -46,8 +53,9 @@ const Table: FC<IProps> = ({ data, columns, callback }) => {
             <Button
               loading={loading}
               disabled={!hasSelected}
-              type="primary"
+              type={callback.type ? callback.type : "primary"}
               onClick={onCallback}
+              danger={callback.danger}
             >
               {`${callback.title} ${hasSelected ? selectedRowKeys.length : ""}`}
             </Button>

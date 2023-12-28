@@ -4,10 +4,12 @@ import { TypeMatch } from "../store/Slices/matchesSlice/interface";
 import { useParams } from "react-router-dom";
 import axios from "../core/axios";
 import { Space, Spin } from "antd";
+import { useTypeSelector } from "../hooks/useTypeSelector";
 
 const MatchElementPage: FC = () => {
   const { id } = useParams();
 
+  const { message } = useTypeSelector((state) => state.pusher);
   const [match, setMatch] = useState<TypeMatch | null>(null);
 
   const getSinglePageMatch = async (id: string) => {
@@ -18,6 +20,12 @@ const MatchElementPage: FC = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (!message || !id) return;
+    setMatch(null);
+    getSinglePageMatch(id);
+  }, [message]);
 
   useEffect(() => {
     if (!id) return;

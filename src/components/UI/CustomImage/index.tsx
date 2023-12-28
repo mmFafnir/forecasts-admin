@@ -5,8 +5,9 @@ interface ICustomImageProps {
   src: string;
   errorSrc: string;
   classes?: string;
-  width?: number;
-  height?: number;
+  rootClasses?: string;
+  width?: number | string;
+  height?: number | string;
 }
 
 const CustomImage: FC<ICustomImageProps> = ({
@@ -14,13 +15,14 @@ const CustomImage: FC<ICustomImageProps> = ({
   errorSrc,
   width = 250,
   height = 250,
-  classes = "border-solid  border-gray-600 border p-2 rounded-2xl bg-slate-200",
+  rootClasses = "",
+  classes = "border-solid  border-gray-600 border p-2 rounded-2xl bg-slate-200 overflow-hidden",
 }) => {
   return (
     <Image
       className={classes}
       src={src}
-      rootClassName=""
+      rootClassName={rootClasses}
       width={width}
       height={height}
       placeholder={

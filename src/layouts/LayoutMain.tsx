@@ -1,11 +1,32 @@
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
+import PusherNotify from "../modules/PusherNotify";
+import Pusher from "pusher-js/with-encryption";
+import { useTypeDispatch } from "../hooks/useTypeDispatch";
+import { IStatePusher, setPusherMessage } from "../store/Slices/pusherSlice";
 
 const LayoutMain: FC = () => {
+  const dispatch = useTypeDispatch();
+
+  const Pushers = async () => {
+    const pusher = new Pusher(process.env.PUSHER_KEY as string, {
+      cluster: process.env.PUSHER_CLUSTER as string,
+    });
+    const channel = pusher.subscribe("AiSportacle");
+    channel.bind("App\\Events\\NewNotification", function (data: IStatePusher) {
+      console.log(data);
+      if (!data.message) return;
+      dispatch(setPusherMessage(data.message));
+    });
+  };
+
+  useEffect(() => {
+    Pushers();
+  }, []);
   return (
     <div className="app">
       <div className="w-full">
@@ -18,6 +39,7 @@ const LayoutMain: FC = () => {
             </Content>
           </Layout>
         </Layout>
+        <PusherNotify />
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ const Leagues: FC = () => {
         const data: ISelectDataAutoComplete[] = [];
         payload.data.forEach((item) => {
           data.push({
-            key: String(item.league_id),
+            key: String(item.id),
             value: `${item.league_name}`,
           });
         });

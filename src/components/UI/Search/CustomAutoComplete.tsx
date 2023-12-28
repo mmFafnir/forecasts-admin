@@ -21,7 +21,7 @@ type TypeOptions = {
   key: number | string;
 };
 
-let timerId: number | undefined = undefined;
+let timerId: NodeJS.Timeout | undefined = undefined;
 
 const CustomAutoComplete: FC<IProps> = ({
   data,

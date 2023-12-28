@@ -4,7 +4,6 @@ import { sports } from "../../assets/data/sports";
 import TextEditor from "../../components/TextEditor";
 import EventForm from "../../components/Events/EventForm";
 import { TypeMatch } from "../../store/Slices/matchesSlice/interface";
-import CustomImage from "../../components/UI/CustomImage";
 import TextArea from "antd/es/input/TextArea";
 import {
   confirmGptMessage,
@@ -15,6 +14,7 @@ import { useTypeDispatch } from "../../hooks/useTypeDispatch";
 import { switchFavoriteCups } from "../../store/Slices/matchesSlice/asyncAction";
 import { notify } from "../../assets/scripts/notify";
 import LoaderCover from "../../components/UI/LoaderCover";
+import CustomImage from "../../components/UI/CustomImage";
 
 interface IProps {
   match: TypeMatch;

@@ -1,8 +1,9 @@
-import { Radio, RadioChangeEvent } from "antd";
+import { Select } from "antd";
 import { FC } from "react";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { setChatGptTextStatus } from "../../../store/Slices/filterSlice";
+import { TypeChatGptTextStatus } from "../../../types/TypeFilter";
 
 const items = [
   { label: "Все", value: "" },
@@ -16,7 +17,8 @@ const items = [
 const ChatGptText: FC = () => {
   const { chat_gpt_text_status } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
-  const onChange = ({ target: { value } }: RadioChangeEvent) => {
+  const onChange = (value: TypeChatGptTextStatus) => {
+    console.log(value);
     dispatch(setChatGptTextStatus(value));
   };
 
@@ -25,12 +27,12 @@ const ChatGptText: FC = () => {
       <p className="mr-2 font-semibold absolute -top-4">
         Сортировка по статусу:
       </p>
-      <Radio.Group
-        options={items}
-        onChange={onChange}
+      <Select
+        style={{ width: 180 }}
         value={chat_gpt_text_status}
-        optionType="button"
-        buttonStyle="solid"
+        onChange={onChange}
+        options={items}
+        className="text-left"
       />
     </>
   );
