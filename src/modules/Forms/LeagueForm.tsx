@@ -1,4 +1,4 @@
-import { Button, Form, Input, Row } from "antd";
+import { Button, Form, Input, Row, Switch } from "antd";
 import { FC, useState } from "react";
 import { TypeLeague } from "../../store/Slices/leaguesSlice/interface";
 import { useTypeDispatch } from "../../hooks/useTypeDispatch";
@@ -8,6 +8,7 @@ import CustomImage from "../../components/UI/CustomImage";
 import { updateLeague } from "../../store/Slices/leaguesSlice/asyncActions";
 import { AxiosError } from "axios";
 import { notify } from "../../assets/scripts/notify";
+import { asyncTogglePindLeague } from "../../api/league/asyncTogglePindLeague";
 
 interface IInputs {
   league_name: string;
@@ -17,11 +18,15 @@ interface IProps {
   league: TypeLeague;
 }
 
+const titleClasses = `text-left font-semibold text-sm mb-2`;
 const LeagueForm: FC<IProps> = ({ league }) => {
-  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useTypeDispatch();
+
   const [form] = Form.useForm<IInputs>();
-  const titleClasses = `text-left font-semibold text-sm mb-2`;
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [switchValue, setSwitchValue] = useState<boolean>(false);
+  const [loadingSwitch, setLoadingSwitch] = useState<boolean>(false);
 
   const onFinish = () => {
     setLoading(true);
@@ -50,6 +55,27 @@ const LeagueForm: FC<IProps> = ({ league }) => {
         setLoading(false);
       });
   };
+
+  const togglePind = () => {
+    setLoadingSwitch(true);
+    setSwitchValue((prev) => !prev);
+    asyncTogglePindLeague(league.id)
+      .then((res) => {
+        setSwitchValue(res.message === "Add ed in favorite");
+      })
+      .catch(() => {
+        setSwitchValue((prev) => !prev);
+        notify({
+          type: "error",
+          message: "Ошибка",
+          description: "Произошла ошибка, попробуйте позже",
+        });
+      })
+      .finally(() => {
+        setLoadingSwitch(false);
+      });
+  };
+
   return (
     <>
       <Form
@@ -64,7 +90,30 @@ const LeagueForm: FC<IProps> = ({ league }) => {
         autoComplete="off"
       >
         <div className="flex justify-start flex-col max-w-96">
-          <Row justify={"space-between"}>
+          <div className="flex items-center mb-2">
+            <p className={`${titleClasses} mb-0 mr-2`}>Лига в избранном:</p>
+            <Switch
+              onChange={togglePind}
+              checkedChildren="Да"
+              unCheckedChildren="Нет"
+              loading={loadingSwitch}
+              checked={switchValue}
+            />
+          </div>
+
+          <Form.Item
+            className="mr-3"
+            name="league_name"
+            rules={[required]}
+            initialValue={league.league_name}
+          >
+            <div>
+              <p className={titleClasses}>Наименование команды</p>
+              <Input defaultValue={league.league_name} />
+            </div>
+          </Form.Item>
+
+          <Row justify={"space-between"} className="mb-4">
             <div className="">
               <p className={`${titleClasses.replace("mb-2", "mb-1")} mr-1`}>
                 Вид спорта:
@@ -83,20 +132,9 @@ const LeagueForm: FC<IProps> = ({ league }) => {
               </div>
             </div>
           </Row>
-          <Form.Item
-            className="mr-3"
-            name="league_name"
-            rules={[required]}
-            initialValue={league.league_name}
-          >
-            <div>
-              <p className={titleClasses}>Наименование команды</p>
-              <Input defaultValue={league.league_name} />
-            </div>
-          </Form.Item>
 
           <Row justify={"space-between"}>
-            <div style={{ maxWidth: "200px" }}>
+            <div>
               <p className={titleClasses.replace("text-left", "text-center")}>
                 Флаг Лиги
               </p>
@@ -105,7 +143,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
                 errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
               />
             </div>
-            <div style={{ maxWidth: "200px" }}>
+            <div>
               <p className={titleClasses.replace("text-left", "text-center")}>
                 Страна: {league.league_cc}
               </p>

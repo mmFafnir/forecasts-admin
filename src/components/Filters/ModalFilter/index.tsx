@@ -4,6 +4,7 @@ import { EnumModalFilters } from "../../../types/Enums";
 import Leagues from "./Leagues";
 import Date from "./Date";
 import ChatGptText from "./ChatGptStatus";
+import Favorite from "./Favorite";
 
 interface IProps {
   name: EnumModalFilters;
@@ -25,6 +26,10 @@ const components = [
   {
     name: EnumModalFilters.STATUS_CHAT_GPT_TEXT,
     component: <ChatGptText />,
+  },
+  {
+    name: EnumModalFilters.FAVORITE,
+    component: <Favorite />,
   },
 ];
 const ModalFilter: FC<IProps> = ({ name }) => {

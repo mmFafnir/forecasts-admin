@@ -8,6 +8,7 @@ export type TypeLeague = {
   league_name: string;
   updated_at: string;
   sport_id: string;
+  favorit: "0" | "1";
 };
 
 export interface IDataLeaguesFetch {

@@ -107,14 +107,6 @@ export const columns: ColumnsType<TypeMatch> = [
       <p>{dayjs(record.updated_at).format("DD.MM.YYYY")}</p>
     ),
   },
-  // {
-  //   title: "Пользователь",
-  //   dataIndex: "user",
-  // },
-  // {
-  //   title: "Статус",
-  //   dataIndex: "moderation",
-  // },
   {
     title: "",
     key: "action",

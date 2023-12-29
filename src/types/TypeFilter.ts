@@ -11,4 +11,5 @@ export interface TFilter {
   date?: IDateFilter;
   chat_gpt_text_status?: TypeChatGptTextStatus;
   statusMatch: string;
+  favorite: boolean;
 }

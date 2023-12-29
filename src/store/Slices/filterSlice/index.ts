@@ -18,6 +18,7 @@ const initialState: IState = {
     start: "",
     finish: "",
   },
+  favorite: false,
   chat_gpt_text_status: "",
 };
 
@@ -49,6 +50,9 @@ const filterSlice = createSlice({
     setStatusMatch: (state, action: PayloadAction<string>) => {
       state.statusMatch = action.payload;
     },
+    setFavorite: (state, action: PayloadAction<boolean>) => {
+      state.favorite = action.payload;
+    },
   },
 });
 
@@ -60,6 +64,7 @@ export const {
   setLeague,
   setCountry,
   setStatusMatch,
+  setFavorite,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

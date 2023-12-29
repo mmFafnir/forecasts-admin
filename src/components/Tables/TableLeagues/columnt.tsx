@@ -3,11 +3,64 @@ import { Link } from "react-router-dom";
 import { Image, Spin } from "antd";
 import { TypeLeague } from "../../../store/Slices/leaguesSlice/interface";
 
+import { Switch } from "antd";
+import { FC, useEffect, useState } from "react";
+import { notify } from "../../../assets/scripts/notify";
+import { asyncTogglePindLeague } from "../../../api/league/asyncTogglePindLeague";
+interface IProps {
+  favorite: boolean;
+  id: string | number;
+}
+
+const FavoriteSwitch: FC<IProps> = ({ favorite, id }) => {
+  const [isFav, setIsFav] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const togglePind = () => {
+    setLoading(true);
+    setIsFav((prev) => !prev);
+    asyncTogglePindLeague(id)
+      .then((res) => {
+        setIsFav(res.message === "Add ed in favorite");
+      })
+      .catch(() => {
+        setIsFav((prev) => !prev);
+        notify({
+          type: "error",
+          message: "Ошибка",
+          description: "Произошла ошибка, попробуйте позже",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    setIsFav(favorite);
+  }, []);
+
+  return <Switch onChange={togglePind} loading={loading} checked={isFav} />;
+};
+
 export const columns: ColumnsType<TypeLeague> = [
   {
     title: "Название",
     dataIndex: "league_name",
   },
+
+  {
+    title: "Избранное",
+    dataIndex: "favorit",
+    render: (_, record) => {
+      const fav = Boolean(Number(record.favorit));
+      return (
+        <p className="flex  w-full">
+          <FavoriteSwitch favorite={fav} id={record.id} />
+        </p>
+      );
+    },
+  },
+
   {
     title: "Лого",
     dataIndex: "league_id",
@@ -32,6 +85,7 @@ export const columns: ColumnsType<TypeLeague> = [
       <p>{record.country ? record.country.translation : "null"}</p>
     ),
   },
+
   {
     title: "",
     dataIndex: "league_cc",
@@ -47,6 +101,7 @@ export const columns: ColumnsType<TypeLeague> = [
       />
     ),
   },
+
   {
     title: "",
     key: "action",

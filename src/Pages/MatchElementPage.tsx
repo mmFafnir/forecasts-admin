@@ -2,13 +2,12 @@ import { FC, useEffect, useState } from "react";
 import MatchEditForm from "../modules/Forms/MatchEditForm";
 import { TypeMatch } from "../store/Slices/matchesSlice/interface";
 import { useParams } from "react-router-dom";
-import axios from "../core/axios";
 import { Space, Spin } from "antd";
 import { useTypeSelector } from "../hooks/useTypeSelector";
+import axios from "../core/axios";
 
 const MatchElementPage: FC = () => {
   const { id } = useParams();
-
   const { message } = useTypeSelector((state) => state.pusher);
   const [match, setMatch] = useState<TypeMatch | null>(null);
 
@@ -23,14 +22,16 @@ const MatchElementPage: FC = () => {
 
   useEffect(() => {
     if (!message || !id) return;
+    if (message.parent_id !== Number(id)) return;
     setMatch(null);
     getSinglePageMatch(id);
   }, [message]);
 
   useEffect(() => {
+    setMatch(null);
     if (!id) return;
     getSinglePageMatch(id);
-  }, []);
+  }, [id]);
 
   return (
     <div className="form">

@@ -9,7 +9,7 @@ import axios from "../../../core/axios";
 
 export const fetchMatches = createAsyncThunk<
   IDataMatchesFetch,
-  Required<TFilter>
+  Required<Omit<TFilter, "favorite">>
 >("matches/fetchMatches", async (params) => {
   const {
     limit = 10,

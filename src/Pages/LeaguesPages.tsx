@@ -8,6 +8,10 @@ const filterBtnItems = [
     name: "Страна",
     value: EnumModalFilters.COUNTRIES,
   },
+  {
+    name: "Избранные",
+    value: EnumModalFilters.FAVORITE,
+  },
 ];
 
 const LeaguesPages: FC = () => {

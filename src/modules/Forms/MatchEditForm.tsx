@@ -58,8 +58,6 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
   };
 
   const confirmGptText = (id: number) => {
-    console.log("asd");
-    console.log("return avec nua");
     confirmGptMessage(id).then((res) => {
       if (res === "error") return;
       setChatGbtStatus(res.chat_gpt_text_status);
@@ -83,7 +81,6 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
     console.log("Failed:", errorInfo);
   };
 
-  console.log(match);
   return (
     <>
       <Form
@@ -323,7 +320,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       </Form>
 
       {/* События */}
-      {match.cards && match.cards.length > 0 && (
+      {match.cards && match.cards.length > 0 && chatGbtStatus > 1 && (
         <EventForm cards={match.cards} />
       )}
 

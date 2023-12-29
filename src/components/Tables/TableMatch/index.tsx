@@ -40,7 +40,7 @@ const TableMatch: FC = () => {
   const dispatch = useTypeDispatch();
   const [page, setPage] = useState<number>(1);
 
-  const onGetAllMatches = (params: Required<TFilter>) => {
+  const onGetAllMatches = (params: Required<Omit<TFilter, "favorite">>) => {
     dispatch(fetchMatches(params));
   };
 
