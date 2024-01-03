@@ -33,6 +33,8 @@ const MatchElementPage: FC = () => {
     getSinglePageMatch(id);
   }, [id]);
 
+  console.log(match)
+
   return (
     <div className="form">
       <h1 className="mb-5">Редактировать Матч</h1>

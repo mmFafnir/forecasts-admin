@@ -214,20 +214,24 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
 
         {/* gpt тексты */}
         <div className="relative mt-8 text-end">
-          {chatGbtStatus == 2 && (
             <div className="sticky top-2 text-right z-10 inline-block ml-auto">
-              <Button
-                onClick={() => confirmGptText(match.id)}
-                type="primary"
-                className="mr-2"
-              >
-                Подтвердить
-              </Button>
-              <Button onClick={() => resendGptText(match.id)} type="primary">
-                Повторный запрос
-              </Button>
+              {chatGbtStatus == 2 && (
+                <Button
+                  onClick={() => confirmGptText(match.id)}
+                  type="primary"
+                  className="mr-2"
+                >
+                  Подтвердить
+                </Button>
+              )}
+              {
+                chatGbtStatus >= 2 && (
+                  <Button onClick={() => resendGptText(match.id)} type="primary">
+                    Повторный запрос
+                  </Button>
+                )
+              }
             </div>
-          )}
 
           {/* Текст для чата GPT */}
           {chatGbtStatus !== 4 && (
@@ -274,8 +278,6 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
               name={"game_cf"}
               initialValue={match.game_cf ? match.game_cf : ""}
             >
-              {/* <div className="cover-loader">
-              </div> */}
               <div className="form-item">
                 <div className="flex items-center mb-2">
                   <p className="!mb-0">Коэффициент:</p>
