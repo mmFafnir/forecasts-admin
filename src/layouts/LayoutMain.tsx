@@ -30,7 +30,7 @@ const LayoutMain: FC = () => {
   return (
     <div className="app">
       <div className="w-full">
-        <Layout className="min-h-screen pb-24">
+        <Layout className="min-h-screen">
           <Sidebar />
           <Layout>
             <Header />

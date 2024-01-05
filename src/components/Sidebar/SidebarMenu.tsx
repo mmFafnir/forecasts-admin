@@ -2,6 +2,7 @@ import {
   EditOutlined,
   LaptopOutlined,
   NotificationOutlined,
+  TranslationOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -34,6 +35,9 @@ export const SidebarMenu = [
   {
     icon: EditOutlined,
     name: <Link to={"/prompts"}>ПРОМТЫ</Link>,
-    // children: forecast,
+  },
+  {
+    icon: TranslationOutlined,
+    name: <Link to={"/translate"}>ПЕРЕВОДЫ</Link>,
   },
 ];

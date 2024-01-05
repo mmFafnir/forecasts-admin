@@ -1,5 +1,17 @@
 import { TypeCountry } from "../countriesSlice/interface";
 
+interface ILang {
+  id: number;
+  url: string;
+  name: string;
+}
+export interface ITranslateLeague {
+  id: number;
+  lang_id: string;
+  translation: string;
+  lang: ILang;
+}
+
 export type TypeLeague = {
   country: TypeCountry | null;
   id: number;
@@ -9,6 +21,7 @@ export type TypeLeague = {
   updated_at: string;
   sport_id: string;
   favorit: "0" | "1";
+  translate: ITranslateLeague[];
 };
 
 export interface IDataLeaguesFetch {

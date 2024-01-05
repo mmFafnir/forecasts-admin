@@ -1,28 +1,20 @@
-import { FC } from "react";
-import FilterHeader from "../components/Filters/FilterHeader";
+import { FC, useEffect } from "react";
 import TableTeams from "../components/Tables/TableTeams";
-import { EnumModalFilters } from "../types/Enums";
+// import axios from "axios";
 
-const filterBtnItems = [
-  {
-    name: "Страна",
-    value: EnumModalFilters.COUNTRIES,
-  },
-  {
-    name: "Лига",
-    value: EnumModalFilters.LEAGUES,
-  },
-];
+// const asyncGetTranslates = async () => {
+//   const {data} = axios.get()
+// }
 
 const TeamsPage: FC = () => {
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className="flex items-center">
         <h1>КОМАНДЫ</h1>
       </div>
-      <div className="mt-6">
-        <FilterHeader items={filterBtnItems} />
-      </div>
+      <div className="mt-6"></div>
       <div></div>
       <TableTeams />
     </>

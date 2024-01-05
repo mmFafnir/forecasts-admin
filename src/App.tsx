@@ -14,6 +14,7 @@ import EventsPage from "./Pages/EventsPage";
 import BookmakerPage from "./Pages/BookmakersPage";
 import "./assets/scss/App.scss";
 import BookmakerElementPage from "./Pages/BookmakersElementPage";
+import TranslatePage from "./Pages/TraslatesPage";
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
         <Route path="/countries" element={<CountriesPage />} />
 
         <Route path="/prompts" element={<PromptsPage />} />
+
+        <Route path="/translate" element={<TranslatePage />} />
 
         <Route
           path="*"

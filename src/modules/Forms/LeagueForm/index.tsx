@@ -1,23 +1,22 @@
 import { Button, Form, Input, Row, Switch } from "antd";
 import { FC, useState } from "react";
-import { TypeLeague } from "../../store/Slices/leaguesSlice/interface";
-import { useTypeDispatch } from "../../hooks/useTypeDispatch";
+import { TypeLeague } from "../../../store/Slices/leaguesSlice/interface";
+import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import dayjs from "dayjs";
-import { required } from "../../core/form-rools";
-import CustomImage from "../../components/UI/CustomImage";
-import { updateLeague } from "../../store/Slices/leaguesSlice/asyncActions";
+import { required } from "../../../core/form-rools";
+import CustomImage from "../../../components/UI/CustomImage";
+import { updateLeague } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { AxiosError } from "axios";
-import { notify } from "../../assets/scripts/notify";
-import { asyncTogglePindLeague } from "../../api/league/asyncTogglePindLeague";
+import { notify } from "../../../assets/scripts/notify";
+import { asyncTogglePindLeague } from "../../../api/league/asyncTogglePindLeague";
+import TableTranslate from "./TableTranslate";
 
 interface IInputs {
   league_name: string;
 }
-
 interface IProps {
   league: TypeLeague;
 }
-
 const titleClasses = `text-left font-semibold text-sm mb-2`;
 const LeagueForm: FC<IProps> = ({ league }) => {
   const dispatch = useTypeDispatch();
@@ -165,6 +164,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
           Редактировать
         </Button>
       </Form>
+      <TableTranslate translate={league.translate} />
     </>
   );
 };

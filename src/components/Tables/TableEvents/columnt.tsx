@@ -2,6 +2,7 @@ import { ColumnsType } from "antd/es/table";
 import { TypeEvent } from "../../../store/Slices/eventsSlice/interface";
 import dayjs from "dayjs";
 import { Form, Input } from "antd";
+import { statusMatchRender } from "../../../assets/scripts/statusRender";
 // import { updateEvent } from "../../../store/Slices/eventsSlice/asyncActions";
 
 export const columns: ColumnsType<TypeEvent> = [
@@ -26,7 +27,7 @@ export const columns: ColumnsType<TypeEvent> = [
   {
     title: "Статус",
     dataIndex: "status",
-    render: (_, record) => <p>statusMatchRender{record.status}</p>,
+    render: (_, record) => <p>{statusMatchRender(Number(record.status))}</p>,
   },
   {
     title: "Создано",
