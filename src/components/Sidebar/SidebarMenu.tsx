@@ -1,5 +1,6 @@
 import {
   EditOutlined,
+  HomeOutlined,
   LaptopOutlined,
   NotificationOutlined,
   TranslationOutlined,
@@ -12,15 +13,18 @@ const forecast = [
   { link: "/leagues", text: "ЛИГИ" },
   { link: "/teams", text: "КОМАНДЫ" },
   { link: "/matches", text: "МАТЧИ" },
-  { link: "/bookmakers", text: "ТОП БУКМЕКЕРОВ" },
   { link: "/events", text: "СОБЫТИЯ" },
 ];
 
 export const SidebarMenu = [
   {
-    icon: LaptopOutlined,
+    icon: HomeOutlined,
     name: <Link to={"/"}>ГЛАВНАЯ</Link>,
     // children: forecast,
+  },
+  {
+    icon: LaptopOutlined,
+    name: <Link to={"/bookmakers"}>ТОП БУКМЕКЕРОВ</Link>,
   },
   {
     icon: NotificationOutlined,

@@ -35,7 +35,7 @@ const TableCountries: FC = () => {
   useEffect(() => {
     setPage(1);
   }, [search]);
-
+  console.log(countries);
   return (
     <div>
       <Spin
