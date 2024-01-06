@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import MatchEditForm from "../modules/Forms/MatchEditForm";
+import MatchEditForm from "../modules/Forms/Update/MatchEditForm";
 import { TypeMatch } from "../store/Slices/matchesSlice/interface";
 import { useParams } from "react-router-dom";
 import { Space, Spin } from "antd";
@@ -33,7 +33,7 @@ const MatchElementPage: FC = () => {
     getSinglePageMatch(id);
   }, [id]);
 
-  console.log(match)
+  console.log(match);
 
   return (
     <div className="form">

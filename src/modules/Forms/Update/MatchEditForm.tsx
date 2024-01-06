@@ -1,20 +1,20 @@
 import { Button, Form, Row, Spin, Switch } from "antd";
 import { FC, useState } from "react";
-import { sports } from "../../assets/data/sports";
-import TextEditor from "../../components/TextEditor";
-import EventForm from "../../components/Events/EventForm";
-import { TypeMatch } from "../../store/Slices/matchesSlice/interface";
+import { sports } from "../../../assets/data/sports";
+import TextEditor from "../../../components/TextEditor";
+import EventForm from "../../../components/Events/EventForm";
+import { TypeMatch } from "../../../store/Slices/matchesSlice/interface";
 import TextArea from "antd/es/input/TextArea";
 import {
   confirmGptMessage,
   getMatchTextGpt,
   resendGptMessage,
-} from "../../api/ChatGPT";
-import { useTypeDispatch } from "../../hooks/useTypeDispatch";
-import { switchFavoriteCups } from "../../store/Slices/matchesSlice/asyncAction";
-import { notify } from "../../assets/scripts/notify";
-import LoaderCover from "../../components/UI/LoaderCover";
-import CustomImage from "../../components/UI/CustomImage";
+} from "../../../api/ChatGPT";
+import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
+import { switchFavoriteCups } from "../../../store/Slices/matchesSlice/asyncAction";
+import { notify } from "../../../assets/scripts/notify";
+import LoaderCover from "../../../components/UI/LoaderCover";
+import CustomImage from "../../../components/UI/CustomImage";
 
 interface IProps {
   match: TypeMatch;
@@ -214,24 +214,22 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
 
         {/* gpt тексты */}
         <div className="relative mt-8 text-end">
-            <div className="sticky top-2 text-right z-10 inline-block ml-auto">
-              {chatGbtStatus == 2 && (
-                <Button
-                  onClick={() => confirmGptText(match.id)}
-                  type="primary"
-                  className="mr-2"
-                >
-                  Подтвердить
-                </Button>
-              )}
-              {
-                chatGbtStatus >= 2 && (
-                  <Button onClick={() => resendGptText(match.id)} type="primary">
-                    Повторный запрос
-                  </Button>
-                )
-              }
-            </div>
+          <div className="sticky top-2 text-right z-10 inline-block ml-auto">
+            {chatGbtStatus == 2 && (
+              <Button
+                onClick={() => confirmGptText(match.id)}
+                type="primary"
+                className="mr-2"
+              >
+                Подтвердить
+              </Button>
+            )}
+            {chatGbtStatus >= 2 && (
+              <Button onClick={() => resendGptText(match.id)} type="primary">
+                Повторный запрос
+              </Button>
+            )}
+          </div>
 
           {/* Текст для чата GPT */}
           {chatGbtStatus !== 4 && (

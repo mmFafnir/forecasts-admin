@@ -2,19 +2,19 @@ import { FC, useState } from "react";
 import {
   IDataCreateBookmaker,
   TypeBookmaker,
-} from "../../store/Slices/bookmakersSlice/interface";
+} from "../../../store/Slices/bookmakersSlice/interface";
 import { Button, Form, Input, Modal } from "antd";
-import UploadInput from "../../components/UI/Form/UploadInput";
-import { required } from "../../core/form-rools";
-import { useTypeDispatch } from "../../hooks/useTypeDispatch";
+import UploadInput from "../../../components/UI/Form/UploadInput";
+import { required } from "../../../core/form-rools";
+import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import {
   deleteBookmaker,
   updateBookmaker,
-} from "../../store/Slices/bookmakersSlice/asyncActions";
-import { notify } from "../../assets/scripts/notify";
+} from "../../../store/Slices/bookmakersSlice/asyncActions";
+import { notify } from "../../../assets/scripts/notify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import CustomImage from "../../components/UI/CustomImage";
+import CustomImage from "../../../components/UI/CustomImage";
 
 interface IProps {
   bookmaker: TypeBookmaker;

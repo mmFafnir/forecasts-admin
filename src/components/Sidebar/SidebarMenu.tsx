@@ -42,6 +42,6 @@ export const SidebarMenu = [
   },
   {
     icon: TranslationOutlined,
-    name: <Link to={"/translate"}>ПЕРЕВОДЫ</Link>,
+    name: <Link to={"/translates"}>ПЕРЕВОДЫ</Link>,
   },
 ];

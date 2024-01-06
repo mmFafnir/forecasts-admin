@@ -1,11 +1,11 @@
 import { Button, Form, Input, Row, notification } from "antd";
 import { FC, useState } from "react";
-import { ITeam } from "../../store/Slices/teamsSlice/interface";
+import { ITeam } from "../../../store/Slices/teamsSlice/interface";
 import dayjs from "dayjs";
-import { required } from "../../core/form-rools";
-import { useTypeDispatch } from "../../hooks/useTypeDispatch";
-import { updateTeam } from "../../store/Slices/teamsSlice/asyncActions";
-import CustomImage from "../../components/UI/CustomImage";
+import { required } from "../../../core/form-rools";
+import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
+import { updateTeam } from "../../../store/Slices/teamsSlice/asyncActions";
+import CustomImage from "../../../components/UI/CustomImage";
 import { AxiosError } from "axios";
 
 interface IProps {

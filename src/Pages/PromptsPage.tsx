@@ -2,7 +2,9 @@ import { FC, useEffect } from "react";
 import { useTypeSelector } from "../hooks/useTypeSelector";
 import { fetchPrompts } from "../store/Slices/promptsSlice/asyncActions";
 import { useTypeDispatch } from "../hooks/useTypeDispatch";
-import PromptForm, { PromptFromLoading } from "../modules/Forms/PromptForm";
+import PromptForm, {
+  PromptFromLoading,
+} from "../modules/Forms/Update/PromptForm";
 import { EnumStatus } from "../types/Status";
 
 const PromptsPage: FC = () => {

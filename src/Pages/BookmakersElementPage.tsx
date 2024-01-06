@@ -2,7 +2,7 @@ import axios from "../core/axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Space, Spin } from "antd";
-import BookmakerForm from "../modules/Forms/BookmakerForm";
+import BookmakerForm from "../modules/Forms/Update/BookmakerForm";
 import { TypeBookmaker } from "../store/Slices/bookmakersSlice/interface";
 
 const BookmakerElementPage: FC = () => {

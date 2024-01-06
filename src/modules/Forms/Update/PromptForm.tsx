@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
-import { TypePrompt } from "../../store/Slices/promptsSlice/interface";
+import { TypePrompt } from "../../../store/Slices/promptsSlice/interface";
 import { Button, Form, Spin, notification } from "antd";
-import { required } from "../../core/form-rools";
-import { useTypeDispatch } from "../../hooks/useTypeDispatch";
-import { updatePrompts } from "../../store/Slices/promptsSlice/asyncActions";
+import { required } from "../../../core/form-rools";
+import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
+import { updatePrompts } from "../../../store/Slices/promptsSlice/asyncActions";
 
 interface IProps {
   prompt: TypePrompt;

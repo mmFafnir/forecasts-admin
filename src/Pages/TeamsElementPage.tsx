@@ -1,7 +1,7 @@
 import axios from "../core/axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import TeamEditForm from "../modules/Forms/TeamEditForm";
+import TeamEditForm from "../modules/Forms/Update/TeamEditForm";
 import { ITeam } from "../store/Slices/teamsSlice/interface";
 import { Space, Spin } from "antd";
 
