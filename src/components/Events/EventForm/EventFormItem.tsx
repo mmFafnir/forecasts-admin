@@ -70,13 +70,13 @@ const EventFormItem: FC<IProps> = ({ data }) => {
       <Form.Item
         className="items-start"
         name={"best_bet"}
-        initialValue={data.event.id === 3}
+        initialValue={data.best_bet === "Yes"}
         // label="Кубок любимый"
       >
         <div className="flex form-item items-center ">
           <p className="mr-3 !mb-0">Лучшая ставка</p>
           <Switch
-            defaultChecked={data.event.id === 3}
+            defaultChecked={data.best_bet === "Yes"}
             // onChange={(value) => form.setFieldsValue({ best_bet: value })}
             className="bg-slate-400 pointer-events-none"
           />

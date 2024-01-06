@@ -12,6 +12,7 @@ export type TypeMatchEventCard = {
   risk: TypeRisk;
   updated_at: string;
   why: string;
+  best_bet: "Yes" | "No";
 };
 
 export type TypeMatch = {

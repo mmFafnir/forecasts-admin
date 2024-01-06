@@ -214,7 +214,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
 
         {/* gpt тексты */}
         <div className="relative mt-8 text-end">
-          <div className="sticky top-2 text-right z-10 inline-block ml-auto">
+          <div className="sticky top-2 text-right z-10 inline-block ml-auto mb-2">
             {chatGbtStatus == 2 && (
               <Button
                 onClick={() => confirmGptText(match.id)}
@@ -253,9 +253,9 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                   {chatGbtStatus === 3 && (
                     <p className="ml-auto">
                       <span className="!font-medium">
-                        Ждем ответа от чата GPT:{" "}
+                        Ждем создание карточек:{" "}
                       </span>
-                      <Spin size="large" />
+                      <Spin size="default" />
                     </p>
                   )}
                 </div>
@@ -282,9 +282,9 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                   {chatGbtStatus === 3 && (
                     <p className="ml-auto">
                       <span className="!font-medium">
-                        Ждем ответа от чата GPT:{" "}
+                        Ждем создание карточек:{" "}
                       </span>
-                      <Spin size="large" />
+                      <Spin size="default" />
                     </p>
                   )}
                 </div>
