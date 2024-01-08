@@ -62,8 +62,6 @@ const TableBookmakers: FC = () => {
     setPage(1);
   }, [search]);
 
-  console.log(bookmakers);
-
   return (
     <div>
       <Spin

@@ -48,8 +48,9 @@ const TableMatch: FC = () => {
     await getMatchTextGptArray(ids as number[]);
 
   useEffect(() => {
+    console.log(page);
     onGetAllMatches({
-      page,
+      page: page - 1,
       limit,
       country,
       league,
