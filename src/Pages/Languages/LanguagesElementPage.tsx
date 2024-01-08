@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TypeLanguages } from "../../store/Slices/languagesSlice/interface";
 import axios from "../../core/axios";
-import LanguagesForm from "../../modules/Forms/Update/LanguagesForm";
+import LanguagesForm from "../../modules/Forms/LanguageForm/UpdateLanguages";
 import { Space, Spin } from "antd";
 
 const LanguagesElementPage = () => {
@@ -23,7 +23,7 @@ const LanguagesElementPage = () => {
   }, []);
   return (
     <div className="form">
-      <h1 className="mb-5">Редактировать Лигу</h1>
+      <h1 className="mb-5">Редактировать Язык</h1>
       {!lang ? (
         <Space className="flex h-96 max-w-md justify-center items-center">
           <Spin size="large" />

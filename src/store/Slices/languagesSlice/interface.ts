@@ -7,7 +7,7 @@ export type TypeLanguages = {
   url: string;
 };
 
-export interface IUpdateLanguages {
+export interface IParamsLanguages {
   lang_json: string;
   name: string;
   url: string;

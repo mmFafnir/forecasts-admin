@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../core/axios";
-import { IUpdateLanguages, TypeLanguages } from "./interface";
+import { IParamsLanguages, TypeLanguages } from "./interface";
 
 // fetch
 export const fetchLanguages = createAsyncThunk<TypeLanguages[]>(
@@ -11,12 +11,21 @@ export const fetchLanguages = createAsyncThunk<TypeLanguages[]>(
   }
 );
 
+// Create
+export const createLanguage = createAsyncThunk<TypeLanguages, IParamsLanguages>(
+  "languages/createLanguage",
+  async (params) => {
+    const { data } = await axios.post("/create_lang", params);
+    console.log(data);
+    return data.create;
+  }
+);
+
 // update
 interface IParamsUpdate {
-  data: IUpdateLanguages;
+  data: IParamsLanguages;
   id: number;
 }
-
 export const updateLanguages = createAsyncThunk<TypeLanguages[], IParamsUpdate>(
   "languages/updateLanguages",
   async (params) => {
@@ -27,5 +36,15 @@ export const updateLanguages = createAsyncThunk<TypeLanguages[], IParamsUpdate>(
     );
     console.log(data);
     return data.data;
+  }
+);
+
+// delete
+export const deleteLanguage = createAsyncThunk<number, number>(
+  "languages/deleteLanguages",
+  async (id) => {
+    const { data } = await axios.get(`/delete_lang?lang_id=${id}`);
+    console.log(data);
+    return id;
   }
 );

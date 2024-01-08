@@ -253,7 +253,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                   {chatGbtStatus === 3 && (
                     <p className="ml-auto">
                       <span className="!font-medium">
-                        Ждем создание карточек:{" "}
+                        Ждем создания карточек:{" "}
                       </span>
                       <Spin size="default" />
                     </p>
@@ -282,7 +282,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                   {chatGbtStatus === 3 && (
                     <p className="ml-auto">
                       <span className="!font-medium">
-                        Ждем создание карточек:{" "}
+                        Ждем создания карточек:{" "}
                       </span>
                       <Spin size="default" />
                     </p>

@@ -24,7 +24,7 @@ export const SidebarMenu = [
   },
   {
     icon: LaptopOutlined,
-    name: <Link to={"/bookmakers"}>ТОП БУКМЕКЕРОВ</Link>,
+    name: <Link to={"/bookmakers"}>БУКМЕКЕРЫ</Link>,
   },
   {
     icon: NotificationOutlined,

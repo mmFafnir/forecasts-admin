@@ -5,7 +5,7 @@ import { Spin } from "antd";
 import { EnumStatus } from "../../../types/Status";
 import { columns } from "./columnt";
 import Table from "..";
-import { fetchLanguages } from "../../../store/Slices/languagesSlice/actions";
+import { fetchLanguages } from "../../../store/Slices/languagesSlice/asyncAactions";
 
 const TableLanguages: FC = () => {
   const { status, languages } = useTypeSelector((state) => state.languages);
