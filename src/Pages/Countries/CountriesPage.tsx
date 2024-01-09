@@ -1,6 +1,6 @@
 import { FC } from "react";
-import FilterHeader from "../components/Filters/FilterHeader";
-import TableCountries from "../components/Tables/TableCountries";
+import FilterHeader from "../../components/Filters/FilterHeader";
+import TableCountries from "../../components/Tables/TableCountries";
 
 const CountriesPage: FC = () => {
   return (

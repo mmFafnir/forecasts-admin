@@ -9,7 +9,7 @@ import { updateLeague } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { AxiosError } from "axios";
 import { notify } from "../../../assets/scripts/notify";
 import { asyncTogglePindLeague } from "../../../api/league/asyncTogglePindLeague";
-import TableTranslate from "./TableTranslate";
+import TableTranslate from "../../TableTranslate/TableTranslate";
 
 interface IInputs {
   league_name: string;
@@ -82,6 +82,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
         name="league-form"
         layout="vertical"
         style={{ maxWidth: "700px" }}
+        className="mb-10"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}

@@ -5,6 +5,7 @@ import {
   NotificationOutlined,
   TranslationOutlined,
   UserOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -43,5 +44,9 @@ export const SidebarMenu = [
   {
     icon: TranslationOutlined,
     name: <Link to={"/translates"}>ПЕРЕВОДЫ</Link>,
+  },
+  {
+    icon: UsergroupAddOutlined,
+    name: <Link to={"/users"}>МОДЕРАТОРЫ</Link>,
   },
 ];

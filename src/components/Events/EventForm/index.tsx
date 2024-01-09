@@ -19,7 +19,7 @@ const EventForm: FC<IState> = ({ cards }) => {
   }, []);
 
   return (
-    <div className="mt-8" style={{ maxWidth: "1041px" }}>
+    <div className="mt-8" style={{ maxWidth: "1000px" }}>
       <Row align={"middle"} className="mb-5">
         <h3 className="mr-4">События </h3>
       </Row>

@@ -7,15 +7,17 @@ import TeamsPage from "./Pages/TeamsPage";
 import SecurityProvider from "./modules/SecurityProvider";
 import PromptsPage from "./Pages/PromptsPage";
 import LeaguesPages from "./Pages/LeaguesPages";
-import CountriesPage from "./Pages/CountriesPage";
+import CountriesPage from "./Pages/Countries/CountriesPage";
 import TeamsElementPage from "./Pages/TeamsElementPage";
 import LeaguesElementPage from "./Pages/LeaguesElementPage";
 import EventsPage from "./Pages/EventsPage";
-import BookmakerPage from "./Pages/BookmakersPage";
-import "./assets/scss/App.scss";
-import BookmakerElementPage from "./Pages/BookmakersElementPage";
+import BookmakerPage from "./Pages/Bookmakers/BookmakersPage";
+import BookmakerElementPage from "./Pages/Bookmakers/BookmakersElementPage";
 import LanguagesPage from "./Pages/Languages/LanguagesPage";
 import LanguagesElementPage from "./Pages/Languages/LanguagesElementPage";
+
+import "./assets/scss/App.scss";
+import UsersPage from "./Pages/Users/UsersPage";
 
 function App() {
   return (
@@ -50,6 +52,8 @@ function App() {
 
         <Route path="/translates" element={<LanguagesPage />} />
         <Route path="/translates/:id" element={<LanguagesElementPage />} />
+
+        <Route path="/users" element={<UsersPage />} />
 
         <Route
           path="*"

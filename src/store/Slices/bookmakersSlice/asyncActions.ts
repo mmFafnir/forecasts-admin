@@ -30,9 +30,8 @@ export const updateBookmaker = createAsyncThunk<TypeBookmaker, FormData>(
   "bookmaker/updateBookmaker",
   async (params) => {
     const url = "/update_best_bookmaker";
-    console.log(params.entries());
     const { data } = await axios.post(url, params);
-    console.log(data);
+    console.log("data", data);
     return data;
   }
 );

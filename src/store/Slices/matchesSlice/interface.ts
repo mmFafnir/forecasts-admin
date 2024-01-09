@@ -1,7 +1,14 @@
 import { TypeEvent } from "../eventsSlice/interface";
+import { TypeLanguages } from "../languagesSlice/interface";
 import { TypeLeague } from "../leaguesSlice/interface";
 import { TypeRisk } from "../risksSlice/interface";
 import { ITeam } from "../teamsSlice/interface";
+
+type Translate = {
+  lang: TypeLanguages;
+  why_best: string | null;
+  why: string;
+};
 
 export type TypeMatchEventCard = {
   bet: string;
@@ -12,7 +19,9 @@ export type TypeMatchEventCard = {
   risk: TypeRisk;
   updated_at: string;
   why: string;
+  why_best: string | null;
   best_bet: "Yes" | "No";
+  translate: Translate[];
 };
 
 export type TypeMatch = {

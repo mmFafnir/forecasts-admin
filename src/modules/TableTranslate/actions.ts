@@ -1,11 +1,11 @@
-import axios from "../../../core/axios";
-import { notify } from "../../../assets/scripts/notify";
+import axios from "../../core/axios";
+import { notify } from "../../assets/scripts/notify";
 
 interface IParamsUpdateTranslate {
   trans_id: number;
   translation: string;
 }
-export const updateTranslateLeague = async (params: IParamsUpdateTranslate) => {
+export const updateTranslate = async (params: IParamsUpdateTranslate) => {
   try {
     const { trans_id, translation } = params;
     const { data } = await axios.post("/update_translation", {

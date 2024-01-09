@@ -1,9 +1,9 @@
-import axios from "../core/axios";
+import axios from "../../core/axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Space, Spin } from "antd";
-import BookmakerForm from "../modules/Forms/Update/BookmakerForm";
-import { TypeBookmaker } from "../store/Slices/bookmakersSlice/interface";
+import { TypeBookmaker } from "../../store/Slices/bookmakersSlice/interface";
+import BookmakerForm from "../../modules/Forms/BookmakerForm";
 
 const BookmakerElementPage: FC = () => {
   const { id } = useParams();

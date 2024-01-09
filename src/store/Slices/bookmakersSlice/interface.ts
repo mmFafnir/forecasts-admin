@@ -7,6 +7,7 @@ export type TypeBookmaker = {
   price: string;
   updated_at: Date;
   url: string;
+  best_status: "0" | "1";
 };
 
 export interface IDataCreateBookmaker {

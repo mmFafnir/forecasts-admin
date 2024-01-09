@@ -1,7 +1,7 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
-import { Form, Spin } from "antd";
+import { Button, Form, Spin } from "antd";
 import { EnumStatus } from "../../../types/Status";
 import { columns } from "./columnt";
 import Table from "..";
@@ -10,6 +10,8 @@ import {
   updateEvent,
 } from "../../../store/Slices/eventsSlice/asyncActions";
 import { useForm } from "antd/es/form/Form";
+import { ITranslateLeague } from "../../../store/Slices/leaguesSlice/interface";
+import ModalLang from "../../../modules/TableTranslate/ModalLang";
 
 // interface IValues {
 //   [key: number]: string;
@@ -20,6 +22,13 @@ const TableEvents: FC = () => {
   const dispatch = useTypeDispatch();
 
   const [form] = useForm();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [translate, setTranslate] = useState<ITranslateLeague[]>([]);
+
+  const openModal = (translate: ITranslateLeague[]) => {
+    setTranslate(translate);
+    setIsModalOpen(true);
+  };
 
   const updateEventName = (id: number) => {
     dispatch(updateEvent({ id: id, name: form.getFieldValue(id) }));
@@ -34,9 +43,9 @@ const TableEvents: FC = () => {
       })
     );
   }, [search]);
-  console.log(events);
+
   return (
-    <div>
+    <>
       <Form
         name={`events-update`}
         form={form}
@@ -51,6 +60,16 @@ const TableEvents: FC = () => {
           <Table
             data={events}
             columns={columns.map((col) => {
+              if (col.key === "translate") {
+                col.render = (_, record) => (
+                  <Button
+                    type="default"
+                    onClick={() => openModal(record.translate)}
+                  >
+                    Посмотреть
+                  </Button>
+                );
+              }
               if (col.key === "action") {
                 col.render = (_, record) => (
                   <button
@@ -77,7 +96,12 @@ const TableEvents: FC = () => {
           />
         </Spin>
       </Form>
-    </div>
+      <ModalLang
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+        translate={translate}
+      />
+    </>
   );
 };
 

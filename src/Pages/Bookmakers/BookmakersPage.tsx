@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
-import FilterHeader from "../components/Filters/FilterHeader";
-import TableBookmakers from "../components/Tables/TableBookmakers";
+import FilterHeader from "../../components/Filters/FilterHeader";
+import TableBookmakers from "../../components/Tables/TableBookmakers";
 import { Button, Modal } from "antd";
-import CreateBookmaker from "../modules/Forms/Create/CreateBookmaker";
+import CreateBookmaker from "../../modules/Forms/BookmakerForm/CreateBookmaker";
 
 const BookmakerPage: FC = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);

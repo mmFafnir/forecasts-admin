@@ -13,3 +13,24 @@ export type TypeUser = {
   surname: string;
   updated_at: Date;
 };
+
+export interface IFetchDataUsers {
+  current_page: number;
+  data: TypeUser[];
+  from: 1;
+  last_page: 1;
+  to: 3;
+  total: 3;
+}
+
+export interface ICreateUser {
+  email: string;
+  name: string;
+  password: string;
+  role_id: number;
+}
+
+export type TypeRole = {
+  id: number;
+  name: string;
+};

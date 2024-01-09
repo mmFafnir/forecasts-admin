@@ -3,7 +3,7 @@ import {
   IDataCreateBookmaker,
   TypeBookmaker,
 } from "../../../store/Slices/bookmakersSlice/interface";
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, Switch } from "antd";
 import UploadInput from "../../../components/UI/Form/UploadInput";
 import { required } from "../../../core/form-rools";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
@@ -15,6 +15,7 @@ import { notify } from "../../../assets/scripts/notify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import CustomImage from "../../../components/UI/CustomImage";
+import SelectCountries from "./SelectCountries";
 
 interface IProps {
   bookmaker: TypeBookmaker;
@@ -65,7 +66,6 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
     console.log(values);
     setLoading(true);
     const formData = new FormData();
-
     if (imgFile) {
       formData.append("logo", imgFile);
     }
@@ -103,38 +103,51 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
       style={{ maxWidth: "700px" }}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
-      initialValues={{ remember: true }}
+      initialValues={{
+        remember: true,
+      }}
       onFinish={onFinish}
       autoComplete="off"
     >
-      <Form.Item
-        name="name"
-        className="mb-7"
-        initialValue={bookmaker.name}
-        rules={[required]}
-      >
-        <div>
-          <p className={titleClasses}>Наименование Букмекера </p>
-          <Input defaultValue={bookmaker.name} />
-        </div>
-      </Form.Item>
-      <Form.Item
-        name="url"
-        className="mb-7"
-        rules={[
-          required,
-          {
-            pattern: /(http|https):\/\/[^\s]+/gm,
-            message: "Данное значение не является ссылкой",
-          },
-        ]}
-        initialValue={bookmaker.url}
-      >
-        <div>
-          <p className={titleClasses}>Ссылка на Букмекера</p>
-          <Input defaultValue={bookmaker.url} />
-        </div>
-      </Form.Item>
+      <div className="flex items-center mb-3">
+        <p className={`${titleClasses} !mb-0 mr-2`}>Избранный</p>
+        <Form.Item
+          name={"best_status"}
+          noStyle
+          valuePropName="checked"
+          initialValue={bookmaker.best_status === "0" ? false : true}
+        >
+          <Switch />
+        </Form.Item>
+      </div>
+      <div className="mb-7">
+        <p className={titleClasses}>Наименование Букмекера </p>
+        <Form.Item name="name" initialValue={bookmaker.name} rules={[required]}>
+          <Input />
+        </Form.Item>
+      </div>
+
+      <div className="mb-7">
+        <p className={titleClasses}>Ссылка на Букмекера</p>
+        <Form.Item
+          name="url"
+          rules={[
+            required,
+            {
+              pattern: /(http|https):\/\/[^\s]+/gm,
+              message: "Данное значение не является ссылкой",
+            },
+          ]}
+          initialValue={bookmaker.url}
+        >
+          <Input />
+        </Form.Item>
+      </div>
+
+      <div className="mb-7">
+        <p className={`${titleClasses}`}>Добавить Страну</p>
+        <SelectCountries />
+      </div>
 
       <div className="mb-7 flex flex-col items-start text-left">
         <p className={`${titleClasses} mb-3`}>Загрузить новый логотип</p>
@@ -160,29 +173,29 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
         />
       </div>
 
-      <Form.Item
-        name="code"
-        className="mb-7"
-        rules={[required]}
-        initialValue={bookmaker.code}
-      >
-        <div>
-          <p className={titleClasses}>Промокод </p>
-          <Input defaultValue={bookmaker.code} />
-        </div>
-      </Form.Item>
+      <div className="mb-7">
+        <p className={titleClasses}>Промокод </p>
+        <Form.Item
+          name="code"
+          noStyle
+          rules={[required]}
+          initialValue={bookmaker.code}
+        >
+          <Input />
+        </Form.Item>
+      </div>
 
-      <Form.Item
-        name="price"
-        className="mb-7"
-        rules={[required]}
-        initialValue={bookmaker.price}
-      >
-        <div>
-          <p className={titleClasses}>Сумма подарка </p>
-          <Input type="number" defaultValue={bookmaker.price} />
-        </div>
-      </Form.Item>
+      <div className="mb-7">
+        <p className={titleClasses}>Сумма подарка </p>
+        <Form.Item
+          name="price"
+          noStyle
+          rules={[required]}
+          initialValue={bookmaker.price}
+        >
+          <Input type="number" />
+        </Form.Item>
+      </div>
 
       <div className="flex">
         <Button
@@ -203,6 +216,7 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
           Сохранить
         </Button>
       </div>
+
       <Modal
         title="Удалить?!"
         open={modalIsOpen}

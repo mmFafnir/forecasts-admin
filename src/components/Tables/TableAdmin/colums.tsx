@@ -1,57 +1,37 @@
 import { ColumnsType } from "antd/es/table";
-import { TypeEvent } from "../../../store/Slices/eventsSlice/interface";
+import { TypeUser } from "../../../store/Slices/userSlices/interface";
 import dayjs from "dayjs";
-import { Form, Input } from "antd";
-import { statusMatchRender } from "../../../assets/scripts/statusRender";
-// import { updateEvent } from "../../../store/Slices/eventsSlice/asyncActions";
+import { Link } from "react-router-dom";
 
-export const columns: ColumnsType<TypeEvent> = [
+export const columns: ColumnsType<TypeUser> = [
   {
-    title: "Название ",
-    dataIndex: "original_name",
+    title: "Имя",
+    dataIndex: "name",
   },
   {
-    title: "Кастомное название ",
-    dataIndex: "show_name",
-    render: (_, record) => (
-      <Form.Item
-        className="!mb-0"
-        name={record.id}
-        initialValue={record.show_name ? record.show_name : ""}
-      >
-        <Input />
-      </Form.Item>
-    ),
-  },
-
-  {
-    title: "Статус",
-    dataIndex: "status",
-    render: (_, record) => <p>{statusMatchRender(Number(record.status))}</p>,
+    title: "Фамилия",
+    dataIndex: "surname",
   },
   {
-    title: "Создано",
+    title: "Почта",
+    dataIndex: "email",
+  },
+  {
+    title: "Создан",
     dataIndex: "created_at",
     render: (_, record) => (
-      <p>{dayjs(record.created_at).format("DD.MM.YYYY")}</p>
+      <p>{dayjs(record.created_at).format("YYYY-MM-DD")}</p>
     ),
   },
   {
-    title: "Обновлено",
-    dataIndex: "updated_at",
-    render: (_, record) => (
-      <p>{dayjs(record.updated_at).format("DD.MM.YYYY")}</p>
-    ),
-  },
-  {
-    title: "Переводы",
-    key: "translate",
+    title: "",
+    key: "delete",
   },
   {
     title: "",
     key: "action",
-    render: () => (
-      <button type="submit">
+    render: (_, record) => (
+      <Link to={`/users/${record.id}`} type="submit">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -64,7 +44,7 @@ export const columns: ColumnsType<TypeEvent> = [
             fill="#888888"
           />
         </svg>
-      </button>
+      </Link>
     ),
   },
 ];

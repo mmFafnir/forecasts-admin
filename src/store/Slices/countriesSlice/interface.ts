@@ -1,8 +1,11 @@
+import { ITranslateLeague } from "../leaguesSlice/interface";
+
 export type TypeCountry = {
   id: string;
   code: string;
   name: string;
   translation: string;
+  translate: ITranslateLeague[];
 };
 
 export interface IDataTypeCountryFetch {

@@ -95,13 +95,6 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        {/* Switch любимый кубок */}
-        {/* <Form.Item
-          className="items-starconfirmGptMessaget"
-          name={"favorite_cup"}
-          // label="Кубок любимый"
-          initialValue={match.favorite_game == "0" ? false : true}
-        > */}
         <div className="flex form-item">
           <p className="mr-3">Кубок любимый</p>
           <Switch
@@ -323,15 +316,6 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       {match.cards && match.cards.length > 0 && chatGbtStatus > 1 && (
         <EventForm cards={match.cards} />
       )}
-
-      {/* <Button
-        type="primary"
-        size="large"
-        className="mr-auto mt-8 flex w-44 justify-center"
-        onClick={onFinish}
-      >
-        Сохранить
-      </Button> */}
     </>
   );
 };

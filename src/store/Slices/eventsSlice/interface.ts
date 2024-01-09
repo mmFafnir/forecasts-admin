@@ -1,3 +1,5 @@
+import { ITranslateLeague } from "../leaguesSlice/interface";
+
 export type TypeEvent = {
   created_at: string;
   id: number;
@@ -5,6 +7,7 @@ export type TypeEvent = {
   show_name: null | string;
   status: string | number;
   updated_at: string;
+  translate: ITranslateLeague[];
 };
 
 export interface UpdateEventParams {

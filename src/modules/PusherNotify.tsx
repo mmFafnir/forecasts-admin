@@ -22,6 +22,7 @@ const PusherNotify: FC = () => {
   };
 
   useEffect(() => {
+    console.log(message);
     if (!message) return;
     console.log(message);
     notifyApi.info({
