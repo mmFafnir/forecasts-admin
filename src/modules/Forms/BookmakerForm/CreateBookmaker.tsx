@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Switch } from "antd";
 import { FC, useState } from "react";
 import { IDataCreateBookmaker } from "../../../store/Slices/bookmakersSlice/interface";
 import { required } from "../../../core/form-rools";
@@ -6,6 +6,8 @@ import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { createBookmaker } from "../../../store/Slices/bookmakersSlice/asyncActions";
 import { notify } from "../../../assets/scripts/notify";
 import UploadInput from "../../../components/UI/Form/UploadInput";
+import SelectCountries from "./SelectCountries";
+import SelectSports from "./SelectSports";
 
 const titleClasses = `text-left font-semibold text-sm mb-1`;
 
@@ -13,7 +15,11 @@ const CreateBookmaker: FC = () => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IDataCreateBookmaker>();
   const [loading, setLoading] = useState<boolean>(false);
+
   const [imgFile, setImgFile] = useState<File | null>(null);
+
+  const [countries, setCountries] = useState<string[]>([]);
+  const [sports, setSports] = useState<string[]>([]);
 
   const onFinish = async (values: IDataCreateBookmaker) => {
     setLoading(true);
@@ -23,8 +29,21 @@ const CreateBookmaker: FC = () => {
       formData.append("logo", imgFile);
     }
     for (const [key, value] of Object.entries(values)) {
-      formData.append(key, value);
+      if (key === "best_status") {
+        formData.append(key, value ? "1" : "0");
+      } else {
+        formData.append(key, value);
+      }
     }
+
+    countries.forEach((country) => {
+      console.log(country);
+      formData.append("country_ids[]", country);
+    });
+
+    sports.forEach((item) => {
+      formData.append("sport_ids[]", item);
+    });
 
     dispatch(createBookmaker(formData))
       .then(() => {
@@ -60,46 +79,67 @@ const CreateBookmaker: FC = () => {
       onFinish={onFinish}
       autoComplete="off"
     >
-      <Form.Item className="mb-7" name="name" rules={[required]}>
-        <div>
-          <p className={titleClasses}>Наименование Букмекера </p>
+      <div className="flex items-center mb-3 mt-5">
+        <p className={`${titleClasses} !mb-0 mr-2`}>Избранный</p>
+        <Form.Item
+          name={"best_status"}
+          noStyle
+          valuePropName="checked"
+          initialValue={false}
+        >
+          <Switch />
+        </Form.Item>
+      </div>
+      <div className="mb-4">
+        <p className={titleClasses}>Наименование Букмекера </p>
+        <Form.Item name="name" rules={[required]}>
           <Input />
-        </div>
-      </Form.Item>
-      <Form.Item
-        className="mb-7"
-        name="url"
-        rules={[
-          required,
-          {
-            pattern: /(http|https):\/\/[^\s]+/gm,
-            message: "Данное значение не является ссылкой",
-          },
-        ]}
-      >
-        <div>
-          <p className={titleClasses}>Ссылка на Букмекера</p>
-          <Input />
-        </div>
-      </Form.Item>
+        </Form.Item>
+      </div>
 
-      <div className="mb-7">
+      <div className="mb-4">
+        <p className={titleClasses}>Ссылка на Букмекера</p>
+        <Form.Item
+          name="url"
+          rules={[
+            required,
+            {
+              pattern: /(http|https):\/\/[^\s]+/gm,
+              message: "Данное значение не является ссылкой",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+      </div>
+
+      <div className="mb-4">
+        <p className={`${titleClasses}`}>Добавить Страну</p>
+        <SelectCountries setData={setCountries} />
+      </div>
+
+      <div className="mb-4">
+        <p className={`${titleClasses}`}>Добавить вид спорта</p>
+        <SelectSports setData={setSports} />
+      </div>
+
+      <div className="mb-4">
         <p className={`${titleClasses} mb-3`}>Загрузить логотип</p>
         <UploadInput file={imgFile} setFile={setImgFile} />
       </div>
 
-      <Form.Item className="mb-7" name="code" rules={[required]}>
-        <div>
-          <p className={titleClasses}>Промокод </p>
+      <div className="mb-4">
+        <p className={titleClasses}>Промокод </p>
+        <Form.Item name="code" rules={[required]}>
           <Input />
-        </div>
-      </Form.Item>
-      <Form.Item className="mb-7" name="price" rules={[required]}>
-        <div>
-          <p className={titleClasses}>Сумма подарка </p>
+        </Form.Item>
+      </div>
+      <div className="mb-4">
+        <p className={titleClasses}>Сумма подарка </p>
+        <Form.Item name="price" rules={[required]}>
           <Input type="number" />
-        </div>
-      </Form.Item>
+        </Form.Item>
+      </div>
 
       <div className="flex">
         <Button

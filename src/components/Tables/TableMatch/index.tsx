@@ -59,8 +59,25 @@ const TableMatch: FC = () => {
       chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
       statusMatch,
     });
+  }, [page]);
+
+  useEffect(() => {
+    if (page !== 1) {
+      setPage(1);
+      return;
+    }
+    onGetAllMatches({
+      page: 0,
+      limit,
+      country,
+      league,
+      search,
+      date: date ? date : { start: "", finish: "" },
+      chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
+      statusMatch,
+    });
   }, [
-    page,
+    search,
     limit,
     search,
     date,
@@ -69,10 +86,6 @@ const TableMatch: FC = () => {
     country,
     statusMatch,
   ]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search]);
 
   return (
     <div>

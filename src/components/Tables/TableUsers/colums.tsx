@@ -23,15 +23,12 @@ export const columns: ColumnsType<TypeUser> = [
       <p>{dayjs(record.created_at).format("YYYY-MM-DD")}</p>
     ),
   },
-  {
-    title: "",
-    key: "delete",
-  },
+
   {
     title: "",
     key: "action",
     render: (_, record) => (
-      <Link to={`/admins/${record.id}`} type="submit">
+      <Link to={`/users/${record.id}`} type="submit">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"

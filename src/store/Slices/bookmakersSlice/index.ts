@@ -67,7 +67,8 @@ const bookmakersSlice = createSlice({
         }),
       ];
     });
-    builder.addCase(updateBookmaker.rejected, (state) => {
+    builder.addCase(updateBookmaker.rejected, (state, actions) => {
+      console.log(actions.error);
       state.status = EnumStatus.ERROR;
     });
 

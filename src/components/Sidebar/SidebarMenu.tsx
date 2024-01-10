@@ -47,6 +47,10 @@ export const SidebarMenu = [
   },
   {
     icon: UsergroupAddOutlined,
-    name: <Link to={"/users"}>МОДЕРАТОРЫ</Link>,
+    name: <Link to={"/admins"}>МОДЕРАТОРЫ</Link>,
+  },
+  {
+    icon: UsergroupAddOutlined,
+    name: <Link to={"/users"}>ПОЛЬЗОВАТЕЛИ</Link>,
   },
 ];

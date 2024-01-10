@@ -13,24 +13,25 @@ export const getUserInfo = createAsyncThunk<TypeUser>(
   }
 );
 
-export const getAllUsers = createAsyncThunk<
+export const getAllAdmins = createAsyncThunk<
   IFetchDataUsers,
   Pick<TFilter, "search">
->("user/getAllUsers", async (params) => {
+>("user/getAllAdmins", async (params) => {
   const { search } = params;
-  const { data } = await axios.get(`/all_users?search=${search}`);
-  return data.data;
+  console.log(search);
+  const { data } = await axios.get(`/get_admins`);
+  return data;
 });
 
 interface IErrorMessage {
   message: { [key: string]: string[] };
 }
-export const createUser = createAsyncThunk<TypeUser, ICreateUser>(
-  "user/createUser",
+export const createAdmin = createAsyncThunk<TypeUser, ICreateUser>(
+  "user/createAdmin",
   async (params) => {
     try {
       const { data } = await axios.post("/create_new_admin", params);
-      return data.message;
+      return data.data;
     } catch (error) {
       const err = error as AxiosError<IErrorMessage>;
       const obj = err.response?.data.message;
@@ -42,12 +43,37 @@ export const createUser = createAsyncThunk<TypeUser, ICreateUser>(
   }
 );
 
-type TDeleteUser = number | string;
-export const deleteUser = createAsyncThunk<TDeleteUser, TDeleteUser>(
-  "user/deleteUser",
+type TDeleteAdmin = number | string;
+export const deleteAdmin = createAsyncThunk<TDeleteAdmin, TDeleteAdmin>(
+  "user/deleteAdmin",
   async (id) => {
     const { data } = await axios.get(`/delete_admin?admin_id=${id}`);
     console.log(data);
     return id;
   }
 );
+
+interface IUpdateAdmin {
+  id: number | string;
+  data: ICreateUser;
+}
+export const updateAdmin = createAsyncThunk<TypeUser, IUpdateAdmin>(
+  "user/updateAdmin",
+  async (params) => {
+    const { data } = await axios.post(
+      `/update_admin?admin_id=${params.id}`,
+      params.data
+    );
+    return data.data;
+  }
+);
+
+// Users
+export const getAllUsers = createAsyncThunk<
+  IFetchDataUsers,
+  Pick<TFilter, "search">
+>("user/getAllUsers", async (params) => {
+  const { search } = params;
+  const { data } = await axios.get(`/all_users?search=${search}`);
+  return data.data;
+});

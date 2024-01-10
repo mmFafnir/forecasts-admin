@@ -1,66 +1,51 @@
 import { FC, useEffect, useState } from "react";
+import { AutoComplete } from "antd";
+import { useTypeSelector } from "../../../hooks/useTypeSelector";
+import { ISelectDataAutoComplete } from "../../UI/Search/CustomAutoComplete";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
-import { fetchCountries } from "../../../store/Slices/countriesSlice/asyncActions";
-import { IDataTypeCountryFetch } from "../../../store/Slices/countriesSlice/interface";
-import CustomAutoComplete, {
-  ISelectDataAutoComplete,
-} from "../../UI/Search/CustomAutoComplete";
 import { setCountry } from "../../../store/Slices/filterSlice";
 
+type TypeOptions = {
+  value: string;
+  key: number | string;
+};
 const Countries: FC = () => {
+  const { countries } = useTypeSelector((state) => state.countries);
   const dispatch = useTypeDispatch();
   const [data, setData] = useState<ISelectDataAutoComplete[]>([]);
-  const [search, setSearch] = useState<string>("");
-  const [limit, setLimit] = useState<number>(20);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [empty, setEmpty] = useState<boolean>(false);
-
-  const addLimit = () => setLimit((prev) => prev + 20);
-  const onChange = (value: string, key?: number | string) => {
-    setSearch(value);
+  const onSearch = (value: string, options: TypeOptions) => {
+    const { key } = options;
+    if (value.length > 0 && !key) return;
     dispatch(setCountry(key ? String(key) : ""));
   };
 
-  const getCountries = (value: string) => {
-    setLoading(true);
-    dispatch(
-      fetchCountries({
-        limit: limit,
-        page: 1,
-        search: value,
-      })
-    )
-      .then((res) => {
-        const payload = res.payload as IDataTypeCountryFetch;
-        const data: ISelectDataAutoComplete[] = [];
-        console.log(payload.data);
-        payload.data.forEach((item) => {
-          data.push({
-            key: item.code,
-            value: `${item.translation} (${item.name})`,
-          });
-        });
-        setEmpty(payload.total === data.length);
-        setData(data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
   useEffect(() => {
-    getCountries(search);
-  }, [search, limit]);
+    const newData: ISelectDataAutoComplete[] = [];
+    countries.forEach((item) => {
+      newData.push({
+        key: item.code,
+        value: `${item.name} (${item.translation})`,
+      });
+    });
+    setData(newData);
+  }, [countries]);
 
+  // [...countries.map(country => ({
+  //   key: country.code,
+  //   value: country.name
+  // })]
   return (
     <>
       <p className="mr-2 font-semibold absolute -top-4">Посик по странам:</p>
-      <CustomAutoComplete
-        loading={loading}
-        setLimit={addLimit}
-        data={data}
-        setSearch={onChange}
-        empty={empty}
+      <AutoComplete
+        style={{ width: 200 }}
+        options={data}
+        placeholder="Поиск..."
+        className="text-left"
+        onChange={(value, options) => onSearch(value, options as TypeOptions)}
+        filterOption={(inputValue, option) =>
+          option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+        }
       />
     </>
   );

@@ -1,3 +1,6 @@
+import { TypeCountry } from "../countriesSlice/interface";
+import { TypeSport } from "../sportSlice/interface";
+
 export type TypeBookmaker = {
   code: string;
   created_at: Date;
@@ -8,6 +11,8 @@ export type TypeBookmaker = {
   updated_at: Date;
   url: string;
   best_status: "0" | "1";
+  sport: TypeSport[];
+  country: TypeCountry[];
 };
 
 export interface IDataCreateBookmaker {

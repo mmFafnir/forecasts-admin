@@ -8,6 +8,8 @@ import PusherNotify from "../modules/PusherNotify";
 import Pusher from "pusher-js/with-encryption";
 import { useTypeDispatch } from "../hooks/useTypeDispatch";
 import { IStatePusher, setPusherMessage } from "../store/Slices/pusherSlice";
+import GetAllCountries from "./GetAllCountries";
+import GetAllSports from "./GetAllSports";
 
 const LayoutMain: FC = () => {
   const dispatch = useTypeDispatch();
@@ -40,6 +42,8 @@ const LayoutMain: FC = () => {
           </Layout>
         </Layout>
         <PusherNotify />
+        <GetAllCountries />
+        <GetAllSports />
       </div>
     </div>
   );

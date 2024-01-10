@@ -11,6 +11,7 @@ import risksSlice from "./Slices/risksSlice";
 import bookmakersSlice from "./Slices/bookmakersSlice";
 import pusherSlice from "./Slices/pusherSlice";
 import languagesSlice from "./Slices/languagesSlice";
+import sportsSlice from "./Slices/sportSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     bookmakers: bookmakersSlice,
     pusher: pusherSlice,
     languages: languagesSlice,
+    sports: sportsSlice,
   },
 });
 

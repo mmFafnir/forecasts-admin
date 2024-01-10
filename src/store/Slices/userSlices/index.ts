@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  createUser,
-  deleteUser,
+  createAdmin,
+  deleteAdmin,
+  getAllAdmins,
   getAllUsers,
   getUserInfo,
+  updateAdmin,
 } from "./asyncAction";
 import { EnumStatus } from "../../../types/Status";
 import { TypeUser } from "./interface";
@@ -14,6 +16,7 @@ import { TypeUser } from "./interface";
 interface IState {
   user: TypeUser | null;
   status: EnumStatus;
+  admins: TypeUser[];
   users: TypeUser[];
   total: number;
   page: number;
@@ -23,6 +26,7 @@ interface IState {
 const initialState: IState = {
   user: null,
   status: EnumStatus.LOADING,
+  admins: [],
   users: [],
   total: 0,
   page: 0,
@@ -52,43 +56,75 @@ const userSlice = createSlice({
       state.status = EnumStatus.ERROR;
     });
 
-    // get all users
-    builder.addCase(getAllUsers.pending, (state) => {
+    // get all admins
+    builder.addCase(getAllAdmins.pending, (state) => {
       state.status = EnumStatus.LOADING;
     });
-    builder.addCase(getAllUsers.fulfilled, (state, action) => {
-      state.users = action.payload.data;
+    builder.addCase(getAllAdmins.fulfilled, (state, action) => {
+      state.admins = action.payload.data;
       state.total = action.payload.total;
       state.page = action.payload.current_page;
       state.status = EnumStatus.SUCCESS;
     });
-    builder.addCase(getAllUsers.rejected, (state) => {
+    builder.addCase(getAllAdmins.rejected, (state) => {
       state.status = EnumStatus.ERROR;
     });
 
     // create
-    builder.addCase(createUser.pending, (state) => {
+    builder.addCase(createAdmin.pending, (state) => {
       state.status = EnumStatus.LOADING;
     });
-    builder.addCase(createUser.fulfilled, (state) => {
-      // state.users = action.payload.data;
+    builder.addCase(createAdmin.fulfilled, (state, action) => {
+      state.admins = [...state.admins, action.payload];
       state.status = EnumStatus.SUCCESS;
     });
-    builder.addCase(createUser.rejected, (state, action) => {
+    builder.addCase(createAdmin.rejected, (state, action) => {
       state.errorMessage = action.error.message || "Ошибка валидации";
       state.status = EnumStatus.ERROR;
     });
 
     // delete
-    builder.addCase(deleteUser.pending, (state) => {
+    builder.addCase(deleteAdmin.pending, (state) => {
       state.status = EnumStatus.LOADING;
     });
-    builder.addCase(deleteUser.fulfilled, (state, action) => {
-      state.users = state.users.filter((user) => user.id !== action.payload);
+    builder.addCase(deleteAdmin.fulfilled, (state, action) => {
+      state.admins = state.admins.filter(
+        (admin) => admin.id !== action.payload
+      );
       state.status = EnumStatus.SUCCESS;
     });
-    builder.addCase(deleteUser.rejected, (state) => {
+    builder.addCase(deleteAdmin.rejected, (state) => {
       state.errorMessage = "Ошибка, попробуйте позже";
+      state.status = EnumStatus.ERROR;
+    });
+
+    // update
+    builder.addCase(updateAdmin.pending, (state) => {
+      state.status = EnumStatus.LOADING;
+    });
+    builder.addCase(updateAdmin.fulfilled, (state, action) => {
+      state.admins = state.admins.map((admin) => {
+        if (admin.id === action.payload.id) {
+          return action.payload;
+        }
+        return admin;
+      });
+      state.status = EnumStatus.SUCCESS;
+    });
+    builder.addCase(updateAdmin.rejected, (state) => {
+      state.errorMessage = "Ошибка, попробуйте позже";
+      state.status = EnumStatus.ERROR;
+    });
+
+    // users
+    builder.addCase(getAllUsers.pending, (state) => {
+      state.status = EnumStatus.LOADING;
+    });
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      state.users = action.payload.data;
+      state.status = EnumStatus.SUCCESS;
+    });
+    builder.addCase(getAllUsers.rejected, (state) => {
       state.status = EnumStatus.ERROR;
     });
   },

@@ -27,14 +27,7 @@ const countriesSlice = createSlice({
       state.status = EnumStatus.LOADING;
     });
     builder.addCase(fetchCountries.fulfilled, (state, action) => {
-      state.countries = [
-        ...action.payload.data.map((country) => {
-          country["id"] = country.code;
-          return country;
-        }),
-      ];
-      state.total = action.payload.total;
-      state.page = action.payload.current_page;
+      state.countries = action.payload.data;
       state.status = EnumStatus.SUCCESS;
     });
     builder.addCase(fetchCountries.rejected, (state) => {
@@ -42,7 +35,5 @@ const countriesSlice = createSlice({
     });
   },
 });
-
-// export const {} = countriesSlice.actions;
 
 export default countriesSlice.reducer;

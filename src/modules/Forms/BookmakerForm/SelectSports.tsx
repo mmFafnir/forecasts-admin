@@ -1,6 +1,5 @@
+import { Select, SelectProps, Spin } from "antd";
 import { FC, useEffect, useState } from "react";
-import { Select, Spin } from "antd";
-import type { SelectProps } from "antd";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 
 interface IProps {
@@ -8,8 +7,8 @@ interface IProps {
   data?: string[];
 }
 
-const SelectCountries: FC<IProps> = ({ setData, data = [] }) => {
-  const { countries } = useTypeSelector((state) => state.countries);
+const SelectSports: FC<IProps> = ({ setData, data }) => {
+  const { sports } = useTypeSelector((state) => state.sports);
   const [currentData, setCurrentData] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -18,35 +17,36 @@ const SelectCountries: FC<IProps> = ({ setData, data = [] }) => {
   };
 
   useEffect(() => {
-    if (countries.length === 0) return;
+    if (sports.length === 0) return;
     const newData: SelectProps["options"] = [];
-    countries.forEach((item) => {
+    sports.forEach((item) => {
       newData.push({
-        label: `${item.name} (${item.translation})`,
+        label: `${item.name}`,
         value: String(item.id),
       });
     });
     setCurrentData(newData);
     setLoading(false);
-  }, [countries]);
+  }, [sports]);
+
   return (
     <Spin spinning={loading}>
       <Select
         mode="tags"
         style={{ width: "100%" }}
-        defaultValue={data}
         onChange={handleChange}
         autoClearSearchValue={false}
-        tokenSeparators={[","]}
         filterOption={(inputValue, option) =>
           String(option!.label)
             .toUpperCase()
             .indexOf(inputValue.toUpperCase()) !== -1
         }
+        tokenSeparators={[","]}
+        defaultValue={data}
         options={currentData}
       />
     </Spin>
   );
 };
 
-export default SelectCountries;
+export default SelectSports;

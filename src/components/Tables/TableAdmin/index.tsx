@@ -7,40 +7,40 @@ import { columns } from "./colums";
 import Pagination from "../../UI/Pagination";
 import Table from "..";
 import {
-  deleteUser,
-  getAllUsers,
+  deleteAdmin,
+  getAllAdmins,
 } from "../../../store/Slices/userSlices/asyncAction";
 import { TypeUser } from "../../../store/Slices/userSlices/interface";
 
 const AdminsTable: FC = () => {
-  const { users, status, total } = useTypeSelector((state) => state.user);
+  const { admins, status, total } = useTypeSelector((state) => state.user);
   const { search } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
 
   const [page, setPage] = useState<number>(1);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [user, setUser] = useState<TypeUser | null>(null);
+  const [admin, setAdmin] = useState<TypeUser | null>(null);
 
-  const onDeleteUser = () => {
-    if (!user) return;
-    dispatch(deleteUser(user.id)).then(() => {
-      setUser(null);
+  const onDeleteAdmin = () => {
+    if (!admin) return;
+    dispatch(deleteAdmin(admin.id)).then(() => {
+      setAdmin(null);
       setIsOpenModal(false);
     });
   };
 
   const openModal = (user: TypeUser) => {
-    setUser(user);
+    setAdmin(user);
     setIsOpenModal(true);
   };
 
   const closeModal = () => {
-    setUser(null);
+    setAdmin(null);
     setIsOpenModal(false);
   };
   useEffect(() => {
-    dispatch(getAllUsers({ search }));
-  }, [search]);
+    dispatch(getAllAdmins({ search }));
+  }, []);
 
   return (
     <div>
@@ -50,7 +50,7 @@ const AdminsTable: FC = () => {
         tip="Loading..."
       >
         <Table
-          data={users}
+          data={admins}
           columns={columns.map((col) => {
             if (col.key === "delete") {
               col.render = (_, record) => (
@@ -76,7 +76,7 @@ const AdminsTable: FC = () => {
           <div>
             <Button onClick={closeModal}>Отмена</Button>
             <Button
-              onClick={onDeleteUser}
+              onClick={onDeleteAdmin}
               type="primary"
               loading={status === EnumStatus.LOADING}
             >
@@ -85,7 +85,7 @@ const AdminsTable: FC = () => {
           </div>
         }
       >
-        <p>Вы действительно хотите удалить {user?.name}</p>
+        <p>Вы действительно хотите удалить {admin?.name}</p>
       </Modal>
     </div>
   );

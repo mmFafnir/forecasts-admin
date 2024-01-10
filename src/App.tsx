@@ -17,6 +17,8 @@ import LanguagesPage from "./Pages/Languages/LanguagesPage";
 import LanguagesElementPage from "./Pages/Languages/LanguagesElementPage";
 
 import "./assets/scss/App.scss";
+import AdminsPage from "./Pages/Users/AdminsPage";
+import AdminsElementPage from "./Pages/Users/AdminElementPage";
 import UsersPage from "./Pages/Users/UsersPage";
 
 function App() {
@@ -52,6 +54,9 @@ function App() {
 
         <Route path="/translates" element={<LanguagesPage />} />
         <Route path="/translates/:id" element={<LanguagesElementPage />} />
+
+        <Route path="/admins" element={<AdminsPage />} />
+        <Route path="/admins/:id" element={<AdminsElementPage />} />
 
         <Route path="/users" element={<UsersPage />} />
 

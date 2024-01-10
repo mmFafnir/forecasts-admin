@@ -16,6 +16,7 @@ import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import CustomImage from "../../../components/UI/CustomImage";
 import SelectCountries from "./SelectCountries";
+import SelectSports from "./SelectSports";
 
 interface IProps {
   bookmaker: TypeBookmaker;
@@ -23,13 +24,16 @@ interface IProps {
 const titleClasses = `text-left font-semibold text-sm mb-1`;
 
 const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
-  const dispatch = useTypeDispatch();
   const navigate = useNavigate();
+  const dispatch = useTypeDispatch();
 
   const [form] = Form.useForm<IDataCreateBookmaker>();
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingError, setLoadingError] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+
+  const [countries, setCountries] = useState<string[]>([]);
+  const [sports, setSports] = useState<string[]>([]);
 
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [previewImage, serPreviewImage] = useState<string | null>(null);
@@ -63,16 +67,30 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
   };
 
   const onFinish = (values: IDataCreateBookmaker) => {
-    console.log(values);
     setLoading(true);
     const formData = new FormData();
     if (imgFile) {
       formData.append("logo", imgFile);
     }
     for (const [key, value] of Object.entries(values)) {
-      formData.append(key, value);
+      console.log(key, value);
+      if (key === "best_status") {
+        formData.append(key, value ? "1" : "0");
+      } else {
+        formData.append(key, value);
+      }
     }
+    countries.forEach((country) => {
+      console.log(country);
+      formData.append("country_ids[]", country);
+    });
+
+    sports.forEach((item) => {
+      formData.append("sport_ids[]", item);
+    });
+
     formData.append("bookmaker_id", String(bookmaker.id));
+
     dispatch(updateBookmaker(formData))
       .then(() => {
         notify({
@@ -95,6 +113,7 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
       });
   };
 
+  console.log(bookmaker);
   return (
     <Form
       form={form}
@@ -146,7 +165,18 @@ const BookmakerForm: FC<IProps> = ({ bookmaker }) => {
 
       <div className="mb-7">
         <p className={`${titleClasses}`}>Добавить Страну</p>
-        <SelectCountries />
+        <SelectCountries
+          data={[...bookmaker.country.map((item) => String(item.id))]}
+          setData={setCountries}
+        />
+      </div>
+
+      <div className="mb-7">
+        <p className={`${titleClasses}`}>Добавить вид спорта</p>
+        <SelectSports
+          data={[...bookmaker.sport.map((item) => String(item.id))]}
+          setData={setSports}
+        />
       </div>
 
       <div className="mb-7 flex flex-col items-start text-left">

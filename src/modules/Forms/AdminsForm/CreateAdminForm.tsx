@@ -7,12 +7,12 @@ import {
 } from "../../../store/Slices/userSlices/interface";
 import { asyncFetchRoles } from "./actions";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
-import { createUser } from "../../../store/Slices/userSlices/asyncAction";
+import { createAdmin } from "../../../store/Slices/userSlices/asyncAction";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 import { EnumStatus } from "../../../types/Status";
 import { notify } from "../../../assets/scripts/notify";
 
-const CreateUserForm: FC = () => {
+const CreateAdminForm: FC = () => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<ICreateUser>();
   const [roles, setRoles] = useState<TypeRole[]>([]);
@@ -20,7 +20,7 @@ const CreateUserForm: FC = () => {
   const { errorMessage, status } = useTypeSelector((state) => state.user);
 
   const onFinish = (values: ICreateUser) => {
-    dispatch(createUser(values)).then(() => {
+    dispatch(createAdmin(values)).then(() => {
       form.resetFields();
     });
   };
@@ -90,4 +90,4 @@ const CreateUserForm: FC = () => {
   );
 };
 
-export default memo(CreateUserForm);
+export default memo(CreateAdminForm);
