@@ -36,8 +36,7 @@ export const updateFaq = createAsyncThunk(
 export const deleteFaq = createAsyncThunk(
   "faq/createAsyncThunk",
   async (id: number) => {
-    const { data } = await axios.post("/delete_faq", { id });
-    console.log(deleteFaq);
-    return data;
+    await axios.get(`/delete_faq?faq_id=${id}`);
+    return id;
   }
 );

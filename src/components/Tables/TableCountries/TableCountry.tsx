@@ -23,10 +23,15 @@ const TableCountry: FC<IProps> = ({ columns, data }) => {
     setCurrentData(data);
   }, [data]);
   return (
-    <>
+    <div className="pr-11">
       <Search className="max-w-sm ml-auto block mb-3" onSearch={handleSearch} />
-      <AntTable rowKey="code" columns={columns} dataSource={currentData} />
-    </>
+      <AntTable
+        className="table w-full"
+        rowKey="code"
+        columns={columns}
+        dataSource={currentData}
+      />
+    </div>
   );
 };
 

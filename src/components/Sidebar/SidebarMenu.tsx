@@ -73,4 +73,8 @@ export const SidebarMenu = [
     name: "SEO",
     children: seo,
   },
+  // {
+  //   icon: FontSizeOutlined,
+  //   name: <Link to={"/users"}>ЗАПРОСЫ</Link>,
+  // },
 ];

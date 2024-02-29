@@ -65,7 +65,7 @@ const TableFaq: FC = () => {
         onCancel={onCloseModal}
         title="Создать FAQ"
       >
-        <UpdateFaq defaultFaq={modalFaq} />
+        <UpdateFaq defaultFaq={modalFaq} onModalClose={onCloseModal} />
       </Modal>
       {/* <Pagination setPage={setPage} defaultPage={page} total={total} /> */}
     </div>

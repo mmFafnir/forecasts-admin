@@ -6,6 +6,7 @@ export type TypeCountry = {
   name: string;
   translation: string;
   translate: ITranslateLeague[];
+  league?: [];
 };
 
 export interface IDataTypeCountryFetch {

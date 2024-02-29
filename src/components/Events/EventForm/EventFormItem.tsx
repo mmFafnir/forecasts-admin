@@ -13,6 +13,7 @@ import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { updateEventMatch } from "../../../store/Slices/matchesSlice/asyncAction";
 import { notify } from "../../../assets/scripts/notify";
 import TextArea from "antd/es/input/TextArea";
+import axios from "../../../core/axios";
 
 interface IRenderSelect {
   label: string;
@@ -42,11 +43,23 @@ interface IWhyText {
 interface IProps {
   data: TypeMatchEventCard;
 }
+
+const postAccessEvent = async (id: string | number) => {
+  const { data } = await axios.post("/change_card_access", {
+    card_id: id,
+  });
+  return data;
+};
+
 const EventFormItem: FC<IProps> = ({ data }) => {
   const dispatch = useTypeDispatch();
   const eventsData = useEventDataHook();
   const risksData = useRiskDataHook();
   const [form] = Form.useForm<IUpdateEventMatch>();
+  console.log(data);
+
+  const [accessEvent, setAccessEvent] = useState<boolean>(false);
+  const [accessEventLoading, setAccessEventLoading] = useState<boolean>(false);
 
   const [whyText, setWhyText] = useState<IWhyText>({
     why: data.why,
@@ -86,13 +99,24 @@ const EventFormItem: FC<IProps> = ({ data }) => {
     });
   };
 
+  const changeAccessEvent = () => {
+    setAccessEventLoading(true);
+    setAccessEvent((prev) => !prev);
+    postAccessEvent(data.id)
+      .catch(() => {
+        setAccessEvent((prev) => !prev);
+      })
+      .finally(() => {
+        setAccessEventLoading(false);
+      });
+  };
+
   const findEventData = () =>
     eventsData.find((event) => event.value === String(data.event.id));
 
   const findRiskData = () =>
     risksData.find((event) => event.value === String(data.risk.id));
 
-  console.log(whyText);
   return (
     <Form
       className=" bg-slate-300 p-3 rounded-2xl"
@@ -119,6 +143,18 @@ const EventFormItem: FC<IProps> = ({ data }) => {
             className="bg-slate-400 pointer-events-none"
           />
         </Form.Item>
+        {/* Ставка прошла/не прошла */}
+        <p className="mr-3 ml-3 !mb-0">Ставка прошла</p>
+
+        <Switch
+          onChange={changeAccessEvent}
+          checked={accessEvent}
+          loading={accessEventLoading}
+          checkedChildren="Да"
+          unCheckedChildren="Нет"
+          className="bg-slate-400 "
+        />
+
         <Select
           rootClassName="text-left"
           options={renderTranslateSelect({ translate: data.translate })}

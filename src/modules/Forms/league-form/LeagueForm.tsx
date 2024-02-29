@@ -95,9 +95,6 @@ const LeagueForm: FC<IProps> = ({ league }) => {
     setLoadingPinAdmin(true);
     setSwitchPinAdmin((prev) => !prev);
     asyncTogglePindLeagueAdmin(league.id)
-      .then((res) => {
-        setSwitchPinAdmin(res.message === "Updated");
-      })
       .catch(() => {
         setSwitchPinAdmin((prev) => !prev);
         notify({

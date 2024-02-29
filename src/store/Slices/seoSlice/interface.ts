@@ -1,3 +1,10 @@
+interface IDopSet {
+  id: number;
+  country_id: number;
+  league_id: number;
+  sport_id: number;
+}
+
 export interface ISeo {
   id: number;
   ceo_title: string;
@@ -10,6 +17,9 @@ export interface ISeo {
   page: null | string;
   created_at: string;
   updated_at: string;
+  country?: IDopSet[];
+  sport?: IDopSet[];
+  league?: IDopSet[];
 }
 
 export interface IFaqSeo {

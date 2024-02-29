@@ -33,3 +33,8 @@ export const updateFaqSeo = async (params: IUpdateSeoFaq) => {
   const { data } = await axios.post("/update_global_ceo_faq", params);
   console.log(data);
 };
+
+export const updateElementSeo = async (params: FormData) => {
+  const { data } = await axios.post("/update_ceo", params);
+  console.log(data);
+};

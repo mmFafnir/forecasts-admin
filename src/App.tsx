@@ -25,6 +25,8 @@ import SeoPage from "./Pages/Seo/SeoPage";
 import SeoHomePage from "./Pages/Seo/SeoHomePage";
 import SeoMatchPage from "./Pages/Seo/SeoMatchPage";
 import SeoFaqPage from "./Pages/Seo/SeoFaqPage";
+import SeoElementPage from "./Pages/Seo/SeoElementPage";
+import CountriesElementPage from "./Pages/Countries/CountriesElementPage";
 
 function App() {
   return (
@@ -54,6 +56,7 @@ function App() {
         <Route path="/events" element={<EventsPage />} />
 
         <Route path="/countries" element={<CountriesPage />} />
+        <Route path="/countries/:id" element={<CountriesElementPage />} />
 
         <Route path="/prompts" element={<PromptsPage />} />
 
@@ -68,6 +71,7 @@ function App() {
         <Route path="/faq" element={<FAQPage />} />
 
         <Route path="/seo" element={<SeoPage />} />
+        <Route path="/seo/:id" element={<SeoElementPage />} />
         <Route path="/seo/home" element={<SeoHomePage />} />
         <Route path="/seo/match" element={<SeoMatchPage />} />
         <Route path="/seo/faq" element={<SeoFaqPage />} />

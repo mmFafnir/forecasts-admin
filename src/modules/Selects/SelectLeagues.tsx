@@ -79,43 +79,31 @@ const SelectLeagues: FC<IProps> = ({
   }, [search, limit]);
 
   return (
-    <Spin spinning={loading}>
-      <Select
-        className={className}
-        disabled={disabled}
-        mode="tags"
-        onSearch={onSearch}
-        style={{ width: "100%" }}
-        onChange={handleChange}
-        value={values}
-        autoClearSearchValue={false}
-        filterOption={(inputValue, option) => {
-          return (
-            String(option!.label)
-              .toUpperCase()
-              .indexOf(inputValue.toUpperCase()) !== -1
-          );
-        }}
-        tokenSeparators={[","]}
-        onPopupScroll={onScroll}
-        defaultValue={data}
-        options={currentData}
-      />
-    </Spin>
+    <div className={className}>
+      <Spin spinning={loading}>
+        <Select
+          disabled={disabled}
+          mode="tags"
+          onSearch={onSearch}
+          style={{ width: "100%" }}
+          onChange={handleChange}
+          value={values}
+          autoClearSearchValue={false}
+          filterOption={(inputValue, option) => {
+            return (
+              String(option!.label)
+                .toUpperCase()
+                .indexOf(inputValue.toUpperCase()) !== -1
+            );
+          }}
+          tokenSeparators={[","]}
+          onPopupScroll={onScroll}
+          defaultValue={data}
+          options={currentData}
+        />
+      </Spin>
+    </div>
   );
 };
 
 export default SelectLeagues;
-
-// useEffect(() => {
-//   if (leagues.length === 0) return;
-//   const newData: SelectProps["options"] = [];
-//   leagues.forEach((item) => {
-//     newData.push({
-//       label: `${item.translate || item.league_name}`,
-//       value: String(item.id),
-//     });
-//   });
-//   setCurrentData(newData);
-//   setLoading(false);
-// }, [leagues]);

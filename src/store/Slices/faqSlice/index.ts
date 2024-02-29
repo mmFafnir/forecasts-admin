@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { EnumStatus } from "../../../types/Status";
 import { IFaq } from "./interface";
-import { fetchAllFaq, postFaq } from "./ayncActions";
+import { deleteFaq, fetchAllFaq, postFaq } from "./ayncActions";
 
 interface IState {
   status: EnumStatus;
@@ -39,6 +39,23 @@ const faqSlice = createSlice({
       state.faqs = [actions.payload, ...state.faqs];
     });
     builder.addCase(postFaq.rejected, (state) => {
+      state.status = EnumStatus.ERROR;
+    });
+
+    //Delete
+    builder.addCase(deleteFaq.pending, (state) => {
+      state.status = EnumStatus.LOADING;
+    });
+    builder.addCase(
+      deleteFaq.fulfilled,
+      (state, actions: PayloadAction<number>) => {
+        state.status = EnumStatus.SUCCESS;
+        state.faqs = [
+          ...state.faqs.filter((faq) => faq.id !== actions.payload),
+        ];
+      }
+    );
+    builder.addCase(deleteFaq.rejected, (state) => {
       state.status = EnumStatus.ERROR;
     });
   },

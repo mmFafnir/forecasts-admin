@@ -11,6 +11,7 @@ import {
 
 interface IProps {
   defaultFaq: IFaq | null;
+  onModalClose: () => void;
 }
 interface IPramsInput {
   question: string;
@@ -20,8 +21,7 @@ interface IPramsInput {
 
 const orders = new Array(20).fill(null);
 
-const UpdateFaq: FC<IProps> = ({ defaultFaq }) => {
-  console.log(defaultFaq);
+const UpdateFaq: FC<IProps> = ({ defaultFaq, onModalClose }) => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IPramsInput>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,9 +54,13 @@ const UpdateFaq: FC<IProps> = ({ defaultFaq }) => {
   const onDelete = () => {
     if (!defaultFaq) return;
     setDeleteLoading(true);
-    dispatch(deleteFaq(defaultFaq.id)).finally(() => {
-      setDeleteLoading(false);
-    });
+    dispatch(deleteFaq(defaultFaq.id))
+      .then(() => {
+        onModalClose();
+      })
+      .finally(() => {
+        setDeleteLoading(false);
+      });
   };
 
   useEffect(() => {

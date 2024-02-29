@@ -39,25 +39,26 @@ const SelectCountries: FC<IProps> = ({
     setLoading(false);
   }, [countries]);
   return (
-    <Spin spinning={loading}>
-      <Select
-        className={className}
-        disabled={disabled}
-        mode="tags"
-        style={{ width: "100%" }}
-        defaultValue={data}
-        onChange={handleChange}
-        autoClearSearchValue={false}
-        tokenSeparators={[","]}
-        value={values}
-        filterOption={(inputValue, option) =>
-          String(option!.label)
-            .toUpperCase()
-            .indexOf(inputValue.toUpperCase()) !== -1
-        }
-        options={currentData}
-      />
-    </Spin>
+    <div className={className}>
+      <Spin spinning={loading}>
+        <Select
+          disabled={disabled}
+          mode="tags"
+          style={{ width: "100%" }}
+          defaultValue={data}
+          onChange={handleChange}
+          autoClearSearchValue={false}
+          tokenSeparators={[","]}
+          value={values}
+          filterOption={(inputValue, option) =>
+            String(option!.label)
+              .toUpperCase()
+              .indexOf(inputValue.toUpperCase()) !== -1
+          }
+          options={currentData}
+        />
+      </Spin>
+    </div>
   );
 };
 
