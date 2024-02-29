@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import TableLanguages from "../../components/Tables/TableLanguages";
 import { Button, Modal } from "antd";
-import CreateLanguage from "../../modules/Forms/LanguageForm/CreateLanguage";
+import CreateLanguage from "../../modules/Forms/languages-form/CreateLanguage";
 
 const LanguagesPage: FC = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);

@@ -1,4 +1,4 @@
-import { Button, Form, Input, Row, Switch } from "antd";
+import { Button, Form, Input, Row, Select, Switch } from "antd";
 import { FC, useState } from "react";
 import { TypeLeague } from "../../../store/Slices/leaguesSlice/interface";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
@@ -8,24 +8,39 @@ import CustomImage from "../../../components/UI/CustomImage";
 import { updateLeague } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { AxiosError } from "axios";
 import { notify } from "../../../assets/scripts/notify";
-import { asyncTogglePindLeague } from "../../../api/league/asyncTogglePindLeague";
+import {
+  asyncTogglePindLeague,
+  asyncTogglePindLeagueAdmin,
+} from "../../../api/league/asyncTogglePindLeague";
 import TableTranslate from "../../TableTranslate/TableTranslate";
 
 interface IInputs {
   league_name: string;
+  tir: string;
 }
 interface IProps {
   league: TypeLeague;
 }
+
+const tirs = new Array(20).fill(null);
+
 const titleClasses = `text-left font-semibold text-sm mb-2`;
 const LeagueForm: FC<IProps> = ({ league }) => {
+  console.log(league);
   const dispatch = useTypeDispatch();
 
   const [form] = Form.useForm<IInputs>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [switchValue, setSwitchValue] = useState<boolean>(false);
+  const [switchValue, setSwitchValue] = useState<boolean>(
+    league.favorit === "1"
+  );
   const [loadingSwitch, setLoadingSwitch] = useState<boolean>(false);
+
+  const [switchPinAdmin, setSwitchPinAdmin] = useState<boolean>(
+    league.has_toplist_admin === "1"
+  );
+  const [loadingPinAdmin, setLoadingPinAdmin] = useState<boolean>(false);
 
   const onFinish = () => {
     setLoading(true);
@@ -33,6 +48,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
       updateLeague({
         league_id: league.id,
         name: form.getFieldsValue().league_name,
+        tir: form.getFieldsValue().tir,
       })
     )
       .then(() => {
@@ -75,6 +91,26 @@ const LeagueForm: FC<IProps> = ({ league }) => {
       });
   };
 
+  const togglePindAdmin = () => {
+    setLoadingPinAdmin(true);
+    setSwitchPinAdmin((prev) => !prev);
+    asyncTogglePindLeagueAdmin(league.id)
+      .then((res) => {
+        setSwitchPinAdmin(res.message === "Updated");
+      })
+      .catch(() => {
+        setSwitchPinAdmin((prev) => !prev);
+        notify({
+          type: "error",
+          message: "Ошибка",
+          description: "Произошла ошибка, попробуйте позже",
+        });
+      })
+      .finally(() => {
+        setLoadingPinAdmin(false);
+      });
+  };
+
   return (
     <>
       <Form
@@ -90,14 +126,37 @@ const LeagueForm: FC<IProps> = ({ league }) => {
         autoComplete="off"
       >
         <div className="flex justify-start flex-col max-w-96">
-          <div className="flex items-center mb-2">
-            <p className={`${titleClasses} mb-0 mr-2`}>Лига в избранном:</p>
+          <div className="flex items-center mb-4">
+            <p className={`${titleClasses} !mb-0 mr-2`}>Лига в избранном:</p>
             <Switch
               onChange={togglePind}
               checkedChildren="Да"
               unCheckedChildren="Нет"
               loading={loadingSwitch}
               checked={switchValue}
+            />
+            <p className={`${titleClasses} !mb-0 mr-2 ml-auto`}>Тир лиги:</p>
+            <Form.Item name={"tir"} noStyle initialValue={league.tir || "1"}>
+              <Select
+                defaultActiveFirstOption
+                options={tirs.map((_, index) => ({
+                  value: String(index + 1),
+                  label: `Тир: ${index + 1}`,
+                }))}
+              />
+            </Form.Item>
+          </div>
+
+          <div className="flex items-center mb-4">
+            <p className={`${titleClasses} !mb-0 mr-2`}>
+              Лига в избранном от Админа:
+            </p>
+            <Switch
+              onChange={togglePindAdmin}
+              checkedChildren="Да"
+              unCheckedChildren="Нет"
+              loading={loadingPinAdmin}
+              checked={switchPinAdmin}
             />
           </div>
 

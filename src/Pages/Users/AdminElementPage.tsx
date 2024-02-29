@@ -2,7 +2,7 @@ import axios from "../../core/axios";
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Space, Spin } from "antd";
-import UpdateAdminForm from "../../modules/Forms/AdminsForm/UpdateAdminForm";
+import UpdateAdminForm from "../../modules/Forms/admins-form/UpdateAdminForm";
 import { TypeUser } from "../../store/Slices/userSlices/interface";
 import { notify } from "../../assets/scripts/notify";
 

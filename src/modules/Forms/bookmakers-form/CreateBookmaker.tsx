@@ -6,8 +6,8 @@ import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { createBookmaker } from "../../../store/Slices/bookmakersSlice/asyncActions";
 import { notify } from "../../../assets/scripts/notify";
 import UploadInput from "../../../components/UI/Form/UploadInput";
-import SelectCountries from "./SelectCountries";
-import SelectSports from "./SelectSports";
+import SelectCountries from "../../Selects/SelectCountries";
+import SelectSports from "../../Selects/SelectSports";
 
 const titleClasses = `text-left font-semibold text-sm mb-1`;
 

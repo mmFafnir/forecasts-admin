@@ -1,14 +1,23 @@
 import { FC, useEffect, useState } from "react";
 import { Select, Spin } from "antd";
 import type { SelectProps } from "antd";
-import { useTypeSelector } from "../../../hooks/useTypeSelector";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
 
 interface IProps {
   setData: (keys: string[]) => void;
   data?: string[];
+  className?: string;
+  disabled?: boolean;
+  values?: string[];
 }
 
-const SelectCountries: FC<IProps> = ({ setData, data = [] }) => {
+const SelectCountries: FC<IProps> = ({
+  setData,
+  data = [],
+  disabled,
+  values,
+  className,
+}) => {
   const { countries } = useTypeSelector((state) => state.countries);
   const [currentData, setCurrentData] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -32,12 +41,15 @@ const SelectCountries: FC<IProps> = ({ setData, data = [] }) => {
   return (
     <Spin spinning={loading}>
       <Select
+        className={className}
+        disabled={disabled}
         mode="tags"
         style={{ width: "100%" }}
         defaultValue={data}
         onChange={handleChange}
         autoClearSearchValue={false}
         tokenSeparators={[","]}
+        value={values}
         filterOption={(inputValue, option) =>
           String(option!.label)
             .toUpperCase()

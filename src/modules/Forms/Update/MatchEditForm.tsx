@@ -15,13 +15,18 @@ import { switchFavoriteCups } from "../../../store/Slices/matchesSlice/asyncActi
 import { notify } from "../../../assets/scripts/notify";
 import LoaderCover from "../../../components/UI/LoaderCover";
 import CustomImage from "../../../components/UI/CustomImage";
+import { useTypeSelector } from "../../../hooks/useTypeSelector";
 
 interface IProps {
   match: TypeMatch;
 }
 
 const MatchEditForm: FC<IProps> = ({ match }) => {
+  console.log(match);
+
+  const { user } = useTypeSelector((state) => state.user);
   const dispatch = useTypeDispatch();
+
   const [form] = Form.useForm();
   const [favoriteCup, setFavoriteCup] = useState<boolean>(
     match.favorite_game == "0" ? false : true
@@ -63,6 +68,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       setChatGbtStatus(res.chat_gpt_text_status);
     });
   };
+
   const resendGptText = (id: number) => {
     resendGptMessage(id)
       .then((res) => {
@@ -225,7 +231,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           </div>
 
           {/* Текст для чата GPT */}
-          {chatGbtStatus !== 4 && (
+          {chatGbtStatus !== 4 && user?.role_id == "1" && (
             <Form.Item
               name={"chat_gpt_text"}
               initialValue={match.chat_gpt_text ? match.chat_gpt_text : ""}

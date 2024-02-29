@@ -25,7 +25,6 @@ const Leagues: FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    console.log(search);
     dispatch(
       fetchLeagues({
         limit: limit,

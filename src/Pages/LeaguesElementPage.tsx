@@ -2,7 +2,7 @@ import axios from "../core/axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TypeLeague } from "../store/Slices/leaguesSlice/interface";
-import LeagueForm from "../modules/Forms/LeagueForm";
+import LeagueForm from "../modules/Forms/league-form/LeagueForm";
 import { Space, Spin } from "antd";
 
 const LeaguesElementPage: FC = () => {

@@ -2,7 +2,7 @@ import { Button, Modal } from "antd";
 
 import TableAdmin from "../../components/Tables/TableAdmin";
 import { useState } from "react";
-import CreateUserForm from "../../modules/Forms/AdminsForm/CreateAdminForm";
+import CreateUserForm from "../../modules/Forms/admins-form/CreateAdminForm";
 
 const AdminsPage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

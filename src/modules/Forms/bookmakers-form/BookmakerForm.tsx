@@ -15,8 +15,8 @@ import { notify } from "../../../assets/scripts/notify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import CustomImage from "../../../components/UI/CustomImage";
-import SelectCountries from "./SelectCountries";
-import SelectSports from "./SelectSports";
+import SelectCountries from "../../Selects/SelectCountries";
+import SelectSports from "../../Selects/SelectSports";
 
 interface IProps {
   bookmaker: TypeBookmaker;

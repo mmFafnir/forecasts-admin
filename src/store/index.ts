@@ -12,6 +12,8 @@ import bookmakersSlice from "./Slices/bookmakersSlice";
 import pusherSlice from "./Slices/pusherSlice";
 import languagesSlice from "./Slices/languagesSlice";
 import sportsSlice from "./Slices/sportSlice";
+import faqSlice from "./Slices/faqSlice";
+import seoSlice from "./Slices/seoSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +30,8 @@ export const store = configureStore({
     pusher: pusherSlice,
     languages: languagesSlice,
     sports: sportsSlice,
+    faq: faqSlice,
+    seo: seoSlice,
   },
 });
 

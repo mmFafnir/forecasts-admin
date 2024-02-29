@@ -44,6 +44,7 @@ const LayoutMain: FC = () => {
         <PusherNotify />
         <GetAllCountries />
         <GetAllSports />
+        {/* <GetAllLeagues /> */}
       </div>
     </div>
   );

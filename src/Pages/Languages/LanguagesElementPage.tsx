@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TypeLanguages } from "../../store/Slices/languagesSlice/interface";
 import axios from "../../core/axios";
-import LanguagesForm from "../../modules/Forms/LanguageForm/UpdateLanguages";
 import { Space, Spin } from "antd";
+import UpdateLanguages from "../../modules/Forms/languages-form/UpdateLanguages";
 
 const LanguagesElementPage = () => {
   const { id } = useParams();
@@ -29,7 +29,7 @@ const LanguagesElementPage = () => {
           <Spin size="large" />
         </Space>
       ) : (
-        <LanguagesForm lang={lang} />
+        <UpdateLanguages lang={lang} />
       )}
     </div>
   );

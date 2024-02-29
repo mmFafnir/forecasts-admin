@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { columns } from "../Forms/LeagueForm/column";
+import { columns } from "../Forms/league-form/column";
 import { ITranslateLeague } from "../../store/Slices/leaguesSlice/interface";
 import { Button, Form, Table } from "antd";
 import { updateTranslate } from "./actions";

@@ -20,6 +20,11 @@ import "./assets/scss/App.scss";
 import AdminsPage from "./Pages/Users/AdminsPage";
 import AdminsElementPage from "./Pages/Users/AdminElementPage";
 import UsersPage from "./Pages/Users/UsersPage";
+import FAQPage from "./Pages/Faq/FAQPage";
+import SeoPage from "./Pages/Seo/SeoPage";
+import SeoHomePage from "./Pages/Seo/SeoHomePage";
+import SeoMatchPage from "./Pages/Seo/SeoMatchPage";
+import SeoFaqPage from "./Pages/Seo/SeoFaqPage";
 
 function App() {
   return (
@@ -59,6 +64,13 @@ function App() {
         <Route path="/admins/:id" element={<AdminsElementPage />} />
 
         <Route path="/users" element={<UsersPage />} />
+
+        <Route path="/faq" element={<FAQPage />} />
+
+        <Route path="/seo" element={<SeoPage />} />
+        <Route path="/seo/home" element={<SeoHomePage />} />
+        <Route path="/seo/match" element={<SeoMatchPage />} />
+        <Route path="/seo/faq" element={<SeoFaqPage />} />
 
         <Route
           path="*"

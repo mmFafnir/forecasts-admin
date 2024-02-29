@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Space, Spin } from "antd";
 import { TypeBookmaker } from "../../store/Slices/bookmakersSlice/interface";
-import BookmakerForm from "../../modules/Forms/BookmakerForm";
+import BookmakerForm from "../../modules/Forms/bookmakers-form/BookmakerForm";
 
 const BookmakerElementPage: FC = () => {
   const { id } = useParams();

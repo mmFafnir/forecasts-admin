@@ -21,7 +21,9 @@ export type TypeLeague = {
   updated_at: string;
   sport_id: string;
   favorit: "0" | "1";
+  has_toplist_admin: "0" | "1";
   translate: ITranslateLeague[];
+  tir: string;
 };
 
 export interface IDataLeaguesFetch {
@@ -34,4 +36,5 @@ export interface IDataLeaguesFetch {
 export interface IUpdateLeagueParams {
   league_id: string | number;
   name: string;
+  tir: string;
 }

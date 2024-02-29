@@ -34,7 +34,7 @@ const TableLeagues: FC = () => {
   useEffect(() => {
     setPage(1);
   }, [search]);
-  console.log(leagues);
+
   return (
     <div>
       <Spin
