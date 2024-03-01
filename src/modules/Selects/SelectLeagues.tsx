@@ -4,6 +4,7 @@ import { fetchLeagues } from "../../store/Slices/leaguesSlice/asyncActions";
 import { IDataLeaguesFetch } from "../../store/Slices/leaguesSlice/interface";
 import { useTypeDispatch } from "../../hooks/useTypeDispatch";
 import { getScrollPos } from "../../assets/scripts/getScrollPos";
+import { DefaultOptionType } from "antd/es/select";
 
 interface IProps {
   setData: (keys: string[]) => void;
@@ -11,6 +12,7 @@ interface IProps {
   values?: string[];
   className?: string;
   disabled?: boolean;
+  all?: boolean;
 }
 let timerId: NodeJS.Timeout | undefined = undefined;
 const SelectLeagues: FC<IProps> = ({
@@ -18,7 +20,8 @@ const SelectLeagues: FC<IProps> = ({
   data,
   className,
   disabled,
-  values = [],
+  values,
+  all,
 }) => {
   const dispatch = useTypeDispatch();
   // const { leagues } = useTypeSelector((state) => state.leagues);
@@ -28,8 +31,27 @@ const SelectLeagues: FC<IProps> = ({
   const [search, setSearch] = useState<string>("");
   const [limit, setLimit] = useState<number>(20);
 
-  const handleChange = (value: string[]) => {
-    setData(value);
+  const [currentValues, setCurrentValues] = useState<string[]>(
+    values || data || []
+  );
+
+  const handleChange = (
+    value: string[],
+    option: DefaultOptionType | DefaultOptionType[]
+  ) => {
+    console.log(option);
+
+    if (value.find((val) => val === "all")) {
+      setCurrentValues(["all"]);
+      setData(["all"]);
+      return;
+    }
+    const res = option
+      .map((opt: DefaultOptionType) => opt.value)
+      .filter((val: string) => val);
+
+    setCurrentValues(res);
+    setData(res);
   };
 
   const onSearch = (value: string) => {
@@ -63,7 +85,9 @@ const SelectLeagues: FC<IProps> = ({
     )
       .then((res) => {
         const payload = res.payload as IDataLeaguesFetch;
-        const data: SelectProps["options"] = [];
+        const data: SelectProps["options"] = all
+          ? [{ label: `Все`, value: "all" }]
+          : [];
         payload.data.forEach((item) => {
           data.push({
             label: `${item.league_name}`,
@@ -87,7 +111,7 @@ const SelectLeagues: FC<IProps> = ({
           onSearch={onSearch}
           style={{ width: "100%" }}
           onChange={handleChange}
-          value={values}
+          value={currentValues}
           autoClearSearchValue={false}
           filterOption={(inputValue, option) => {
             return (

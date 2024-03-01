@@ -1,6 +1,7 @@
 import { Select, SelectProps, Spin } from "antd";
 import { FC, useEffect, useState } from "react";
 import { useTypeSelector } from "../../hooks/useTypeSelector";
+import { DefaultOptionType } from "antd/es/select";
 
 interface IProps {
   setData: (keys: string[]) => void;
@@ -8,6 +9,7 @@ interface IProps {
   values?: string[];
   className?: string;
   disabled?: boolean;
+  all?: boolean;
 }
 
 const SelectSports: FC<IProps> = ({
@@ -15,19 +17,45 @@ const SelectSports: FC<IProps> = ({
   data,
   className,
   disabled,
-  values = [],
+  values,
+  all,
 }) => {
   const { sports } = useTypeSelector((state) => state.sports);
   const [currentData, setCurrentData] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const handleChange = (value: string[]) => {
-    setData(value);
+  const [currentValues, setCurrentValues] = useState<string[]>(
+    values || data || []
+  );
+  const handleChange = (
+    value: string[],
+    option: DefaultOptionType | DefaultOptionType[]
+  ) => {
+    console.log(option);
+
+    if (value.find((val) => val === "all")) {
+      setCurrentValues(["all"]);
+      setData(["all"]);
+      return;
+    }
+    const res = option
+      .map((opt: DefaultOptionType) => opt.value)
+      .filter((val: string) => val);
+
+    setCurrentValues(res);
+    setData(res);
   };
 
   useEffect(() => {
+    if (!values) return;
+    setCurrentValues(values);
+  }, [values]);
+
+  useEffect(() => {
     if (sports.length === 0) return;
-    const newData: SelectProps["options"] = [];
+    const newData: SelectProps["options"] = all
+      ? [{ label: `Все`, value: "all" }]
+      : [];
     sports.forEach((item) => {
       newData.push({
         label: `${item.name}`,
@@ -54,7 +82,7 @@ const SelectSports: FC<IProps> = ({
         }
         tokenSeparators={[","]}
         defaultValue={data}
-        value={values}
+        value={currentValues}
         options={currentData}
       />
     </Spin>

@@ -13,3 +13,12 @@ export const fetchCountries = createAsyncThunk<
   const { data } = await axios.get(url);
   return data;
 });
+
+export const createCountry = createAsyncThunk(
+  "countries/createCountries",
+  async (country: FormData) => {
+    const { data } = await axios.post("/create_new_country", country);
+    console.log(data);
+    return data;
+  }
+);

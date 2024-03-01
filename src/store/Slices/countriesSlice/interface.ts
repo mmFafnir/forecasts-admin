@@ -15,3 +15,9 @@ export interface IDataTypeCountryFetch {
   last_page: number;
   total: number;
 }
+
+export interface ICreateCountry {
+  name: string;
+  translation: string;
+  photo: string;
+}

@@ -24,7 +24,8 @@ const seo = [
   { link: "/seo", text: "Все" },
   { link: "/seo/home", text: "Главная" },
   { link: "/seo/match", text: "Страница матча" },
-  { link: "/seo/faq", text: "Faq" },
+  { link: "/seo/faq", text: "Вопросы/Ответы" },
+  { link: "/seo/archive", text: "Архив" },
 ];
 
 export const SidebarMenu = [

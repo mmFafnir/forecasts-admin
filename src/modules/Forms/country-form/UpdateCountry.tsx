@@ -1,10 +1,12 @@
-import { FC, useEffect } from "react";
+import { FC, useState } from "react";
 import { TypeLeague } from "../../../store/Slices/leaguesSlice/interface";
 import Table, { ColumnsType } from "antd/es/table";
-import { Select, Switch } from "antd";
-// import axios from "axios";
+import { Button, Switch } from "antd";
+import { SelectLigCountry } from "./components/Select";
+import axios from "../../../core/axios";
 
 interface IProps {
+  id: string;
   leagues: TypeLeague[];
 }
 
@@ -31,41 +33,51 @@ const columns: ColumnsType<TypeLeague> = [
   },
 ];
 
-// const getFreeLeagues = async () => {
-//     const {data} = await axios.get('/get_league_for_connect_country');
-//     return data
-// }
+const postLigConnection = async (ids: number[], countryId: string) => {
+  const { data } = await axios.post("/conection_league_for_country", {
+    country_id: Number(countryId),
+    league_ids: ids,
+  });
+  return data;
+};
 
-const UpdateCountry: FC<IProps> = ({ leagues }) => {
-  //   const [data, setData] = useState<SelectProps["options"]>([]);
-  //   const [loading, setLoading] = useState<boolean>(false);
-  //   const [loadingAdd, setLoadingAdd] = useState<boolean>(false);
-
-  useEffect(() => {}, []);
+const UpdateCountry: FC<IProps> = ({ leagues, id }) => {
+  console.log(leagues);
+  const [currentLeagues, setCurrentLeagues] = useState<TypeLeague[]>(leagues);
+  const [data, setData] = useState<number[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  console.log(data);
+  const onConnection = () => {
+    setLoading(true);
+    postLigConnection(data, id)
+      .then((res) => {
+        console.log(res.data?.league);
+        if (res.data[0]?.league) {
+          setCurrentLeagues(res.data[0]?.league);
+          setData([]);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <div>
       <div className="mb-4">
-        <Select
-          //   disabled={disabled}
-          mode="tags"
-          //   onSearch={onSearch}
-          style={{ width: "100%" }}
-          //   onChange={handleChange}
-          //   value={values}
-          autoClearSearchValue={false}
-          filterOption={(inputValue, option) => {
-            return (
-              String(option!.label)
-                .toUpperCase()
-                .indexOf(inputValue.toUpperCase()) !== -1
-            );
-          }}
-          tokenSeparators={[","]}
-          //   options={currentData}
-        />
+        <div className="flex">
+          <Button
+            className="mb-2 ml-auto"
+            type="primary"
+            onClick={onConnection}
+            loading={loading}
+          >
+            Добавить
+          </Button>
+        </div>
+        <SelectLigCountry data={data} setData={setData} />
       </div>
-      <Table dataSource={leagues} columns={columns} />
+      <Table dataSource={currentLeagues} columns={columns} />
     </div>
   );
 };

@@ -31,6 +31,7 @@ export interface IDataLeaguesFetch {
   data: TypeLeague[];
   last_page: number;
   total: number;
+  next_page_url: string | null;
 }
 
 export interface IUpdateLeagueParams {

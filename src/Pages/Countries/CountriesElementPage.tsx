@@ -41,7 +41,7 @@ const CountriesElementPage = () => {
           <Spin size="large" />
         </Space>
       ) : (
-        <UpdateCountry leagues={country.league || []} />
+        <UpdateCountry id={country.id} leagues={country.league || []} />
       )}
     </div>
   );

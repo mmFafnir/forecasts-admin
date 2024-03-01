@@ -14,6 +14,7 @@ const initialState: IState = {
   statusMatch: "",
   country: "",
   league: "",
+  tir: "",
   date: {
     start: "",
     finish: "",
@@ -41,6 +42,9 @@ const filterSlice = createSlice({
     setLeague: (state, action: PayloadAction<string>) => {
       state.league = action.payload;
     },
+    setTir: (state, action: PayloadAction<string>) => {
+      state.tir = action.payload;
+    },
     setChatGptTextStatus: (
       state,
       action: PayloadAction<TypeChatGptTextStatus>
@@ -65,6 +69,7 @@ export const {
   setCountry,
   setStatusMatch,
   setFavorite,
+  setTir,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

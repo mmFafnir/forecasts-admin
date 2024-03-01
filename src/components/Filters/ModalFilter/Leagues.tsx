@@ -5,10 +5,16 @@ import CustomAutoComplete, {
 } from "../../UI/Search/CustomAutoComplete";
 import { fetchLeagues } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { IDataLeaguesFetch } from "../../../store/Slices/leaguesSlice/interface";
-import { setLeague } from "../../../store/Slices/filterSlice";
+import { setLeague, setTir } from "../../../store/Slices/filterSlice";
+import { Select } from "antd";
+
+const tirs = new Array(20).fill(null);
 
 const Leagues: FC = () => {
   const dispatch = useTypeDispatch();
+
+  const [isTir, setIsTir] = useState<boolean>(false);
+
   const [data, setData] = useState<ISelectDataAutoComplete[]>([]);
   const [search, setSearch] = useState<string>("");
   const [limit, setLimit] = useState<number>(20);
@@ -21,6 +27,10 @@ const Leagues: FC = () => {
     console.log(value);
     setSearch(value);
     dispatch(setLeague(key ? String(key) : ""));
+  };
+
+  const onChangeTir = (value: string) => {
+    dispatch(setTir(value));
   };
 
   useEffect(() => {
@@ -50,17 +60,45 @@ const Leagues: FC = () => {
       });
   }, [search, limit]);
 
+  useEffect(() => {
+    dispatch(setLeague(""));
+    dispatch(setTir(""));
+  }, [isTir]);
   return (
-    <>
-      <p className="mr-2 font-semibold absolute -top-4">Посик по лигам:</p>
-      <CustomAutoComplete
-        loading={loading}
-        setLimit={addLimit}
-        data={data}
-        setSearch={onChange}
-        empty={empty}
-      />
-    </>
+    <div style={{ minWidth: 200 }}>
+      <p className="mr-2 font-semibold absolute -top-4">
+        Посик по {isTir ? "Тирам" : "Лигам"}:{" "}
+        <button
+          style={{ color: "#1677ff" }}
+          onClick={() => setIsTir((prev) => !prev)}
+        >
+          {isTir ? "Лиги" : "Тир"}{" "}
+        </button>
+      </p>
+      {isTir ? (
+        <Select
+          style={{ width: "100%", textAlign: "left" }}
+          defaultActiveFirstOption
+          onChange={onChangeTir}
+          defaultValue={""}
+          options={[
+            { value: "", label: "Все" },
+            ...tirs.map((_, index) => ({
+              value: String(index + 1),
+              label: `Тир: ${index + 1}`,
+            })),
+          ]}
+        />
+      ) : (
+        <CustomAutoComplete
+          loading={loading}
+          setLimit={addLimit}
+          data={data}
+          setSearch={onChange}
+          empty={empty}
+        />
+      )}
+    </div>
   );
 };
 

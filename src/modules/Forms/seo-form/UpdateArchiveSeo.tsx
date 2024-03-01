@@ -1,16 +1,13 @@
 import { Button, Form, Input } from "antd";
-import { FC, memo, useState } from "react";
+import { FC, useState } from "react";
 import { ISeo } from "../../../store/Slices/seoSlice/interface";
 import { required } from "../../../core/form-rools";
 import TextArea from "antd/es/input/TextArea";
 import UploadInput from "../../../components/UI/Form/UploadInput";
 import CustomImage from "../../../components/UI/CustomImage";
-import { updateElementSeo } from "../../../store/Slices/seoSlice/asyncActions";
+import { updateArchiveSeo } from "../../../store/Slices/seoSlice/asyncActions";
 import { notify } from "../../../assets/scripts/notify";
 import { AxiosError } from "axios";
-import SelectCountries from "../../Selects/SelectCountries";
-import SelectSports from "../../Selects/SelectSports";
-import SelectLeagues from "../../Selects/SelectLeagues";
 
 interface IInputs {
   ceo_title: string;
@@ -25,19 +22,8 @@ interface IProps {
   seo: ISeo;
 }
 const titleClasses = `text-left font-semibold text-sm mb-2`;
-const UpdateElementSeo: FC<IProps> = ({ seo }) => {
-  console.log(seo);
+const UpdateArchiveSeo: FC<IProps> = ({ seo }) => {
   const [loading, setLoading] = useState<boolean>(false);
-
-  const [sports, setSports] = useState<string[]>(
-    seo.sport?.map((item) => `${item.sport_id}`) || []
-  );
-  const [countries, setCountries] = useState<string[]>(
-    seo.country?.map((item) => `${item.country_id}`) || []
-  );
-  const [leagues, setLeagues] = useState<string[]>(
-    seo.league?.map((item) => `${item.league_id}`) || []
-  );
 
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [previewImage, serPreviewImage] = useState<string | null>(null);
@@ -45,41 +31,16 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
   const [form] = Form.useForm<IInputs>();
 
   const onFinish = (values: IInputs) => {
-    console.log(values);
-
     setLoading(true);
     const formData = new FormData();
-    // console.log('seo': seo.id);
-    formData.append("ceo_id ", `3`);
     if (imgFile) {
       formData.append("ceo_photo", imgFile);
     }
     for (const [key, value] of Object.entries(values)) {
       formData.append(key, value);
     }
-    if (sports.length == 0) {
-      formData.append("sports_id[]", "null");
-    }
-    sports.forEach((sport) => {
-      formData.append("sports_id[]", sport);
-    });
 
-    if (countries.length == 0) {
-      formData.append("countrys_id[]", "null");
-    }
-    countries.forEach((country) => {
-      console.log(country);
-      formData.append("countrys_id[]", country);
-    });
-
-    if (leagues.length == 0) {
-      formData.append("leagues_id[]", "null");
-    }
-    leagues.forEach((league) => {
-      formData.append("leagues_id[]", league);
-    });
-
-    updateElementSeo(formData, seo.id)
+    updateArchiveSeo(formData)
       .then(() => {
         notify({
           type: "success",
@@ -100,7 +61,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
         setLoading(false);
       });
   };
-  console.log(leagues);
+
   return (
     <Form
       form={form}
@@ -112,39 +73,6 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
       autoComplete="off"
       onFinish={onFinish}
     >
-      {/* sport country league */}
-      <div>
-        <p className={`${titleClasses} !mb-0`}>Спорт:</p>
-        <SelectSports
-          all
-          className="mb-2"
-          setData={setSports}
-          data={seo.sport?.map((item) => String(item.sport_id)) || []}
-          disabled={leagues.length > 0 || countries.length > 0}
-        />
-        <p className={`${titleClasses} !mb-0`}>Страна:</p>
-        <SelectCountries
-          all
-          className="mb-2"
-          setData={setCountries}
-          data={seo.country?.map((item) => String(item.country_id)) || []}
-          disabled={leagues.length > 0 || sports.length > 0}
-        />
-        <p className={`${titleClasses} !mb-0`}>Лиги:</p>
-        <SelectLeagues
-          all
-          className="mb-2"
-          setData={setLeagues}
-          // @ts-ignore
-          data={
-            seo.league?.map((item) => ({
-              label: item.league?.league_name || "",
-              value: item.league_id,
-            })) || []
-          }
-          disabled={sports.length > 0 || countries.length > 0}
-        />
-      </div>
       {/* ceo_title */}
       <div>
         <p className={titleClasses}>Заголовок</p>
@@ -258,4 +186,4 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
   );
 };
 
-export default memo(UpdateElementSeo);
+export default UpdateArchiveSeo;

@@ -12,6 +12,7 @@ interface IProps {
   setFile: (file: File | null) => void;
   file: File | null;
   setPreviewImage?: (previewImage: string | null) => void;
+  accept?: string;
 }
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
@@ -20,7 +21,12 @@ const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   reader.readAsDataURL(img);
 };
 
-const UploadInput: FC<IProps> = ({ setFile, file, setPreviewImage }) => {
+const UploadInput: FC<IProps> = ({
+  setFile,
+  file,
+  setPreviewImage,
+  accept,
+}) => {
   const [currentFile, setCurrentFile] = useState<UploadFile<RcFile>[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,6 +61,7 @@ const UploadInput: FC<IProps> = ({ setFile, file, setPreviewImage }) => {
       fileList={currentFile}
       customRequest={uploadFile}
       listType="picture"
+      accept={accept}
       onRemove={cleatFiles}
       maxCount={1}
       onChange={handleChange}

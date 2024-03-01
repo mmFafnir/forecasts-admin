@@ -27,6 +27,7 @@ import SeoMatchPage from "./Pages/Seo/SeoMatchPage";
 import SeoFaqPage from "./Pages/Seo/SeoFaqPage";
 import SeoElementPage from "./Pages/Seo/SeoElementPage";
 import CountriesElementPage from "./Pages/Countries/CountriesElementPage";
+import SeoArchivePage from "./Pages/Seo/SeoArchivePage";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         <Route path="/seo/home" element={<SeoHomePage />} />
         <Route path="/seo/match" element={<SeoMatchPage />} />
         <Route path="/seo/faq" element={<SeoFaqPage />} />
+        <Route path="/seo/archive" element={<SeoArchivePage />} />
 
         <Route
           path="*"

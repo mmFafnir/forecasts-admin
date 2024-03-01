@@ -5,9 +5,9 @@ import { FC, useState } from "react";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { setLimit } from "../../../store/Slices/filterSlice";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
-import "./filterBtn.scss";
 import ModalFilter from "../ModalFilter";
 import { EnumModalFilters } from "../../../types/Enums";
+import "./filterBtn.scss";
 
 type TBtnFilter = {
   value: EnumModalFilters;

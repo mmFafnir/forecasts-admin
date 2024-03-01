@@ -36,6 +36,7 @@ const TableMatch: FC = () => {
     league,
     country,
     statusMatch,
+    tir,
   } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
   const [page, setPage] = useState<number>(1);
@@ -58,6 +59,7 @@ const TableMatch: FC = () => {
       date: date ? date : { start: "", finish: "" },
       chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
       statusMatch,
+      tir,
     });
   }, [page]);
 
@@ -75,6 +77,7 @@ const TableMatch: FC = () => {
       date: date ? date : { start: "", finish: "" },
       chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
       statusMatch,
+      tir,
     });
   }, [
     search,
@@ -85,6 +88,7 @@ const TableMatch: FC = () => {
     league,
     country,
     statusMatch,
+    tir,
   ]);
 
   return (

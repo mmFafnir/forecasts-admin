@@ -24,6 +24,11 @@ export const updateHomeSeo = async (params: FormData) => {
   console.log(data);
 };
 
+export const updateArchiveSeo = async (params: FormData) => {
+  const { data } = await axios.post("/update_archive_page", params);
+  console.log(data);
+};
+
 export const updateMatchSeo = async (params: FormData) => {
   const { data } = await axios.post("/update_match_page_ceo", params);
   console.log(data);
@@ -34,7 +39,7 @@ export const updateFaqSeo = async (params: IUpdateSeoFaq) => {
   console.log(data);
 };
 
-export const updateElementSeo = async (params: FormData) => {
-  const { data } = await axios.post("/update_ceo", params);
+export const updateElementSeo = async (params: FormData, id: number) => {
+  const { data } = await axios.post(`/update_ceo?ceo_id=${id}`, params);
   console.log(data);
 };

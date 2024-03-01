@@ -1,7 +1,10 @@
+import { TypeLeague } from "../leaguesSlice/interface";
+
 interface IDopSet {
   id: number;
   country_id: number;
   league_id: number;
+  league?: TypeLeague;
   sport_id: number;
 }
 
