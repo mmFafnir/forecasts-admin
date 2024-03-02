@@ -50,7 +50,7 @@ const CreateCountry = () => {
           rules={[
             required,
             {
-              pattern: /^[A-Za-z0-9]+$/u,
+              pattern: /^[A-Za-z0-9_-]+$/u,
               message: "'en' для кого написано не пойму?",
             },
           ]}
@@ -65,7 +65,7 @@ const CreateCountry = () => {
           rules={[
             required,
             {
-              pattern: /^[А-Яа-яЁё0-9]+$/u,
+              pattern: /^[А-Яа-яЁё0-9_-]+$/u,
               message: "'ru' приколы какие-то?",
             },
           ]}
