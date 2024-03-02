@@ -5,6 +5,7 @@ import UploadInput from "../../../components/UI/Form/UploadInput";
 import CustomImage from "../../../components/UI/CustomImage";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { createCountry } from "../../../store/Slices/countriesSlice/asyncActions";
+// import { useTypeSelector } from "../../../hooks/useTypeSelector";
 
 interface IPramsInput {
   name: string;
@@ -13,6 +14,8 @@ interface IPramsInput {
 }
 const CreateCountry = () => {
   const dispatch = useTypeDispatch();
+
+  // const {status} = useTypeSelector(state => st)
 
   const [form] = Form.useForm<IPramsInput>();
   const [loading, setLoading] = useState<boolean>(false);
