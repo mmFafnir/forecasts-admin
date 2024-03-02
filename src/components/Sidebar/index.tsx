@@ -14,10 +14,24 @@ const links: MenuProps["items"] = SidebarMenu.map((item, index) => {
     label: item.name,
 
     children: item.children?.map((submenu) => {
+      if (!submenu.link && submenu.children) {
+        return {
+          key: `sub${key + submenu.text}`,
+          label: submenu.text,
+          children: submenu.children.map((deepMenu) => ({
+            key: deepMenu.link + key,
+            label: (
+              <Link to={deepMenu.link || "/"} className="w-full text-right">
+                {deepMenu.text}
+              </Link>
+            ),
+          })),
+        };
+      }
       return {
         key: submenu.link + key,
         label: (
-          <Link to={submenu.link} className="w-full text-right">
+          <Link to={submenu.link || ""} className="w-full text-right">
             {submenu.text}
           </Link>
         ),
@@ -37,7 +51,7 @@ const Sidebar: FC = () => {
       </div>
       <div className="mt-7">
         <Menu
-          mode="inline"
+          // mode="inline"
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
           className="text-left"

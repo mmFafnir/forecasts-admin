@@ -1,10 +1,14 @@
+import { TypeCountry } from "../countriesSlice/interface";
 import { TypeLeague } from "../leaguesSlice/interface";
+import { TypeSport } from "../sportSlice/interface";
 
 interface IDopSet {
   id: number;
   country_id: number;
   league_id: number;
   league?: TypeLeague;
+  sport: TypeSport;
+  country?: TypeCountry;
   sport_id: number;
 }
 
@@ -67,4 +71,8 @@ export interface ICreateSeo {
   sports_id: string;
   countrys_id: string;
   leagues_id: string;
+}
+
+export interface ICreateGeneralSeo {
+  [key: string]: IUpdateSeo;
 }

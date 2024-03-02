@@ -1,10 +1,11 @@
 import { Button, Form, Input } from "antd";
 import { required } from "../../../core/form-rools";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadInput from "../../../components/UI/Form/UploadInput";
 import CustomImage from "../../../components/UI/CustomImage";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { createCountry } from "../../../store/Slices/countriesSlice/asyncActions";
+import { notify } from "../../../assets/scripts/notify";
 // import { useTypeSelector } from "../../../hooks/useTypeSelector";
 
 interface IPramsInput {
@@ -14,8 +15,6 @@ interface IPramsInput {
 }
 const CreateCountry = () => {
   const dispatch = useTypeDispatch();
-
-  // const {status} = useTypeSelector(state => st)
 
   const [form] = Form.useForm<IPramsInput>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,7 +32,16 @@ const CreateCountry = () => {
       formData.append("photo", imgFile);
     }
     dispatch(createCountry(formData))
-      .then(() => {
+      .then((res) => {
+        if (!res.payload) {
+          notify({
+            type: "error",
+            message: "Ошибка!",
+            description: "Произошла ошибка, попробуйте позже",
+          });
+          return;
+        }
+        console.log(res);
         form.resetFields();
         setImgFile(null);
         serPreviewImage(null);
@@ -44,6 +52,11 @@ const CreateCountry = () => {
 
     console.log(values);
   };
+
+  useEffect(() => {
+    form.setFieldValue("photo", imgFile);
+  }, [imgFile]);
+
   return (
     <Form form={form} onFinish={onFinish}>
       <div className="form-item">
@@ -52,10 +65,10 @@ const CreateCountry = () => {
           name={"name"}
           rules={[
             required,
-            // {
-            //   pattern: /^[A-Za-z0-9_-]+$/u,
-            //   message: "'en' для кого написано не пойму?",
-            // },
+            {
+              pattern: /^[A-Za-z\s\d\-/]+$/u,
+              message: "Название должно быть на анлийском",
+            },
           ]}
         >
           <Input />
@@ -67,10 +80,10 @@ const CreateCountry = () => {
           name={"translation"}
           rules={[
             required,
-            // {
-            //   pattern: /^[А-Яа-яЁё0-9_-]+$/u,
-            //   message: "'ru' приколы какие-то?",
-            // },
+            {
+              pattern: /^[А-Яа-яЁё\s\d\-/]+$/u,
+              message: "На русском пожалуйста",
+            },
           ]}
         >
           <Input />
@@ -90,12 +103,14 @@ const CreateCountry = () => {
             />
           </div>
         )}
-        <UploadInput
-          file={imgFile}
-          setFile={setImgFile}
-          setPreviewImage={serPreviewImage}
-          accept=".svg"
-        />
+        <Form.Item name={"photo"} rules={[required]}>
+          <UploadInput
+            file={imgFile}
+            setFile={setImgFile}
+            setPreviewImage={serPreviewImage}
+            accept=".svg"
+          />
+        </Form.Item>
       </div>
 
       <Button

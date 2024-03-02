@@ -10,7 +10,13 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-const forecast = [
+interface ISubMenu {
+  link?: string;
+  text: string;
+  children?: ISubMenu[];
+}
+
+const forecast: ISubMenu[] = [
   { link: "/countries", text: "СТРАНЫ" },
   { link: "/leagues", text: "ЛИГИ" },
   { link: "/teams", text: "КОМАНДЫ" },
@@ -18,14 +24,22 @@ const forecast = [
   { link: "/events", text: "СОБЫТИЯ" },
 ];
 
-const texts = [{ link: "/faq", text: "Вопросы/Ответы" }];
+const texts: ISubMenu[] = [{ link: "/faq", text: "Вопросы/Ответы" }];
 
-const seo = [
-  { link: "/seo", text: "Все" },
-  { link: "/seo/home", text: "Главная" },
-  { link: "/seo/match", text: "Страница матча" },
-  { link: "/seo/faq", text: "Вопросы/Ответы" },
-  { link: "/seo/archive", text: "Архив" },
+const seo: ISubMenu[] = [
+  { link: "/seo", text: "Общее" },
+  {
+    text: "Дополнительное",
+    children: [
+      { link: "/seo/country", text: "Страны" },
+      { link: "/seo/leagues", text: "Лиги" },
+    ],
+  },
+  { link: "/seo/static", text: "Статические страницы" },
+
+  // { link: "/seo/match", text: "Страница матча" },
+  // { link: "/seo/faq", text: "Вопросы/Ответы" },
+  // { link: "/seo/archive", text: "Архив" },
 ];
 
 export const SidebarMenu = [
@@ -74,8 +88,4 @@ export const SidebarMenu = [
     name: "SEO",
     children: seo,
   },
-  // {
-  //   icon: FontSizeOutlined,
-  //   name: <Link to={"/users"}>ЗАПРОСЫ</Link>,
-  // },
 ];

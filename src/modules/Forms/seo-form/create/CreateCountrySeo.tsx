@@ -1,14 +1,14 @@
 import { Button, Form, Input } from "antd";
 import { FC, useEffect, useState } from "react";
-import { required } from "../../../core/form-rools";
+import { required } from "../../../../core/form-rools";
 import TextArea from "antd/es/input/TextArea";
-import CustomImage from "../../../components/UI/CustomImage";
-import UploadInput from "../../../components/UI/Form/UploadInput";
-import SelectSports from "../../Selects/SelectSports";
-import SelectCountries from "../../Selects/SelectCountries";
-import SelectLeagues from "../../Selects/SelectLeagues";
-import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
-import { createSeo } from "../../../store/Slices/seoSlice/asyncActions";
+import CustomImage from "../../../../components/UI/CustomImage";
+import UploadInput from "../../../../components/UI/Form/UploadInput";
+import SelectCountries from "../../../Selects/SelectCountries";
+import { useTypeDispatch } from "../../../../hooks/useTypeDispatch";
+import { createSeo } from "../../../../store/Slices/seoSlice/asyncActions";
+import SelectOneSport from "../../../Selects/SelectOneSport";
+import { notify } from "../../../../assets/scripts/notify";
 
 interface IInputs {
   ceo_title: string;
@@ -17,13 +17,13 @@ interface IInputs {
   ceo_h: string;
   ceo_short_description_for_h: string;
   ceo_text: string;
-  sports_id: string;
+  sport_id: string;
   countrys_id: string;
   leagues_id: string;
 }
 
 const titleClasses = `text-left font-semibold mb-2`;
-const CreateSeo: FC = () => {
+export const CreateCountrySeo: FC = () => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IInputs>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,13 +31,18 @@ const CreateSeo: FC = () => {
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [previewImage, serPreviewImage] = useState<string | null>(null);
 
-  const [sports, setSports] = useState<string[]>([]);
+  const [sport, setSport] = useState<number>(1);
   const [countries, setCountries] = useState<string[]>([]);
-  const [leagues, setLeagues] = useState<string[]>([]);
 
   const onFinish = (values: IInputs) => {
+    if (countries.length === 0) {
+      notify({
+        message: "Список стран пуст...",
+        type: "error",
+      });
+      return;
+    }
     setLoading(true);
-    console.log(values);
     const formData = new FormData();
 
     for (const [key, value] of Object.entries(values)) {
@@ -47,24 +52,17 @@ const CreateSeo: FC = () => {
       formData.append("ceo_photo", imgFile);
     }
 
-    sports.forEach((sport) => {
-      formData.append("sports_id[]", sport);
-    });
-
+    formData.append("sport_id", `${sport}`);
     countries.forEach((country) => {
       console.log(country);
       formData.append("countrys_id[]", country);
     });
 
-    leagues.forEach((league) => {
-      formData.append("leagues_id[]", league);
-    });
-    dispatch(createSeo(formData))
+    dispatch(createSeo({ formData, sportId: sport }))
       .then(() => {
         form.resetFields();
-        setSports([]);
+        setSport(1);
         setCountries([]);
-        setLeagues([]);
         serPreviewImage(null);
         setImgFile(null);
       })
@@ -90,35 +88,16 @@ const CreateSeo: FC = () => {
       {/* sport country league */}
       <div>
         <p className={`${titleClasses} !mb-0`}>Спорт:</p>
-        <SelectSports
-          data={[]}
-          values={sports}
-          className="mb-2"
-          setData={setSports}
-          disabled={leagues.length > 0 || countries.length > 0}
-        />
+        <SelectOneSport value={sport} setValue={setSport} className="mb-2" />
+
         <p className={`${titleClasses} !mb-0`}>Страна:</p>
-        <SelectCountries
-          data={[]}
-          values={countries}
-          className="mb-2"
-          setData={setCountries}
-          disabled={leagues.length > 0 || sports.length > 0}
-        />
-        <p className={`${titleClasses} !mb-0`}>Лига</p>
-        <SelectLeagues
-          values={leagues}
-          data={[]}
-          className="mb-2"
-          setData={setLeagues}
-          disabled={sports.length > 0 || countries.length > 0}
-        />
+        <SelectCountries data={[]} values={countries} setData={setCountries} />
       </div>
 
       {/* ceo_title */}
       <div>
         <p className={titleClasses}>Заголовок</p>
-        <Form.Item className="mr-3" name="ceo_title" rules={[required]}>
+        <Form.Item name="ceo_title" rules={[required]}>
           <Input />
         </Form.Item>
       </div>
@@ -126,7 +105,7 @@ const CreateSeo: FC = () => {
       {/* ceo_description */}
       <div>
         <p className={titleClasses}>Описание</p>
-        <Form.Item className="mr-3" name="ceo_description" rules={[required]}>
+        <Form.Item name="ceo_description" rules={[required]}>
           <Input />
         </Form.Item>
       </div>
@@ -134,7 +113,7 @@ const CreateSeo: FC = () => {
       {/* ceo_keywords */}
       <div>
         <p className={titleClasses}>Ключевые слова</p>
-        <Form.Item className="mr-3" name="ceo_keywords" rules={[required]}>
+        <Form.Item name="ceo_keywords" rules={[required]}>
           <Input />
         </Form.Item>
       </div>
@@ -142,7 +121,7 @@ const CreateSeo: FC = () => {
       {/* ceo_h */}
       <div>
         <p className={titleClasses}>H1 заголовок</p>
-        <Form.Item className="mr-3" name="ceo_h" rules={[required]}>
+        <Form.Item name="ceo_h" rules={[required]}>
           <Input />
         </Form.Item>
       </div>
@@ -202,5 +181,3 @@ const CreateSeo: FC = () => {
     </Form>
   );
 };
-
-export default CreateSeo;

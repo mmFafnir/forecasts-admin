@@ -21,13 +21,9 @@ import AdminsPage from "./Pages/Users/AdminsPage";
 import AdminsElementPage from "./Pages/Users/AdminElementPage";
 import UsersPage from "./Pages/Users/UsersPage";
 import FAQPage from "./Pages/Faq/FAQPage";
-import SeoPage from "./Pages/Seo/SeoPage";
-import SeoHomePage from "./Pages/Seo/SeoHomePage";
-import SeoMatchPage from "./Pages/Seo/SeoMatchPage";
-import SeoFaqPage from "./Pages/Seo/SeoFaqPage";
-import SeoElementPage from "./Pages/Seo/SeoElementPage";
+import SeoElementPage from "./Pages/Seo/dop/SeoElementPage";
 import CountriesElementPage from "./Pages/Countries/CountriesElementPage";
-import SeoArchivePage from "./Pages/Seo/SeoArchivePage";
+import { SeoCountryPage, SeoLeaguePage, SeoPage, SeoStatic } from "./Pages/Seo";
 
 function App() {
   return (
@@ -72,11 +68,13 @@ function App() {
         <Route path="/faq" element={<FAQPage />} />
 
         <Route path="/seo" element={<SeoPage />} />
+
+        <Route path="/seo/country" element={<SeoCountryPage />} />
+        <Route path="/seo/leagues" element={<SeoLeaguePage />} />
+
         <Route path="/seo/:id" element={<SeoElementPage />} />
-        <Route path="/seo/home" element={<SeoHomePage />} />
-        <Route path="/seo/match" element={<SeoMatchPage />} />
-        <Route path="/seo/faq" element={<SeoFaqPage />} />
-        <Route path="/seo/archive" element={<SeoArchivePage />} />
+
+        <Route path="/seo/static" element={<SeoStatic />} />
 
         <Route
           path="*"

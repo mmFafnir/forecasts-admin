@@ -46,6 +46,9 @@ export const columns: ColumnsType<TypeLeague> = [
   {
     title: "Название",
     dataIndex: "league_name",
+    render: (_, record) => {
+      return <Link to={`/leagues/${record.id}`}>{record.league_name}</Link>;
+    },
   },
 
   {

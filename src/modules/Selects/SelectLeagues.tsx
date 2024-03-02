@@ -111,7 +111,7 @@ const SelectLeagues: FC<IProps> = ({
           onSearch={onSearch}
           style={{ width: "100%" }}
           onChange={handleChange}
-          value={currentValues}
+          value={values || currentValues}
           autoClearSearchValue={false}
           filterOption={(inputValue, option) => {
             return (

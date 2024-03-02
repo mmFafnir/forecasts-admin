@@ -11,8 +11,34 @@ export const columns: ColumnsType<ISeo> = [
   },
 
   {
-    title: "Страница",
-    dataIndex: "page",
+    title: "Страницы",
+    className: "overflow-hidden max-w-xs",
+    render: (_, record) => {
+      let text: string = "";
+      if (record.country && record.country.length > 0) {
+        text =
+          record.country
+            ?.map((item) => `${item.country?.name || item.country?.translate}`)
+            .join(", ") || "";
+      }
+
+      if (record.league && record.league.length > 0) {
+        text =
+          record.league
+            ?.map((lig) => `${lig.league?.league_name}`)
+            .join(", ") || "";
+      }
+
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden  text-ellipsis"
+          title={text}
+        >
+          {" "}
+          {text}
+        </p>
+      );
+    },
   },
 
   {

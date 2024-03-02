@@ -1,17 +1,11 @@
 import { Button, Form, Input } from "antd";
-import { FC, memo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ISeo } from "../../../store/Slices/seoSlice/interface";
 import { required } from "../../../core/form-rools";
 import TextArea from "antd/es/input/TextArea";
-import UploadInput from "../../../components/UI/Form/UploadInput";
-import CustomImage from "../../../components/UI/CustomImage";
-import { updateElementSeo } from "../../../store/Slices/seoSlice/asyncActions";
 import { notify } from "../../../assets/scripts/notify";
 import { AxiosError } from "axios";
-import SelectCountries from "../../Selects/SelectCountries";
-import SelectSports from "../../Selects/SelectSports";
-import SelectLeagues from "../../Selects/SelectLeagues";
-import SelectOneSport from "../../Selects/SelectOneSport";
+import { updateStaticSeo } from "../../../store/Slices/seoSlice/asyncActions";
 
 interface IInputs {
   ceo_title: string;
@@ -23,71 +17,28 @@ interface IInputs {
 }
 
 interface IProps {
-  seo: ISeo;
+  seo?: ISeo;
 }
 const titleClasses = `text-left font-semibold text-sm mb-2`;
-const UpdateElementSeo: FC<IProps> = ({ seo }) => {
-  const type = seo.country && seo.country.length > 0 ? "country" : "league";
-
+export const SeoStaticElementPage: FC<IProps> = ({ seo }) => {
   const [loading, setLoading] = useState<boolean>(false);
-
-  const [sport, setSport] = useState<number>(
-    (seo.sport && seo.sport[0].id) || 1
-  );
-  const [countries, setCountries] = useState<string[]>(
-    seo.country?.map((item) => `${item.country_id}`) || []
-  );
-  const [leagues, setLeagues] = useState<string[]>(
-    seo.league?.map((item) => `${item.league_id}`) || []
-  );
-
-  const [imgFile, setImgFile] = useState<File | null>(null);
-  const [previewImage, serPreviewImage] = useState<string | null>(null);
-
   const [form] = Form.useForm<IInputs>();
 
   const onFinish = (values: IInputs) => {
     setLoading(true);
     const formData = new FormData();
-    // console.log('seo': seo.id);
-    formData.append("ceo_id ", `3`);
-    if (imgFile) {
-      formData.append("ceo_photo", imgFile);
+    // if (imgFile) {
+    //   formData.append("ceo_photo", imgFile);
+    // }
+    if (seo && seo.page) {
+      formData.append("page", seo.page);
     }
+
     for (const [key, value] of Object.entries(values)) {
       formData.append(key, value);
     }
 
-    formData.append("sport_id", `${sport}`);
-
-    if (type === "country") {
-      if (countries.length == 0) {
-        notify({
-          type: "error",
-          message: "Список стран пуст...",
-        });
-        setLoading(false);
-        return;
-      }
-      countries.forEach((country) => {
-        console.log(country);
-        formData.append("countrys_id[]", country);
-      });
-    } else {
-      if (leagues.length == 0) {
-        notify({
-          type: "error",
-          message: "Список лиг пуст...",
-        });
-        setLoading(false);
-        return;
-      }
-      leagues.forEach((league) => {
-        formData.append("leagues_id[]", league);
-      });
-    }
-
-    updateElementSeo(formData, seo.id)
+    updateStaticSeo(formData)
       .then(() => {
         notify({
           type: "success",
@@ -97,7 +48,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
       })
       .catch((error) => {
         const err = error as AxiosError;
-        serPreviewImage(null);
+        // serPreviewImage(null);
         notify({
           type: "error",
           message: `Ошибка ${err.code}`,
@@ -108,6 +59,13 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (!seo) return;
+    form.setFieldsValue(seo);
+  }, [seo]);
+
+  if (!seo) return <></>;
   return (
     <Form
       form={form}
@@ -119,43 +77,6 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
       autoComplete="off"
       onFinish={onFinish}
     >
-      {/* sport country league */}
-      <div>
-        <p className={`${titleClasses}`}>Спорт:</p>
-        <SelectOneSport
-          value={sport}
-          setValue={setSport}
-          className="mb-2 text-left"
-        />
-        {type === "country" && (
-          <>
-            <p className={`${titleClasses}`}>Страна:</p>
-            <SelectCountries
-              all
-              className="mb-2"
-              setData={setCountries}
-              data={seo.country?.map((item) => String(item.country_id)) || []}
-            />
-          </>
-        )}
-        {type === "league" && (
-          <>
-            <p className={`${titleClasses}`}>Лиги:</p>
-            <SelectLeagues
-              all
-              className="mb-2"
-              setData={setLeagues}
-              // @ts-ignore
-              data={
-                seo.league?.map((item) => ({
-                  label: item.league?.league_name || "",
-                  value: item.league_id,
-                })) || []
-              }
-            />
-          </>
-        )}
-      </div>
       {/* ceo_title */}
       <div>
         <p className={titleClasses}>Заголовок</p>
@@ -233,7 +154,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
         </Form.Item>
       </div>
 
-      <div className="mb-7 flex flex-col items-start text-left">
+      {/* <div className="mb-7 flex flex-col items-start text-left">
         <p className={titleClasses}>Seo Картика</p>
 
         <div className="h-40 mb-3" style={{ minWidth: "300px" }}>
@@ -254,7 +175,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
           setFile={setImgFile}
           setPreviewImage={serPreviewImage}
         />
-      </div>
+      </div> */}
 
       <Button
         type="primary"
@@ -268,5 +189,3 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
     </Form>
   );
 };
-
-export default memo(UpdateElementSeo);

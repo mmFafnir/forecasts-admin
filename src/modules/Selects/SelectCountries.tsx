@@ -33,8 +33,6 @@ const SelectCountries: FC<IProps> = ({
     value: string[],
     option: DefaultOptionType | DefaultOptionType[]
   ) => {
-    console.log(option);
-
     if (value.find((val) => val === "all")) {
       setCurrentValues(["all"]);
       setData(["all"]);
@@ -74,7 +72,7 @@ const SelectCountries: FC<IProps> = ({
           onChange={handleChange}
           autoClearSearchValue={false}
           tokenSeparators={[","]}
-          value={currentValues}
+          value={values || currentValues}
           filterOption={(inputValue, option) =>
             String(option!.label)
               .toUpperCase()

@@ -1,14 +1,14 @@
-import axios from "../../core/axios";
+import axios from "../../../core/axios";
 import { FC, useEffect, useState } from "react";
-import { ISeo } from "../../store/Slices/seoSlice/interface";
-import UpdateHomeSeo from "../../modules/Forms/seo-form/UpdateHomeSeo";
+import { IFaqSeo } from "../../../store/Slices/seoSlice/interface";
 import { Space, Spin } from "antd";
+import UploadFaqSeo from "../../../modules/Forms/seo-form/UploadFaqSeo";
 
-const SeoHomePage: FC = () => {
-  const [data, setData] = useState<null | ISeo>(null);
+const SeoFaqPage: FC = () => {
+  const [data, setData] = useState<null | IFaqSeo>(null);
   const getSinglePageSeo = async () => {
     try {
-      const { data } = await axios.get(`/get_home_page_ceo`);
+      const { data } = await axios.get(`/get_global_faq_ceo`);
       setData(data.data);
     } catch (error) {
       console.log(error);
@@ -20,16 +20,15 @@ const SeoHomePage: FC = () => {
 
   return (
     <div className="form">
-      <h1 className="mb-5">Редактировать Seo для Главной страницы</h1>
       {!data ? (
         <Space className="flex h-96 max-w-md justify-center items-center">
           <Spin size="large" />
         </Space>
       ) : (
-        <UpdateHomeSeo seo={data} />
+        <UploadFaqSeo seo={data} />
       )}
     </div>
   );
 };
 
-export default SeoHomePage;
+export default SeoFaqPage;
