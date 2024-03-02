@@ -49,10 +49,10 @@ const CreateCountry = () => {
           name={"name"}
           rules={[
             required,
-            {
-              pattern: /^[A-Za-z0-9_-]+$/u,
-              message: "'en' для кого написано не пойму?",
-            },
+            // {
+            //   pattern: /^[A-Za-z0-9_-]+$/u,
+            //   message: "'en' для кого написано не пойму?",
+            // },
           ]}
         >
           <Input />
@@ -64,10 +64,10 @@ const CreateCountry = () => {
           name={"translation"}
           rules={[
             required,
-            {
-              pattern: /^[А-Яа-яЁё0-9_-]+$/u,
-              message: "'ru' приколы какие-то?",
-            },
+            // {
+            //   pattern: /^[А-Яа-яЁё0-9_-]+$/u,
+            //   message: "'ru' приколы какие-то?",
+            // },
           ]}
         >
           <Input />
