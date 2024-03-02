@@ -9,7 +9,6 @@ import { updateElementSeo } from "../../../store/Slices/seoSlice/asyncActions";
 import { notify } from "../../../assets/scripts/notify";
 import { AxiosError } from "axios";
 import SelectCountries from "../../Selects/SelectCountries";
-import SelectSports from "../../Selects/SelectSports";
 import SelectLeagues from "../../Selects/SelectLeagues";
 import SelectOneSport from "../../Selects/SelectOneSport";
 
@@ -145,6 +144,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
               all
               className="mb-2"
               setData={setLeagues}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               data={
                 seo.league?.map((item) => ({
@@ -260,7 +260,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
         type="primary"
         htmlType="submit"
         size="large"
-        className="ml-auto flex font-semibold"
+        className="ml-auto font-semibold"
         loading={loading}
       >
         Сохранить

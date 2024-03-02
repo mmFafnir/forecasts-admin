@@ -180,7 +180,7 @@ export const CreateLeagueSeo: FC = () => {
         type="primary"
         htmlType="submit"
         size="large"
-        className="ml-auto flex font-semibold"
+        className="ml-auto font-semibold"
         loading={loading}
       >
         Сохранить
