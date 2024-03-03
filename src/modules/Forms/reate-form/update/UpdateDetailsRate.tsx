@@ -90,7 +90,9 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           message: "Элемент успешно обновлен!",
         });
         onClose();
-        form.resetFields();
+        setTimeout(() => {
+          form.resetFields();
+        }, 100);
       })
       .finally(() => setLoading(false));
   };
@@ -119,7 +121,29 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
   };
 
   useEffect(() => {
+    if (!data) return;
     setCurrentData(data);
+    form.setFieldsValue({
+      name: data.name,
+      price_rub: data.price_rub || "0",
+      price_usd: data.price_usd || "0",
+      price_euro: data.price_euro || "0",
+
+      saved_price_rub: data.saved_price_rub || "0",
+      saved_price_usd: data.saved_price_usd || "0",
+      saved_price_euro: data.saved_price_euro || "0",
+
+      day_price_rub: data.day_price_rub || "0",
+      day_price_usd: data.day_price_usd || "0",
+      day_price_euro: data.day_price_euro || "0",
+
+      work_day: data.work_day || "",
+      work_month: data.work_month || "",
+      work_year: data.work_year || "",
+
+      bonus_day: data.bonus_day || "",
+      bonus_percent: data.bonus_percent || "",
+    });
     setIsFree(data?.free_or_not == "1");
   }, [data]);
 
