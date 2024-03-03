@@ -24,6 +24,7 @@ export interface ISeo {
   page: null | string;
   created_at: string;
   updated_at: string;
+  sports_idi: number;
   country?: IDopSet[];
   sport?: IDopSet[];
   league?: IDopSet[];

@@ -30,9 +30,8 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [sport, setSport] = useState<number>(
-    (seo.sport && seo.sport[0].id) || 1
-  );
+  const [sport, setSport] = useState<number>(seo.sports_idi || 1);
+  console.log(sport);
   const [countries, setCountries] = useState<string[]>(
     seo.country?.map((item) => `${item.country_id}`) || []
   );
@@ -107,6 +106,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
         setLoading(false);
       });
   };
+
   return (
     <Form
       form={form}

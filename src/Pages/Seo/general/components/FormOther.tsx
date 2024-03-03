@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { FC, useEffect } from "react";
 import { ISeo } from "../../../../store/Slices/seoSlice/interface";
+import { defaultSeo } from "../const/defaultSeo";
 
 interface IProps {
   title: string;
@@ -22,7 +23,10 @@ export const FormOther: FC<IProps> = ({ title, page, data }) => {
   const [form] = Form.useForm<IInputs>();
 
   useEffect(() => {
-    if (!data) return;
+    if (!data) {
+      form.setFieldsValue(defaultSeo);
+      return;
+    }
     form.setFieldsValue(data);
   }, [data]);
 

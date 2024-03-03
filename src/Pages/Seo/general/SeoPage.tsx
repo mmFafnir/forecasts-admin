@@ -9,6 +9,7 @@ import {
 } from "../../../store/Slices/seoSlice/interface";
 import { Form, Spin } from "antd";
 import { notify } from "../../../assets/scripts/notify";
+import { defaultSeo } from "./const/defaultSeo";
 
 const fetchGeneralSeo = async (sportId: number) => {
   try {
@@ -69,10 +70,10 @@ export const SeoPage: FC = () => {
         const leagueData = res.find((item) => item.page === "league");
         const matchData = res.find((item) => item.page === "match");
 
-        if (sportData) setSportData(sportData);
-        if (countryData) setCountryData(countryData);
-        if (leagueData) setLeagueData(leagueData);
-        if (matchData) setMatchData(matchData);
+        setSportData(sportData || defaultSeo);
+        setCountryData(countryData || defaultSeo);
+        setLeagueData(leagueData || defaultSeo);
+        setMatchData(matchData || defaultSeo);
       })
       .finally(() => {
         setLoading(false);

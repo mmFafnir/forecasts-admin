@@ -3,6 +3,7 @@ import { required } from "../../../../core/form-rools";
 import TextArea from "antd/es/input/TextArea";
 import { ISeo } from "../../../../store/Slices/seoSlice/interface";
 import { FC, useEffect } from "react";
+import { defaultSeo } from "../const/defaultSeo";
 
 interface IInputs {
   ceo_title: string;
@@ -22,7 +23,11 @@ export const FormSport: FC<IProps> = ({ data }) => {
   const [form] = Form.useForm<IInputs>();
 
   useEffect(() => {
-    if (!data) return;
+    console.log(data);
+    if (!data) {
+      form.setFieldsValue(defaultSeo);
+      return;
+    }
     form.setFieldsValue(data);
   }, [data]);
 
