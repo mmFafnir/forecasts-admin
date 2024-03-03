@@ -24,6 +24,7 @@ import FAQPage from "./Pages/Faq/FAQPage";
 import SeoElementPage from "./Pages/Seo/dop/SeoElementPage";
 import CountriesElementPage from "./Pages/Countries/CountriesElementPage";
 import { SeoCountryPage, SeoLeaguePage, SeoPage, SeoStatic } from "./Pages/Seo";
+import { RateElementPage, RatePage } from "./Pages/Rate";
 
 function App() {
   return (
@@ -71,10 +72,18 @@ function App() {
 
         <Route path="/seo/country" element={<SeoCountryPage />} />
         <Route path="/seo/leagues" element={<SeoLeaguePage />} />
-
         <Route path="/seo/:id" element={<SeoElementPage />} />
-
         <Route path="/seo/static" element={<SeoStatic />} />
+
+        <Route path="/rates" element={<RatePage />} />
+        <Route path="/rates/:id" element={<RateElementPage />} />
+
+        <Route
+          path="404"
+          element={
+            <h1 className="text-3xl mt-20 font-bold">Страница не найдена :(</h1>
+          }
+        />
 
         <Route
           path="*"

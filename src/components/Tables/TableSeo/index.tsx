@@ -1,6 +1,6 @@
 import { Spin } from "antd";
 import { FC } from "react";
-import Table from "..";
+import Table from "./Table";
 import { columns } from "./columns";
 import { ISeo } from "../../../store/Slices/seoSlice/interface";
 

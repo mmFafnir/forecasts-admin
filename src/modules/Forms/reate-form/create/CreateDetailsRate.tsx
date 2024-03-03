@@ -1,0 +1,239 @@
+import { Button, Form, Input, Switch } from "antd";
+import { FC, useState } from "react";
+import { required } from "../../../../core/form-rools";
+import { useTypeDispatch } from "../../../../hooks/useTypeDispatch";
+import { createDetailsRate } from "../../../../store/Slices/rateSlice/asyncActions";
+import { notify } from "../../../../assets/scripts/notify";
+
+interface IInputs {
+  name: string;
+  rate_id: number;
+
+  price_rub: string;
+  price_usd: string;
+  price_euro: string;
+
+  work_day: string;
+  work_month: string;
+  work_year: string;
+
+  saved_price_rub: string;
+  saved_price_usd: string;
+  saved_price_euro: string;
+
+  day_price_rub: string;
+  day_price_usd: string;
+  day_price_euro: string;
+
+  bonus_day: string;
+  bonus_percent: string;
+}
+
+interface IProps {
+  id?: string;
+}
+
+export const CreateDetailsRate: FC<IProps> = ({ id }) => {
+  const dispatch = useTypeDispatch();
+  const [form] = Form.useForm<IInputs>();
+  const [isFree, setIsFree] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const onFinish = (values: IInputs) => {
+    if (!id) return;
+    setLoading(true);
+
+    dispatch(
+      createDetailsRate({
+        name: values.name,
+        price_rub: values.price_rub || "0",
+        price_usd: values.price_usd || "0",
+        price_euro: values.price_euro || "0",
+
+        saved_price_rub: values.saved_price_rub || "0",
+        saved_price_usd: values.saved_price_usd || "0",
+        saved_price_euro: values.saved_price_euro || "0",
+
+        day_price_rub: values.day_price_rub || "0",
+        day_price_usd: values.day_price_usd || "0",
+        day_price_euro: values.day_price_euro || "0",
+
+        work_day: values.work_day,
+        work_month: values.work_month,
+        work_year: values.work_year,
+
+        bonus_day: values.bonus_day,
+        bonus_percent: values.bonus_percent,
+        free_or_not: isFree ? 1 : 0,
+        rate_id: Number(id),
+      })
+    )
+      .then((res) => {
+        if (!res.payload) {
+          notify({
+            type: "error",
+            message: "Ошибка!",
+          });
+          return;
+        }
+        notify({
+          type: "success",
+          message: "Элемент успешно создан!",
+        });
+        form.resetFields();
+      })
+      .finally(() => setLoading(false));
+  };
+
+  if (!id) return <></>;
+  return (
+    <Form
+      form={form}
+      layout="vertical"
+      style={{ maxWidth: "700px" }}
+      labelCol={{ span: 8 }}
+      wrapperCol={{ span: 16 }}
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      autoComplete="off"
+    >
+      <div className="form-item">
+        <p>Название:</p>
+        <Form.Item name={"name"} rules={[required]}>
+          <Input />
+        </Form.Item>
+      </div>
+      <div className="form-item mb-2 flex item-center">
+        <p className="!mb-0 mr-2">Бесплатно:</p>
+        <Switch
+          style={{ marginTop: 2 }}
+          checkedChildren="Да"
+          unCheckedChildren="Нет"
+          checked={isFree}
+          onChange={setIsFree}
+        />
+      </div>
+      {!isFree && (
+        <>
+          <div className="form-item mb-2">
+            <p>Цены:</p>
+            <div className="flex">
+              <Form.Item name={"price_rub"} rules={[required]} noStyle>
+                <Input
+                  prefix={"rub"}
+                  type="number"
+                  className="rounded-br-none rounded-tr-none"
+                />
+              </Form.Item>
+              <Form.Item name={"price_usd"} rules={[required]} noStyle>
+                <Input prefix={"usd"} type="number" className="rounded-none" />
+              </Form.Item>
+              <Form.Item name={"price_euro"} rules={[required]} noStyle>
+                <Input
+                  prefix={"eu"}
+                  type="number"
+                  className="rounded-bl-none rounded-tl-none"
+                />
+              </Form.Item>
+            </div>
+          </div>
+
+          <div className="form-item mb-2">
+            <p>Цена за один день:</p>
+            <div className="flex">
+              <Form.Item name={"day_price_rub"} rules={[required]} noStyle>
+                <Input
+                  prefix={"rub"}
+                  type="number"
+                  className="rounded-br-none rounded-tr-none"
+                />
+              </Form.Item>
+              <Form.Item name={"day_price_usd"} rules={[required]} noStyle>
+                <Input prefix={"usd"} type="number" className="rounded-none" />
+              </Form.Item>
+              <Form.Item name={"day_price_euro"} rules={[required]} noStyle>
+                <Input
+                  prefix={"eu"}
+                  type="number"
+                  className="rounded-bl-none rounded-tl-none"
+                />
+              </Form.Item>
+            </div>
+          </div>
+
+          <div className="form-item mb-2">
+            <p>Экономия:</p>
+            <div className="flex">
+              <Form.Item name={"saved_price_rub"} rules={[required]} noStyle>
+                <Input
+                  prefix={"rub"}
+                  type="number"
+                  className="rounded-br-none rounded-tr-none"
+                />
+              </Form.Item>
+              <Form.Item name={"saved_price_usd"} rules={[required]} noStyle>
+                <Input prefix={"usd"} type="number" className="rounded-none" />
+              </Form.Item>
+              <Form.Item name={"saved_price_euro"} rules={[required]} noStyle>
+                <Input
+                  prefix={"eu"}
+                  type="number"
+                  className="rounded-bl-none rounded-tl-none"
+                />
+              </Form.Item>
+            </div>
+          </div>
+        </>
+      )}
+
+      <div className="form-item mb-2">
+        <p>Переод:</p>
+        <div className="flex">
+          <Form.Item name={"work_day"} noStyle>
+            <Input
+              prefix={"День"}
+              type="number"
+              className="rounded-br-none rounded-tr-none"
+            />
+          </Form.Item>
+          <Form.Item name={"work_month"} noStyle>
+            <Input prefix={"Месяц"} type="number" className="rounded-none" />
+          </Form.Item>
+          <Form.Item name={"work_year"} noStyle>
+            <Input
+              prefix={"Год"}
+              type="number"
+              className="rounded-bl-none rounded-tl-none"
+            />
+          </Form.Item>
+        </div>
+      </div>
+
+      <div className="form-item ">
+        <p>Бонусный день:</p>
+        <Form.Item name={"bonus_day"} rules={[required]}>
+          <Input type="number" />
+        </Form.Item>
+      </div>
+
+      <div className="form-item">
+        <p>Бонус:</p>
+        <Form.Item name={"bonus_percent"} rules={[required]}>
+          <Input type="number" />
+        </Form.Item>
+      </div>
+
+      <div className="flex mt-5">
+        <Button
+          htmlType="submit"
+          className="ml-auto"
+          size="large"
+          type="primary"
+          loading={loading}
+        >
+          Сохранить
+        </Button>
+      </div>
+    </Form>
+  );
+};

@@ -14,6 +14,7 @@ import languagesSlice from "./Slices/languagesSlice";
 import sportsSlice from "./Slices/sportSlice";
 import faqSlice from "./Slices/faqSlice";
 import seoSlice from "./Slices/seoSlice";
+import rateSlice from "./Slices/rateSlice";
 
 export const store = configureStore({
   reducer: {
@@ -32,6 +33,7 @@ export const store = configureStore({
     sports: sportsSlice,
     faq: faqSlice,
     seo: seoSlice,
+    rate: rateSlice,
   },
 });
 

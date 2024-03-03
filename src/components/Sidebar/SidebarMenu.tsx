@@ -88,4 +88,8 @@ export const SidebarMenu = [
     name: "SEO",
     children: seo,
   },
+  {
+    icon: UsergroupAddOutlined,
+    name: <Link to={"/rates"}>ТАРИФЫ</Link>,
+  },
 ];
