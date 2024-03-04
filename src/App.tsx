@@ -20,11 +20,13 @@ import "./assets/scss/App.scss";
 import AdminsPage from "./Pages/Users/AdminsPage";
 import AdminsElementPage from "./Pages/Users/AdminElementPage";
 import UsersPage from "./Pages/Users/UsersPage";
-import FAQPage from "./Pages/Faq/FAQPage";
+import FAQPage from "./Pages/Static/FAQPage";
 import SeoElementPage from "./Pages/Seo/dop/SeoElementPage";
 import CountriesElementPage from "./Pages/Countries/CountriesElementPage";
 import { SeoCountryPage, SeoLeaguePage, SeoPage, SeoStatic } from "./Pages/Seo";
 import { RateElementPage, RatePage } from "./Pages/Rate";
+import PrivacyPolicy from "./Pages/Static/PrivacyPolicy";
+import TermOfUsePage from "./Pages/Static/TermOfUsePage";
 
 function App() {
   return (
@@ -67,6 +69,8 @@ function App() {
         <Route path="/users" element={<UsersPage />} />
 
         <Route path="/faq" element={<FAQPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/term-of-use" element={<TermOfUsePage />} />
 
         <Route path="/seo" element={<SeoPage />} />
 

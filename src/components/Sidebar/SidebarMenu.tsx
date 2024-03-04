@@ -24,7 +24,11 @@ const forecast: ISubMenu[] = [
   { link: "/events", text: "СОБЫТИЯ" },
 ];
 
-const texts: ISubMenu[] = [{ link: "/faq", text: "Вопросы/Ответы" }];
+const texts: ISubMenu[] = [
+  { link: "/faq", text: "Вопросы/Ответы" },
+  { link: "/privacy-policy", text: "Политика конфиденциальности" },
+  { link: "/term-of-use", text: "Условия пользования" },
+];
 
 const seo: ISubMenu[] = [
   { link: "/seo", text: "Общее" },
