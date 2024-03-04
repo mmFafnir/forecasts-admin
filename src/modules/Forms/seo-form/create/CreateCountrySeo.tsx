@@ -1,7 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { FC, useEffect, useState } from "react";
 import { required } from "../../../../core/form-rools";
-import TextArea from "antd/es/input/TextArea";
 import CustomImage from "../../../../components/UI/CustomImage";
 import UploadInput from "../../../../components/UI/Form/UploadInput";
 import SelectCountries from "../../../Selects/SelectCountries";
@@ -9,6 +8,7 @@ import { useTypeDispatch } from "../../../../hooks/useTypeDispatch";
 import { createSeo } from "../../../../store/Slices/seoSlice/asyncActions";
 import SelectOneSport from "../../../Selects/SelectOneSport";
 import { notify } from "../../../../assets/scripts/notify";
+import TextEditor from "../../../../components/TextEditor";
 
 interface IInputs {
   ceo_title: string;
@@ -127,22 +127,18 @@ export const CreateCountrySeo: FC = () => {
       </div>
 
       {/* ceo_short_description_for_h */}
-      <div>
+      {/* <div>
         <p className={titleClasses}>H1 подзаголовок</p>
-        <Form.Item
-          className="mr-3"
-          name="ceo_short_description_for_h"
-          rules={[required]}
-        >
+        <Form.Item className="mr-3" name="ceo_short_description_for_h">
           <Input />
         </Form.Item>
-      </div>
+      </div> */}
 
       {/* ceo_text */}
       <div>
         <p className={titleClasses}>Текст</p>
         <Form.Item name="ceo_text" rules={[required]}>
-          <TextArea style={{ minHeight: 150 }} />
+          <TextEditor />
         </Form.Item>
       </div>
 

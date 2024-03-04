@@ -2,10 +2,10 @@ import { Button, Form, Input } from "antd";
 import { FC, useEffect, useState } from "react";
 import { ISeo } from "../../../store/Slices/seoSlice/interface";
 import { required } from "../../../core/form-rools";
-import TextArea from "antd/es/input/TextArea";
 import { notify } from "../../../assets/scripts/notify";
 import { AxiosError } from "axios";
 import { updateStaticSeo } from "../../../store/Slices/seoSlice/asyncActions";
+import TextEditor from "../../../components/TextEditor";
 
 interface IInputs {
   ceo_title: string;
@@ -130,17 +130,16 @@ export const SeoStaticElementPage: FC<IProps> = ({ seo }) => {
       </div>
 
       {/* ceo_short_description_for_h */}
-      <div>
+      {/* <div>
         <p className={titleClasses}>H1 подзаголовок</p>
         <Form.Item
           className="mr-3"
           name="ceo_short_description_for_h"
-          rules={[required]}
           initialValue={seo.ceo_short_description_for_h}
         >
           <Input />
         </Form.Item>
-      </div>
+      </div> */}
 
       {/* ceo_text */}
       <div>
@@ -150,7 +149,7 @@ export const SeoStaticElementPage: FC<IProps> = ({ seo }) => {
           rules={[required]}
           initialValue={seo.ceo_text}
         >
-          <TextArea style={{ minHeight: 200 }} />
+          <TextEditor initialValue={seo.ceo_text} />
         </Form.Item>
       </div>
 
@@ -177,15 +176,17 @@ export const SeoStaticElementPage: FC<IProps> = ({ seo }) => {
         />
       </div> */}
 
-      <Button
-        type="primary"
-        htmlType="submit"
-        size="large"
-        className="ml-auto  font-semibold"
-        loading={loading}
-      >
-        Сохранить
-      </Button>
+      <div className="flex">
+        <Button
+          type="primary"
+          htmlType="submit"
+          size="large"
+          className="ml-auto  font-semibold"
+          loading={loading}
+        >
+          Сохранить
+        </Button>
+      </div>
     </Form>
   );
 };

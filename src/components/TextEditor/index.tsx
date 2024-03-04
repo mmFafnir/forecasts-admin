@@ -7,17 +7,16 @@ import { content_style, plugins, toolbar } from "./editorConfig";
 
 interface IProps {
   height?: number;
-  defaultValue?: string;
-  onChange: (value: string) => void;
+  initialValue?: string;
+  onChange?: (value: string) => void;
 }
 
-const TextEditor: FC<IProps> = ({ height = 500, defaultValue, onChange }) => {
+const TextEditor: FC<IProps> = ({ height = 500, initialValue, onChange }) => {
   const editorRef = useRef<Editor>(null);
 
   const onChangeEditor = () => {
     if (!editorRef.current) return;
     if (!editorRef.current.editor) return;
-    onChange(editorRef.current.editor.getContent());
   };
 
   return (
@@ -26,8 +25,9 @@ const TextEditor: FC<IProps> = ({ height = 500, defaultValue, onChange }) => {
         apiKey="z0ljugkdjg4mg4441owx0ic0eyzypwr10owtr0bbdlopl6zv"
         ref={editorRef}
         onChange={onChangeEditor}
+        onEditorChange={onChange}
         // onInit={(evt, editor) => editorRef.current = editor}
-        initialValue={defaultValue}
+        initialValue={initialValue}
         init={{
           height: height,
           resize: false,

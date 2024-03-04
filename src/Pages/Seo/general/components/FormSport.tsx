@@ -1,9 +1,9 @@
 import { Form, Input } from "antd";
 import { required } from "../../../../core/form-rools";
-import TextArea from "antd/es/input/TextArea";
 import { ISeo } from "../../../../store/Slices/seoSlice/interface";
 import { FC, useEffect } from "react";
 import { defaultSeo } from "../const/defaultSeo";
+import TextEditor from "../../../../components/TextEditor";
 
 interface IInputs {
   ceo_title: string;
@@ -83,17 +83,16 @@ export const FormSport: FC<IProps> = ({ data }) => {
       </div>
 
       {/* ceo_short_description_for_h */}
-      <div>
+      {/* <div>
         <p className={titleClasses}>H1 подзаголовок:</p>
         <Form.Item
           className="mr-3"
           name="ceo_short_description_for_h"
-          rules={[required]}
           initialValue={data?.ceo_short_description_for_h || ""}
         >
           <Input />
         </Form.Item>
-      </div>
+      </div> */}
 
       {/* ceo_text */}
       <div>
@@ -103,7 +102,7 @@ export const FormSport: FC<IProps> = ({ data }) => {
           rules={[required]}
           initialValue={data?.ceo_text || ""}
         >
-          <TextArea style={{ minHeight: 150 }} />
+          <TextEditor initialValue={data?.ceo_text || ""} />
         </Form.Item>
       </div>
     </Form>

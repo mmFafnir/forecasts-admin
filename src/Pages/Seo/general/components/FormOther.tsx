@@ -66,12 +66,12 @@ export const FormOther: FC<IProps> = ({ title, page, data }) => {
       </div>
 
       {/* ceo_short_description_for_h */}
-      <div>
+      {/* <div>
         <p className={titleClasses}>H1 подзаголовок:</p>
         <Form.Item className="mr-3" name="ceo_short_description_for_h">
           <Input />
         </Form.Item>
-      </div>
+      </div> */}
 
       {page === "match" && (
         <div className="flex mt-10">

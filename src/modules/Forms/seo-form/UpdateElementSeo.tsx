@@ -2,7 +2,6 @@ import { Button, Form, Input } from "antd";
 import { FC, memo, useState } from "react";
 import { ISeo } from "../../../store/Slices/seoSlice/interface";
 import { required } from "../../../core/form-rools";
-import TextArea from "antd/es/input/TextArea";
 import UploadInput from "../../../components/UI/Form/UploadInput";
 import CustomImage from "../../../components/UI/CustomImage";
 import { updateElementSeo } from "../../../store/Slices/seoSlice/asyncActions";
@@ -11,6 +10,7 @@ import { AxiosError } from "axios";
 import SelectCountries from "../../Selects/SelectCountries";
 import SelectLeagues from "../../Selects/SelectLeagues";
 import SelectOneSport from "../../Selects/SelectOneSport";
+import TextEditor from "../../../components/TextEditor";
 
 interface IInputs {
   ceo_title: string;
@@ -209,7 +209,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
       </div>
 
       {/* ceo_short_description_for_h */}
-      <div>
+      {/* <div>
         <p className={titleClasses}>H1 подзаголовок</p>
         <Form.Item
           className="mr-3"
@@ -219,7 +219,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
         >
           <Input />
         </Form.Item>
-      </div>
+      </div> */}
 
       {/* ceo_text */}
       <div>
@@ -229,7 +229,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
           rules={[required]}
           initialValue={seo.ceo_text}
         >
-          <TextArea style={{ minHeight: 200 }} />
+          <TextEditor initialValue={seo.ceo_text} />
         </Form.Item>
       </div>
 

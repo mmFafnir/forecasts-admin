@@ -26,6 +26,10 @@ const pages = [
     label: "Вопросы/ответы",
     value: "faq",
   },
+  {
+    label: "404",
+    value: "404",
+  },
 ];
 
 const fetchStaticPages = async () => {
