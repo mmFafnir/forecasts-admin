@@ -59,7 +59,7 @@ const TableMatch: FC = () => {
       date: date ? date : { start: "", finish: "" },
       chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
       statusMatch,
-      tir,
+      tir: tir || "",
     });
   }, [page]);
 
@@ -77,7 +77,7 @@ const TableMatch: FC = () => {
       date: date ? date : { start: "", finish: "" },
       chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
       statusMatch,
-      tir,
+      tir: tir || "",
     });
   }, [
     search,

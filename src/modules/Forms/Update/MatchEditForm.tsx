@@ -309,7 +309,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
               <p>Анализ:</p>
               <LoaderCover loading={chatGbtStatus === 1}>
                 <TextEditor
-                  defaultValue={match.game_analize ? match.game_analize : ""}
+                  initialValue={match.game_analize ? match.game_analize : ""}
                   onChange={(value) => form.setFieldsValue({ analysis: value })}
                 />
               </LoaderCover>
