@@ -9,11 +9,11 @@ import axios from "../../../core/axios";
 
 export const fetchLeagues = createAsyncThunk<
   IDataLeaguesFetch,
-  Pick<TFilter, "limit" | "page" | "search" | "favorite">
+  Pick<TFilter, "limit" | "page" | "search" | "favorite" | "tir">
 >("leagues/fetchLeague", async (params) => {
-  const { limit = 10, page = 1, search = "", favorite } = params;
+  const { limit = 10, page = 1, search = "", favorite, tir } = params;
   let url = "/get_all_league";
-  url = url + `?limit=${limit}&page=${page}&search=${search}`;
+  url = url + `?limit=${limit}&page=${page}&search=${search}&tir=${tir || ""}`;
   if (favorite) {
     url = url + `&is_favorite=${favorite}`;
   }

@@ -5,6 +5,7 @@ import Leagues from "./Leagues";
 import Date from "./Date";
 import ChatGptText from "./ChatGptStatus";
 import Favorite from "./Favorite";
+import TirLeagues from "./TirLeagues";
 
 interface IProps {
   name: EnumModalFilters;
@@ -30,6 +31,10 @@ const components = [
   {
     name: EnumModalFilters.FAVORITE,
     component: <Favorite />,
+  },
+  {
+    name: EnumModalFilters.TIR,
+    component: <TirLeagues />,
   },
 ];
 const ModalFilter: FC<IProps> = ({ name }) => {

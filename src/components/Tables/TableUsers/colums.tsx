@@ -17,6 +17,10 @@ export const columns: ColumnsType<TypeUser> = [
     dataIndex: "email",
   },
   {
+    title: "Авторизован",
+    dataIndex: "type",
+  },
+  {
     title: "Создан",
     dataIndex: "created_at",
     render: (_, record) => (

@@ -11,25 +11,29 @@ import Pagination from "../../UI/Pagination";
 
 const TableLeagues: FC = () => {
   const { leagues, status, total } = useTypeSelector((state) => state.leagues);
-  const { limit, search, favorite } = useTypeSelector((state) => state.filters);
+  const { limit, search, favorite, tir } = useTypeSelector(
+    (state) => state.filters
+  );
   const dispatch = useTypeDispatch();
 
   const [page, setPage] = useState<number>(1);
 
   const onGetAllLeagues = (
-    params: Pick<TFilter, "page" | "limit" | "search" | "favorite">
+    params: Pick<TFilter, "page" | "limit" | "search" | "favorite" | "tir">
   ) => {
     dispatch(fetchLeagues(params));
   };
 
   useEffect(() => {
+    console.log(limit);
     onGetAllLeagues({
       page,
       limit,
       search,
       favorite,
+      tir,
     });
-  }, [page, limit, search, favorite]);
+  }, [page, limit, search, favorite, tir]);
 
   useEffect(() => {
     setPage(1);

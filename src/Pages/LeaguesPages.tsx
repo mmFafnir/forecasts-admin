@@ -12,6 +12,10 @@ const filterBtnItems = [
     name: "Избранные",
     value: EnumModalFilters.FAVORITE,
   },
+  {
+    name: "Тир",
+    value: EnumModalFilters.TIR,
+  },
 ];
 
 const LeaguesPages: FC = () => {

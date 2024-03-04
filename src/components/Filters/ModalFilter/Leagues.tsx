@@ -6,9 +6,7 @@ import CustomAutoComplete, {
 import { fetchLeagues } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { IDataLeaguesFetch } from "../../../store/Slices/leaguesSlice/interface";
 import { setLeague, setTir } from "../../../store/Slices/filterSlice";
-import { Select } from "antd";
-
-const tirs = new Array(20).fill(null);
+import TirLeagues from "./TirLeagues";
 
 const Leagues: FC = () => {
   const dispatch = useTypeDispatch();
@@ -27,10 +25,6 @@ const Leagues: FC = () => {
     console.log(value);
     setSearch(value);
     dispatch(setLeague(key ? String(key) : ""));
-  };
-
-  const onChangeTir = (value: string) => {
-    dispatch(setTir(value));
   };
 
   useEffect(() => {
@@ -76,19 +70,7 @@ const Leagues: FC = () => {
         </button>
       </p>
       {isTir ? (
-        <Select
-          style={{ width: "100%", textAlign: "left" }}
-          defaultActiveFirstOption
-          onChange={onChangeTir}
-          defaultValue={""}
-          options={[
-            { value: "", label: "Все" },
-            ...tirs.map((_, index) => ({
-              value: String(index + 1),
-              label: `Тир: ${index + 1}`,
-            })),
-          ]}
-        />
+        <TirLeagues />
       ) : (
         <CustomAutoComplete
           loading={loading}
