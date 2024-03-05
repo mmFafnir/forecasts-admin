@@ -260,7 +260,7 @@ const UpdateElementSeo: FC<IProps> = ({ seo }) => {
         type="primary"
         htmlType="submit"
         size="large"
-        className="ml-auto font-semibold"
+        className="ml-auto font-semibold w-full"
         loading={loading}
       >
         Сохранить

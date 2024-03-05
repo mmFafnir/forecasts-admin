@@ -80,7 +80,10 @@ export const columns: ColumnsType<TypeLeague> = [
       />
     ),
   },
-
+  {
+    title: "Тир",
+    dataIndex: "tir",
+  },
   {
     title: "Страна",
     dataIndex: "country",
