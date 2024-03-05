@@ -32,7 +32,7 @@ export const columns: ColumnsType<TypeRateDetail> = [
     },
   },
   {
-    title: "Статуч",
+    title: "Статуc",
     dataIndex: "show_status",
 
     render: (_, record) => {

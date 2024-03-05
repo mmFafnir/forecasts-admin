@@ -5,6 +5,8 @@ export type TypeRate = {
   status: null | string;
   created_at: string;
   updated_at: string;
+  bonus: string;
+  show_status: "1" | "0";
 };
 
 export type TypeRateDetail = {
@@ -38,6 +40,12 @@ export type TypeRateDetail = {
 
 export interface IRateFetchSingle extends TypeRate {
   rate_detail: TypeRateDetail[];
+}
+
+export interface IUpdateRate {
+  rate_id: number;
+  show_status: string;
+  bonus: string;
 }
 
 export interface ICreateDetailsRate {

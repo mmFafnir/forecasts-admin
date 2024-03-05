@@ -14,6 +14,15 @@ export const columns: ColumnsType<TypeRate> = [
   },
 
   {
+    key: "switch",
+    title: "Включен",
+    dataIndex: "name",
+    // render: (_, record) => {
+
+    // },
+  },
+
+  {
     title: "Дата обновления",
     dataIndex: "updated_at",
     render: (_, record) => (

@@ -1,11 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../core/axios";
-import { ICreateDetailsRate, IUpdateDetailsRate } from "./interface";
+import {
+  ICreateDetailsRate,
+  IUpdateDetailsRate,
+  IUpdateRate,
+  TypeRate,
+} from "./interface";
 
-export const fetchAllRate = createAsyncThunk("rate/fetchAllRate", async () => {
-  const { data } = await axios.get("/all_rate");
-  return data.data;
-});
+export const fetchAllRate = createAsyncThunk(
+  "rate/fetchAllRate",
+  async (): Promise<TypeRate[]> => {
+    const { data } = await axios.get("/all_rate");
+    return data.data;
+  }
+);
 
 // create
 export const createRate = createAsyncThunk(
@@ -31,6 +39,15 @@ export const createDetailsRate = createAsyncThunk(
 );
 
 // update
+export const updateShowRate = createAsyncThunk<IUpdateRate, IUpdateRate>(
+  "rate/updateRate",
+  async (params) => {
+    const { data } = await axios.post("/update_rate", params);
+    console.log(data);
+    return params;
+  }
+);
+
 export const updateDetailsRate = createAsyncThunk(
   "rate/updateDetailsRate",
   async (rate: IUpdateDetailsRate) => {

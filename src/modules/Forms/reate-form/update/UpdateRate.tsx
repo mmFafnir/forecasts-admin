@@ -1,17 +1,31 @@
 import { FC, useEffect, useState } from "react";
 import {
   IRateFetchSingle,
+  IUpdateRate,
   TypeRateDetail,
 } from "../../../../store/Slices/rateSlice/interface";
 import { Table } from "../components/Table";
 import { useTypeSelector } from "../../../../hooks/useTypeSelector";
 import { useTypeDispatch } from "../../../../hooks/useTypeDispatch";
 import { clearDetailRate } from "../../../../store/Slices/rateSlice";
+import { Button, Form, Input, Switch } from "antd";
+import { required } from "../../../../core/form-rools";
+import { updateShowRate } from "../../../../store/Slices/rateSlice/asyncActions";
+import { notify } from "../../../../assets/scripts/notify";
+
+interface IInputs {
+  show_status: boolean;
+  bonus: string;
+}
 
 interface IProps {
   data: IRateFetchSingle | null;
 }
 export const UpdateRate: FC<IProps> = ({ data }) => {
+  const [form] = Form.useForm<IInputs>();
+
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { detailRate, typeDetailRate, deleteRate } = useTypeSelector(
     (state) => state.rate
   );
@@ -19,6 +33,41 @@ export const UpdateRate: FC<IProps> = ({ data }) => {
   const [details, setDetails] = useState<TypeRateDetail[]>(
     data?.rate_detail || []
   );
+
+  console.log(data);
+
+  const onUpdate = (values: IInputs) => {
+    if (!data) return;
+    setLoading(true);
+    dispatch(
+      updateShowRate({
+        rate_id: data.id,
+        bonus: values.bonus,
+        show_status: values.show_status ? "1" : "",
+      })
+    )
+      .then((res) => {
+        console.log(res);
+        if (!res.payload) {
+          notify({
+            type: "error",
+            message: "Ошибка при обновлении",
+          });
+          return;
+        }
+        setDetails((prev) =>
+          prev.map((rate) => {
+            rate.bonus_percent = (res.payload as IUpdateRate).bonus;
+            return rate;
+          })
+        );
+        notify({
+          type: "success",
+          message: "Тариф успешно обновлен",
+        });
+      })
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     if (!detailRate) return;
@@ -39,13 +88,54 @@ export const UpdateRate: FC<IProps> = ({ data }) => {
 
   useEffect(() => {
     if (!deleteRate) return;
-
     setDetails((prev) => prev.filter((det) => det.id !== deleteRate));
     dispatch(clearDetailRate());
   }, [deleteRate]);
 
   return (
-    <div>
+    <div className="text-left">
+      <Form
+        className="mr-11 "
+        form={form}
+        onFinish={onUpdate}
+        labelAlign="left"
+      >
+        <Form.Item
+          label={"Тариф включен"}
+          labelCol={{
+            prefixCls: "font-semibold !text-sm",
+          }}
+          name={"show_status"}
+          className="mr-2"
+          valuePropName="checked"
+          initialValue={data?.show_status == "1"}
+        >
+          <Switch
+            className="mr-auto block"
+            unCheckedChildren="Нет"
+            checkedChildren="Да"
+          />
+        </Form.Item>
+        <Form.Item
+          name={"bonus"}
+          rules={[required]}
+          labelCol={{
+            prefixCls: "font-semibold !text-sm",
+          }}
+          label={"Общий бонус"}
+          initialValue={data?.bonus}
+        >
+          <Input className="block w-16" size="small" />
+        </Form.Item>
+        <Button
+          loading={loading}
+          htmlType="submit"
+          className="block"
+          type="primary"
+        >
+          Сохранить
+        </Button>
+      </Form>
       <Table data={details} />
     </div>
   );

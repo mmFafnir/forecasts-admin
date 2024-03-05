@@ -32,6 +32,8 @@ export const RatePage: FC = () => {
       .finally(() => setLoading(false));
   };
 
+  console.log(rates);
+
   return (
     <>
       <div className="flex items-center">

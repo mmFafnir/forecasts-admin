@@ -1,4 +1,4 @@
-import { Button, Modal, Spin } from "antd";
+import { Button, Modal, Spin, Switch } from "antd";
 import Table from "./Table";
 import { columns } from "./columns";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
@@ -8,12 +8,13 @@ import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import {
   deleteRate,
   fetchAllRate,
+  updateShowRate,
 } from "../../../store/Slices/rateSlice/asyncActions";
 import { TypeRate } from "../../../store/Slices/rateSlice/interface";
 import { notify } from "../../../assets/scripts/notify";
 
 const TableRate = () => {
-  const { rates, status } = useTypeSelector((state) => state.rate);
+  const { rates, status, showRate } = useTypeSelector((state) => state.rate);
   const dispatch = useTypeDispatch();
 
   const [currentDeleteRate, setCurrentDeleteRate] = useState<TypeRate | null>(
@@ -46,6 +47,23 @@ const TableRate = () => {
       .finally(() => setLoadingDelete(false));
   };
 
+  const updateRateShow = (rate: TypeRate) => {
+    dispatch(
+      updateShowRate({
+        bonus: rate.bonus,
+        show_status: "1",
+        rate_id: rate.id,
+      })
+    ).then((res) => {
+      if (!res.payload) {
+        notify({
+          type: "error",
+          message: "Ошибка при обновлении",
+        });
+      }
+    });
+  };
+
   useEffect(() => {
     dispatch(fetchAllRate());
   }, []);
@@ -76,6 +94,19 @@ const TableRate = () => {
                   </Button>
                 </div>
               );
+            }
+            if (col.key === "switch") {
+              col.render = (_, record) => {
+                return (
+                  <Switch
+                    checked={showRate == record.id}
+                    disabled={showRate == record.id}
+                    onChange={() => updateRateShow(record)}
+                    checkedChildren="Да"
+                    unCheckedChildren="Нет"
+                  />
+                );
+              };
             }
             return col;
           })}

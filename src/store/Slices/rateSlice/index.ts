@@ -8,12 +8,14 @@ import {
   deleteRate,
   fetchAllRate,
   updateDetailsRate,
+  updateShowRate,
 } from "./asyncActions";
 
 interface IState {
   rates: TypeRate[];
   detailRate: TypeRateDetail | null;
   deleteRate: number | null;
+  showRate: number;
   status: EnumStatus;
   typeDetailRate: "create" | "update" | "";
 }
@@ -24,6 +26,7 @@ const initialState: IState = {
   deleteRate: null,
   typeDetailRate: "",
   status: EnumStatus.LOADING,
+  showRate: 0,
 };
 
 const rateSlice = createSlice({
@@ -41,6 +44,8 @@ const rateSlice = createSlice({
       state.status = EnumStatus.LOADING;
     });
     builder.addCase(fetchAllRate.fulfilled, (state, action) => {
+      state.showRate =
+        action.payload.find((rate) => rate.show_status == "1")?.id || 0;
       state.rates = action.payload;
       state.status = EnumStatus.SUCCESS;
     });
@@ -57,6 +62,18 @@ const rateSlice = createSlice({
       state.status = EnumStatus.SUCCESS;
     });
     builder.addCase(createRate.rejected, (state) => {
+      state.status = EnumStatus.ERROR;
+    });
+
+    //update
+    builder.addCase(updateShowRate.pending, (state) => {
+      state.status = EnumStatus.LOADING;
+    });
+    builder.addCase(updateShowRate.fulfilled, (state, action) => {
+      state.showRate = action.payload.rate_id;
+      state.status = EnumStatus.SUCCESS;
+    });
+    builder.addCase(updateShowRate.rejected, (state) => {
       state.status = EnumStatus.ERROR;
     });
 
