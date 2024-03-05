@@ -50,7 +50,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IInputs>();
   const [isFree, setIsFree] = useState(data?.free_or_not == "1");
-  const [isUse, setIsUse] = useState(data?.show_status == 1);
+  const [isUse, setIsUse] = useState(data?.show_status == 0);
 
   const [loading, setLoading] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -87,7 +87,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
         price_usd_with_bonus: values.price_usd_with_bonus || "0",
         price_rub_with_bonus: values.price_rub_with_bonus || "0",
 
-        show_status: isUse ? 1 : 0,
+        show_status: isUse ? 0 : 1,
       })
     )
       .then((res) => {
@@ -162,7 +162,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
       bonus_percent: data.bonus_percent || "",
     });
     setIsFree(data?.free_or_not == "1");
-    setIsUse(data?.show_status == 1);
+    setIsUse(data?.show_status == 0);
   }, [data]);
 
   if (!currentData) return <></>;

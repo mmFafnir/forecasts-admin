@@ -75,7 +75,7 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
         bonus_day: values.bonus_day,
         bonus_percent: values.bonus_percent,
         free_or_not: isFree ? 1 : 0,
-        show_status: isUse ? 1 : 0,
+        show_status: isUse ? 0 : 1,
         rate_id: Number(id),
       })
     )

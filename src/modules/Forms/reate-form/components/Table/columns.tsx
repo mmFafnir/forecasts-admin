@@ -38,7 +38,7 @@ export const columns: ColumnsType<TypeRateDetail> = [
     render: (_, record) => {
       return (
         <p>
-          {record.show_status == 1 ? (
+          {record.show_status == 0 ? (
             <span style={{ color: "#0dcf3e" }}>Используется</span>
           ) : (
             <span style={{ color: "#cf0d0d" }}>Выключен</span>
