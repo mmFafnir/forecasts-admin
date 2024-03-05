@@ -144,11 +144,7 @@ export const SeoStaticElementPage: FC<IProps> = ({ seo }) => {
       {/* ceo_text */}
       <div>
         <p className={titleClasses}>Текст</p>
-        <Form.Item
-          name="ceo_text"
-          rules={[required]}
-          initialValue={seo.ceo_text}
-        >
+        <Form.Item name="ceo_text" initialValue={seo.ceo_text}>
           <TextEditor initialValue={seo.ceo_text} />
         </Form.Item>
       </div>
