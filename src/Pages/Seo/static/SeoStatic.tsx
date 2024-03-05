@@ -14,6 +14,10 @@ const pages = [
     value: "archive",
   },
   {
+    label: "Избранное",
+    value: "favorite",
+  },
+  {
     label: "Политика конфиденциальности",
     value: "privacy-policy",
   },
