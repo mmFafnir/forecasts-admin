@@ -8,13 +8,12 @@ import { Table } from "../components/Table";
 import { useTypeSelector } from "../../../../hooks/useTypeSelector";
 import { useTypeDispatch } from "../../../../hooks/useTypeDispatch";
 import { clearDetailRate } from "../../../../store/Slices/rateSlice";
-import { Button, Form, Input, Switch } from "antd";
+import { Button, Form, Input } from "antd";
 import { required } from "../../../../core/form-rools";
 import { updateShowRate } from "../../../../store/Slices/rateSlice/asyncActions";
 import { notify } from "../../../../assets/scripts/notify";
 
 interface IInputs {
-  show_status: boolean;
   bonus: string;
 }
 
@@ -43,7 +42,7 @@ export const UpdateRate: FC<IProps> = ({ data }) => {
       updateShowRate({
         rate_id: data.id,
         bonus: values.bonus,
-        show_status: values.show_status ? "1" : "",
+        show_status: data.show_status,
       })
     )
       .then((res) => {
@@ -100,22 +99,6 @@ export const UpdateRate: FC<IProps> = ({ data }) => {
         onFinish={onUpdate}
         labelAlign="left"
       >
-        <Form.Item
-          label={"Тариф включен"}
-          labelCol={{
-            prefixCls: "font-semibold !text-sm",
-          }}
-          name={"show_status"}
-          className="mr-2"
-          valuePropName="checked"
-          initialValue={data?.show_status == "1"}
-        >
-          <Switch
-            className="mr-auto block"
-            unCheckedChildren="Нет"
-            checkedChildren="Да"
-          />
-        </Form.Item>
         <Form.Item
           name={"bonus"}
           rules={[required]}
