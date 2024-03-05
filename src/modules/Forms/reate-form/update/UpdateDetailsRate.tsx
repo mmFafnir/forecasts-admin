@@ -25,9 +25,15 @@ interface IInputs {
   saved_price_usd: string;
   saved_price_euro: string;
 
+  price_euro_with_bonus: string;
+  price_usd_with_bonus: string;
+  price_rub_with_bonus: string;
+
   day_price_rub: string;
   day_price_usd: string;
   day_price_euro: string;
+
+  show_status: 0 | 1;
 
   bonus_day: string;
   bonus_percent: string;
@@ -44,6 +50,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IInputs>();
   const [isFree, setIsFree] = useState(data?.free_or_not == "1");
+  const [isUse, setIsUse] = useState(data?.show_status == 1);
 
   const [loading, setLoading] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -75,6 +82,12 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
         bonus_percent: values.bonus_percent,
         free_or_not: isFree ? 1 : 0,
         rate_detail_id: data.id,
+
+        price_euro_with_bonus: values.price_euro_with_bonus || "0",
+        price_usd_with_bonus: values.price_usd_with_bonus || "0",
+        price_rub_with_bonus: values.price_rub_with_bonus || "0",
+
+        show_status: isUse ? 1 : 0,
       })
     )
       .then((res) => {
@@ -137,6 +150,10 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
       day_price_usd: data.day_price_usd || "0",
       day_price_euro: data.day_price_euro || "0",
 
+      price_euro_with_bonus: data.price_euro_with_bonus || "0",
+      price_usd_with_bonus: data.price_usd_with_bonus || "0",
+      price_rub_with_bonus: data.price_rub_with_bonus || "0",
+
       work_day: data.work_day || "",
       work_month: data.work_month || "",
       work_year: data.work_year || "",
@@ -145,6 +162,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
       bonus_percent: data.bonus_percent || "",
     });
     setIsFree(data?.free_or_not == "1");
+    setIsUse(data?.show_status == 1);
   }, [data]);
 
   if (!currentData) return <></>;
@@ -169,15 +187,28 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           <Input />
         </Form.Item>
       </div>
-      <div className="form-item mb-2 flex item-center">
-        <p className="!mb-0 mr-2">Бесплатно:</p>
-        <Switch
-          style={{ marginTop: 2 }}
-          checkedChildren="Да"
-          unCheckedChildren="Нет"
-          checked={isFree}
-          onChange={setIsFree}
-        />
+
+      <div className="flex">
+        <div className="form-item mb-2 flex item-center">
+          <p className="!mb-0 mr-2">Бесплатно:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={isFree}
+            onChange={setIsFree}
+          />
+        </div>
+        <div className="form-item mb-2 flex item-center ml-4">
+          <p className="!mb-0 mr-2">Используется:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={isUse}
+            onChange={setIsUse}
+          />
+        </div>
       </div>
       {!isFree && (
         <>
@@ -353,6 +384,46 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           <Input type="number" />
         </Form.Item>
       </div>
+
+      {!isFree && (
+        <div className="form-item">
+          <p>Конечная цена:</p>
+          <div className="flex">
+            <Form.Item
+              name={"price_rub_with_bonus"}
+              rules={[required]}
+              initialValue={currentData.price_rub_with_bonus}
+              noStyle
+            >
+              <Input
+                prefix={"rub"}
+                type="number"
+                className="rounded-br-none rounded-tr-none"
+              />
+            </Form.Item>
+            <Form.Item
+              name={"price_usd_with_bonus"}
+              rules={[required]}
+              initialValue={currentData.price_usd_with_bonus}
+              noStyle
+            >
+              <Input prefix={"usd"} type="number" className="rounded-none" />
+            </Form.Item>
+            <Form.Item
+              name={"price_euro_with_bonus"}
+              initialValue={currentData.price_euro_with_bonus}
+              rules={[required]}
+              noStyle
+            >
+              <Input
+                prefix={"eu"}
+                type="number"
+                className="rounded-bl-none rounded-tl-none"
+              />
+            </Form.Item>
+          </div>
+        </div>
+      )}
 
       <div className="flex mt-5 items-center">
         <Button

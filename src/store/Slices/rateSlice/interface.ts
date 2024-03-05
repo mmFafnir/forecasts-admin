@@ -29,6 +29,11 @@ export type TypeRateDetail = {
   saved_price_euro: null | string;
   bonus_day: null | string;
   bonus_percent: null | string;
+
+  price_rub_with_bonus: string;
+  price_usd_with_bonus: string;
+  price_euro_with_bonus: string;
+  show_status: 0 | 1;
 };
 
 export interface IRateFetchSingle extends TypeRate {
@@ -38,6 +43,7 @@ export interface IRateFetchSingle extends TypeRate {
 export interface ICreateDetailsRate {
   name: string;
   free_or_not: 0 | 1;
+  show_status: 0 | 1;
   rate_id: number;
 
   price_rub: string;
@@ -51,6 +57,10 @@ export interface ICreateDetailsRate {
   saved_price_rub: string;
   saved_price_usd: string;
   saved_price_euro: string;
+
+  price_rub_with_bonus: string;
+  price_usd_with_bonus: string;
+  price_euro_with_bonus: string;
 
   day_price_rub: string;
   day_price_usd: string;

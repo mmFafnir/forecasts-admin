@@ -31,7 +31,22 @@ export const columns: ColumnsType<TypeRateDetail> = [
       return <p></p>;
     },
   },
+  {
+    title: "Статуч",
+    dataIndex: "show_status",
 
+    render: (_, record) => {
+      return (
+        <p>
+          {record.show_status == 1 ? (
+            <span style={{ color: "#0dcf3e" }}>Используется</span>
+          ) : (
+            <span style={{ color: "#cf0d0d" }}>Выключен</span>
+          )}
+        </p>
+      );
+    },
+  },
   {
     title: "Дата обновления",
     dataIndex: "updated_at",

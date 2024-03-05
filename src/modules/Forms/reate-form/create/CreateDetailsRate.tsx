@@ -25,6 +25,10 @@ interface IInputs {
   day_price_usd: string;
   day_price_euro: string;
 
+  price_rub_with_bonus: string;
+  price_usd_with_bonus: string;
+  price_euro_with_bonus: string;
+
   bonus_day: string;
   bonus_percent: string;
 }
@@ -38,6 +42,8 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
   const [form] = Form.useForm<IInputs>();
   const [isFree, setIsFree] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [isUse, setIsUse] = useState(false);
 
   const onFinish = (values: IInputs) => {
     if (!id) return;
@@ -58,6 +64,10 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
         day_price_usd: values.day_price_usd || "0",
         day_price_euro: values.day_price_euro || "0",
 
+        price_rub_with_bonus: values.price_rub_with_bonus || "0",
+        price_usd_with_bonus: values.price_usd_with_bonus || "0",
+        price_euro_with_bonus: values.price_euro_with_bonus || "0",
+
         work_day: values.work_day,
         work_month: values.work_month,
         work_year: values.work_year,
@@ -65,6 +75,7 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
         bonus_day: values.bonus_day,
         bonus_percent: values.bonus_percent,
         free_or_not: isFree ? 1 : 0,
+        show_status: isUse ? 1 : 0,
         rate_id: Number(id),
       })
     )
@@ -103,15 +114,27 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
           <Input />
         </Form.Item>
       </div>
-      <div className="form-item mb-2 flex item-center">
-        <p className="!mb-0 mr-2">Бесплатно:</p>
-        <Switch
-          style={{ marginTop: 2 }}
-          checkedChildren="Да"
-          unCheckedChildren="Нет"
-          checked={isFree}
-          onChange={setIsFree}
-        />
+      <div className="flex ">
+        <div className="form-item mb-2 flex item-center">
+          <p className="!mb-0 mr-2">Бесплатно:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={isFree}
+            onChange={setIsFree}
+          />
+        </div>
+        <div className="form-item mb-2 flex item-center ml-4">
+          <p className="!mb-0 mr-2">Используется:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={isUse}
+            onChange={setIsUse}
+          />
+        </div>
       </div>
       {!isFree && (
         <>
@@ -222,6 +245,35 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
           <Input type="number" />
         </Form.Item>
       </div>
+
+      {!isFree && (
+        <div className="form-item">
+          <p>Конечная цена:</p>
+          <div className="flex">
+            <Form.Item name={"price_rub_with_bonus"} rules={[required]} noStyle>
+              <Input
+                prefix={"rub"}
+                type="number"
+                className="rounded-br-none rounded-tr-none"
+              />
+            </Form.Item>
+            <Form.Item name={"price_usd_with_bonus"} rules={[required]} noStyle>
+              <Input prefix={"usd"} type="number" className="rounded-none" />
+            </Form.Item>
+            <Form.Item
+              name={"price_euro_with_bonus"}
+              rules={[required]}
+              noStyle
+            >
+              <Input
+                prefix={"eu"}
+                type="number"
+                className="rounded-bl-none rounded-tl-none"
+              />
+            </Form.Item>
+          </div>
+        </div>
+      )}
 
       <div className="flex mt-5">
         <Button

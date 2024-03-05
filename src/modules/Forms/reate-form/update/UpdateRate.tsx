@@ -26,6 +26,7 @@ export const UpdateRate: FC<IProps> = ({ data }) => {
       setDetails((prev) => [detailRate, ...prev]);
     }
     if (typeDetailRate === "update") {
+      console.log("update");
       setDetails((prev) =>
         prev.map((det) => {
           if (det.id === detailRate.id) return detailRate;
