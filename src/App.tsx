@@ -27,6 +27,7 @@ import { SeoCountryPage, SeoLeaguePage, SeoPage, SeoStatic } from "./Pages/Seo";
 import { RateElementPage, RatePage } from "./Pages/Rate";
 import PrivacyPolicy from "./Pages/Static/PrivacyPolicy";
 import TermOfUsePage from "./Pages/Static/TermOfUsePage";
+import { RefsPage } from "./Pages/Refs";
 
 function App() {
   return (
@@ -81,6 +82,8 @@ function App() {
 
         <Route path="/rates" element={<RatePage />} />
         <Route path="/rates/:id" element={<RateElementPage />} />
+
+        <Route path="/refs" element={<RefsPage />} />
 
         <Route
           path="404"

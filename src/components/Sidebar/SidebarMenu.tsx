@@ -96,4 +96,8 @@ export const SidebarMenu = [
     icon: UsergroupAddOutlined,
     name: <Link to={"/rates"}>ТАРИФЫ</Link>,
   },
+  {
+    icon: UsergroupAddOutlined,
+    name: <Link to={"/refs"}>РЕФЕРАЛКИ</Link>,
+  },
 ];
