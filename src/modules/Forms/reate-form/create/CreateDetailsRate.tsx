@@ -241,7 +241,7 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
 
       <div className="form-item">
         <p>Бонус:</p>
-        <Form.Item name={"bonus_percent"} rules={[required]}>
+        <Form.Item name={"bonus_percent"}>
           <Input type="number" />
         </Form.Item>
       </div>
