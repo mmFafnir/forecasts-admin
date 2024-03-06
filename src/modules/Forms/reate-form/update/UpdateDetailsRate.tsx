@@ -74,9 +74,9 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
         day_price_usd: values.day_price_usd || "0",
         day_price_euro: values.day_price_euro || "0",
 
-        work_day: values.work_day,
-        work_month: values.work_month,
-        work_year: values.work_year,
+        work_day: values.work_day || "0",
+        work_month: values.work_month || "0",
+        work_year: values.work_year || "0",
 
         bonus_day: values.bonus_day,
         bonus_percent: values.bonus_percent,
@@ -217,7 +217,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           <div className="flex">
             <Form.Item
               name={"price_rub"}
-              rules={[required]}
               initialValue={currentData.price_rub}
               noStyle
             >
@@ -229,7 +228,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
             </Form.Item>
             <Form.Item
               name={"price_usd"}
-              rules={[required]}
               initialValue={currentData.price_usd}
               noStyle
             >
@@ -237,7 +235,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
             </Form.Item>
             <Form.Item
               name={"price_euro"}
-              rules={[required]}
               initialValue={currentData.price_euro}
               noStyle
             >
@@ -255,7 +252,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           <div className="flex">
             <Form.Item
               name={"day_price_rub"}
-              rules={[required]}
               initialValue={currentData.day_price_rub}
               noStyle
             >
@@ -267,7 +263,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
             </Form.Item>
             <Form.Item
               name={"day_price_usd"}
-              rules={[required]}
               initialValue={currentData.day_price_usd}
               noStyle
             >
@@ -275,7 +270,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
             </Form.Item>
             <Form.Item
               name={"day_price_euro"}
-              rules={[required]}
               initialValue={currentData.day_price_euro}
               noStyle
             >
@@ -293,7 +287,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           <div className="flex">
             <Form.Item
               name={"saved_price_rub"}
-              rules={[required]}
               initialValue={currentData.saved_price_rub}
               noStyle
             >
@@ -305,7 +298,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
             </Form.Item>
             <Form.Item
               name={"saved_price_usd"}
-              rules={[required]}
               initialValue={currentData.saved_price_usd}
               noStyle
             >
@@ -313,7 +305,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
             </Form.Item>
             <Form.Item
               name={"saved_price_euro"}
-              rules={[required]}
               initialValue={currentData.saved_price_euro}
               noStyle
             >
@@ -393,7 +384,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
         <div className="flex">
           <Form.Item
             name={"price_rub_with_bonus"}
-            rules={[required]}
             initialValue={currentData.price_rub_with_bonus}
             noStyle
           >
@@ -405,7 +395,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           </Form.Item>
           <Form.Item
             name={"price_usd_with_bonus"}
-            rules={[required]}
             initialValue={currentData.price_usd_with_bonus}
             noStyle
           >
@@ -414,7 +403,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           <Form.Item
             name={"price_euro_with_bonus"}
             initialValue={currentData.price_euro_with_bonus}
-            rules={[required]}
             noStyle
           >
             <Input
