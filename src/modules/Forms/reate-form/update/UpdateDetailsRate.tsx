@@ -378,7 +378,6 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
         <p>Бонус:</p>
         <Form.Item
           name={"bonus_percent"}
-          rules={[required]}
           initialValue={currentData.bonus_percent}
         >
           <Input type="number" />
