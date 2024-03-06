@@ -210,123 +210,123 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
           />
         </div>
       </div>
-      {!isFree && (
-        <>
-          <div className="form-item mb-2">
-            <p>Цены:</p>
-            <div className="flex">
-              <Form.Item
-                name={"price_rub"}
-                rules={[required]}
-                initialValue={currentData.price_rub}
-                noStyle
-              >
-                <Input
-                  prefix={"rub"}
-                  type="number"
-                  className="rounded-br-none rounded-tr-none"
-                />
-              </Form.Item>
-              <Form.Item
-                name={"price_usd"}
-                rules={[required]}
-                initialValue={currentData.price_usd}
-                noStyle
-              >
-                <Input prefix={"usd"} type="number" className="rounded-none" />
-              </Form.Item>
-              <Form.Item
-                name={"price_euro"}
-                rules={[required]}
-                initialValue={currentData.price_euro}
-                noStyle
-              >
-                <Input
-                  prefix={"eu"}
-                  type="number"
-                  className="rounded-bl-none rounded-tl-none"
-                />
-              </Form.Item>
-            </div>
+      {/* {!isFree && ( */}
+      <div style={{ display: !isFree ? "block" : "none" }}>
+        <div className="form-item mb-2">
+          <p>Цены:</p>
+          <div className="flex">
+            <Form.Item
+              name={"price_rub"}
+              rules={[required]}
+              initialValue={currentData.price_rub}
+              noStyle
+            >
+              <Input
+                prefix={"rub"}
+                type="number"
+                className="rounded-br-none rounded-tr-none"
+              />
+            </Form.Item>
+            <Form.Item
+              name={"price_usd"}
+              rules={[required]}
+              initialValue={currentData.price_usd}
+              noStyle
+            >
+              <Input prefix={"usd"} type="number" className="rounded-none" />
+            </Form.Item>
+            <Form.Item
+              name={"price_euro"}
+              rules={[required]}
+              initialValue={currentData.price_euro}
+              noStyle
+            >
+              <Input
+                prefix={"eu"}
+                type="number"
+                className="rounded-bl-none rounded-tl-none"
+              />
+            </Form.Item>
           </div>
+        </div>
 
-          <div className="form-item mb-2">
-            <p>Цена за один день:</p>
-            <div className="flex">
-              <Form.Item
-                name={"day_price_rub"}
-                rules={[required]}
-                initialValue={currentData.day_price_rub}
-                noStyle
-              >
-                <Input
-                  prefix={"rub"}
-                  type="number"
-                  className="rounded-br-none rounded-tr-none"
-                />
-              </Form.Item>
-              <Form.Item
-                name={"day_price_usd"}
-                rules={[required]}
-                initialValue={currentData.day_price_usd}
-                noStyle
-              >
-                <Input prefix={"usd"} type="number" className="rounded-none" />
-              </Form.Item>
-              <Form.Item
-                name={"day_price_euro"}
-                rules={[required]}
-                initialValue={currentData.day_price_euro}
-                noStyle
-              >
-                <Input
-                  prefix={"eu"}
-                  type="number"
-                  className="rounded-bl-none rounded-tl-none"
-                />
-              </Form.Item>
-            </div>
+        <div className="form-item mb-2">
+          <p>Цена за один день:</p>
+          <div className="flex">
+            <Form.Item
+              name={"day_price_rub"}
+              rules={[required]}
+              initialValue={currentData.day_price_rub}
+              noStyle
+            >
+              <Input
+                prefix={"rub"}
+                type="number"
+                className="rounded-br-none rounded-tr-none"
+              />
+            </Form.Item>
+            <Form.Item
+              name={"day_price_usd"}
+              rules={[required]}
+              initialValue={currentData.day_price_usd}
+              noStyle
+            >
+              <Input prefix={"usd"} type="number" className="rounded-none" />
+            </Form.Item>
+            <Form.Item
+              name={"day_price_euro"}
+              rules={[required]}
+              initialValue={currentData.day_price_euro}
+              noStyle
+            >
+              <Input
+                prefix={"eu"}
+                type="number"
+                className="rounded-bl-none rounded-tl-none"
+              />
+            </Form.Item>
           </div>
+        </div>
 
-          <div className="form-item mb-2">
-            <p>Экономия:</p>
-            <div className="flex">
-              <Form.Item
-                name={"saved_price_rub"}
-                rules={[required]}
-                initialValue={currentData.saved_price_rub}
-                noStyle
-              >
-                <Input
-                  prefix={"rub"}
-                  type="number"
-                  className="rounded-br-none rounded-tr-none"
-                />
-              </Form.Item>
-              <Form.Item
-                name={"saved_price_usd"}
-                rules={[required]}
-                initialValue={currentData.saved_price_usd}
-                noStyle
-              >
-                <Input prefix={"usd"} type="number" className="rounded-none" />
-              </Form.Item>
-              <Form.Item
-                name={"saved_price_euro"}
-                rules={[required]}
-                initialValue={currentData.saved_price_euro}
-                noStyle
-              >
-                <Input
-                  prefix={"eu"}
-                  type="number"
-                  className="rounded-bl-none rounded-tl-none"
-                />
-              </Form.Item>
-            </div>
+        <div className="form-item mb-2">
+          <p>Экономия:</p>
+          <div className="flex">
+            <Form.Item
+              name={"saved_price_rub"}
+              rules={[required]}
+              initialValue={currentData.saved_price_rub}
+              noStyle
+            >
+              <Input
+                prefix={"rub"}
+                type="number"
+                className="rounded-br-none rounded-tr-none"
+              />
+            </Form.Item>
+            <Form.Item
+              name={"saved_price_usd"}
+              rules={[required]}
+              initialValue={currentData.saved_price_usd}
+              noStyle
+            >
+              <Input prefix={"usd"} type="number" className="rounded-none" />
+            </Form.Item>
+            <Form.Item
+              name={"saved_price_euro"}
+              rules={[required]}
+              initialValue={currentData.saved_price_euro}
+              noStyle
+            >
+              <Input
+                prefix={"eu"}
+                type="number"
+                className="rounded-bl-none rounded-tl-none"
+              />
+            </Form.Item>
           </div>
-        </>
-      )}
+        </div>
+      </div>
+      {/* )} */}
 
       <div className="form-item mb-2">
         <p>Переод:</p>

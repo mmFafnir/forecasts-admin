@@ -137,7 +137,7 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
         </div>
       </div>
       {!isFree && (
-        <>
+        <div>
           <div className="form-item mb-2">
             <p>Цены:</p>
             <div className="flex">
@@ -206,7 +206,7 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
               </Form.Item>
             </div>
           </div>
-        </>
+        </div>
       )}
 
       <div className="form-item mb-2">
