@@ -384,45 +384,48 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
         </Form.Item>
       </div>
 
-      {!isFree && (
-        <div className="form-item">
-          <p>Конечная цена:</p>
-          <div className="flex">
-            <Form.Item
-              name={"price_rub_with_bonus"}
-              rules={[required]}
-              initialValue={currentData.price_rub_with_bonus}
-              noStyle
-            >
-              <Input
-                prefix={"rub"}
-                type="number"
-                className="rounded-br-none rounded-tr-none"
-              />
-            </Form.Item>
-            <Form.Item
-              name={"price_usd_with_bonus"}
-              rules={[required]}
-              initialValue={currentData.price_usd_with_bonus}
-              noStyle
-            >
-              <Input prefix={"usd"} type="number" className="rounded-none" />
-            </Form.Item>
-            <Form.Item
-              name={"price_euro_with_bonus"}
-              initialValue={currentData.price_euro_with_bonus}
-              rules={[required]}
-              noStyle
-            >
-              <Input
-                prefix={"eu"}
-                type="number"
-                className="rounded-bl-none rounded-tl-none"
-              />
-            </Form.Item>
-          </div>
+      {/* {!isFree && ( */}
+      <div
+        className="form-item"
+        style={{ display: !isFree ? "block" : "none" }}
+      >
+        <p>Конечная цена:</p>
+        <div className="flex">
+          <Form.Item
+            name={"price_rub_with_bonus"}
+            rules={[required]}
+            initialValue={currentData.price_rub_with_bonus}
+            noStyle
+          >
+            <Input
+              prefix={"rub"}
+              type="number"
+              className="rounded-br-none rounded-tr-none"
+            />
+          </Form.Item>
+          <Form.Item
+            name={"price_usd_with_bonus"}
+            rules={[required]}
+            initialValue={currentData.price_usd_with_bonus}
+            noStyle
+          >
+            <Input prefix={"usd"} type="number" className="rounded-none" />
+          </Form.Item>
+          <Form.Item
+            name={"price_euro_with_bonus"}
+            initialValue={currentData.price_euro_with_bonus}
+            rules={[required]}
+            noStyle
+          >
+            <Input
+              prefix={"eu"}
+              type="number"
+              className="rounded-bl-none rounded-tl-none"
+            />
+          </Form.Item>
         </div>
-      )}
+      </div>
+      {/* )} */}
 
       <div className="flex mt-5 items-center">
         <Button
