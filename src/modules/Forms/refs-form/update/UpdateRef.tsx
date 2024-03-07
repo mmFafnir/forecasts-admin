@@ -50,7 +50,7 @@ export const UpdateRef: FC<IProps> = ({ data, onClose }) => {
         }
         notify({
           type: "success",
-          message: "Реферальная ссылка уже создана!",
+          message: "Реферальная ссылка успешно обновлена!",
         });
         onClose();
       })
