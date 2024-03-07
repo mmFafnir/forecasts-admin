@@ -120,7 +120,7 @@ export const UpdateRef: FC<IProps> = ({ data, onClose }) => {
       </div>
 
       <div className="mb-4">
-        <p className={titleClasses}>Срок действия:</p>
+        <p className={titleClasses}>Количество использований:</p>
         <Form.Item name="work_count" rules={[required]}>
           <Input type="number" />
         </Form.Item>
