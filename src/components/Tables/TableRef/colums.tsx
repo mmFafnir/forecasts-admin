@@ -21,7 +21,7 @@ export const columns: ColumnsType<TypeRef> = [
     dataIndex: "bonus_day",
     render: (_, record) => (
       <p>
-        {record.bonus_day ? (
+        {record.bonus_day == "1" ? (
           <span style={{ color: "#20b418" }}>Есть</span>
         ) : (
           <span style={{ color: "#c21717" }}>Нет</span>
@@ -35,7 +35,7 @@ export const columns: ColumnsType<TypeRef> = [
     dataIndex: "bonus_percent",
     render: (_, record) => (
       <p>
-        {record.bonus_percent ? (
+        {record.bonus_percent == "1" ? (
           <span style={{ color: "#20b418" }}>Есть</span>
         ) : (
           <span style={{ color: "#c21717" }}>Нет</span>

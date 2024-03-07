@@ -65,7 +65,7 @@ export const CreateRef = () => {
         </Form.Item>
       </div>
       <div className="mb-4 flex items-center">
-        <p className={titleClasses}>Бонусгый день:</p>
+        <p className={titleClasses}>Бонусный день:</p>
         <Form.Item name="bonus_day" noStyle valuePropName="checked">
           <Switch
             className="ml-1"
