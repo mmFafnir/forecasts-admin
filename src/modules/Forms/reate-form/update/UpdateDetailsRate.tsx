@@ -211,41 +211,41 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
         </div>
       </div>
       {/* {!isFree && ( */}
-      <div style={{ display: !isFree ? "block" : "none" }}>
-        <div className="form-item mb-2">
-          <p>Цены:</p>
-          <div className="flex">
-            <Form.Item
-              name={"price_rub"}
-              initialValue={currentData.price_rub}
-              noStyle
-            >
-              <Input
-                prefix={"rub"}
-                type="number"
-                className="rounded-br-none rounded-tr-none"
-              />
-            </Form.Item>
-            <Form.Item
-              name={"price_usd"}
-              initialValue={currentData.price_usd}
-              noStyle
-            >
-              <Input prefix={"usd"} type="number" className="rounded-none" />
-            </Form.Item>
-            <Form.Item
-              name={"price_euro"}
-              initialValue={currentData.price_euro}
-              noStyle
-            >
-              <Input
-                prefix={"eu"}
-                type="number"
-                className="rounded-bl-none rounded-tl-none"
-              />
-            </Form.Item>
-          </div>
+      {/* <div style={{ display: !isFree ? "block" : "none" }}> */}
+      <div className="form-item mb-2">
+        <p>Цены:</p>
+        <div className="flex">
+          <Form.Item
+            name={"price_rub"}
+            initialValue={currentData.price_rub}
+            noStyle
+          >
+            <Input
+              prefix={"rub"}
+              type="number"
+              className="rounded-br-none rounded-tr-none"
+            />
+          </Form.Item>
+          <Form.Item
+            name={"price_usd"}
+            initialValue={currentData.price_usd}
+            noStyle
+          >
+            <Input prefix={"usd"} type="number" className="rounded-none" />
+          </Form.Item>
+          <Form.Item
+            name={"price_euro"}
+            initialValue={currentData.price_euro}
+            noStyle
+          >
+            <Input
+              prefix={"eu"}
+              type="number"
+              className="rounded-bl-none rounded-tl-none"
+            />
+          </Form.Item>
         </div>
+        {/* </div> */}
 
         <div className="form-item mb-2">
           <p>Цена за один день:</p>
