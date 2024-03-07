@@ -378,7 +378,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
       {/* {!isFree && ( */}
       <div
         className="form-item"
-        style={{ display: !isFree ? "block" : "none" }}
+        // style={{ display: !isFree ? "block" : "none" }}
       >
         <p>Конечная цена:</p>
         <div className="flex">
