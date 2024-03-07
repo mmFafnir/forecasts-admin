@@ -8,6 +8,7 @@ import { notify } from "../../../../assets/scripts/notify";
 
 interface IProps {
   data: TypeRef | null;
+  onClose: () => void;
 }
 
 interface IInputs {
@@ -20,7 +21,7 @@ interface IInputs {
 
 const titleClasses = `text-left font-semibold text-sm `;
 
-export const UpdateRef: FC<IProps> = ({ data }) => {
+export const UpdateRef: FC<IProps> = ({ data, onClose }) => {
   const dispatch = useTypeDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm<IInputs>();
@@ -51,7 +52,7 @@ export const UpdateRef: FC<IProps> = ({ data }) => {
           type: "success",
           message: "Реферальная ссылка уже создана!",
         });
-        form.resetFields();
+        onClose();
       })
       .finally(() => setLoading(false));
     console.log(values);

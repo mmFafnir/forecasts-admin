@@ -86,7 +86,7 @@ const TableRefs: FC = () => {
         onCancel={closeModal}
         title={`Обновить Реферальную ссылку ${ref?.ref_code}`}
       >
-        <UpdateRef data={ref} />
+        <UpdateRef onClose={closeModal} data={ref} />
       </Modal>
     </div>
   );
