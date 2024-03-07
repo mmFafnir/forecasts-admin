@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { EnumStatus } from "../../../types/Status";
-import { TypeRate, TypeRateDetail } from "./interface";
+import { IWallet, TypeRate, TypeRateDetail } from "./interface";
 import {
   createDetailsRate,
   createRate,
@@ -18,6 +18,7 @@ interface IState {
   showRate: number;
   status: EnumStatus;
   typeDetailRate: "create" | "update" | "";
+  wallet: IWallet;
 }
 
 const initialState: IState = {
@@ -27,6 +28,10 @@ const initialState: IState = {
   typeDetailRate: "",
   status: EnumStatus.LOADING,
   showRate: 0,
+  wallet: {
+    eu: 0,
+    usd: 0,
+  },
 };
 
 const rateSlice = createSlice({
@@ -36,6 +41,10 @@ const rateSlice = createSlice({
     clearDetailRate: (state) => {
       state.detailRate = null;
       state.deleteRate = null;
+    },
+
+    setWallet: (state, action: PayloadAction<IWallet>) => {
+      state.wallet = action.payload;
     },
   },
 
@@ -108,5 +117,5 @@ const rateSlice = createSlice({
   },
 });
 
-export const { clearDetailRate } = rateSlice.actions;
+export const { clearDetailRate, setWallet } = rateSlice.actions;
 export default rateSlice.reducer;

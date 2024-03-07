@@ -1,3 +1,8 @@
+export interface IWallet {
+  eu: number;
+  usd: number;
+}
+
 export type TypeRate = {
   id: number;
   name: string;

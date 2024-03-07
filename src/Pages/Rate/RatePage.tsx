@@ -5,6 +5,7 @@ import { useTypeDispatch } from "../../hooks/useTypeDispatch";
 import { createRate } from "../../store/Slices/rateSlice/asyncActions";
 import { notify } from "../../assets/scripts/notify";
 import { useTypeSelector } from "../../hooks/useTypeSelector";
+import { WalletConvert } from "../../modules/Forms/reate-form/components/WalletConvert";
 
 export const RatePage: FC = () => {
   const { rates } = useTypeSelector((state) => state.rate);
@@ -61,7 +62,9 @@ export const RatePage: FC = () => {
           Создать
         </Button>
       </div>
-      <div></div>
+      <div>
+        <WalletConvert />
+      </div>
       <TableRate />
     </>
   );

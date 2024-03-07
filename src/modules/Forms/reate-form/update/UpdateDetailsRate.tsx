@@ -1,5 +1,5 @@
 import { Button, Form, Input, Switch } from "antd";
-import { FC, useEffect, useState } from "react";
+import { FC, FormEvent, useEffect, useState } from "react";
 import { required } from "../../../../core/form-rools";
 import { useTypeDispatch } from "../../../../hooks/useTypeDispatch";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../../../../store/Slices/rateSlice/asyncActions";
 import { notify } from "../../../../assets/scripts/notify";
 import { TypeRateDetail } from "../../../../store/Slices/rateSlice/interface";
+import { useTypeSelector } from "../../../../hooks/useTypeSelector";
 
 interface IInputs {
   name: string;
@@ -45,6 +46,8 @@ interface IProps {
 }
 
 export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
+  const { wallet } = useTypeSelector((state) => state.rate);
+
   const [currentData, setCurrentData] = useState<TypeRateDetail | null>(data);
 
   const dispatch = useTypeDispatch();
@@ -133,6 +136,17 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
       });
   };
 
+  const onChangeRub = (e: FormEvent<HTMLFormElement>) => {
+    const target = e.target as HTMLFormElement;
+    if (target.id.includes("rub")) {
+      const usd = (target.value / wallet.usd).toFixed(2);
+      const eu = String((target.value / wallet.eu).toFixed(2));
+
+      form.setFieldValue(target.id.replace("rub", "usd"), usd);
+      form.setFieldValue(target.id.replace("rub", "euro"), eu);
+    }
+  };
+
   useEffect(() => {
     if (!data) return;
     setCurrentData(data);
@@ -168,6 +182,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
   if (!currentData) return <></>;
   return (
     <Form
+      onChange={onChangeRub}
       form={form}
       layout="vertical"
       style={{ maxWidth: "700px" }}

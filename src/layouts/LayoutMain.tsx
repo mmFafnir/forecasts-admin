@@ -10,6 +10,7 @@ import { useTypeDispatch } from "../hooks/useTypeDispatch";
 import { IStatePusher, setPusherMessage } from "../store/Slices/pusherSlice";
 import GetAllCountries from "./GetAllCountries";
 import GetAllSports from "./GetAllSports";
+import GetAllGeneral from "./GetAllGeneral";
 
 const LayoutMain: FC = () => {
   const dispatch = useTypeDispatch();
@@ -44,6 +45,7 @@ const LayoutMain: FC = () => {
         <PusherNotify />
         <GetAllCountries />
         <GetAllSports />
+        <GetAllGeneral />
         {/* <GetAllLeagues /> */}
       </div>
     </div>
