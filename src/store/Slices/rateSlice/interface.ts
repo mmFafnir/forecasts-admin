@@ -41,6 +41,8 @@ export type TypeRateDetail = {
   price_usd_with_bonus: string;
   price_euro_with_bonus: string;
   show_status: 0 | 1;
+  has_top: 0 | 1;
+  start_tariffe: 0 | 1;
 };
 
 export interface IRateFetchSingle extends TypeRate {
@@ -57,6 +59,10 @@ export interface ICreateDetailsRate {
   name: string;
   free_or_not: 0 | 1;
   show_status: 0 | 1;
+
+  start_tariffe: 0 | 1;
+  has_top: 0 | 1;
+
   rate_id: number;
 
   price_rub: string;

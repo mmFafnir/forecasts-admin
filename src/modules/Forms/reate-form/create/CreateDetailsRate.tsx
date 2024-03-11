@@ -44,10 +44,13 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IInputs>();
 
-  const [isFree, setIsFree] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isFree, setIsFree] = useState<boolean>(false);
+  const [isUse, setIsUse] = useState<boolean>(false);
 
-  const [isUse, setIsUse] = useState(false);
+  const [startTariffe, setStartTariffe] = useState<boolean>(false);
+  const [hasTop, setHasTop] = useState<boolean>(false);
+
+  const [loading, setLoading] = useState(false);
 
   const onChangeRub = (e: FormEvent<HTMLFormElement>) => {
     const target = e.target as HTMLFormElement;
@@ -66,6 +69,9 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
 
     dispatch(
       createDetailsRate({
+        has_top: hasTop ? 1 : 0,
+        start_tariffe: startTariffe ? 1 : 0,
+
         name: values.name,
         price_rub: values.price_rub || "0",
         price_usd: values.price_usd || "0",
@@ -152,6 +158,30 @@ export const CreateDetailsRate: FC<IProps> = ({ id }) => {
           />
         </div>
       </div>
+
+      <div className="flex ">
+        <div className="form-item mb-2 flex item-center">
+          <p className="!mb-0 mr-2">Стартовый тариф:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={startTariffe}
+            onChange={setStartTariffe}
+          />
+        </div>
+        <div className="form-item mb-2 flex item-center ml-4">
+          <p className="!mb-0 mr-2">Популярный:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={hasTop}
+            onChange={setHasTop}
+          />
+        </div>
+      </div>
+
       {/* {!isFree && ( */}
       {/* <div style={{ display: !isFree ? "block" : "none" }}> */}
       <div className="form-item mb-2">

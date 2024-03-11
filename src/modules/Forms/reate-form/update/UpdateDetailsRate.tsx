@@ -52,8 +52,14 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
 
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IInputs>();
+
   const [isFree, setIsFree] = useState(data?.free_or_not == "1");
   const [isUse, setIsUse] = useState(data?.show_status == 0);
+
+  const [startTariffe, setStartTariffe] = useState<boolean>(
+    data?.start_tariffe == 1
+  );
+  const [hasTop, setHasTop] = useState<boolean>(data?.has_top == 1);
 
   const [loading, setLoading] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -64,6 +70,9 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
     console.log(values);
     dispatch(
       updateDetailsRate({
+        has_top: hasTop ? 1 : 0,
+        start_tariffe: startTariffe ? 1 : 0,
+
         name: values.name,
         price_rub: values.price_rub || "0",
         price_usd: values.price_usd || "0",
@@ -177,6 +186,8 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
     });
     setIsFree(data?.free_or_not == "1");
     setIsUse(data?.show_status == 0);
+    setStartTariffe(data?.start_tariffe == 1);
+    setHasTop(data?.has_top == 1);
   }, [data]);
 
   if (!currentData) return <></>;
@@ -222,6 +233,29 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
             unCheckedChildren="Нет"
             checked={isUse}
             onChange={setIsUse}
+          />
+        </div>
+      </div>
+
+      <div className="flex ">
+        <div className="form-item mb-2 flex item-center">
+          <p className="!mb-0 mr-2">Стартовый тариф:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={startTariffe}
+            onChange={setStartTariffe}
+          />
+        </div>
+        <div className="form-item mb-2 flex item-center ml-4">
+          <p className="!mb-0 mr-2">Популярный:</p>
+          <Switch
+            style={{ marginTop: 2 }}
+            checkedChildren="Да"
+            unCheckedChildren="Нет"
+            checked={hasTop}
+            onChange={setHasTop}
           />
         </div>
       </div>
