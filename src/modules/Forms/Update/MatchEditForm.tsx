@@ -101,6 +101,16 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
+        <div className="flex form-item mb-2">
+          <p className="!mb-0 mr-2">Ссылка на матч:</p>
+          <a
+            target="_blank"
+            style={{ fontSize: "16px" }}
+            href={`https://aibetguru.com/soccer/${match.url}`}
+          >
+            https://aibetguru.com/soccer/{match.url}
+          </a>
+        </div>
         <div className="flex form-item">
           <p className="mr-3">Кубок любимый</p>
           <Switch

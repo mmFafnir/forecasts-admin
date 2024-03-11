@@ -52,6 +52,7 @@ export type TypeMatch = {
   time: number | string;
   time_status: number;
   updated_at: Date;
+  url: string;
 };
 
 export interface IDataMatchesFetch {
