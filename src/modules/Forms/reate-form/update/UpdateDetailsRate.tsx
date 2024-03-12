@@ -72,6 +72,7 @@ export const UpdateDetailsRate: FC<IProps> = ({ data, onClose }) => {
       updateDetailsRate({
         has_top: hasTop ? 1 : 0,
         start_tariffe: startTariffe ? 1 : 0,
+        rate_id: data.rate_id,
 
         name: values.name,
         price_rub: values.price_rub || "0",

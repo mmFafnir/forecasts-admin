@@ -92,4 +92,5 @@ export interface ICreateDetailsRate {
 export interface IUpdateDetailsRate
   extends Omit<ICreateDetailsRate, "rate_id"> {
   rate_detail_id: number;
+  rate_id: string | number;
 }

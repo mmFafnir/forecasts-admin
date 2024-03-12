@@ -107,6 +107,7 @@ const rateSlice = createSlice({
     // update detail rate
     builder.addCase(updateDetailsRate.fulfilled, (state, action) => {
       state.detailRate = action.payload;
+
       state.typeDetailRate = "update";
     });
 

@@ -74,11 +74,16 @@ export const UpdateRate: FC<IProps> = ({ data }) => {
       setDetails((prev) => [detailRate, ...prev]);
     }
     if (typeDetailRate === "update") {
-      console.log("update");
       setDetails((prev) =>
         prev.map((det) => {
           if (det.id === detailRate.id) return detailRate;
-          return det;
+          const oldDet: TypeRateDetail = {
+            ...det,
+            has_top: detailRate.has_top == 1 ? 0 : det.has_top,
+            start_tariffe:
+              detailRate.start_tariffe == 1 ? 0 : det.start_tariffe,
+          };
+          return oldDet;
         })
       );
     }
