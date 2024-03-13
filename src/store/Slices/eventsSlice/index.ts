@@ -29,14 +29,17 @@ const eventsSlice = createSlice({
     builder.addCase(fetchEvents.rejected, (state) => {
       state.status = EnumStatus.ERROR;
     });
+
     //update
     builder.addCase(updateEvent.pending, (state) => {
       state.status = EnumStatus.LOADING;
     });
     builder.addCase(updateEvent.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.events = [
         ...state.events.map((event) => {
-          if (event.id == action.payload.id) return action.payload;
+          if (event.id == action.payload.id)
+            return { ...event, ...action.payload };
           return event;
         }),
       ];
