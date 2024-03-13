@@ -1,18 +1,32 @@
-import { FC, createElement } from "react";
+import { FC, createElement, useEffect, useState } from "react";
 import Sider from "antd/es/layout/Sider";
 import Logo from "../UI/Logo";
 import { Menu, MenuProps } from "antd";
 import { SidebarMenu } from "./SidebarMenu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
+
+const getCurrentMenu = (menu: string, links: MenuProps["items"]) => {
+  const res: MenuProps["items"] = [];
+  links?.forEach((link) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (link.menu == menu) {
+      res.push(link);
+    }
+  });
+  return res;
+};
 
 const links: MenuProps["items"] = SidebarMenu.map((item, index) => {
   const key = String(index + 1);
 
   return {
     key: `sub${key}`,
-    icon: createElement(item.icon),
+    icon: item.icon ? createElement(item.icon) : null,
     label: item.name,
-
+    menu: item.menu,
+    href: item.href,
     children: item.children?.map((submenu) => {
       if (!submenu.link && submenu.children) {
         return {
@@ -41,6 +55,19 @@ const links: MenuProps["items"] = SidebarMenu.map((item, index) => {
 });
 
 const Sidebar: FC = () => {
+  const { menu } = useTypeSelector((state) => state.filters);
+  const navigate = useNavigate();
+  const [active, setActive] = useState<string>("sub1");
+
+  useEffect(() => {
+    const link = getCurrentMenu(menu, links)[0];
+    setActive(String(link?.key || ""));
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigate(link.href);
+  }, [menu]);
+
+  console.log(active);
   return (
     <Sider style={siderStyle}>
       <div
@@ -51,12 +78,12 @@ const Sidebar: FC = () => {
       </div>
       <div className="mt-7">
         <Menu
-          // mode="inline"
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
+          selectedKeys={[active]}
+          onClick={(e) => setActive(e.key)}
+          activeKey={active}
           className="text-left"
           style={{ height: "100%", backgroundColor: "transparent" }}
-          items={links}
+          items={getCurrentMenu(menu, links)}
         />
       </div>
     </Sider>

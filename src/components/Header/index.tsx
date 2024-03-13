@@ -7,9 +7,12 @@ import { sports } from "../../assets/data/sports";
 import { LogoutOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/Slices/userSlices";
+import { setMenu } from "../../store/Slices/filterSlice";
 
 const Header: FC = () => {
   const dispatch = useDispatch();
+
+  const onChangeMenu = (value: string) => dispatch(setMenu(value));
   const onLogout = () => dispatch(logout());
 
   return (
@@ -19,13 +22,28 @@ const Header: FC = () => {
           style={{ backgroundColor: "transparent" }}
           mode="horizontal"
           defaultSelectedKeys={["2"]}
-          items={sports.map((sport, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: <button className="font-bold">{sport.label}</button>,
-            };
-          })}
+          items={[
+            {
+              onClick: () => onChangeMenu(String("general")),
+              key: "general",
+              label: <button className="font-bold">Общая</button>,
+            },
+            ...sports.map((sport, index) => {
+              const key = index + 1;
+              return {
+                key,
+                onClick: () => onChangeMenu(String(key)),
+                label: (
+                  <button
+                    // onClick={}
+                    className="font-bold"
+                  >
+                    {sport.label}
+                  </button>
+                ),
+              };
+            }),
+          ]}
         />
       </div>
       <div className="ml-auto">

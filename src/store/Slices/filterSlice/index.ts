@@ -6,10 +6,13 @@ export interface IDateFilter {
   finish: string;
 }
 
-interface IState extends Omit<TFilter, "page"> {}
+interface IState extends Omit<TFilter, "page"> {
+  menu: string;
+}
 
 const initialState: IState = {
   limit: 10,
+  menu: "general",
   search: "",
   statusMatch: "",
   country: "",
@@ -57,6 +60,10 @@ const filterSlice = createSlice({
     setFavorite: (state, action: PayloadAction<boolean>) => {
       state.favorite = action.payload;
     },
+
+    setMenu: (state, action: PayloadAction<string>) => {
+      state.menu = action.payload;
+    },
   },
 });
 
@@ -70,6 +77,7 @@ export const {
   setStatusMatch,
   setFavorite,
   setTir,
+  setMenu,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

@@ -16,6 +16,7 @@ import { notify } from "../../../assets/scripts/notify";
 import LoaderCover from "../../../components/UI/LoaderCover";
 import CustomImage from "../../../components/UI/CustomImage";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
+import { Link } from "react-router-dom";
 
 interface IProps {
   match: TypeMatch;
@@ -167,7 +168,10 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           {/* Первая команда */}
           <div className="w-5/12 form-item form-team">
             <p>
-              Первая команда:<span>{match.home_team.team_name}</span>
+              Первая команда:
+              <Link to={`/teams/${match.home_team.id}`}>
+                {match.home_team.team_name}
+              </Link>
             </p>
             <div className="mb-2">
               <p className="flex items-center">
@@ -195,7 +199,10 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           {/* Вторая команда */}
           <div className="w-5/12 form-item form-team">
             <p>
-              Вторая команда:<span>{match.away_team.team_name}</span>
+              Вторая команда:
+              <Link to={`/teams/${match.away_team.id}`}>
+                {match.away_team.team_name}
+              </Link>
             </p>
             <div className="mb-2">
               <p className="flex items-center">

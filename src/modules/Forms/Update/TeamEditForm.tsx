@@ -7,6 +7,8 @@ import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import { updateTeam } from "../../../store/Slices/teamsSlice/asyncActions";
 import CustomImage from "../../../components/UI/CustomImage";
 import { AxiosError } from "axios";
+import { updateTranslateId } from "../../../api/translate/updateTranslateId";
+import { TypeTranslate } from "../../../types/translate";
 
 interface IProps {
   team: ITeam;
@@ -22,6 +24,11 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
   const dispatch = useTypeDispatch();
   const [form] = Form.useForm<IInputs>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingTranslate, setLoadingTranslate] = useState<boolean>(false);
+
+  const [translateRu, setTranslateRu] = useState<TypeTranslate | null>(
+    team.translate && team.translate.length > 0 ? team.translate[0] : null
+  );
 
   const onFinish = () => {
     setLoading(true);
@@ -74,20 +81,26 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
             </div>
             <div>
               <p className={titleClasses.replace("mb-2", "mb-1")}>Даты:</p>
-              <div className="flex items-center">
-                <p className="text-right font-medium text-sm me-2">
-                  Обновлено:
-                </p>
-                <p className="text-right font-medium text-sm">
-                  {dayjs(team.updated_at).format("DD.MM.YYYY")}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <p className="text-right font-medium text-sm me-2">Создано:</p>
-                <p className="text-right font-medium text-sm">
-                  {dayjs(team.created_at).format("DD.MM.YYYY")}
-                </p>
-              </div>
+              {team.updated_at && (
+                <div className="flex items-center">
+                  <p className="text-right font-medium text-sm me-2">
+                    Обновлено:
+                  </p>
+                  <p className="text-right font-medium text-sm">
+                    {dayjs(team.updated_at).format("DD.MM.YYYY")}
+                  </p>
+                </div>
+              )}
+              {team.created_at && (
+                <div className="flex items-center">
+                  <p className="text-right font-medium text-sm me-2">
+                    Создано:
+                  </p>
+                  <p className="text-right font-medium text-sm">
+                    {dayjs(team.created_at).format("DD.MM.YYYY")}
+                  </p>
+                </div>
+              )}
             </div>
           </Row>
 
@@ -102,6 +115,37 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
               <Input defaultValue={team.team_name} />
             </div>
           </Form.Item>
+
+          {translateRu && (
+            <div className="mr-3 mb-10">
+              <p className={titleClasses}>Наименование команды (RU)</p>
+              <div className="flex">
+                <Input
+                  value={translateRu.translation}
+                  className="rounded-tr-none rounded-br-none"
+                  onChange={(e) =>
+                    setTranslateRu({
+                      ...translateRu,
+                      translation: e.target.value,
+                    })
+                  }
+                />
+                <Button
+                  loading={loadingTranslate}
+                  onClick={() =>
+                    updateTranslateId({
+                      id: translateRu.id,
+                      text: translateRu.translation,
+                      setLoading: setLoadingTranslate,
+                    })
+                  }
+                  className="rounded-tl-none rounded-bl-none"
+                >
+                  Сохранить
+                </Button>
+              </div>
+            </div>
+          )}
 
           <Row justify={"space-between"}>
             <div style={{ maxWidth: "200px" }}>

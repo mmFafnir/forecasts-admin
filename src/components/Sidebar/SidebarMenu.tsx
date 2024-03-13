@@ -2,10 +2,8 @@ import {
   EditOutlined,
   FontSizeOutlined,
   HomeOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
+  // LaptopOutlined,
   TranslationOutlined,
-  UserOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -16,12 +14,12 @@ interface ISubMenu {
   children?: ISubMenu[];
 }
 
-const forecast: ISubMenu[] = [
-  { link: "/countries", text: "СТРАНЫ" },
-  { link: "/leagues", text: "ЛИГИ" },
-  { link: "/teams", text: "КОМАНДЫ" },
-  { link: "/matches", text: "МАТЧИ" },
-  { link: "/events", text: "СОБЫТИЯ" },
+const forecast = [
+  { href: "countries", name: <Link to={"/countries"}>СТРАНЫ</Link>, menu: "1" },
+  { href: "leagues", name: <Link to={"/leagues"}>ЛИГИ</Link>, menu: "1" },
+  { href: "teams", name: <Link to={"/teams"}>КОМАНДЫ</Link>, menu: "1" },
+  { href: "matches", name: <Link to={"/matches"}>МАТЧИ</Link>, menu: "1" },
+  { href: "events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
 ];
 
 const texts: ISubMenu[] = [
@@ -40,64 +38,72 @@ const seo: ISubMenu[] = [
     ],
   },
   { link: "/seo/static", text: "Статические страницы" },
-
-  // { link: "/seo/match", text: "Страница матча" },
-  // { link: "/seo/faq", text: "Вопросы/Ответы" },
-  // { link: "/seo/archive", text: "Архив" },
 ];
 
-export const SidebarMenu = [
+interface ISidebarMenu {
+  menu: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: any;
+  name: JSX.Element | string;
+  href: string;
+  children?: ISubMenu[];
+}
+export const SidebarMenu: ISidebarMenu[] = [
   {
+    menu: "general",
     icon: HomeOutlined,
+    href: "/",
     name: <Link to={"/"}>ГЛАВНАЯ</Link>,
-    // children: forecast,
   },
-  {
-    icon: LaptopOutlined,
-    name: <Link to={"/bookmakers"}>БУКМЕКЕРЫ</Link>,
-  },
-  {
-    icon: NotificationOutlined,
-    name: "ПРОГНОЗЫ",
-    children: forecast,
-  },
-  {
-    icon: UserOutlined,
-    name: "СТАВИМ C ИИ",
-    // children: forecast,
-  },
+  ...forecast,
   {
     icon: EditOutlined,
+    href: "/prompts",
     name: <Link to={"/prompts"}>ПРОМТЫ</Link>,
+    menu: "1",
   },
   {
+    menu: "general",
     icon: TranslationOutlined,
+    href: "/translates",
     name: <Link to={"/translates"}>ПЕРЕВОДЫ</Link>,
   },
   {
+    menu: "general",
     icon: UsergroupAddOutlined,
+    href: "/admins",
     name: <Link to={"/admins"}>МОДЕРАТОРЫ</Link>,
   },
   {
+    menu: "general",
     icon: UsergroupAddOutlined,
+    href: "/users",
     name: <Link to={"/users"}>ПОЛЬЗОВАТЕЛИ</Link>,
   },
   {
+    menu: "general",
     icon: FontSizeOutlined,
+    href: texts[0].link || "/",
     name: "ТЕКСТА",
     children: texts,
   },
   {
+    menu: "general",
     icon: FontSizeOutlined,
+    href: seo[0].link || "/",
     name: "SEO",
     children: seo,
   },
   {
+    menu: "general",
     icon: UsergroupAddOutlined,
+    href: "/rates",
     name: <Link to={"/rates"}>ТАРИФЫ</Link>,
   },
   {
+    menu: "general",
     icon: UsergroupAddOutlined,
+    href: "/refs",
     name: <Link to={"/refs"}>РЕФЕРАЛКИ</Link>,
   },
 ];

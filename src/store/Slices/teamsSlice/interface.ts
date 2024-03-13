@@ -1,3 +1,5 @@
+import { TypeTranslate } from "../../../types/translate";
+
 export type ITeam = {
   created_at: string | null;
   get_photo: string;
@@ -8,6 +10,7 @@ export type ITeam = {
   team_id: number;
   team_name: string;
   updated_at: string;
+  translate: TypeTranslate[];
 };
 
 export interface IDataTeamsFetch {

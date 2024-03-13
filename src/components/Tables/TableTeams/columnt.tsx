@@ -8,6 +8,13 @@ export const columns: ColumnsType<ITeam> = [
   {
     title: "Название",
     dataIndex: "team_name",
+    render: (_, record) => {
+      const name =
+        record.translate && record.translate.length > 0
+          ? record.translate[0].translation
+          : record.team_name;
+      return <p>{name}</p>;
+    },
   },
   {
     title: "Лого",
