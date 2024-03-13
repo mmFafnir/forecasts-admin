@@ -1,8 +1,5 @@
 import {
-  EditOutlined,
   FontSizeOutlined,
-  // HomeOutlined,
-  // LaptopOutlined,
   TranslationOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
@@ -15,6 +12,7 @@ interface ISubMenu {
 }
 
 const forecast = [
+  { href: "/matches", name: <Link to={"/matches"}>МАТЧИ</Link>, menu: "1" },
   {
     href: "/countries",
     name: <Link to={"/countries"}>СТРАНЫ</Link>,
@@ -22,7 +20,11 @@ const forecast = [
   },
   { href: "/leagues", name: <Link to={"/leagues"}>ЛИГИ</Link>, menu: "1" },
   { href: "/teams", name: <Link to={"/teams"}>КОМАНДЫ</Link>, menu: "1" },
-  { href: "/matches", name: <Link to={"/matches"}>МАТЧИ</Link>, menu: "1" },
+  {
+    href: "/prompts",
+    name: <Link to={"/prompts"}>ПРОМТЫ</Link>,
+    menu: "1",
+  },
   { href: "/events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
 ];
 
@@ -53,19 +55,6 @@ interface ISidebarMenu {
   children?: ISubMenu[];
 }
 export const SidebarMenu: ISidebarMenu[] = [
-  // {
-  //   menu: "general",
-  //   icon: HomeOutlined,
-  //   href: "/",
-  //   name: <Link to={"/"}>ГЛАВНАЯ</Link>,
-  // },
-  ...forecast,
-  {
-    icon: EditOutlined,
-    href: "/prompts",
-    name: <Link to={"/prompts"}>ПРОМТЫ</Link>,
-    menu: "1",
-  },
   {
     menu: "general",
     icon: TranslationOutlined,
@@ -88,9 +77,10 @@ export const SidebarMenu: ISidebarMenu[] = [
     menu: "general",
     icon: FontSizeOutlined,
     href: texts[0].link || "/",
-    name: "ТЕКСТА",
+    name: "СТАТИЧЕСКИЕ/ТЕКСТА",
     children: texts,
   },
+
   {
     menu: "general",
     icon: FontSizeOutlined,
@@ -108,6 +98,7 @@ export const SidebarMenu: ISidebarMenu[] = [
     menu: "general",
     icon: UsergroupAddOutlined,
     href: "/refs",
-    name: <Link to={"/refs"}>РЕФЕРАЛКИ</Link>,
+    name: <Link to={"/refs"}>ПРОМО/РЕФЕРАЛ</Link>,
   },
+  ...forecast,
 ];
