@@ -44,11 +44,17 @@
 }
 
 .no-action {
-  table tbody td:last-child {
-    position: static;
-    opacity: 1;
-    height: auto;
-    width: auto;
-    cursor: auto;
+  table {
+    tbody td:last-child {
+      position: static;
+      opacity: 1;
+      height: auto;
+      width: auto;
+      cursor: auto;
+      padding: 16px 16px;
+    }
+    thead td:last-child {
+      display: table-cell;
+    }
   }
 }

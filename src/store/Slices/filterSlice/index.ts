@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TFilter, TypeChatGptTextStatus } from "../../../types/TypeFilter";
+import { SidebarMenu } from "../../../components/Sidebar/SidebarMenu";
 
 export interface IDateFilter {
   start: string;
@@ -12,7 +13,9 @@ interface IState extends Omit<TFilter, "page"> {
 
 const initialState: IState = {
   limit: 10,
-  menu: "general",
+  menu:
+    SidebarMenu.find((item) => item.href.includes(window.location.pathname))
+      ?.menu || "general",
   search: "",
   statusMatch: "",
   country: "",

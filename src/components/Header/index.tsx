@@ -8,10 +8,11 @@ import { LogoutOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/Slices/userSlices";
 import { setMenu } from "../../store/Slices/filterSlice";
+import { useTypeSelector } from "../../hooks/useTypeSelector";
 
 const Header: FC = () => {
+  const { menu } = useTypeSelector((state) => state.filters);
   const dispatch = useDispatch();
-
   const onChangeMenu = (value: string) => dispatch(setMenu(value));
   const onLogout = () => dispatch(logout());
 
@@ -21,7 +22,7 @@ const Header: FC = () => {
         <Menu
           style={{ backgroundColor: "transparent" }}
           mode="horizontal"
-          defaultSelectedKeys={["2"]}
+          selectedKeys={[menu]}
           items={[
             {
               onClick: () => onChangeMenu(String("general")),

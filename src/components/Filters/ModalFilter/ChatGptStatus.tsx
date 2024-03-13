@@ -8,8 +8,8 @@ import { TypeChatGptTextStatus } from "../../../types/TypeFilter";
 const items = [
   { label: "Все", value: "" },
   { label: "Текст не отправлен", value: "0" },
-  { label: "На модерации", value: "1" },
-  { label: "Пришел ответ", value: "2" },
+  { label: "Ждем ответ", value: "1" },
+  { label: "На модерации", value: "2" },
   // { label: "Ожидаем события", value: "3" },
   { label: "Уже на сайте", value: "4" },
 ];
@@ -18,7 +18,6 @@ const ChatGptText: FC = () => {
   const { chat_gpt_text_status } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
   const onChange = (value: TypeChatGptTextStatus) => {
-    console.log(value);
     dispatch(setChatGptTextStatus(value));
   };
 

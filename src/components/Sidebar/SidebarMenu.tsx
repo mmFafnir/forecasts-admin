@@ -1,7 +1,7 @@
 import {
   EditOutlined,
   FontSizeOutlined,
-  HomeOutlined,
+  // HomeOutlined,
   // LaptopOutlined,
   TranslationOutlined,
   UsergroupAddOutlined,
@@ -15,11 +15,15 @@ interface ISubMenu {
 }
 
 const forecast = [
-  { href: "countries", name: <Link to={"/countries"}>СТРАНЫ</Link>, menu: "1" },
-  { href: "leagues", name: <Link to={"/leagues"}>ЛИГИ</Link>, menu: "1" },
-  { href: "teams", name: <Link to={"/teams"}>КОМАНДЫ</Link>, menu: "1" },
-  { href: "matches", name: <Link to={"/matches"}>МАТЧИ</Link>, menu: "1" },
-  { href: "events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
+  {
+    href: "/countries",
+    name: <Link to={"/countries"}>СТРАНЫ</Link>,
+    menu: "1",
+  },
+  { href: "/leagues", name: <Link to={"/leagues"}>ЛИГИ</Link>, menu: "1" },
+  { href: "/teams", name: <Link to={"/teams"}>КОМАНДЫ</Link>, menu: "1" },
+  { href: "/matches", name: <Link to={"/matches"}>МАТЧИ</Link>, menu: "1" },
+  { href: "/events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
 ];
 
 const texts: ISubMenu[] = [
@@ -49,12 +53,12 @@ interface ISidebarMenu {
   children?: ISubMenu[];
 }
 export const SidebarMenu: ISidebarMenu[] = [
-  {
-    menu: "general",
-    icon: HomeOutlined,
-    href: "/",
-    name: <Link to={"/"}>ГЛАВНАЯ</Link>,
-  },
+  // {
+  //   menu: "general",
+  //   icon: HomeOutlined,
+  //   href: "/",
+  //   name: <Link to={"/"}>ГЛАВНАЯ</Link>,
+  // },
   ...forecast,
   {
     icon: EditOutlined,
