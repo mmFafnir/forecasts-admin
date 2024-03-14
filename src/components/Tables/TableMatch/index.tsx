@@ -2,11 +2,13 @@ import { FC, Key, ReactElement, useEffect, useState } from "react";
 import { columns } from "./colums";
 import Table from "..";
 import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
-import { fetchMatches } from "../../../store/Slices/matchesSlice/asyncAction";
+import {
+  IParamsFetchMatches,
+  fetchMatches,
+} from "../../../store/Slices/matchesSlice/asyncAction";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
-import { TFilter } from "../../../types/TypeFilter";
 import { EnumStatus } from "../../../types/Status";
-import { Spin } from "antd";
+import { Spin, Switch } from "antd";
 import Pagination from "../../UI/Pagination";
 import { getMatchTextGptArray } from "../../../api/ChatGPT";
 
@@ -40,8 +42,9 @@ const TableMatch: FC = () => {
   } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
   const [page, setPage] = useState<number>(1);
+  const [hasTextGpt, setHasTextGpt] = useState<boolean>(false);
 
-  const onGetAllMatches = (params: Required<Omit<TFilter, "favorite">>) => {
+  const onGetAllMatches = (params: IParamsFetchMatches) => {
     dispatch(fetchMatches(params));
   };
 
@@ -57,6 +60,7 @@ const TableMatch: FC = () => {
       country,
       league,
       search,
+      hasTextGpt: hasTextGpt,
       date: date ? date : { start: "", finish: "" },
       chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
       statusMatch,
@@ -69,6 +73,7 @@ const TableMatch: FC = () => {
     date,
     chat_gpt_text_status,
     league,
+    hasTextGpt,
     country,
     statusMatch,
     tir,
@@ -85,9 +90,20 @@ const TableMatch: FC = () => {
         spinning={status == EnumStatus.LOADING}
         tip="Loading..."
       >
-        <p className="ml-auto text-base text-right mr-11">
-          Общее количество: <span className="font-semibold">{total}</span>
-        </p>
+        <div className="ml-auto flex items-center justify-end">
+          <div className="flex mr-5 items-center">
+            <p className=" text-base mr-2">Есть текст чат-GPT: </p>
+            <Switch
+              unCheckedChildren="Нет"
+              onChange={setHasTextGpt}
+              checked={hasTextGpt}
+              checkedChildren="Да"
+            />
+          </div>
+          <p className=" text-base text-right mr-11">
+            Общее количество: <span className="font-semibold">{total}</span>
+          </p>
+        </div>
         <Table
           data={matches}
           columns={columns}
@@ -103,6 +119,7 @@ const TableMatch: FC = () => {
             limit,
             country,
             league,
+            hasTextGpt,
             search,
             date: date ? date : { start: "", finish: "" },
             chat_gpt_text_status: chat_gpt_text_status
