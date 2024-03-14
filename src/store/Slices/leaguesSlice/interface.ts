@@ -17,6 +17,7 @@ export type TypeLeague = {
   id: number;
   league_cc: string;
   league_id: number;
+  photo: string;
   league_name: string;
   updated_at: string;
   sport_id: string;

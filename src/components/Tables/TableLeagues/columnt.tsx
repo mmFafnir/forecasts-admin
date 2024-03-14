@@ -70,7 +70,7 @@ export const columns: ColumnsType<TypeLeague> = [
     render: (_, record) => (
       <Image
         width={20}
-        src={`https://admin.aibetguru.com/uploads/${record.league_id}.png`}
+        src={`https://admin.aibetguru.com/photo/league/${record.photo}`}
         placeholder={<Spin />}
         onError={(e) => {
           const target = e.target as HTMLImageElement;

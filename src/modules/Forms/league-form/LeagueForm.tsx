@@ -195,7 +195,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
                 Флаг Лиги
               </p>
               <CustomImage
-                src={`https://admin.aibetguru.com/uploads/${league.league_id}.png`}
+                src={`https://admin.aibetguru.com/photo/league/${league.photo}`}
                 errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
               />
             </div>
