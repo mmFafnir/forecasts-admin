@@ -88,8 +88,6 @@ const Sidebar: FC = () => {
     navigate(link.href);
   }, [menu]);
 
-  console.log(active);
-
   return (
     <Sider style={siderStyle}>
       <div

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Countries from "./Countries";
 import { EnumModalFilters } from "../../../types/Enums";
 import Leagues from "./Leagues";
@@ -6,6 +6,8 @@ import Date from "./Date";
 import ChatGptText from "./ChatGptStatus";
 import Favorite from "./Favorite";
 import TirLeagues from "./TirLeagues";
+import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
+import { setDefaultFilter } from "../../../store/Slices/filterSlice";
 
 interface IProps {
   name: EnumModalFilters;
@@ -38,6 +40,16 @@ const components = [
   },
 ];
 const ModalFilter: FC<IProps> = ({ name }) => {
+  const dispatch = useTypeDispatch();
+
+  const onClearFilter = () => dispatch(setDefaultFilter());
+  useEffect(() => {
+    return () => {
+      console.log("filter out");
+      onClearFilter();
+    };
+  }, []);
+
   return (
     <div className="ml-2">
       <div className="relative">

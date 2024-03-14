@@ -28,16 +28,13 @@ const TableRefs: FC = () => {
   };
 
   useEffect(() => {
+    setPage(1);
     onGetRefs({
       page,
       limit,
       search,
     });
-  }, [page, limit, search]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search]);
+  }, [limit, search]);
 
   return (
     <div>
@@ -78,7 +75,18 @@ const TableRefs: FC = () => {
           })}
         />
       </Spin>
-      <Pagination setPage={setPage} defaultPage={page} total={total} />
+      <Pagination
+        callback={(page) => {
+          setPage(page);
+          onGetRefs({
+            page,
+            limit,
+            search,
+          });
+        }}
+        defaultPage={page}
+        total={total}
+      />
 
       <Modal
         open={isOpenModal}

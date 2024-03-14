@@ -23,16 +23,13 @@ const TableTeams: FC = () => {
   };
 
   useEffect(() => {
+    setPage(1);
     onGetAllTeams({
       page,
       limit,
       search,
     });
-  }, [page, limit, search]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search]);
+  }, [limit, search]);
 
   return (
     <div>
@@ -46,7 +43,18 @@ const TableTeams: FC = () => {
         </p>
         <Table data={teams} columns={columns} />
       </Spin>
-      <Pagination setPage={setPage} defaultPage={page} total={total} />
+      <Pagination
+        callback={(page) => {
+          setPage(page);
+          onGetAllTeams({
+            page,
+            limit,
+            search,
+          });
+        }}
+        defaultPage={page}
+        total={total}
+      />
     </div>
   );
 };

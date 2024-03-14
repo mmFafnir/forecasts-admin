@@ -29,7 +29,6 @@ export const fetchMatches = createAsyncThunk<
     `?limit=${limit}&offset=${offset}&team_name=${search}&date_start=${date.start}&date_end=${date.finish}&chat_gpt_text_status=${chat_gpt_text_status}&legue_id=${league}&country_code=${country}&match_status=${statusMatch}&tir=${tir}`;
 
   const { data } = await axios.get(url);
-  console.log(url);
   console.log(data);
   return data;
 });

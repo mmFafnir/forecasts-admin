@@ -67,7 +67,13 @@ const AdminsTable: FC = () => {
           })}
         />
       </Spin>
-      <Pagination setPage={setPage} defaultPage={page} total={total} />
+      <Pagination
+        callback={(page) => {
+          setPage(page);
+        }}
+        defaultPage={page}
+        total={total}
+      />
       <Modal
         open={isOpenModal}
         onCancel={closeModal}

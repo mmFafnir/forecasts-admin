@@ -69,12 +69,12 @@ const filterSlice = createSlice({
     },
 
     setDefaultFilter: (state) => {
-      state.chat_gpt_text_status = initialState.chat_gpt_text_status;
+      console.log("filter redux out");
       state.country = initialState.country;
+      state.chat_gpt_text_status = initialState.chat_gpt_text_status;
       state.date = initialState.date;
       state.favorite = initialState.favorite;
       state.league = initialState.league;
-      state.limit = initialState.limit;
       state.search = initialState.search;
       state.statusMatch = initialState.statusMatch;
       state.tir = initialState.tir;

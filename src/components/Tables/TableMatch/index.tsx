@@ -49,28 +49,8 @@ const TableMatch: FC = () => {
     await getMatchTextGptArray(ids as number[]);
 
   useEffect(() => {
-    console.log("country", country);
-
-    onGetAllMatches({
-      page: page - 1,
-      limit,
-      country,
-      league,
-      search,
-      date: date ? date : { start: "", finish: "" },
-      chat_gpt_text_status: chat_gpt_text_status ? chat_gpt_text_status : "",
-      statusMatch,
-      tir: tir || "",
-    });
-  }, [page]);
-
-  useEffect(() => {
-    console.log("country", country);
-
-    if (page !== 1) {
-      setPage(1);
-      return;
-    }
+    setPage(1);
+    console.log("filter, country", country, limit);
     onGetAllMatches({
       page: 0,
       limit,
@@ -94,6 +74,10 @@ const TableMatch: FC = () => {
     tir,
   ]);
 
+  useEffect(() => {
+    console.log("country", country);
+  }, [country]);
+
   return (
     <div>
       <Spin
@@ -110,7 +94,27 @@ const TableMatch: FC = () => {
           callback={{ fn: getAllMatch, title: "Получит текст чат GPT" }}
         />
       </Spin>
-      <Pagination setPage={setPage} defaultPage={page} total={total} />
+      <Pagination
+        // setPage={setPage}
+        callback={(page) => {
+          setPage(page);
+          onGetAllMatches({
+            page: page - 1,
+            limit,
+            country,
+            league,
+            search,
+            date: date ? date : { start: "", finish: "" },
+            chat_gpt_text_status: chat_gpt_text_status
+              ? chat_gpt_text_status
+              : "",
+            statusMatch,
+            tir: tir || "",
+          });
+        }}
+        defaultPage={page}
+        total={total}
+      />
     </div>
   );
 };

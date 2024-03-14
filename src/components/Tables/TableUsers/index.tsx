@@ -28,7 +28,13 @@ const TableUsers: FC = () => {
       >
         <Table data={users} columns={columns} />
       </Spin>
-      <Pagination setPage={setPage} defaultPage={page} total={total} />
+      <Pagination
+        callback={(page) => {
+          setPage(page);
+        }}
+        defaultPage={page}
+        total={total}
+      />
     </div>
   );
 };

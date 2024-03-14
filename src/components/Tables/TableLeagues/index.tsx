@@ -25,6 +25,8 @@ const TableLeagues: FC = () => {
   };
 
   useEffect(() => {
+    console.log(country);
+    setPage(1);
     onGetAllLeagues({
       page,
       limit,
@@ -32,12 +34,7 @@ const TableLeagues: FC = () => {
       favorite,
       tir,
     });
-    console.log(country);
-  }, [page, limit, search, favorite, tir]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search]);
+  }, [limit, search, favorite, tir]);
 
   return (
     <div>
@@ -46,12 +43,25 @@ const TableLeagues: FC = () => {
         spinning={status == EnumStatus.LOADING}
         tip="Loading..."
       >
-        <p className="ml-auto text-base text-right mb-2">
+        <p className="ml-auto text-base text-right mb-2 mr-11">
           Общее количество: <span className="font-semibold">{total}</span>
         </p>
         <Table data={leagues} columns={columns} />
       </Spin>
-      <Pagination setPage={setPage} defaultPage={page} total={total} />
+      <Pagination
+        callback={(page) => {
+          setPage(page);
+          onGetAllLeagues({
+            page,
+            limit,
+            search,
+            favorite,
+            tir,
+          });
+        }}
+        defaultPage={page}
+        total={total}
+      />
     </div>
   );
 };

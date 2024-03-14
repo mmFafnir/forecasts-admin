@@ -5,15 +5,15 @@ import { useTypeSelector } from "../../../hooks/useTypeSelector";
 interface IProps {
   defaultPage?: number;
   total: number;
-  setPage: (page: number) => void;
+  callback: (page: number) => void;
 }
-const Pagination: FC<IProps> = ({ defaultPage = 1, total = 1, setPage }) => {
+const Pagination: FC<IProps> = ({ defaultPage = 1, total = 1, callback }) => {
   const { limit } = useTypeSelector((state) => state.filters);
   if (Math.floor(total / Number(limit)) <= 1) return <></>;
   return (
     <div className="mt-4">
       <PaginationAnt
-        onChange={setPage}
+        onChange={callback}
         current={defaultPage}
         total={total}
         pageSize={Number(limit)}
