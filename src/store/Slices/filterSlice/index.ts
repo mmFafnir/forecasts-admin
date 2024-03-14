@@ -67,6 +67,18 @@ const filterSlice = createSlice({
     setMenu: (state, action: PayloadAction<string>) => {
       state.menu = action.payload;
     },
+
+    setDefaultFilter: (state) => {
+      state.chat_gpt_text_status = initialState.chat_gpt_text_status;
+      state.country = initialState.country;
+      state.date = initialState.date;
+      state.favorite = initialState.favorite;
+      state.league = initialState.league;
+      state.limit = initialState.limit;
+      state.search = initialState.search;
+      state.statusMatch = initialState.statusMatch;
+      state.tir = initialState.tir;
+    },
   },
 });
 
@@ -81,6 +93,7 @@ export const {
   setFavorite,
   setTir,
   setMenu,
+  setDefaultFilter,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

@@ -30,6 +30,7 @@ const LayoutMain: FC = () => {
   useEffect(() => {
     Pushers();
   }, []);
+
   return (
     <div className="app">
       <div className="w-full">

@@ -13,6 +13,7 @@ const TableTeams: FC = () => {
   const { teams, status, total } = useTypeSelector((state) => state.teams);
   const { limit, search } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
+
   const [page, setPage] = useState<number>(1);
 
   const onGetAllTeams = (
@@ -40,6 +41,9 @@ const TableTeams: FC = () => {
         spinning={status == EnumStatus.LOADING}
         tip="Loading..."
       >
+        <p className="ml-auto text-base text-right mb-2 mr-11">
+          Общее количество: <span className="font-semibold">{total}</span>
+        </p>
         <Table data={teams} columns={columns} />
       </Spin>
       <Pagination setPage={setPage} defaultPage={page} total={total} />

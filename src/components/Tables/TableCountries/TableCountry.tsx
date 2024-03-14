@@ -24,6 +24,10 @@ const TableCountry: FC<IProps> = ({ columns, data }) => {
   }, [data]);
   return (
     <div className="pr-11">
+      <p className="ml-auto text-base text-right mb-2">
+        Общее количество:{" "}
+        <span className="font-semibold">{currentData.length}</span>
+      </p>
       <Search className="max-w-sm ml-auto block mb-3" onSearch={handleSearch} />
       <AntTable
         className="table w-full"

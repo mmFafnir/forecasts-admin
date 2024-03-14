@@ -11,7 +11,7 @@ import Pagination from "../../UI/Pagination";
 
 const TableLeagues: FC = () => {
   const { leagues, status, total } = useTypeSelector((state) => state.leagues);
-  const { limit, search, favorite, tir } = useTypeSelector(
+  const { limit, search, favorite, tir, country } = useTypeSelector(
     (state) => state.filters
   );
   const dispatch = useTypeDispatch();
@@ -25,7 +25,6 @@ const TableLeagues: FC = () => {
   };
 
   useEffect(() => {
-    console.log(limit);
     onGetAllLeagues({
       page,
       limit,
@@ -33,6 +32,7 @@ const TableLeagues: FC = () => {
       favorite,
       tir,
     });
+    console.log(country);
   }, [page, limit, search, favorite, tir]);
 
   useEffect(() => {
@@ -46,6 +46,9 @@ const TableLeagues: FC = () => {
         spinning={status == EnumStatus.LOADING}
         tip="Loading..."
       >
+        <p className="ml-auto text-base text-right mb-2">
+          Общее количество: <span className="font-semibold">{total}</span>
+        </p>
         <Table data={leagues} columns={columns} />
       </Spin>
       <Pagination setPage={setPage} defaultPage={page} total={total} />

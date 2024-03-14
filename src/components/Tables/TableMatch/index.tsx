@@ -49,7 +49,8 @@ const TableMatch: FC = () => {
     await getMatchTextGptArray(ids as number[]);
 
   useEffect(() => {
-    console.log(page);
+    console.log("country", country);
+
     onGetAllMatches({
       page: page - 1,
       limit,
@@ -64,6 +65,8 @@ const TableMatch: FC = () => {
   }, [page]);
 
   useEffect(() => {
+    console.log("country", country);
+
     if (page !== 1) {
       setPage(1);
       return;
@@ -98,6 +101,9 @@ const TableMatch: FC = () => {
         spinning={status == EnumStatus.LOADING}
         tip="Loading..."
       >
+        <p className="ml-auto text-base text-right mr-11">
+          Общее количество: <span className="font-semibold">{total}</span>
+        </p>
         <Table
           data={matches}
           columns={columns}

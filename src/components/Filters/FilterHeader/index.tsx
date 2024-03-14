@@ -25,6 +25,7 @@ const FilterHeader: FC<IProps> = ({ items }) => {
   const [filterName, setFilterName] = useState<EnumModalFilters>(
     items.length > 0 ? items[0].value : EnumModalFilters.COUNTRIES
   );
+
   const onChangeLimit = (value: string) => dispatch(setLimit(Number(value)));
 
   return (
