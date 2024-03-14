@@ -81,6 +81,7 @@ const SelectLeagues: FC<IProps> = ({
         page: 1,
         search: search,
         favorite: false,
+        country: "",
       })
     )
       .then((res) => {

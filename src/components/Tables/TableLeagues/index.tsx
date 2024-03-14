@@ -19,7 +19,10 @@ const TableLeagues: FC = () => {
   const [page, setPage] = useState<number>(1);
 
   const onGetAllLeagues = (
-    params: Pick<TFilter, "page" | "limit" | "search" | "favorite" | "tir">
+    params: Pick<
+      TFilter,
+      "page" | "limit" | "search" | "favorite" | "tir" | "country"
+    >
   ) => {
     dispatch(fetchLeagues(params));
   };
@@ -33,8 +36,9 @@ const TableLeagues: FC = () => {
       search,
       favorite,
       tir,
+      country,
     });
-  }, [limit, search, favorite, tir]);
+  }, [limit, search, favorite, tir, country]);
 
   return (
     <div>
@@ -57,6 +61,7 @@ const TableLeagues: FC = () => {
             search,
             favorite,
             tir,
+            country,
           });
         }}
         defaultPage={page}

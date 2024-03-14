@@ -35,6 +35,7 @@ const Leagues: FC = () => {
         page: 1,
         search: search,
         favorite: false,
+        country: "",
       })
     )
       .then((res) => {
