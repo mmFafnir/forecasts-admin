@@ -1,8 +1,7 @@
 import { Select, SelectProps, Spin } from "antd";
 import { FC, UIEvent, useEffect, useState } from "react";
-import { fetchLeagues } from "../../store/Slices/leaguesSlice/asyncActions";
+import { fetchLeaguesApi } from "../../store/Slices/leaguesSlice/asyncActions";
 import { IDataLeaguesFetch } from "../../store/Slices/leaguesSlice/interface";
-import { useTypeDispatch } from "../../hooks/useTypeDispatch";
 import { getScrollPos } from "../../assets/scripts/getScrollPos";
 import { DefaultOptionType } from "antd/es/select";
 
@@ -23,7 +22,6 @@ const SelectLeagues: FC<IProps> = ({
   values,
   all,
 }) => {
-  const dispatch = useTypeDispatch();
   // const { leagues } = useTypeSelector((state) => state.leagues);
   const [currentData, setCurrentData] = useState<SelectProps["options"]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -67,7 +65,7 @@ const SelectLeagues: FC<IProps> = ({
       ".rc-virtual-list-scrollbar-vertical"
     );
     if (!scrollDiv) return;
-    if (getScrollPos(scrollDiv.children[0] as HTMLElement).bottom == 0) {
+    if (getScrollPos(scrollDiv.children[0] as HTMLElement).bottom <= 10) {
       if (loading || empty) return;
       setLimit((prev) => prev + 20);
     }
@@ -75,27 +73,24 @@ const SelectLeagues: FC<IProps> = ({
 
   useEffect(() => {
     setLoading(true);
-    dispatch(
-      fetchLeagues({
-        limit: limit,
-        page: 1,
-        search: search,
-        favorite: false,
-        country: "",
-      })
-    )
-      .then((res) => {
-        const payload = res.payload as IDataLeaguesFetch;
+    fetchLeaguesApi({
+      limit: limit,
+      page: 1,
+      search: search,
+      favorite: false,
+      country: "",
+    })
+      .then((res: IDataLeaguesFetch) => {
         const data: SelectProps["options"] = all
           ? [{ label: `Все`, value: "all" }]
           : [];
-        payload.data.forEach((item) => {
+        res.data.forEach((item) => {
           data.push({
             label: `${item.league_name}`,
             value: item.league_id,
           });
         });
-        setEmpty(payload.total === data.length);
+        setEmpty(res.total === data.length);
         setCurrentData(data);
       })
       .finally(() => {

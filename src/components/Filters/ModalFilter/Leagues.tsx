@@ -3,7 +3,7 @@ import { useTypeDispatch } from "../../../hooks/useTypeDispatch";
 import CustomAutoComplete, {
   ISelectDataAutoComplete,
 } from "../../UI/Search/CustomAutoComplete";
-import { fetchLeagues } from "../../../store/Slices/leaguesSlice/asyncActions";
+import { fetchLeaguesApi } from "../../../store/Slices/leaguesSlice/asyncActions";
 import { IDataLeaguesFetch } from "../../../store/Slices/leaguesSlice/interface";
 import { setLeague, setTir } from "../../../store/Slices/filterSlice";
 import TirLeagues from "./TirLeagues";
@@ -22,32 +22,28 @@ const Leagues: FC = () => {
   const addLimit = () => setLimit((prev) => prev + 20);
 
   const onChange = (value: string, key?: number | string) => {
-    console.log(value);
     setSearch(value);
     dispatch(setLeague(key ? String(key) : ""));
   };
 
   useEffect(() => {
     setLoading(true);
-    dispatch(
-      fetchLeagues({
-        limit: limit,
-        page: 1,
-        search: search,
-        favorite: false,
-        country: "",
-      })
-    )
-      .then((res) => {
-        const payload = res.payload as IDataLeaguesFetch;
+    fetchLeaguesApi({
+      limit: limit,
+      page: 1,
+      search: search,
+      favorite: false,
+      country: "",
+    })
+      .then((res: IDataLeaguesFetch) => {
         const data: ISelectDataAutoComplete[] = [];
-        payload.data.forEach((item) => {
+        res.data.forEach((item) => {
           data.push({
             key: String(item.id),
             value: `${item.league_name}`,
           });
         });
-        setEmpty(payload.total === data.length);
+        setEmpty(res.total === data.length);
         setData(data);
       })
       .finally(() => {

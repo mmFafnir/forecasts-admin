@@ -7,10 +7,13 @@ import {
 import { TFilter } from "../../../types/TypeFilter";
 import axios from "../../../core/axios";
 
-export const fetchLeagues = createAsyncThunk<
-  IDataLeaguesFetch,
-  Pick<TFilter, "limit" | "page" | "search" | "favorite" | "tir" | "country">
->("leagues/fetchLeague", async (params) => {
+interface IParams
+  extends Pick<
+    TFilter,
+    "limit" | "page" | "search" | "favorite" | "tir" | "country"
+  > {}
+
+export const fetchLeaguesApi = async (params: IParams) => {
   const { limit = 10, page = 1, search = "", favorite, tir, country } = params;
   let url = "/get_all_league";
   url =
@@ -25,7 +28,12 @@ export const fetchLeagues = createAsyncThunk<
   const { data } = await axios.get(url);
   console.log(data);
   return data.data;
-});
+};
+
+export const fetchLeagues = createAsyncThunk<IDataLeaguesFetch, IParams>(
+  "leagues/fetchLeague",
+  fetchLeaguesApi
+);
 
 export const updateLeague = createAsyncThunk<TypeLeague, IUpdateLeagueParams>(
   "teams/updateTeam",
