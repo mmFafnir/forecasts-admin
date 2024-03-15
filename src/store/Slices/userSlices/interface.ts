@@ -10,6 +10,7 @@ export type TypeUser = {
   name: string;
   nickname: string;
   role_id: string;
+  premium: "0" | "1";
   surname: string;
   updated_at: Date;
 };

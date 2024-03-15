@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 
 export const columns: ColumnsType<TypeUser> = [
   {
+    title: "ID",
+    dataIndex: "id",
+  },
+  {
     title: "Имя",
     dataIndex: "name",
   },
@@ -15,6 +19,19 @@ export const columns: ColumnsType<TypeUser> = [
   {
     title: "Почта",
     dataIndex: "email",
+  },
+  {
+    title: "Премиум",
+    dataIndex: "premium",
+    render: (_, record) => (
+      <p>
+        {record.premium == "0" ? (
+          <span>Нет</span>
+        ) : (
+          <span style={{ color: "#49d665" }}>Есть</span>
+        )}{" "}
+      </p>
+    ),
   },
   {
     title: "Авторизован",
