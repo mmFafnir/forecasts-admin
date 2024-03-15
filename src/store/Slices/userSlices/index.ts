@@ -121,6 +121,8 @@ const userSlice = createSlice({
       state.status = EnumStatus.LOADING;
     });
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.total = action.payload.total;
       state.users = action.payload.data;
       state.status = EnumStatus.SUCCESS;
     });

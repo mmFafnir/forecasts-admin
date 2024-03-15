@@ -10,14 +10,15 @@ import { getAllUsers } from "../../../store/Slices/userSlices/asyncAction";
 
 const TableUsers: FC = () => {
   const { users, status, total } = useTypeSelector((state) => state.user);
-  const { search } = useTypeSelector((state) => state.filters);
+  const { search, limit } = useTypeSelector((state) => state.filters);
   const dispatch = useTypeDispatch();
 
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
-    dispatch(getAllUsers({ search }));
-  }, [search]);
+    setPage(1);
+    dispatch(getAllUsers({ search, page: 1, limit }));
+  }, [search, limit]);
 
   return (
     <div>
@@ -31,6 +32,7 @@ const TableUsers: FC = () => {
       <Pagination
         callback={(page) => {
           setPage(page);
+          dispatch(getAllUsers({ search, page, limit }));
         }}
         defaultPage={page}
         total={total}

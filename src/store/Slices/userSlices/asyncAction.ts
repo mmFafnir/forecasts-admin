@@ -71,9 +71,11 @@ export const updateAdmin = createAsyncThunk<TypeUser, IUpdateAdmin>(
 // Users
 export const getAllUsers = createAsyncThunk<
   IFetchDataUsers,
-  Pick<TFilter, "search">
+  Pick<TFilter, "search" | "page" | "limit">
 >("user/getAllUsers", async (params) => {
-  const { search } = params;
-  const { data } = await axios.get(`/all_users?search=${search}`);
+  const { search, page, limit } = params;
+  const { data } = await axios.get(
+    `/all_users?search=${search}&page=${page}&limit=${limit}`
+  );
   return data.data;
 });

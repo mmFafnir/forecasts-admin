@@ -18,6 +18,7 @@ export interface IFetchDataUsers {
   current_page: number;
   data: TypeUser[];
   from: 1;
+  links: [];
   last_page: 1;
   to: 3;
   total: 3;

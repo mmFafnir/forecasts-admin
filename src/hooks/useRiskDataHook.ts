@@ -15,7 +15,10 @@ const useRiskDataHook = () => {
     risks.forEach((risk) => {
       items.push({
         value: String(risk.id),
-        label: risk.name,
+        label:
+          risk.translate && risk.translate.length > 0
+            ? risk.translate[0].translation
+            : risk.name,
       });
     });
     setData(items);

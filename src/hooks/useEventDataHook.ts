@@ -15,7 +15,10 @@ const useEventDataHook = () => {
     events.forEach((event) => {
       items.push({
         value: String(event.id),
-        label: event.show_name || event.original_name,
+        label:
+          event.translate && event.translate.length > 0
+            ? event.translate[0].translation
+            : event.show_name || event.original_name,
       });
     });
     setData(items);
