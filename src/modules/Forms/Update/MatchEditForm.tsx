@@ -336,7 +336,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       </Form>
 
       {/* События */}
-      {match.cards && match.cards.length > 0 && chatGbtStatus > 1 && (
+      {match.cards && match.cards.length > 0 && (
         <EventForm cards={match.cards} />
       )}
     </>

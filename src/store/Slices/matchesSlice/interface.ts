@@ -17,6 +17,7 @@ export type TypeMatchEventCard = {
   id: number | string;
   odds: string | number;
   risk: TypeRisk;
+  status: "0" | "1";
   updated_at: string;
   why: string;
   why_best: string | null;

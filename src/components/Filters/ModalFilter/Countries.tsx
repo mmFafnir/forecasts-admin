@@ -30,10 +30,6 @@ const Countries: FC = () => {
     setData(newData);
   }, [countries]);
 
-  // [...countries.map(country => ({
-  //   key: country.code,
-  //   value: country.name
-  // })]
   return (
     <>
       <p className="mr-2 font-semibold absolute -top-4">Посик по странам:</p>

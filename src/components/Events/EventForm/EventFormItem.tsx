@@ -56,9 +56,8 @@ const EventFormItem: FC<IProps> = ({ data }) => {
   const eventsData = useEventDataHook();
   const risksData = useRiskDataHook();
   const [form] = Form.useForm<IUpdateEventMatch>();
-  console.log(data);
 
-  const [accessEvent, setAccessEvent] = useState<boolean>(false);
+  const [accessEvent, setAccessEvent] = useState<boolean>(data.status == "1");
   const [accessEventLoading, setAccessEventLoading] = useState<boolean>(false);
 
   const [whyText, setWhyText] = useState<IWhyText>({
@@ -117,6 +116,7 @@ const EventFormItem: FC<IProps> = ({ data }) => {
   const findRiskData = () =>
     risksData.find((event) => event.value === String(data.risk.id));
 
+  console.log(data);
   return (
     <Form
       className=" bg-slate-300 p-3 rounded-2xl"
@@ -145,7 +145,6 @@ const EventFormItem: FC<IProps> = ({ data }) => {
         </Form.Item>
         {/* Ставка прошла/не прошла */}
         <p className="mr-3 ml-3 !mb-0">Ставка прошла</p>
-
         <Switch
           onChange={changeAccessEvent}
           checked={accessEvent}
@@ -158,7 +157,7 @@ const EventFormItem: FC<IProps> = ({ data }) => {
         <Select
           rootClassName="text-left"
           options={renderTranslateSelect({ translate: data.translate })}
-          defaultValue={"en"}
+          defaultValue={"ru"}
           style={{ maxWidth: 200 }}
           className=" ml-auto mr-1"
           onChange={(value) => onChangeLang(value)}
@@ -175,7 +174,7 @@ const EventFormItem: FC<IProps> = ({ data }) => {
           initialValue={data.bet}
         >
           <div className="form-item">
-            <p className="mb-2">Название события</p>
+            <p className="mb-2">Ставка</p>
             <Input defaultValue={data.bet} />
           </div>
         </Form.Item>
