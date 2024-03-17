@@ -21,7 +21,7 @@ const ModalFullScreen: FC<IProps> = ({ children }) => {
       {children}
       <Modal
         className="!w-screen !h-screen !top-0 max-w-none modal-full-screen p-0"
-        title="Modal 1000px width"
+        title="Full screen"
         // This was removed
         // centered
         open={visible}
