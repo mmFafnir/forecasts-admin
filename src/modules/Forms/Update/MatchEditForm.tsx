@@ -17,6 +17,7 @@ import LoaderCover from "../../../components/UI/LoaderCover";
 import CustomImage from "../../../components/UI/CustomImage";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 import { Link } from "react-router-dom";
+import ModalFullScreen from "../../../components/UI/ModalFullScreen";
 
 interface IProps {
   match: TypeMatch;
@@ -249,40 +250,44 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
 
           {/* Текст для чата GPT */}
           {chatGbtStatus !== 4 && user?.role_id == "1" && (
-            <Form.Item
-              name={"chat_gpt_text"}
-              initialValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
-            >
-              <div className="form-item">
-                <div className="flex items-center mb-2">
-                  <p className="!mb-0 mr-2">Текст для чата GPT</p>
-                  {(chatGbtStatus == 0 || chatGbtStatus == 1) && (
-                    <Button
-                      className="ml-auto"
-                      onClick={onClickGetMatch}
-                      type="primary"
-                      loading={chatGbtStatus == 1 || loading}
-                    >
-                      Получить ответ
-                    </Button>
-                  )}
-                  {chatGbtStatus === 3 && (
-                    <p className="ml-auto">
-                      <span className="!font-medium">
-                        Ждем создания карточек:{" "}
-                      </span>
-                      <Spin size="default" />
-                    </p>
-                  )}
-                </div>
-                <TextArea
-                  className="!resize-none !h-80"
-                  disabled={chatGbtStatus === 3}
-                  size="large"
-                  defaultValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
-                />
+            <div className="form-item">
+              <div className="flex items-center mb-2">
+                <p className="!mb-0 mr-2">Текст для чата GPT</p>
+                {(chatGbtStatus == 0 || chatGbtStatus == 1) && (
+                  <Button
+                    className="ml-auto"
+                    onClick={onClickGetMatch}
+                    type="primary"
+                    loading={chatGbtStatus == 1 || loading}
+                  >
+                    Получить ответ
+                  </Button>
+                )}
+                {chatGbtStatus === 3 && (
+                  <p className="ml-auto">
+                    <span className="!font-medium">
+                      Ждем создания карточек:{" "}
+                    </span>
+                    <Spin size="default" />
+                  </p>
+                )}
               </div>
-            </Form.Item>
+              <ModalFullScreen>
+                <Form.Item
+                  name={"chat_gpt_text"}
+                  initialValue={match.chat_gpt_text ? match.chat_gpt_text : ""}
+                >
+                  <TextArea
+                    className="!resize-none !h-80"
+                    disabled={chatGbtStatus === 3}
+                    size="large"
+                    defaultValue={
+                      match.chat_gpt_text ? match.chat_gpt_text : ""
+                    }
+                  />
+                </Form.Item>
+              </ModalFullScreen>
+            </div>
           )}
 
           {/* Кф */}
