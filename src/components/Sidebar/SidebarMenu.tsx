@@ -26,7 +26,6 @@ const forecast = [
     menu: "1",
   },
   { href: "/events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
-  { href: "/events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
 ];
 
 const texts: ISubMenu[] = [
