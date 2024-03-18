@@ -26,6 +26,7 @@ const forecast = [
     menu: "1",
   },
   { href: "/events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
+  { href: "/events", name: <Link to={"/events"}>СОБЫТИЯ</Link>, menu: "1" },
 ];
 
 const texts: ISubMenu[] = [
@@ -101,4 +102,9 @@ export const SidebarMenu: ISidebarMenu[] = [
     name: <Link to={"/refs"}>ПРОМО/РЕФЕРАЛ</Link>,
   },
   ...forecast,
+  {
+    menu: "1",
+    href: "/matches/request",
+    name: <Link to={"/matches/request"}>ЗАПРОСЫ</Link>,
+  },
 ];

@@ -28,6 +28,7 @@ import { RateElementPage, RatePage } from "./Pages/Rate";
 import PrivacyPolicy from "./Pages/Static/PrivacyPolicy";
 import TermOfUsePage from "./Pages/Static/TermOfUsePage";
 import { RefsPage } from "./Pages/Refs";
+import MatchesRequest from "./Pages/Matches/MatchesRequest";
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
 
         <Route path="/matches" element={<MatchPage />} />
         <Route path="/matches/:id" element={<MatchElementPage />} />
+
+        <Route path="/matches/request" element={<MatchesRequest />} />
 
         <Route path="/teams" element={<TeamsPage />} />
         <Route path="/teams/:id" element={<TeamsElementPage />} />

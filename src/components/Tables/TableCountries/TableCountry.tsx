@@ -11,10 +11,13 @@ interface IProps {
 
 const TableCountry: FC<IProps> = ({ columns, data }) => {
   const [currentData, setCurrentData] = useState<TypeCountry[]>([]);
+
   const handleSearch = (value: string) => {
     setCurrentData([
       ...data.filter((item) =>
-        `${item.name} ${item.translation}`.includes(value)
+        `${item.name.toLocaleLowerCase()} ${item.translation.toLocaleLowerCase()}`.includes(
+          value.toLocaleLowerCase()
+        )
       ),
     ]);
   };
