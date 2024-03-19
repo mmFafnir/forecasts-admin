@@ -23,7 +23,11 @@ const LayoutMain: FC = () => {
     channel.bind("App\\Events\\NewNotification", function (data: IStatePusher) {
       console.log(data);
       if (!data.message) return;
-      if (data.message.type == "new_message_for_chat_gpt_match") {
+      if (
+        "new_message_for_chat_gpt_match, the_request_has_been_answered, there_are_bets_on_the_match".includes(
+          data.message.type
+        )
+      ) {
         dispatch(setPusherMessage(data.message));
       }
     });

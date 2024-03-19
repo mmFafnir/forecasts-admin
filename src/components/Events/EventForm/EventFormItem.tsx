@@ -181,7 +181,7 @@ const EventFormItem: FC<IProps> = ({ data }) => {
 
         {/* КФ */}
         <Form.Item
-          className="mr-4 basis-1/5"
+          className=" basis-1/5"
           name={"odds"}
           rules={[{ required: true, message: "" }]}
           initialValue={data.odds}
@@ -197,11 +197,12 @@ const EventFormItem: FC<IProps> = ({ data }) => {
         {/* Событие */}
         {eventsData.length > 0 && (
           <Form.Item
-            className="form-item mr-4"
+            className="form-item mr-2 flex-auto"
             name={"event_id"}
             initialValue={findEventData()?.value}
           >
             <SelectForm
+              styles={{ width: "100%" }}
               label="Событие"
               data={eventsData}
               defaultValue={findEventData()?.value}
@@ -212,11 +213,12 @@ const EventFormItem: FC<IProps> = ({ data }) => {
         {/* Риск */}
         {risksData.length > 0 && (
           <Form.Item
-            className="form-item"
+            className="form-item basis-1/5"
             name={"risk_id"}
             initialValue={findRiskData()?.value}
           >
             <SelectForm
+              styles={{ width: "100%" }}
               label="Риск"
               data={risksData}
               defaultValue={findRiskData()?.value}
