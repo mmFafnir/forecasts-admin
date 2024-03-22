@@ -16,6 +16,8 @@ const Header: FC = () => {
   const onChangeMenu = (value: string) => dispatch(setMenu(value));
   const onLogout = () => dispatch(logout());
 
+  console.log(menu);
+
   return (
     <HeaderAnt style={headerStyle}>
       <div>

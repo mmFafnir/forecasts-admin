@@ -14,7 +14,7 @@ interface IState extends Omit<TFilter, "page"> {
 const initialState: IState = {
   limit: 10,
   menu:
-    SidebarMenu.find((item) => item.href.includes(window.location.pathname))
+    SidebarMenu.find((item) => window.location.pathname.includes(item.href))
       ?.menu || "general",
   search: "",
   statusMatch: "",

@@ -28,7 +28,7 @@ const Sidebar: FC = () => {
     () =>
       SidebarMenu.map((item, index) => {
         const key = String(index + 1);
-        if (item.href == path) setActive(`sub${key}`);
+        if (path.includes(item.href)) setActive(`sub${key}`);
 
         return {
           key: `sub${key}`,
@@ -37,7 +37,7 @@ const Sidebar: FC = () => {
           menu: item.menu,
           href: item.href,
           children: item.children?.map((submenu) => {
-            if (submenu.link == path) setActive(submenu.link + key);
+            if (path.includes(submenu.link)) setActive(submenu.link + key);
             if (!submenu.link && submenu.children) {
               return {
                 key: `sub${key + submenu.text}`,
@@ -78,7 +78,6 @@ const Sidebar: FC = () => {
     if (path.length > 1) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-
       path = "/";
       return;
     }
