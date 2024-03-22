@@ -1,8 +1,8 @@
 import { TypeTranslate } from "../../../types/translate";
+import { TypeCountry } from "../countriesSlice/interface";
 
 export type ITeam = {
   created_at: string | null;
-  get_photo: string;
   has_quad: number;
   id: number;
   sport_id: number;
@@ -11,6 +11,8 @@ export type ITeam = {
   team_name: string;
   updated_at: string;
   translate: TypeTranslate[];
+  photo: string | null;
+  country: TypeCountry | null;
 };
 
 export interface IDataTeamsFetch {

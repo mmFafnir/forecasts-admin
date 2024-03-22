@@ -20,7 +20,7 @@ export const columns: ColumnsType<TypeCountry> = [
     render: (_, record) => (
       <Image
         width={20}
-        src={`https://admin.aibetguru.com/uploads/${record.code}.svg`}
+        src={`https://admin.aibetguru.com/${record.photo}`}
         placeholder={<Spin />}
         onError={(e) => {
           const target = e.target as HTMLImageElement;

@@ -29,7 +29,7 @@ const CountriesElementPage = () => {
         <CustomImage
           classes={"!w-5 !h-5"}
           rootClasses="!w-5 !h-5"
-          src={`https://admin.aibetguru.com/uploads/${country?.id}.svg`}
+          src={`https://admin.aibetguru.com/${country?.photo}`}
           errorSrc="https://cdn-icons-png.flaticon.com/512/921/921490.png"
         />
         <h1 className="ml-2">

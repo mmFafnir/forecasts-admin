@@ -22,7 +22,7 @@ export const columns: ColumnsType<ITeam> = [
     render: (_, record) => (
       <Image
         width={20}
-        src={`https://admin.aibetguru.com/uploads/${record.team_id}.png`}
+        src={`https://admin.aibetguru.com/${record.photo}`}
         placeholder={<Spin />}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
@@ -65,7 +65,9 @@ export const columns: ColumnsType<ITeam> = [
     render: (_, record) => (
       <Image
         width={20}
-        src={`https://admin.aibetguru.com/uploads/${record.team_cc}.svg`}
+        src={`https://admin.aibetguru.com/${
+          record.country ? record.country.photo : "null.svg"
+        }`}
         placeholder={<Spin />}
         onError={(e) => {
           const target = e.target as HTMLImageElement;

@@ -42,7 +42,6 @@ const postLigConnection = async (ids: number[], countryId: string) => {
 };
 
 const UpdateCountry: FC<IProps> = ({ leagues, id }) => {
-  console.log(leagues);
   const [currentLeagues, setCurrentLeagues] = useState<TypeLeague[]>(leagues);
   const [data, setData] = useState<number[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

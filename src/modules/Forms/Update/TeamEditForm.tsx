@@ -9,6 +9,7 @@ import CustomImage from "../../../components/UI/CustomImage";
 import { AxiosError } from "axios";
 import { updateTranslateId } from "../../../api/translate/updateTranslateId";
 import { TypeTranslate } from "../../../types/translate";
+import { errorImageOne } from "../../../core/images";
 
 interface IProps {
   team: ITeam;
@@ -57,6 +58,8 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
         setLoading(false);
       });
   };
+
+  console.log(team);
 
   return (
     <>
@@ -153,7 +156,7 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
                 Флаг команды
               </p>
               <CustomImage
-                src={`https://admin.aibetguru.com/uploads/${team.team_id}.png`}
+                src={`https://admin.aibetguru.com/${team.photo}`}
                 errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
               />
             </div>
@@ -162,8 +165,10 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
                 Страна: {team.team_cc}
               </p>
               <CustomImage
-                src={`https://admin.aibetguru.com/uploads/${team.team_cc}.svg`}
-                errorSrc="https://cdn-icons-png.flaticon.com/512/921/921490.png"
+                src={`https://admin.aibetguru.com/${
+                  team.country ? team.country.photo : errorImageOne
+                }`}
+                errorSrc={errorImageOne}
               />
             </div>
           </Row>

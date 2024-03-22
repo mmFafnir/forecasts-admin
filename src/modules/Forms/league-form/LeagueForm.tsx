@@ -195,7 +195,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
                 Флаг Лиги
               </p>
               <CustomImage
-                src={`https://admin.aibetguru.com/photo/league/${league.photo}`}
+                src={`https://admin.aibetguru.com/${league.photo}`}
                 errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
               />
             </div>
@@ -204,7 +204,9 @@ const LeagueForm: FC<IProps> = ({ league }) => {
                 Страна: {league.league_cc}
               </p>
               <CustomImage
-                src={`https://admin.aibetguru.com/uploads/${league.league_cc}.svg`}
+                src={`https://admin.aibetguru.com/${
+                  league.country ? league.country.photo : "null.svg"
+                }`}
                 errorSrc="https://cdn-icons-png.flaticon.com/512/921/921490.png"
               />
             </div>

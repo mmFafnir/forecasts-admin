@@ -70,7 +70,7 @@ export const columns: ColumnsType<TypeLeague> = [
     render: (_, record) => (
       <Image
         width={20}
-        src={`https://admin.aibetguru.com/photo/league/${record.photo}`}
+        src={`https://admin.aibetguru.com/${record.photo}`}
         placeholder={<Spin />}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
@@ -88,7 +88,7 @@ export const columns: ColumnsType<TypeLeague> = [
     title: "Страна",
     dataIndex: "country",
     render: (_, record) => (
-      <p>{record.country ? record.country.translation : "null"}</p>
+      <p>{record.country ? record.country.name : "null"}</p>
     ),
   },
 
@@ -98,7 +98,9 @@ export const columns: ColumnsType<TypeLeague> = [
     render: (_, record) => (
       <Image
         width={20}
-        src={`https://admin.aibetguru.com/uploads/${record.league_cc}.svg`}
+        src={`https://admin.aibetguru.com/${
+          record.country ? record.country.photo : "null.svg"
+        }`}
         placeholder={<Spin />}
         onError={(e) => {
           const target = e.target as HTMLImageElement;

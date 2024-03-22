@@ -18,6 +18,7 @@ const TableCountries: FC = () => {
     setIsOpenModal(true);
   };
 
+  console.log(countries);
   return (
     <div>
       <Spin

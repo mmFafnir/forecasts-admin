@@ -7,6 +7,7 @@ export type TypeCountry = {
   translation: string;
   translate: ITranslateLeague[];
   league?: [];
+  photo: string | null;
 };
 
 export interface IDataTypeCountryFetch {
