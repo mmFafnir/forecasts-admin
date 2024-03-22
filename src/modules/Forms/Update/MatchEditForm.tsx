@@ -178,7 +178,9 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                 <CustomImage
                   classes="!object-contain"
                   errorSrc="https://cdn-icons-png.flaticon.com/512/921/921490.png"
-                  src={`https://admin.aibetguru.com/uploads/${match.home_team.team_cc}.svg`}
+                  src={`https://admin.aibetguru.com/${
+                    match.home_team.country?.photo || "null.svg"
+                  }`}
                   width={35}
                   height={23}
                 />
@@ -189,7 +191,9 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                 classes=""
                 width={150}
                 height={150}
-                src={`https://admin.aibetguru.com/uploads/${match.home_team.team_id}.png`}
+                src={`https://admin.aibetguru.com/${
+                  match.home_team?.photo || "null.svg"
+                }`}
                 errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
               />
             </div>
@@ -208,8 +212,10 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                 Страна:
                 <CustomImage
                   classes="!object-contain"
+                  src={`https://admin.aibetguru.com/${
+                    match.away_team.country?.photo || "null.svg"
+                  }`}
                   errorSrc="https://cdn-icons-png.flaticon.com/512/921/921490.png"
-                  src={`https://admin.aibetguru.com/uploads/${match.away_team.team_cc}.svg`}
                   width={35}
                   height={23}
                 />
@@ -220,7 +226,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
                 classes="!object-fill"
                 width={150}
                 height={150}
-                src={`https://admin.aibetguru.com/uploads/${match.away_team.team_id}.png`}
+                src={`https://admin.aibetguru.com/${match.away_team.photo}`}
                 errorSrc="https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png"
               />
             </div>

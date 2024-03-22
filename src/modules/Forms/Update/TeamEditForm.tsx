@@ -59,8 +59,6 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
       });
   };
 
-  console.log(team);
-
   return (
     <>
       <Form
@@ -166,7 +164,7 @@ const TeamEditForm: FC<IProps> = ({ team }) => {
               </p>
               <CustomImage
                 src={`https://admin.aibetguru.com/${
-                  team.country ? team.country.photo : errorImageOne
+                  team.country ? team.country.photo : "null.svg"
                 }`}
                 errorSrc={errorImageOne}
               />

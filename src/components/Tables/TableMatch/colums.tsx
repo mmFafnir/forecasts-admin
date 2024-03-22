@@ -14,7 +14,9 @@ export const columns: ColumnsType<TypeMatch> = [
         <div className="flex items-center">
           <Image
             width={20}
-            src={`https://admin.aibetguru.com/uploads/${record.leagues.country.code}.svg`}
+            src={`https://admin.aibetguru.com/${
+              record.leagues.country ? record.leagues.country.photo : "null.svg"
+            }`}
             placeholder={<Spin />}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -35,7 +37,7 @@ export const columns: ColumnsType<TypeMatch> = [
       <div className="flex items-center">
         <Image
           width={20}
-          src={`https://admin.aibetguru.com/uploads/${record.leagues.league_id}.png`}
+          src={`https://admin.aibetguru.com/${record.leagues.photo}`}
           placeholder={<Spin />}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -69,7 +71,7 @@ export const columns: ColumnsType<TypeMatch> = [
       <div className="flex items-center">
         <Image
           width={20}
-          src={`https://admin.aibetguru.com/uploads/${record.home_team.team_id}.png`}
+          src={`https://admin.aibetguru.com/${record.home_team.photo}`}
           placeholder={<Spin />}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -88,7 +90,7 @@ export const columns: ColumnsType<TypeMatch> = [
       <div className="flex items-center">
         <Image
           width={20}
-          src={`https://admin.aibetguru.com/uploads/${record.away_team.team_id}.png`}
+          src={`https://admin.aibetguru.com/${record.away_team.photo}`}
           placeholder={<Spin />}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
