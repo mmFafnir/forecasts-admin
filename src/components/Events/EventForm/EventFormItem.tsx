@@ -74,6 +74,7 @@ const EventFormItem: FC<IProps> = ({ data }) => {
         bet: e.bet,
         odds: Number(e.odds),
         why: e ? e.why : "",
+        why_best: e ? e.why_best : "",
       })
     )
       .then(() => {
@@ -92,6 +93,8 @@ const EventFormItem: FC<IProps> = ({ data }) => {
     const texts = data.translate.find((item) => item.lang.url === lang);
     if (!texts) return;
     form.setFieldValue("why", texts.why);
+    form.setFieldValue("why_best", texts.why_best);
+
     setWhyText({
       why: texts.why,
       whyBest: texts.why_best,
@@ -239,10 +242,9 @@ const EventFormItem: FC<IProps> = ({ data }) => {
         {whyText.whyBest && (
           <div className="flex-1 ml-2">
             <p className="text-left mb-1">Анализ события лучшей ставки:</p>
-            <TextArea
-              autoSize={{ minRows: 9, maxRows: 40 }}
-              value={whyText.whyBest}
-            />
+            <Form.Item initialValue={whyText.whyBest} name={"why_best"}>
+              <TextArea autoSize={{ minRows: 9, maxRows: 40 }} />
+            </Form.Item>
           </div>
         )}
       </div>

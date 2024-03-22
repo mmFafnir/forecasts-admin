@@ -70,4 +70,5 @@ export interface IUpdateEventMatch {
   bet: number | string;
   odds: number;
   why: string;
+  why_best: string;
 }
