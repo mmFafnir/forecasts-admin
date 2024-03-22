@@ -37,7 +37,8 @@ const Sidebar: FC = () => {
           menu: item.menu,
           href: item.href,
           children: item.children?.map((submenu) => {
-            if (path.includes(submenu.link)) setActive(submenu.link + key);
+            if (submenu.link && path.includes(submenu.link))
+              setActive(submenu.link + key);
             if (!submenu.link && submenu.children) {
               return {
                 key: `sub${key + submenu.text}`,

@@ -24,8 +24,6 @@ interface IProps {
 }
 
 const MatchEditForm: FC<IProps> = ({ match }) => {
-  console.log(match);
-
   const { user } = useTypeSelector((state) => state.user);
   const dispatch = useTypeDispatch();
 
@@ -322,21 +320,23 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
           )}
 
           {/* Анализ */}
-          <Form.Item
-            className="mt-8 pb-9"
-            name={"analysis"}
-            initialValue={match.game_analize ? match.game_analize : ""}
-          >
-            <div className="form-item">
+          <div className="form-item mt-8 pb-9">
+            <div className="flex mb-2">
               <p>Анализ:</p>
-              <LoaderCover loading={chatGbtStatus === 1}>
+              {/* <Button>Изменить</Button> */}
+            </div>
+            <LoaderCover loading={chatGbtStatus === 1}>
+              <Form.Item
+                name={"analysis"}
+                initialValue={match.game_analize ? match.game_analize : ""}
+              >
                 <TextEditor
                   initialValue={match.game_analize ? match.game_analize : ""}
                   onChange={(value) => form.setFieldsValue({ analysis: value })}
                 />
-              </LoaderCover>
-            </div>
-          </Form.Item>
+              </Form.Item>
+            </LoaderCover>
+          </div>
         </div>
       </Form>
 
