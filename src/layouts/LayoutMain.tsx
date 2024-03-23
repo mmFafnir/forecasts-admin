@@ -34,6 +34,7 @@ const LayoutMain: FC = () => {
   };
 
   useEffect(() => {
+    console.log("pusher");
     Pushers();
   }, []);
 

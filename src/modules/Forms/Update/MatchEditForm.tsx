@@ -257,12 +257,16 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
             <div className="form-item">
               <div className="flex items-center mb-2">
                 <p className="!mb-0 mr-2">Текст для чата GPT</p>
-                {(chatGbtStatus == 0 || chatGbtStatus == 1) && (
+                {(chatGbtStatus == 0 ||
+                  chatGbtStatus == 1 ||
+                  chatGbtStatus == 10) && (
                   <Button
                     className="ml-auto"
                     onClick={onClickGetMatch}
                     type="primary"
-                    loading={chatGbtStatus == 1 || loading}
+                    loading={
+                      chatGbtStatus == 1 || chatGbtStatus == 10 || loading
+                    }
                   >
                     Получить ответ
                   </Button>
