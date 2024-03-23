@@ -33,12 +33,12 @@ const LeagueForm: FC<IProps> = ({ league }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [switchValue, setSwitchValue] = useState<boolean>(
-    league.favorit === "1"
+    league.favorit == "1"
   );
   const [loadingSwitch, setLoadingSwitch] = useState<boolean>(false);
 
   const [switchPinAdmin, setSwitchPinAdmin] = useState<boolean>(
-    league.has_toplist_admin === "1"
+    league.has_toplist_admin == "1"
   );
   const [loadingPinAdmin, setLoadingPinAdmin] = useState<boolean>(false);
 
@@ -133,7 +133,11 @@ const LeagueForm: FC<IProps> = ({ league }) => {
               checked={switchValue}
             />
             <p className={`${titleClasses} !mb-0 mr-2 ml-auto`}>Тир лиги:</p>
-            <Form.Item name={"tir"} noStyle initialValue={league.tir || "1"}>
+            <Form.Item
+              name={"tir"}
+              noStyle
+              initialValue={`${league.tir}` || "1"}
+            >
               <Select
                 defaultActiveFirstOption
                 options={tirs.map((_, index) => ({
