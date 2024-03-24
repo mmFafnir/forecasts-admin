@@ -28,10 +28,9 @@ const TableLeagues: FC = () => {
   };
 
   useEffect(() => {
-    console.log(country);
     setPage(1);
     onGetAllLeagues({
-      page,
+      page: 1,
       limit,
       search,
       favorite,
