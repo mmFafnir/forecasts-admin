@@ -22,7 +22,6 @@ interface IRenderSelect {
 const renderTranslateSelect = (
   languages: Pick<TypeMatchEventCard, "translate">
 ): IRenderSelect[] => {
-  console.log(languages);
   const res: IRenderSelect[] = [];
   languages.translate.forEach((item) => {
     res.push({
@@ -31,7 +30,6 @@ const renderTranslateSelect = (
     });
   });
 
-  console.log(res);
   return res;
 };
 
@@ -117,9 +115,9 @@ const EventFormItem: FC<IProps> = ({ data }) => {
     eventsData.find((event) => event.value === String(data.event.id));
 
   const findRiskData = () =>
-    risksData.find((event) => event.value === String(data.risk.id));
+    risksData.find((event) => event.value === String(data.risk?.id || "")) ||
+    risksData[0];
 
-  console.log(data);
   return (
     <Form
       className=" bg-slate-300 p-3 rounded-2xl"
