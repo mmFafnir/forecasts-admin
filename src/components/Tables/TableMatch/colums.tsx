@@ -24,7 +24,11 @@ export const columns: ColumnsType<TypeMatch> = [
                 "https://cdn-icons-png.flaticon.com/512/921/921490.png";
             }}
           />
-          <p className="ml-1">{record.leagues.country.translation}</p>
+          <p className="ml-1">
+            <Link to={`/countries/${record.leagues.country.id}`}>
+              {record.leagues.country.translation}
+            </Link>
+          </p>
         </div>
       ) : (
         "null"
@@ -45,7 +49,11 @@ export const columns: ColumnsType<TypeMatch> = [
               "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
           }}
         />
-        <p className="ml-1">{record.leagues.league_name}</p>
+        <p className="ml-1">
+          <Link to={`/leagues/${record.leagues.id}`}>
+            {record.leagues.league_name}
+          </Link>{" "}
+        </p>
       </div>
     ),
   },
@@ -79,7 +87,11 @@ export const columns: ColumnsType<TypeMatch> = [
               "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
           }}
         />
-        <p className="ml-1">{record.home_team.team_name}</p>
+        <p className="ml-1">
+          <Link to={`/teams/${record.home_team.id}`}>
+            {record.home_team.team_name}
+          </Link>
+        </p>
       </div>
     ),
   },
@@ -98,7 +110,11 @@ export const columns: ColumnsType<TypeMatch> = [
               "https://metallprofil.pkmk.ru/local/templates/aspro-stroy/images/noimage_detail.png";
           }}
         />
-        <p className="ml-1">{record.away_team.team_name}</p>
+        <p className="ml-1">
+          <Link to={`/teams/${record.away_team.id}`}>
+            {record.away_team.team_name}
+          </Link>
+        </p>
       </div>
     ),
   },
