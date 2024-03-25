@@ -55,7 +55,7 @@ const TableMatch: FC = () => {
     setPage(1);
     console.log("filter, country", country, limit);
     onGetAllMatches({
-      page: 0,
+      page: 1,
       limit,
       country,
       league,
@@ -115,7 +115,7 @@ const TableMatch: FC = () => {
         callback={(page) => {
           setPage(page);
           onGetAllMatches({
-            page: page - 1,
+            page: page,
             limit,
             country,
             league,
