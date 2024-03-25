@@ -150,7 +150,7 @@ const LeagueForm: FC<IProps> = ({ league }) => {
 
           <div className="flex items-center mb-4">
             <p className={`${titleClasses} !mb-0 mr-2`}>
-              Лига в избранном от Админа:
+              Даем прогнозы без запроса
             </p>
             <Switch
               onChange={togglePindAdmin}
