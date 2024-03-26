@@ -17,7 +17,7 @@ const Header: FC = () => {
   const onChangeMenu = (value: string) => dispatch(setMenu(value));
   const onDoubleChangeMenu = (value: string) => {
     const link = SidebarMenu.find((item) => item.menu === value);
-    window.open(link?.href || "", "_blank");
+    window.open(link?.href || "", "_blank")?.focus();
   };
 
   const onLogout = () => dispatch(logout());

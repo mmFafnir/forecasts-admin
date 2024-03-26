@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import MatchEditForm from "../modules/Forms/Update/MatchEditForm";
+import MatchEditForm from "../modules/Forms/match-form/MatchEditForm";
 import { TypeMatch } from "../store/Slices/matchesSlice/interface";
 import { useParams } from "react-router-dom";
 import { Space, Spin } from "antd";

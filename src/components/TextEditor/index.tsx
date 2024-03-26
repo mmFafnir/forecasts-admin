@@ -26,7 +26,6 @@ const TextEditor: FC<IProps> = ({ height = 500, initialValue, onChange }) => {
         ref={editorRef}
         onChange={onChangeEditor}
         onEditorChange={(values) => {
-          console.log(values.replace(/&nbsp;/g, ""));
           onChange && onChange(values.replace(/&nbsp;/g, ""));
         }}
         // onInit={(evt, editor) => editorRef.current = editor}

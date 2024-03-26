@@ -54,6 +54,7 @@ export type TypeMatch = {
   time_status: number;
   updated_at: Date;
   url: string;
+  show_card: "0" | "1";
 };
 
 export interface IDataMatchesFetch {

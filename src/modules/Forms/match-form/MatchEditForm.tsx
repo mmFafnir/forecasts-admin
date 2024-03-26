@@ -18,21 +18,29 @@ import CustomImage from "../../../components/UI/CustomImage";
 import { useTypeSelector } from "../../../hooks/useTypeSelector";
 import { Link } from "react-router-dom";
 import ModalFullScreen from "../../../components/UI/ModalFullScreen";
+import { updateMatch } from "./api/updateMatch";
 
 interface IProps {
   match: TypeMatch;
+}
+
+interface IInputs {
+  chat_gpt_text: string;
+  game_analize: string;
+  show_card: boolean;
 }
 
 const MatchEditForm: FC<IProps> = ({ match }) => {
   const { user } = useTypeSelector((state) => state.user);
   const dispatch = useTypeDispatch();
 
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<IInputs>();
   const [favoriteCup, setFavoriteCup] = useState<boolean>(
     match.favorite_game == "0" ? false : true
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingSwitch, setSwitchLoading] = useState<boolean>(false);
+  const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const [chatGbtStatus, setChatGbtStatus] = useState<number>(
     match.chat_gpt_text_status
   );
@@ -79,8 +87,28 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
       });
   };
 
-  const onFinish = () => {
-    console.log("Success:", form.getFieldsValue());
+  const onUpdate = () => {
+    const values = form.getFieldsValue();
+    setLoadingUpdate(true);
+    updateMatch({
+      match_id: match.id,
+      game_analize: values.game_analize,
+      show_card: values.show_card ? "1" : "0",
+      chat_gpt_text: values.chat_gpt_text,
+    })
+      .then(() => {
+        notify({
+          type: "success",
+          message: "Матч успешно обновлен",
+        });
+      })
+      .catch(() => {
+        notify({
+          type: "error",
+          message: "Ошибка, попробуйте позже",
+        });
+      })
+      .finally(() => setLoadingUpdate(false));
   };
 
   const onFinishFailed = (errorInfo: unknown) => {
@@ -97,7 +125,7 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
+        onFinish={onUpdate}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
@@ -337,16 +365,45 @@ const MatchEditForm: FC<IProps> = ({ match }) => {
             </div>
             <LoaderCover loading={chatGbtStatus === 1}>
               <Form.Item
-                name={"analysis"}
+                name={"game_analize"}
                 initialValue={match.game_analize ? match.game_analize : ""}
               >
                 <TextEditor
                   initialValue={match.game_analize ? match.game_analize : ""}
-                  onChange={(value) => form.setFieldsValue({ analysis: value })}
+                  onChange={(value) =>
+                    form.setFieldsValue({ game_analize: value })
+                  }
                 />
               </Form.Item>
             </LoaderCover>
           </div>
+        </div>
+        <div className="flex justify-end">
+          {match.chat_gpt_text_status == 4 && (
+            <div className="flex items-center mr-2">
+              <p className="font-semibold mr-2">Показать события на сайте:</p>
+              <Form.Item
+                name={"show_card"}
+                noStyle
+                valuePropName="checked"
+                initialValue={match.show_card == "1"}
+              >
+                <Switch title="После изменения не забудь нажать на кнопку 'Обновить'" />
+              </Form.Item>
+            </div>
+          )}
+          {(match.chat_gpt_text_status == 4 ||
+            match.chat_gpt_text_status == 2) && (
+            <Button
+              type="primary"
+              loading={loadingUpdate}
+              htmlType="submit"
+              size="large"
+              className="font-semibold "
+            >
+              Обновить
+            </Button>
+          )}
         </div>
       </Form>
 
