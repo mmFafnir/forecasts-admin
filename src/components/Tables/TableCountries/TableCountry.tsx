@@ -15,9 +15,9 @@ const TableCountry: FC<IProps> = ({ columns, data }) => {
   const handleSearch = (value: string) => {
     setCurrentData([
       ...data.filter((item) =>
-        `${item.name.toLocaleLowerCase()} ${item.translation.toLocaleLowerCase()}`.includes(
-          value.toLocaleLowerCase()
-        )
+        `${item.name.toLocaleLowerCase()} ${
+          item.translation?.toLocaleLowerCase() || ""
+        }`.includes(value.toLocaleLowerCase())
       ),
     ]);
   };
