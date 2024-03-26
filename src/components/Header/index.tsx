@@ -9,14 +9,18 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/Slices/userSlices";
 import { setMenu } from "../../store/Slices/filterSlice";
 import { useTypeSelector } from "../../hooks/useTypeSelector";
+import { SidebarMenu } from "../Sidebar/SidebarMenu";
 
 const Header: FC = () => {
   const { menu } = useTypeSelector((state) => state.filters);
   const dispatch = useDispatch();
   const onChangeMenu = (value: string) => dispatch(setMenu(value));
-  const onLogout = () => dispatch(logout());
+  const onDoubleChangeMenu = (value: string) => {
+    const link = SidebarMenu.find((item) => item.menu === value);
+    window.open(link?.href || "", "_blank");
+  };
 
-  console.log(menu);
+  const onLogout = () => dispatch(logout());
 
   return (
     <HeaderAnt style={headerStyle}>
@@ -29,7 +33,14 @@ const Header: FC = () => {
             {
               onClick: () => onChangeMenu(String("general")),
               key: "general",
-              label: <button className="font-bold">Общая</button>,
+              label: (
+                <button
+                  onContextMenu={() => onDoubleChangeMenu("general")}
+                  className="font-bold"
+                >
+                  Общая
+                </button>
+              ),
             },
             ...sports.map((sport, index) => {
               const key = index + 1;
@@ -39,6 +50,7 @@ const Header: FC = () => {
                 label: (
                   <button
                     // onClick={}
+                    onContextMenu={() => onDoubleChangeMenu(String(key))}
                     className="font-bold"
                   >
                     {sport.label}
