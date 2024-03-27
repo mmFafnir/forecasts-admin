@@ -42,9 +42,13 @@ interface IProps {
   data: TypeMatchEventCard;
 }
 
-const postAccessEvent = async (id: string | number) => {
+const postAccessEvent = async (
+  id: string | number,
+  status: "0" | "1" | "2"
+) => {
   const { data } = await axios.post("/change_card_access", {
     card_id: id,
+    status,
   });
   return data;
 };
@@ -55,7 +59,7 @@ const EventFormItem: FC<IProps> = ({ data }) => {
   const risksData = useRiskDataHook();
   const [form] = Form.useForm<IUpdateEventMatch>();
 
-  const [accessEvent, setAccessEvent] = useState<boolean>(data.status == "1");
+  const [accessEvent, setAccessEvent] = useState<"0" | "1" | "2">(data.status);
   const [accessEventLoading, setAccessEventLoading] = useState<boolean>(false);
 
   const [whyText, setWhyText] = useState<IWhyText>({
@@ -99,12 +103,11 @@ const EventFormItem: FC<IProps> = ({ data }) => {
     });
   };
 
-  const changeAccessEvent = () => {
+  const changeAccessEvent = (status: "1" | "2" | "0") => {
     setAccessEventLoading(true);
-    setAccessEvent((prev) => !prev);
-    postAccessEvent(data.id)
-      .catch(() => {
-        setAccessEvent((prev) => !prev);
+    postAccessEvent(data.id, status)
+      .then(() => {
+        setAccessEvent(status);
       })
       .finally(() => {
         setAccessEventLoading(false);
@@ -145,15 +148,37 @@ const EventFormItem: FC<IProps> = ({ data }) => {
           />
         </Form.Item>
         {/* Ставка прошла/не прошла */}
-        <p className="mr-3 ml-3 !mb-0">Ставка прошла</p>
-        <Switch
+        <p className="mr-3 ml-3 !mb-0">Ставка:</p>
+        <Select
+          className="text-left"
+          style={{ minWidth: 110 }}
+          defaultValue={accessEvent}
+          onChange={(value) => changeAccessEvent(value)}
+          loading={accessEventLoading}
+          disabled={accessEventLoading}
+          options={[
+            {
+              value: "0",
+              label: "В ожидании",
+            },
+            {
+              value: "2",
+              label: "Не прошла",
+            },
+            {
+              value: "1",
+              label: "Прошла",
+            },
+          ]}
+        />
+        {/* <Switch
           onChange={changeAccessEvent}
           checked={accessEvent}
           loading={accessEventLoading}
           checkedChildren="Да"
           unCheckedChildren="Нет"
           className="bg-slate-400 "
-        />
+        /> */}
 
         <Select
           rootClassName="text-left"

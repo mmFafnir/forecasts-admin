@@ -13,7 +13,12 @@ export const columns: ColumnsType<ITeam> = [
         record.translate && record.translate.length > 0
           ? record.translate[0].translation
           : record.team_name;
-      return <p>{name}</p>;
+      return (
+        <p className="flex flex-col">
+          <span>{name}</span>
+          <span>{record.team_name}</span>
+        </p>
+      );
     },
   },
   {
@@ -38,6 +43,23 @@ export const columns: ColumnsType<ITeam> = [
     render: (_, record) => (record.sport_id == 1 ? "Футбол" : ""),
   },
   {
+    title: "Страна",
+    dataIndex: "team_cc",
+    render: (_, record) => (
+      <Image
+        width={20}
+        src={`https://admin.aibetguru.com/${
+          record.country ? record.country.photo : "null.svg"
+        }`}
+        placeholder={<Spin />}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = "https://cdn-icons-png.flaticon.com/512/921/921490.png";
+        }}
+      />
+    ),
+  },
+  {
     title: "Дата",
     dataIndex: "created_at",
     render: (_, record) => (
@@ -57,23 +79,6 @@ export const columns: ColumnsType<ITeam> = [
           ? `${dayjs(record.updated_at).format("DD.MM.YYYY")}`
           : "null"}
       </p>
-    ),
-  },
-  {
-    title: "Страна",
-    dataIndex: "team_cc",
-    render: (_, record) => (
-      <Image
-        width={20}
-        src={`https://admin.aibetguru.com/${
-          record.country ? record.country.photo : "null.svg"
-        }`}
-        placeholder={<Spin />}
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.src = "https://cdn-icons-png.flaticon.com/512/921/921490.png";
-        }}
-      />
     ),
   },
   {
